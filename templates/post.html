@@ -19,5 +19,5 @@
 <time datetime="{{post.meta.createdAt}}">
   {{post.meta.createdAt | date('d.M.yyyy')}}
 </time>
-<div>{{post.body}}</div>
+<div>{{post.body | safe}}</div>
 {% endblock %}
