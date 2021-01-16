@@ -1,0 +1,5 @@
+name: 'Microblog'
+description: 'Create a microblog from Github issues'
+runs:
+  using: 'node14'
+  main: 'dist/index.js'

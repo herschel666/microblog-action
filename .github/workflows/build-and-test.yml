@@ -1,0 +1,40 @@
+name: Build and Test and Deploy
+
+on:
+  push:
+    branches:
+      - KillYourMaster
+  pull_request:
+
+jobs:
+  ci-cd:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js 14
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
+
+      - name: Cache Node dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Cache Build artifacts
+        uses: actions/cache@v2
+        with:
+          path: ./.cache
+          key: ${{ runner.os }}-node-${{ hashFiles('**/*') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Test the application
+        run: |
+          npm ci
+          npm test

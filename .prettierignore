@@ -1,0 +1,8 @@
+package.json
+package-lock.json
+client/build
+src
+dist
+.cache
+.db
+.github
