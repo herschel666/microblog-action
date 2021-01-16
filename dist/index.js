@@ -5,10 +5,20 @@ module.exports =
 /***/ 2932:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __nccwpck_require__) => {
 
+const path = __nccwpck_require__(5622);
 const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
+const { execSync } = __nccwpck_require__(3129);
 
 const { run } = __nccwpck_require__(4822);
+
+const CWD = process.cwd();
+const DIST = __nccwpck_require__.ab + "_site";
+const POSTS = __nccwpck_require__.ab + "posts";
+const PAGES = __nccwpck_require__.ab + "pages";
+const TEMPLATES = __nccwpck_require__.ab + "templates";
+// No shorthand, because otherwise `ncc build` fails...
+const paths = { DIST: __nccwpck_require__.ab + "_site", POSTS: __nccwpck_require__.ab + "posts", PAGES: __nccwpck_require__.ab + "pages", TEMPLATES: __nccwpck_require__.ab + "templates" };
 
 const token = core.getInput('repo-token', { required: true });
 const title = core.getInput('title');
@@ -22,9 +32,9 @@ const userOptions = {
   ...(postsPerPage ? { postsPerPage } : undefined),
 };
 
-console.log('CWD', process.cwd());
+console.log(execSync(`ls -lah ${CWD}`).toString('utf8'));
 
-run({ octokit, repo, userOptions }).then(
+run({ paths, octokit, repo, userOptions }).then(
   () => console.log('Successfully built Microblog'),
   (err) => {
     console.log(err.message);
@@ -42,12 +52,10 @@ const path = __nccwpck_require__(5622);
 const { promises: fs } = __nccwpck_require__(5747);
 const globby = __nccwpck_require__(3398);
 
-const PAGES = __nccwpck_require__.ab + "pages";
-
 const filterWip = ({ labels }) =>
   labels.some(({ name }) => name.toLowerCase() === 'wip') === false;
 
-exports.getPages = async (directory = __nccwpck_require__.ab + "pages") => {
+exports.getPages = async (directory) => {
   const files = await globby(directory);
   const data = await Promise.all(files.map((f) => fs.readFile(f, 'utf8')));
 
@@ -85,25 +93,19 @@ const { createRenderer } = __nccwpck_require__(3075);
 const { renderMarkdown } = __nccwpck_require__(5821);
 const { getPages, getPosts } = __nccwpck_require__(7383);
 
-const DIST = __nccwpck_require__.ab + "_site";
-const POSTS = __nccwpck_require__.ab + "posts";
+exports.run = async ({ paths, octokit, repo, userOptions }) => {
+  const { DIST, POSTS, PAGES, TEMPLATES } = paths;
+  const renderer = createRenderer(TEMPLATES);
+  const defaultOptions = {
+    title: `${repo.owner}'s Microblog`,
+    basePath: '/',
+    postPerPage: '10',
+  };
 
-const defaultOptions = {
-  basePath: '/',
-  postPerPage: '10',
-};
+  const options = Object.assign(defaultOptions, userOptions);
 
-const renderer = createRenderer();
-
-exports.run = async ({ octokit, repo, userOptions }) => {
-  const options = Object.assign(
-    defaultOptions,
-    { title: `${repo.owner}'s Microblog` },
-    userOptions
-  );
-
-  await fs.rmdir(__nccwpck_require__.ab + "_site", { recursive: true, force: true });
-  await fs.mkdir(__nccwpck_require__.ab + "posts", { recursive: true });
+  await fs.rmdir(DIST, { recursive: true });
+  await fs.mkdir(POSTS, { recursive: true });
 
   const data = [
     getPosts({
@@ -111,7 +113,7 @@ exports.run = async ({ octokit, repo, userOptions }) => {
       perPage: options.postsPerPage,
       octokit,
     }),
-    getPages(),
+    getPages(PAGES),
   ];
   const [posts, pages] = await Promise.all(data);
   const postContents = await Promise.all(
@@ -139,13 +141,13 @@ exports.run = async ({ octokit, repo, userOptions }) => {
     posts: postContents,
   });
   const writePosts = postFiles.map((file, i) =>
-    fs.writeFile(__nccwpck_require__.ab + "posts/" + postContents[i].id + '.html', file, 'utf8')
+    fs.writeFile(path.join(POSTS, `${postContents[i].id}.html`), file, 'utf8')
   );
   const writePages = pageFiles.map((file, i) =>
-    fs.writeFile(__nccwpck_require__.ab + "_site/" + pageContents[i].id + '.html', file, 'utf8')
+    fs.writeFile(path.join(DIST, `${pageContents[i].id}.html`), file, 'utf8')
   );
   const writeFrontpage = fs.writeFile(
-    __nccwpck_require__.ab + "index.html",
+    path.join(DIST, 'index.html'),
     frontpage,
     'utf8'
   );
@@ -201,13 +203,10 @@ exports.renderMarkdown = async (item) => {
 /***/ 3075:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
-const path = __nccwpck_require__(5622);
 const nunjucks = __nccwpck_require__(7006);
 const format = __nccwpck_require__(2168);
 
-const DEFAULT_FOLDER = __nccwpck_require__.ab + "templates";
-
-exports.createRenderer = (folder = __nccwpck_require__.ab + "templates") => {
+exports.createRenderer = (folder) => {
   const renderer = nunjucks.configure(folder);
 
   renderer.addFilter('date', (dateString, dateFormat) => {
@@ -49113,6 +49112,14 @@ module.exports = JSON.parse("[\"cent\",\"copy\",\"divide\",\"gt\",\"lt\",\"not\"
 
 "use strict";
 module.exports = require("assert");;
+
+/***/ }),
+
+/***/ 3129:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("child_process");;
 
 /***/ }),
 
