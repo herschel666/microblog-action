@@ -3,7 +3,7 @@ const github = require('@actions/github');
 
 const { run } = require('./lib/');
 
-const token = core.getInput('repo-token');
+const token = core.getInput('repo-token', { required: true });
 const title = core.getInput('title');
 const basePath = core.getInput('base-path');
 const postsPerPage = core.getInput('posts-per-page');
