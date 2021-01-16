@@ -22,6 +22,8 @@ const userOptions = {
   ...(postsPerPage ? { postsPerPage } : undefined),
 };
 
+console.log('CWD', process.cwd());
+
 run({ octokit, repo, userOptions }).then(
   () => console.log('Successfully built Microblog'),
   (err) => {
