@@ -1,1 +1,13 @@
-<footer>&copy; {{site.year}} {{site.owner}}</footer>
+<footer class="wrap">
+  &copy; {{site.year}} {{site.owner}} <span>&nbsp;&bull;&nbsp;</span>
+
+  <!-- -->
+
+  {% if site.pages %}
+  <nav class="inline">
+    {% for page in site.pages %}
+    <a href="{{site.basePath}}{{page.id}}.html">{{page.meta.title}}</a>
+    {% endfor %}
+  </nav>
+  {% endif %}
+</footer>

@@ -22,12 +22,20 @@ const paths = { DIST, POSTS, PAGES, TEMPLATES: __nccwpck_require__.ab + "templat
 
 const token = core.getInput('repo-token', { required: true });
 const title = core.getInput('title');
+const theme = core.getInput('theme');
+const maxWidth = core.getInput('max-width');
+const dateFormat = core.getInput('date-format');
 const basePath = core.getInput('base-path');
 const postsPerPage = core.getInput('posts-per-page');
 const { repo } = github.context;
 const octokit = github.getOctokit(token);
 const userOptions = {
   ...(title ? { title } : undefined),
+  ...(theme ? { theme } : undefined),
+  ...(maxWidth && !Number.isNaN(parseInt(maxWidth, 10))
+    ? { maxWidth }
+    : undefined),
+  ...(dateFormat ? { dateFormat } : undefined),
   ...(basePath ? { basePath } : undefined),
   ...(postsPerPage ? { postsPerPage } : undefined),
 };
@@ -90,17 +98,21 @@ const { promises: fs } = __nccwpck_require__(5747);
 const { createRenderer } = __nccwpck_require__(3075);
 const { renderMarkdown } = __nccwpck_require__(5821);
 const { getPages, getPosts } = __nccwpck_require__(7383);
+const { getThemeLink } = __nccwpck_require__(4024);
 
 exports.run = async ({ paths, octokit, repo, userOptions }) => {
   const { DIST, POSTS, PAGES, TEMPLATES } = paths;
-  const renderer = createRenderer(TEMPLATES);
   const defaultOptions = {
     title: `${repo.owner}'s Microblog`,
+    maxWidth: 640,
+    dateFormat: 'd.M.yyyy H:mm',
     basePath: '/',
     postPerPage: '10',
   };
-
   const options = Object.assign(defaultOptions, userOptions);
+  const renderer = createRenderer(TEMPLATES);
+  const themeLink =
+    typeof options.theme === 'undefined' ? null : getThemeLink(options.theme);
 
   await fs.rmdir(DIST, { recursive: true });
   await fs.mkdir(POSTS, { recursive: true });
@@ -122,7 +134,10 @@ exports.run = async ({ paths, octokit, repo, userOptions }) => {
   );
   const site = {
     ...repo,
+    themeLink,
     title: options.title,
+    maxWidth: options.maxWidth,
+    dateFormat: options.dateFormat,
     basePath: options.basePath,
     year: new Date().getFullYear(),
     pages: pageContents,
@@ -217,6 +232,39 @@ exports.createRenderer = (folder) => {
   });
 
   return renderer;
+};
+
+
+/***/ }),
+
+/***/ 4024:
+/***/ ((__unused_webpack_module, exports) => {
+
+exports.getThemeLink = (theme) => {
+  switch (theme) {
+    case 'water.css':
+      return 'https://cdn.jsdelivr.net/npm/water.css@2/out/water.css';
+    case 'mvp.css':
+      return 'https://unpkg.com/mvp.css';
+    case 'awsm.css':
+      return 'https://unpkg.com/awsm.css/dist/awsm.min.css';
+    case 'bahunya':
+      return 'https://cdn.rawgit.com/kimeiga/bahunya/css/bahunya-0.1.3.css';
+    case 'sakura.css':
+      return 'https://unpkg.com/sakura.css/css/sakura.css';
+    case 'style.css':
+      return 'https://unpkg.com/style.css/style.css';
+    case 'tufte-css':
+      return 'https://unpkg.com/tufte-css/tufte.min.css';
+    case 'tacit':
+      return 'https://cdn.jsdelivr.net/gh/yegor256/tacit@gh-pages/tacit-css-1.5.3.min.css';
+    case 'new.css':
+      return 'https://cdn.jsdelivr.net/npm/@exampledev/new.css@1/new.min.css';
+    case 'bullframe.css':
+      return 'https://cdn.jsdelivr.net/npm/bullframe.css/dist/css/bullframe-classless.min.css';
+    default:
+      throw new Error(`Unknown theme "${theme}".`);
+  }
 };
 
 

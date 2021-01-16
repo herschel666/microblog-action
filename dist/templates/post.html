@@ -15,9 +15,12 @@
 
 <!-- Main Content -->
 {% block maincontent %}
-<h1>{{post.meta.title}}</h1>
-<time datetime="{{post.meta.createdAt}}">
-  {{post.meta.createdAt | date('d.M.yyyy')}}
-</time>
-<div>{{post.body | safe}}</div>
+<article>
+  <h2>{{post.meta.title}}</h2>
+  {{post.body | safe}}
+  <hr />
+  <time datetime="{{post.meta.createdAt}}">
+    {{post.meta.createdAt | date(site.dateFormat)}}
+  </time>
+</article>
 {% endblock %}

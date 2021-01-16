@@ -4,10 +4,29 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="{{site.basePath}}" />
+    <style type="text/css">
+      .inline {
+        display: inline;
+      }
+
+      .wrap {
+        max-width: {{site.maxWidth}}px;
+        margin: 2rem auto;
+      }
+    </style>
+
+    {% if site.themeLink %}
+    <link rel="stylesheet" href="{{site.themeLink}}" />
+    {% endif %}
+
+    <!-- -->
+
     {% block title %}
     <title>{{site.title}}</title>
     {% endblock %}
+
     <!-- -->
+
     {% block htmlhead %}
     <!-- HTML Head -->
     {% endblock %}
@@ -17,9 +36,11 @@
     {% include "partials/header.html" %}
     <!-- /Header -->
 
-    {% block maincontent %}
-    <!-- Main Content -->
-    {% endblock %}
+    <main class="wrap">
+      {% block maincontent %}
+      <!-- Main Content -->
+      {% endblock %}
+    </main>
 
     <!-- Footer -->
     {% include "partials/footer.html" %}

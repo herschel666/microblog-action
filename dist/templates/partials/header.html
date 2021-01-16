@@ -1,12 +1,10 @@
-<header>
-  <div>{{site.title}}</div>
+<header class="wrap">
+  <h1>
+    <a href="{{site.basePath}}">{{site.title}}</a>
+  </h1>
   {% if site.description %}
-  <div>{{site.description}}</div>
+  <div>
+    <strong>{{site.description}}</strong>
+  </div>
   {% endif %}
-  <nav>
-    <a href="{{site.basePath}}">Home</a>
-    {% for page in site.pages %}
-    <a href="{{site.basePath}}{{page.id}}.html">{{page.meta.title}}</a>
-    {% endfor %}
-  </nav>
 </header>

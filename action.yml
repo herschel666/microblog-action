@@ -11,6 +11,17 @@ inputs:
   title:
     description: 'Title of the Microblog'
     required: false
+  theme:
+    description: 'Theme of the Microblog'
+    required: false
+  max-width:
+    description: 'Max width of the content area in px'
+    required: false
+    default: 640
+  date-format:
+    description: 'Date format based on https://date-fns.org/v2.10.0/docs/format'
+    required: false
+    default: 'd.M.yyyy H:mm'
   posts-per-page:
     description: 'Amount of posts per page'
     required: false
