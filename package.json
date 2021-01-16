@@ -5,7 +5,6 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "ncc build index.js --license licenses.txt --target es2018",
-    "postbuild": "rm -rf ./dist/{index.html,_site,pages,posts}",
     "test": "NODE_OPTIONS=\"-r dotenv/config\" jest",
     "test:watch": "npm run test -- --watchAll --selectProjects test",
     "serve": "serve -l 8080 -n _site"

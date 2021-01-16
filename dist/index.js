@@ -12,13 +12,13 @@ const { execSync } = __nccwpck_require__(3129);
 
 const { run } = __nccwpck_require__(4822);
 
-const CWD = process.cwd();
-const DIST = __nccwpck_require__.ab + "_site";
-const POSTS = __nccwpck_require__.ab + "posts";
-const PAGES = __nccwpck_require__.ab + "pages";
+const CWD = execSync('pwd').toString('utf8').trim();
+const DIST = path.join(CWD, '_site');
+const POSTS = path.join(DIST, 'posts');
+const PAGES = path.join(CWD, 'pages');
 const TEMPLATES = __nccwpck_require__.ab + "templates";
-// No shorthand, because otherwise `ncc build` fails...
-const paths = { DIST: __nccwpck_require__.ab + "_site", POSTS: __nccwpck_require__.ab + "posts", PAGES: __nccwpck_require__.ab + "pages", TEMPLATES: __nccwpck_require__.ab + "templates" };
+// No shorthand for TEMPLATES, because otherwise `ncc build` fails...
+const paths = { DIST, POSTS, PAGES, TEMPLATES: __nccwpck_require__.ab + "templates" };
 
 const token = core.getInput('repo-token', { required: true });
 const title = core.getInput('title');
@@ -31,8 +31,6 @@ const userOptions = {
   ...(basePath ? { basePath } : undefined),
   ...(postsPerPage ? { postsPerPage } : undefined),
 };
-
-console.log(execSync(`ls -lah ${CWD}`).toString('utf8'));
 
 run({ paths, octokit, repo, userOptions }).then(
   () => console.log('Successfully built Microblog'),

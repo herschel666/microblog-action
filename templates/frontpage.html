@@ -1,16 +1,11 @@
 {% extends "_document.html" %}
 
-<!-- Title -->
-{% block title %}
-<title>Microblog</title>
-{% endblock %}
-
 <!-- Main Content -->
 {% block maincontent %}
 <ul>
   {% for post in posts %}
   <li>
-    <a href="/posts/{{post.id}}.html">{{post.meta.title}}</a>
+    <a href="{{site.basePath}}posts/{{post.id}}.html">{{post.meta.title}}</a>
   </li>
   {% endfor %}
 </ul>

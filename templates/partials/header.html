@@ -4,9 +4,9 @@
   <div>{{site.description}}</div>
   {% endif %}
   <nav>
-    <a href="/">Home</a>
+    <a href="{{site.basePath}}">Home</a>
     {% for page in site.pages %}
-    <a href="/{{page.id}}.html">{{page.meta.title}}</a>
+    <a href="{{site.basePath}}{{page.id}}.html">{{page.meta.title}}</a>
     {% endfor %}
   </nav>
 </header>
