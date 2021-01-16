@@ -11,7 +11,7 @@
     "serve": "serve -l 8080 -n _site"
   },
   "engines": {
-    "node": "^14"
+    "node": "^12"
   },
   "keywords": [
     "microblog",
