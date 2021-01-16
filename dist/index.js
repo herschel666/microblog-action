@@ -10,7 +10,7 @@ const github = __nccwpck_require__(5438);
 
 const { run } = __nccwpck_require__(4822);
 
-const token = core.getInput('repo-token');
+const token = core.getInput('repo-token', { required: true });
 const title = core.getInput('title');
 const basePath = core.getInput('base-path');
 const postsPerPage = core.getInput('posts-per-page');

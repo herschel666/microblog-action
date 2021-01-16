@@ -1,0 +1,12 @@
+<header>
+  <div>{{site.title}}</div>
+  {% if site.description %}
+  <div>{{site.description}}</div>
+  {% endif %}
+  <nav>
+    <a href="/">Home</a>
+    {% for page in site.pages %}
+    <a href="/{{page.id}}.html">{{page.meta.title}}</a>
+    {% endfor %}
+  </nav>
+</header>

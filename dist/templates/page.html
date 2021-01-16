@@ -1,0 +1,12 @@
+{% extends "_document.html" %}
+
+<!-- Title -->
+{% block title %}
+<title>{{page.meta.title}} | Microblog</title>
+{% endblock %}
+
+<!-- Main Content -->
+{% block maincontent %}
+<h1>{{page.title}}</h1>
+<div>{{page.body | safe}}</div>
+{% endblock %}

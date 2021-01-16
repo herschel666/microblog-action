@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="{{site.basePath}}" />
+    {% block title %}
+    <!-- Title -->
+    {% endblock %}
+    <!-- -->
+    {% block htmlhead %}
+    <!-- HTML Head -->
+    {% endblock %}
+  </head>
+  <body>
+    <!-- Header -->
+    {% include "partials/header.html" %}
+    <!-- /Header -->
+
+    {% block maincontent %}
+    <!-- Main Content -->
+    {% endblock %}
+
+    <!-- Footer -->
+    {% include "partials/footer.html" %}
+    <!-- /Footer -->
+  </body>
+</html>

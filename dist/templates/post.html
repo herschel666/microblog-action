@@ -1,0 +1,23 @@
+{% extends "_document.html" %}
+
+<!-- Title -->
+{% block title %}
+<title>{{post.meta.title}} | Microblog</title>
+{% endblock %}
+
+<!-- HTML Head -->
+{% block htmlhead %}
+<link
+  rel="canonical"
+  href="https://github.com/herschel666/ddd/issues/{{post.meta.number}}"
+/>
+{% endblock %}
+
+<!-- Main Content -->
+{% block maincontent %}
+<h1>{{post.meta.title}}</h1>
+<time datetime="{{post.meta.createdAt}}">
+  {{post.meta.createdAt | date('d.M.yyyy')}}
+</time>
+<div>{{post.body | safe}}</div>
+{% endblock %}
