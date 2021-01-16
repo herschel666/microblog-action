@@ -100,7 +100,7 @@ exports.run = async ({ octokit, repo, userOptions }) => {
     userOptions
   );
 
-  await fs.rm(__nccwpck_require__.ab + "_site", { recursive: true, force: true });
+  await fs.rmdir(__nccwpck_require__.ab + "_site", { recursive: true, force: true });
   await fs.mkdir(__nccwpck_require__.ab + "posts", { recursive: true });
 
   const data = [
