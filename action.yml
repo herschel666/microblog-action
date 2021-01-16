@@ -1,5 +1,20 @@
 name: 'Microblog'
 description: 'Create a microblog from Github issues'
+inputs:
+  repo-token:
+    description: 'Github Access Token'
+    required: true
+  base-path:
+    description: 'Base path of the site; for GH Pages this "/<repo>/"'
+    required: false
+    default: '/'
+  title:
+    description: 'Title of the Microblog'
+    required: false
+  posts-per-page:
+    description: 'Amount of posts per page'
+    required: false
+    default: 10
 runs:
   using: 'node12'
   main: 'dist/index.js'
