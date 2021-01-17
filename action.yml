@@ -1,4 +1,4 @@
-name: 'Microblog'
+name: 'Microblog-Action'
 author: Emanuel Kluge
 description: 'Create a microblog from Github issues'
 inputs:
