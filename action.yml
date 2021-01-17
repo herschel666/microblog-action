@@ -1,6 +1,9 @@
 name: 'Microblog-Action'
 author: Emanuel Kluge
 description: 'Create a microblog from Github issues'
+branding:
+  icon: 'book'
+  color: 'blue'
 inputs:
   repo-token:
     description: 'Github Access Token'
