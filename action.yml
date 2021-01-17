@@ -1,4 +1,5 @@
 name: 'Microblog'
+author: Emanuel Kluge
 description: 'Create a microblog from Github issues'
 inputs:
   repo-token:
