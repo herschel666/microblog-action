@@ -15,6 +15,7 @@ const paths = { DIST, POSTS, PAGES, TEMPLATES: TEMPLATES };
 
 const token = core.getInput('repo-token', { required: true });
 const title = core.getInput('title');
+const description = core.getInput('description');
 const theme = core.getInput('theme');
 const maxWidth = core.getInput('max-width');
 const dateFormat = core.getInput('date-format');
@@ -24,6 +25,7 @@ const { repo } = github.context;
 const octokit = github.getOctokit(token);
 const userOptions = {
   ...(title ? { title } : undefined),
+  ...(description ? { description } : undefined),
   ...(theme ? { theme } : undefined),
   ...(maxWidth && !Number.isNaN(parseInt(maxWidth, 10))
     ? { maxWidth }

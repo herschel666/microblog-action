@@ -11,6 +11,9 @@ inputs:
   title:
     description: 'Title of the Microblog'
     required: false
+  description:
+    description: 'Description of the Microblog'
+    required: false
   theme:
     description: 'Theme of the Microblog'
     required: false

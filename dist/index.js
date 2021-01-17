@@ -22,6 +22,7 @@ const paths = { DIST, POSTS, PAGES, TEMPLATES: __nccwpck_require__.ab + "templat
 
 const token = core.getInput('repo-token', { required: true });
 const title = core.getInput('title');
+const description = core.getInput('description');
 const theme = core.getInput('theme');
 const maxWidth = core.getInput('max-width');
 const dateFormat = core.getInput('date-format');
@@ -31,6 +32,7 @@ const { repo } = github.context;
 const octokit = github.getOctokit(token);
 const userOptions = {
   ...(title ? { title } : undefined),
+  ...(description ? { description } : undefined),
   ...(theme ? { theme } : undefined),
   ...(maxWidth && !Number.isNaN(parseInt(maxWidth, 10))
     ? { maxWidth }
@@ -132,6 +134,7 @@ exports.run = async ({ paths, octokit, repo, userOptions }) => {
     ...repo,
     themeLink,
     title: options.title,
+    description: options.description,
     maxWidth: options.maxWidth,
     dateFormat: options.dateFormat,
     basePath: options.basePath,
