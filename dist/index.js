@@ -61,29 +61,25 @@ const globby = __nccwpck_require__(3398);
 const filterWip = ({ labels }) =>
   labels.some(({ name }) => name.toLowerCase() === 'wip') === false;
 
-exports.getPages = async (directory) => {
-  const files = await globby(directory);
+exports.getPages = async (glob) => {
+  const files = await globby(glob);
   const data = await Promise.all(files.map((f) => fs.readFile(f, 'utf8')));
 
   return data.map((body, i) => ({ body, filename: path.basename(files[i]) }));
 };
 
-exports.getPosts = async ({ octokit, repo, perPage }) => {
-  const { data } = await octokit.issues.listForRepo({
-    ...repo,
-    creator: repo.owner,
-    per_page: Number(perPage ? perPage : '10'),
-  });
+exports.getPosts = async ({ octokit, repo }) => {
+  const result = (await octokit.paginate(octokit.issues.listForRepo, repo))
+    .filter(({ user }) => user.login === repo.owner)
+    .filter(filterWip);
 
-  return data
-    .filter(filterWip)
-    .map(({ id, number, title, body, created_at: createdAt }) => ({
-      filename: `${id}.issue`,
-      number,
-      title,
-      body,
-      createdAt,
-    }));
+  return result.map(({ id, number, title, body, created_at: createdAt }) => ({
+    filename: `${id}.issue`,
+    number,
+    title,
+    body,
+    createdAt,
+  }));
 };
 
 
@@ -113,6 +109,7 @@ exports.run = async ({ paths, octokit, repo, userOptions }) => {
   const renderer = createRenderer(TEMPLATES);
   const themeLink =
     typeof options.theme === 'undefined' ? null : getThemeLink(options.theme);
+  const postsPerPage = Number(options.postsPerPage);
 
   await fs.rmdir(DIST, { recursive: true });
   await fs.mkdir(POSTS, { recursive: true });
@@ -120,10 +117,9 @@ exports.run = async ({ paths, octokit, repo, userOptions }) => {
   const data = [
     getPosts({
       repo: repo,
-      perPage: options.postsPerPage,
       octokit,
     }),
-    getPages(PAGES),
+    getPages(path.join(PAGES, '/*.{md,markdown}')),
   ];
   const [posts, pages] = await Promise.all(data);
   const postContents = await Promise.all(
@@ -149,9 +145,30 @@ exports.run = async ({ paths, octokit, repo, userOptions }) => {
   const pageFiles = pageContents.map((page) =>
     renderer.render('page.html', { page, site })
   );
-  const frontpage = renderer.render('frontpage.html', {
-    site,
-    posts: postContents,
+  const paginatedPosts = postContents.reduce((acc, post) => {
+    const last = acc[acc.length - 1];
+    if (!Array.isArray(last) || last.length === postsPerPage) {
+      acc.push([post]);
+    } else {
+      last.push(post);
+    }
+    return acc;
+  }, []);
+  const indexes = paginatedPosts.map((posts, i, { length: max }) => {
+    const base = i + 1;
+    const prev = base < max ? base + 1 : undefined;
+    const next = base > 2 ? base - 1 : base > 1 ? 'index' : undefined;
+    const hasNext = typeof next === 'number' || next === 'index';
+    const hasPrev = typeof prev === 'number';
+
+    return renderer.render('index.html', {
+      site,
+      next,
+      prev,
+      hasNext,
+      hasPrev,
+      posts,
+    });
   });
   const writePosts = postFiles.map((file, i) =>
     fs.writeFile(path.join(POSTS, `${postContents[i].id}.html`), file, 'utf8')
@@ -159,13 +176,15 @@ exports.run = async ({ paths, octokit, repo, userOptions }) => {
   const writePages = pageFiles.map((file, i) =>
     fs.writeFile(path.join(DIST, `${pageContents[i].id}.html`), file, 'utf8')
   );
-  const writeFrontpage = fs.writeFile(
-    path.join(DIST, 'index.html'),
-    frontpage,
-    'utf8'
+  const writeIndexes = indexes.map((index, i) =>
+    fs.writeFile(
+      path.join(DIST, `${i === 0 ? 'index' : ++i}.html`),
+      index,
+      'utf8'
+    )
   );
 
-  await Promise.all([...writePosts, ...writePages, writeFrontpage]);
+  await Promise.all([...writePosts, ...writePages, ...writeIndexes]);
 };
 
 

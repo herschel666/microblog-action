@@ -1,0 +1,35 @@
+{% extends "_document.html" %}
+
+<!-- Main Content -->
+{% block maincontent %} {% for post in posts %}
+<article>
+  <h3>
+    <a href="{{site.basePath}}posts/{{post.id}}.html">{{post.meta.title}}</a>
+  </h3>
+  <small>
+    <time datetime="{{post.meta.createdAt}}">
+      {{post.meta.createdAt | date(site.dateFormat)}}
+    </time>
+  </small>
+</article>
+{% endfor %}
+
+<!-- Pagination -->
+{% if hasPrev or hasNext %}
+<nav class="pagination">
+  {% if hasPrev %}
+  <a href="{{site.basePath}}{{prev}}.html">&laquo; prev</a>
+  {% else %}
+  <span>&nbsp;</span>
+  {% endif %}
+  <!-- -->
+  {% if hasNext %}
+  <a href="{{site.basePath}}{{next}}.html">next &raquo;</a>
+  {% else %}
+  <span>&nbsp;</span>
+  {% endif %}
+</nav>
+{% endif %}
+<!-- /Pagination -->
+
+{% endblock %}

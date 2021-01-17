@@ -1,10 +1,10 @@
 <footer class="wrap">
-  &copy; {{site.year}} {{site.owner}} <span>&nbsp;&bull;&nbsp;</span>
+  &copy; {{site.year}} {{site.owner}}
 
   <!-- -->
 
   {% if site.pages %}
-  <nav class="inline">
+  <nav class="nav">
     {% for page in site.pages %}
     <a href="{{site.basePath}}{{page.id}}.html">{{page.meta.title}}</a>
     {% endfor %}
