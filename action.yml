@@ -4,10 +4,9 @@ inputs:
   repo-token:
     description: 'Github Access Token'
     required: true
-  base-path:
-    description: 'Base path of the site; for GH Pages this "/<repo>/"'
-    required: false
-    default: '/'
+  url:
+    description: 'Full site URL including base path if it exists.'
+    required: true
   title:
     description: 'Title of the Microblog'
     required: false

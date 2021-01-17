@@ -21,16 +21,17 @@ const TEMPLATES = __nccwpck_require__.ab + "templates";
 const paths = { DIST, POSTS, PAGES, TEMPLATES: __nccwpck_require__.ab + "templates" };
 
 const token = core.getInput('repo-token', { required: true });
+const url = core.getInput('url', { required: true });
 const title = core.getInput('title');
 const description = core.getInput('description');
 const theme = core.getInput('theme');
 const maxWidth = core.getInput('max-width');
 const dateFormat = core.getInput('date-format');
-const basePath = core.getInput('base-path');
 const postsPerPage = core.getInput('posts-per-page');
 const { repo } = github.context;
 const octokit = github.getOctokit(token);
 const userOptions = {
+  url,
   ...(title ? { title } : undefined),
   ...(description ? { description } : undefined),
   ...(theme ? { theme } : undefined),
@@ -38,7 +39,6 @@ const userOptions = {
     ? { maxWidth }
     : undefined),
   ...(dateFormat ? { dateFormat } : undefined),
-  ...(basePath ? { basePath } : undefined),
   ...(postsPerPage ? { postsPerPage } : undefined),
 };
 
@@ -96,7 +96,8 @@ const { promises: fs } = __nccwpck_require__(5747);
 const { createRenderer } = __nccwpck_require__(3075);
 const { renderMarkdown } = __nccwpck_require__(5821);
 const { getPages, getPosts } = __nccwpck_require__(7383);
-const { getThemeLink } = __nccwpck_require__(4024);
+const { getThemeLink, normalizeSiteUrl } = __nccwpck_require__(4024);
+const { render } = __nccwpck_require__(7006);
 
 exports.run = async ({ paths, octokit, repo, userOptions }) => {
   const { DIST, POSTS, PAGES, TEMPLATES } = paths;
@@ -112,6 +113,7 @@ exports.run = async ({ paths, octokit, repo, userOptions }) => {
   const themeLink =
     typeof options.theme === 'undefined' ? null : getThemeLink(options.theme);
   const postsPerPage = Number(options.postsPerPage);
+  const { url, basePath } = normalizeSiteUrl(options.url);
 
   await fs.rmdir(DIST, { recursive: true });
   await fs.mkdir(POSTS, { recursive: true });
@@ -133,12 +135,13 @@ exports.run = async ({ paths, octokit, repo, userOptions }) => {
   const site = {
     ...repo,
     themeLink,
+    url,
+    basePath,
     title: options.title,
     description: options.description,
     maxWidth: options.maxWidth,
     dateFormat: options.dateFormat,
-    basePath: options.basePath,
-    year: new Date().getFullYear(),
+    time: new Date(),
     pages: pageContents,
     posts: postContents,
   };
@@ -173,6 +176,10 @@ exports.run = async ({ paths, octokit, repo, userOptions }) => {
       posts,
     });
   });
+  const rssFeed = renderer.render('feed.xml', {
+    site,
+    posts: postContents.slice(0, postsPerPage),
+  });
   const writePosts = postFiles.map((file, i) =>
     fs.writeFile(path.join(POSTS, `${postContents[i].id}.html`), file, 'utf8')
   );
@@ -186,8 +193,18 @@ exports.run = async ({ paths, octokit, repo, userOptions }) => {
       'utf8'
     )
   );
+  const writeRssFeed = fs.writeFile(
+    path.join(DIST, 'feed.xml'),
+    rssFeed,
+    'utf8'
+  );
 
-  await Promise.all([...writePosts, ...writePages, ...writeIndexes]);
+  await Promise.all([
+    ...writePosts,
+    ...writePages,
+    ...writeIndexes,
+    writeRssFeed,
+  ]);
 };
 
 
@@ -287,6 +304,12 @@ exports.getThemeLink = (theme) => {
     default:
       throw new Error(`Unknown theme "${theme}".`);
   }
+};
+
+exports.normalizeSiteUrl = (url) => {
+  const { origin, pathname } = new URL(url);
+  const basePath = `${pathname}${pathname.endsWith('/') ? '' : '/'}`;
+  return { url: origin, basePath };
 };
 
 

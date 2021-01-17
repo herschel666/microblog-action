@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="2.0">
+  <channel>
+    <title>{{site.title}}</title>
+    {% if site.description %}
+    <description>
+      {{site.description}}
+    </description>
+    {% endif %}
+    <link>{{site.url}}{{site.basePath}}</link>
+    <generator>https://github.com/herschel666/microblog-action</generator>
+    <lastBuildDate>{{site.time | date('ccc, d LLL yyyy HH:mm:ss xx')}}</lastBuildDate>
+    {% for post in posts %}
+    <item>
+      <title>{{post.meta.title}}</title>
+      <link>{{site.url}}{{site.basePath}}posts/{{post.id}}.html</link>
+      <guid isPermaLink="false">{{post.id}}</guid>
+      <pubDate>{{post.meta.createdAt | date('ccc, d LLL yyyy HH:mm:ss xx')}}</pubDate>
+      <description>
+        <![CDATA[{{post.body | safe}}]]>
+      </description>
+    </item>
+    {% endfor %}
+  </channel>
+</rss>
