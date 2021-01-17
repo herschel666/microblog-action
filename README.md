@@ -9,7 +9,7 @@
 - comes with 10 themes (powered by class-less CSS libraries)
 - custom CSS
 - static frontpage
-- arbitrary files from `/static`-folder
+- deploy arbitrary files from `/static`-folder
 - deployment-agnostic: renders the site into a `_site`-folder
 - mark drafts with a `WIP`-label
 - limit publishing to issues with a certain label
@@ -49,6 +49,10 @@ jobs:
           static-frontpage: welcome.md
           label: 'blog'
           closed: true
+          lang: 'de'
+          i18n.next: 'Nächste Artikel'
+          i18n.prev: 'Vorherige Artikel'
+          i18n.posts: 'Artikel'
 
       - Deploy Microblog
         uses: ... # Use your preferred service to the contents of /_site
@@ -140,6 +144,12 @@ But for now, the available themes are basically so-called class-less CSS librari
 
 So if you want to use the `sakura.css`-theme, set the `theme`-option to `'sakura.css'`.
 
+## Custom CSS
+
+In case the class-less CSS lib doesn't quite do the trick there's the possiblity to add custom CSS.
+Create a `.css`-file and assign its file path to the `custom-styles`-option. **Microblog-Action**
+will fetch the contents of that file and inline it in the HTML head of each page.
+
 ## Static files
 
 **Microblog-Action** will copy all contents of the `<repo>/static`-folder (if it exists) into the root of
@@ -212,7 +222,7 @@ jobs:
       - name: Deploy Microblog
         uses: nwtgck/actions-netlify@v1.1
         with:
-          publish-dir: './_site_'
+          publish-dir: './_site'
           github-token: ${{ secrets.GITHUB_TOKEN }}
           production-deploy: true
           enable-pull-request-comment: false
@@ -226,6 +236,11 @@ jobs:
 
 Whatever Github Action is able to push the contents of the `_site`-folder onto a server will be a
 valid deployment action.
+
+## Questions
+
+I you have questions, feel free to ping me on twitter:
+[@Herschel_R](https://twitter.com/Herschel_R).
 
 ---
 
