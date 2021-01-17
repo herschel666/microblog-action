@@ -29,6 +29,7 @@ const theme = core.getInput('theme');
 const maxWidth = core.getInput('max-width');
 const dateFormat = core.getInput('date-format');
 const postsPerPage = core.getInput('posts-per-page');
+const customStyles = core.getInput('custom-styles');
 const { repo } = github.context;
 const octokit = github.getOctokit(token);
 const userOptions = {
@@ -41,6 +42,9 @@ const userOptions = {
     : undefined),
   ...(dateFormat ? { dateFormat } : undefined),
   ...(postsPerPage ? { postsPerPage } : undefined),
+  ...(customStyles
+    ? { customStyles: path.resolve(CWD, customStyles) }
+    : undefined),
 };
 
 run({ paths, octokit, repo, userOptions }).then(
@@ -97,7 +101,12 @@ const { promises: fs } = __nccwpck_require__(35747);
 const { createRenderer } = __nccwpck_require__(13075);
 const { renderMarkdown } = __nccwpck_require__(15821);
 const { getPages, getPosts } = __nccwpck_require__(37383);
-const { getThemeLink, normalizeSiteUrl, copyStatic } = __nccwpck_require__(64024);
+const {
+  getThemeLink,
+  normalizeSiteUrl,
+  copyStatic,
+  loadCustomStyles,
+} = __nccwpck_require__(64024);
 
 exports.run = async ({ paths, octokit, repo, userOptions }) => {
   const { DIST, POSTS, PAGES, STATIC, TEMPLATES } = paths;
@@ -114,6 +123,7 @@ exports.run = async ({ paths, octokit, repo, userOptions }) => {
     typeof options.theme === 'undefined' ? null : getThemeLink(options.theme);
   const postsPerPage = Number(options.postsPerPage);
   const { url, basePath } = normalizeSiteUrl(options.url);
+  const customStyles = await loadCustomStyles(options.customStyles);
 
   await fs.rmdir(DIST, { recursive: true });
   await fs.mkdir(POSTS, { recursive: true });
@@ -138,6 +148,7 @@ exports.run = async ({ paths, octokit, repo, userOptions }) => {
     themeLink,
     url,
     basePath,
+    customStyles,
     title: options.title,
     description: options.description,
     maxWidth: options.maxWidth,
@@ -281,6 +292,7 @@ exports.createRenderer = (folder) => {
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 const path = __nccwpck_require__(85622);
+const { promises: fs } = __nccwpck_require__(35747);
 const cpy = __nccwpck_require__(14070);
 
 exports.getThemeLink = (theme) => {
@@ -318,6 +330,14 @@ exports.normalizeSiteUrl = (url) => {
 
 exports.copyStatic = async (fromDir, toDir) => {
   await cpy(path.join(fromDir, '**/*'), toDir);
+};
+
+exports.loadCustomStyles = async (file) => {
+  try {
+    return await fs.readFile(file, 'utf8');
+  } catch (e) {
+    return null;
+  }
 };
 
 

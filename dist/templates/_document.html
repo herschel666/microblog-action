@@ -29,6 +29,14 @@
       }
     </style>
 
+    <!-- Custom Styles -->
+    {% if site.customStyles %}
+    <style type="text/css">
+      {{site.customStyles}}
+    </style>
+    {% endif %}
+    <!-- /Custom Styles -->
+
     {% if site.themeLink %}
     <link rel="stylesheet" href="{{site.themeLink}}" />
     {% endif %}
