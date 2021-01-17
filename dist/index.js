@@ -87,17 +87,20 @@ exports.getPages = async (glob) => {
 };
 
 exports.getPosts = async ({ octokit, repo }) => {
-  const result = (await octokit.paginate(octokit.issues.listForRepo, repo))
-    .filter(({ user }) => user.login === repo.owner)
-    .filter(filterWip);
+  const result = await octokit.paginate(octokit.issues.listForRepo, {
+    ...repo,
+    creator: repo.owner,
+  });
 
-  return result.map(({ id, number, title, body, created_at: createdAt }) => ({
-    filename: `${id}.issue`,
-    number,
-    title,
-    body,
-    createdAt,
-  }));
+  return result
+    .filter(filterWip)
+    .map(({ id, number, title, body, created_at: createdAt }) => ({
+      filename: `${id}.issue`,
+      number,
+      title,
+      body,
+      createdAt,
+    }));
 };
 
 
