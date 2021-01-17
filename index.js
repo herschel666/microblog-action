@@ -9,9 +9,10 @@ const CWD = execSync('pwd').toString('utf8').trim();
 const DIST = path.join(CWD, '_site');
 const POSTS = path.join(DIST, 'posts');
 const PAGES = path.join(CWD, 'pages');
+const STATIC = path.join(CWD, 'static');
 const TEMPLATES = path.join(__dirname, 'templates');
 // No shorthand for TEMPLATES, because otherwise `ncc build` fails...
-const paths = { DIST, POSTS, PAGES, TEMPLATES: TEMPLATES };
+const paths = { DIST, POSTS, PAGES, STATIC, TEMPLATES: TEMPLATES };
 
 const token = core.getInput('repo-token', { required: true });
 const url = core.getInput('url', { required: true });
