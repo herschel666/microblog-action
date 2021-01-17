@@ -30,6 +30,7 @@ const maxWidth = core.getInput('max-width');
 const dateFormat = core.getInput('date-format');
 const postsPerPage = core.getInput('posts-per-page');
 const customStyles = core.getInput('custom-styles');
+const staticFrontpage = core.getInput('static-frontpage');
 const { repo } = github.context;
 const octokit = github.getOctokit(token);
 const userOptions = {
@@ -45,6 +46,7 @@ const userOptions = {
   ...(customStyles
     ? { customStyles: path.resolve(CWD, customStyles) }
     : undefined),
+  ...(staticFrontpage ? { staticFrontpage } : undefined),
 };
 
 run({ paths, octokit, repo, userOptions }).then(
@@ -137,6 +139,11 @@ exports.run = async ({ paths, octokit, repo, userOptions }) => {
     getPages(path.join(PAGES, '/*.{md,markdown}')),
   ];
   const [posts, pages] = await Promise.all(data);
+  const hasStaticFrontpage =
+    options.staticFrontpage &&
+    pages.findIndex(({ filename }) => filename === options.staticFrontpage) >
+      -1;
+  const postsIndexName = hasStaticFrontpage ? 'posts' : 'index';
   const postContents = await Promise.all(
     posts.map((post) => renderMarkdown(post))
   );
@@ -149,12 +156,15 @@ exports.run = async ({ paths, octokit, repo, userOptions }) => {
     url,
     basePath,
     customStyles,
+    hasStaticFrontpage,
     title: options.title,
     description: options.description,
     maxWidth: options.maxWidth,
     dateFormat: options.dateFormat,
     time: new Date(),
-    pages: pageContents,
+    pages: pageContents.filter(
+      ({ filename }) => filename !== options.staticFrontpage
+    ),
     posts: postContents,
   };
   const postFiles = postContents.map((post) =>
@@ -173,10 +183,11 @@ exports.run = async ({ paths, octokit, repo, userOptions }) => {
     return acc;
   }, []);
   const indexes = paginatedPosts.map((posts, i, { length: max }) => {
+    const firstPageName = hasStaticFrontpage ? 'posts' : 'index';
     const base = i + 1;
     const prev = base < max ? base + 1 : undefined;
-    const next = base > 2 ? base - 1 : base > 1 ? 'index' : undefined;
-    const hasNext = typeof next === 'number' || next === 'index';
+    const next = base > 2 ? base - 1 : base > 1 ? firstPageName : undefined;
+    const hasNext = typeof next === 'number' || next === firstPageName;
     const hasPrev = typeof prev === 'number';
 
     return renderer.render('index.html', {
@@ -195,12 +206,16 @@ exports.run = async ({ paths, octokit, repo, userOptions }) => {
   const writePosts = postFiles.map((file, i) =>
     fs.writeFile(path.join(POSTS, `${postContents[i].id}.html`), file, 'utf8')
   );
-  const writePages = pageFiles.map((file, i) =>
-    fs.writeFile(path.join(DIST, `${pageContents[i].id}.html`), file, 'utf8')
-  );
+  const writePages = pageFiles.map((file, i) => {
+    const filename =
+      pageContents[i].filename === options.staticFrontpage
+        ? 'index'
+        : pageContents[i].id;
+    return fs.writeFile(path.join(DIST, `${filename}.html`), file, 'utf8');
+  });
   const writeIndexes = indexes.map((index, i) =>
     fs.writeFile(
-      path.join(DIST, `${i === 0 ? 'index' : ++i}.html`),
+      path.join(DIST, `${i === 0 ? postsIndexName : ++i}.html`),
       index,
       'utf8'
     )

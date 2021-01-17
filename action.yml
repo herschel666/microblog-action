@@ -31,6 +31,9 @@ inputs:
   custom-styles:
     description: 'Path to a CSS file with custom styles relative to the repo root'
     required: false
+  static-frontpage:
+    description: 'Set the microblog\'s frontpage to be one of the static pages'
+    required: false
 runs:
   using: 'node12'
   main: 'dist/index.js'

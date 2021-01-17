@@ -23,6 +23,7 @@ const maxWidth = core.getInput('max-width');
 const dateFormat = core.getInput('date-format');
 const postsPerPage = core.getInput('posts-per-page');
 const customStyles = core.getInput('custom-styles');
+const staticFrontpage = core.getInput('static-frontpage');
 const { repo } = github.context;
 const octokit = github.getOctokit(token);
 const userOptions = {
@@ -38,6 +39,7 @@ const userOptions = {
   ...(customStyles
     ? { customStyles: path.resolve(CWD, customStyles) }
     : undefined),
+  ...(staticFrontpage ? { staticFrontpage } : undefined),
 };
 
 run({ paths, octokit, repo, userOptions }).then(

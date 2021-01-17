@@ -3,11 +3,15 @@
 
   <!-- -->
 
-  {% if site.pages %}
+  {% if site.pages or site.hasStaticFrontpage %}
   <nav class="nav">
     {% for page in site.pages %}
     <a href="{{site.basePath}}{{page.id}}.html">{{page.meta.title}}</a>
     {% endfor %}
+    <!-- -->
+    {% if site.hasStaticFrontpage %}
+    <a href="{{site.basePath}}posts.html">Posts</a>
+    {% endif %}
   </nav>
   {% endif %}
 </footer>
