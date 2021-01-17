@@ -31,6 +31,7 @@ const dateFormat = core.getInput('date-format');
 const postsPerPage = core.getInput('posts-per-page');
 const customStyles = core.getInput('custom-styles');
 const staticFrontpage = core.getInput('static-frontpage');
+const label = core.getInput('label');
 const lang = core.getInput('lang');
 const i18nNext = core.getInput('i18n.next');
 const i18nPrev = core.getInput('i18n.prev');
@@ -56,6 +57,7 @@ const userOptions = {
     ? { customStyles: path.resolve(CWD, customStyles) }
     : undefined),
   ...(staticFrontpage ? { staticFrontpage } : undefined),
+  ...(label ? { label } : undefined),
 };
 
 run({ paths, octokit, repo, userOptions }).then(
@@ -86,9 +88,10 @@ exports.getPages = async (glob) => {
   return data.map((body, i) => ({ body, filename: path.basename(files[i]) }));
 };
 
-exports.getPosts = async ({ octokit, repo }) => {
+exports.getPosts = async ({ octokit, repo, label }) => {
   const result = await octokit.paginate(octokit.issues.listForRepo, {
     ...repo,
+    ...(label ? { labels: label } : undefined),
     creator: repo.owner,
   });
 
@@ -142,6 +145,7 @@ exports.run = async ({ paths, octokit, repo, userOptions }) => {
   const data = [
     getPosts({
       repo: repo,
+      label: options.label,
       octokit,
     }),
     getPages(path.join(PAGES, '/*.{md,markdown}')),

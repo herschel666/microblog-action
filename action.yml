@@ -35,6 +35,9 @@ inputs:
   static-frontpage:
     description: "Set the microblog's frontpage to be one of the static pages"
     required: false
+  label:
+    description: 'Only publish issues with a certain label'
+    required: false
   lang:
     description: 'Language of the Microblog'
     required: false
