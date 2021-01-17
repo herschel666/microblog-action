@@ -44,6 +44,7 @@ const { repo } = github.context;
 const octokit = github.getOctokit(token);
 const userOptions = {
   url,
+  lang,
   i18n,
   maxWidth,
   dateFormat,
@@ -55,7 +56,6 @@ const userOptions = {
     ? { customStyles: path.resolve(CWD, customStyles) }
     : undefined),
   ...(staticFrontpage ? { staticFrontpage } : undefined),
-  ...(lang ? { lang } : undefined),
 };
 
 run({ paths, octokit, repo, userOptions }).then(
