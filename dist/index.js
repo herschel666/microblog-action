@@ -32,6 +32,7 @@ const postsPerPage = core.getInput('posts-per-page');
 const customStyles = core.getInput('custom-styles');
 const staticFrontpage = core.getInput('static-frontpage');
 const label = core.getInput('label');
+const closed = core.getInput('closed');
 const lang = core.getInput('lang');
 const i18nNext = core.getInput('i18n.next');
 const i18nPrev = core.getInput('i18n.prev');
@@ -58,6 +59,7 @@ const userOptions = {
     : undefined),
   ...(staticFrontpage ? { staticFrontpage } : undefined),
   ...(label ? { label } : undefined),
+  ...(closed ? { closed } : undefined),
 };
 
 run({ paths, octokit, repo, userOptions }).then(
@@ -88,10 +90,11 @@ exports.getPages = async (glob) => {
   return data.map((body, i) => ({ body, filename: path.basename(files[i]) }));
 };
 
-exports.getPosts = async ({ octokit, repo, label }) => {
+exports.getPosts = async ({ octokit, repo, label, closed }) => {
   const result = await octokit.paginate(octokit.issues.listForRepo, {
     ...repo,
     ...(label ? { labels: label } : undefined),
+    ...(closed ? { state: 'closed' } : undefined),
     creator: repo.owner,
   });
 
@@ -146,6 +149,7 @@ exports.run = async ({ paths, octokit, repo, userOptions }) => {
     getPosts({
       repo: repo,
       label: options.label,
+      closed: options.closed,
       octokit,
     }),
     getPages(path.join(PAGES, '/*.{md,markdown}')),

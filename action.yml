@@ -38,6 +38,9 @@ inputs:
   label:
     description: 'Only publish issues with a certain label'
     required: false
+  closed:
+    description: 'Only publish closed issues'
+    required: false
   lang:
     description: 'Language of the Microblog'
     required: false
