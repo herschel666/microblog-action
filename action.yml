@@ -35,6 +35,22 @@ inputs:
   static-frontpage:
     description: 'Set the microblog\'s frontpage to be one of the static pages'
     required: false
+  lang:
+    description: 'Language of the Microblog'
+    required: false
+    default: 'en'
+  i18n.next:
+    description: 'Label of "next"-link'
+    required: false
+    default: 'next'
+  i18n.prev:
+    description: 'Label of "prev"-link'
+    required: false
+    default: 'previous'
+  i18n.posts:
+    description: 'Label of "Posts"-link'
+    required: false
+    default: 'Posts'
 runs:
   using: 'node12'
   main: 'dist/index.js'

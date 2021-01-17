@@ -31,22 +31,31 @@ const dateFormat = core.getInput('date-format');
 const postsPerPage = core.getInput('posts-per-page');
 const customStyles = core.getInput('custom-styles');
 const staticFrontpage = core.getInput('static-frontpage');
+const lang = core.getInput('lang');
+const i18nNext = core.getInput('i18n.next');
+const i18nPrev = core.getInput('i18n.prev');
+const i18nPosts = core.getInput('i18n.posts');
+const i18n = {
+  next: i18nNext,
+  prev: i18nPrev,
+  posts: i18nPosts,
+};
 const { repo } = github.context;
 const octokit = github.getOctokit(token);
 const userOptions = {
   url,
+  i18n,
+  maxWidth,
+  dateFormat,
+  postsPerPage,
   ...(title ? { title } : undefined),
   ...(description ? { description } : undefined),
   ...(theme ? { theme } : undefined),
-  ...(maxWidth && !Number.isNaN(parseInt(maxWidth, 10))
-    ? { maxWidth }
-    : undefined),
-  ...(dateFormat ? { dateFormat } : undefined),
-  ...(postsPerPage ? { postsPerPage } : undefined),
   ...(customStyles
     ? { customStyles: path.resolve(CWD, customStyles) }
     : undefined),
   ...(staticFrontpage ? { staticFrontpage } : undefined),
+  ...(lang ? { lang } : undefined),
 };
 
 run({ paths, octokit, repo, userOptions }).then(
@@ -114,10 +123,6 @@ exports.run = async ({ paths, octokit, repo, userOptions }) => {
   const { DIST, POSTS, PAGES, STATIC, TEMPLATES } = paths;
   const defaultOptions = {
     title: `${repo.owner}'s Microblog`,
-    maxWidth: 640,
-    dateFormat: 'd.M.yyyy H:mm',
-    basePath: '/',
-    postPerPage: '10',
   };
   const options = Object.assign(defaultOptions, userOptions);
   const renderer = createRenderer(TEMPLATES);
@@ -157,10 +162,12 @@ exports.run = async ({ paths, octokit, repo, userOptions }) => {
     basePath,
     customStyles,
     hasStaticFrontpage,
+    lang: options.lang,
     title: options.title,
     description: options.description,
     maxWidth: options.maxWidth,
     dateFormat: options.dateFormat,
+    i18n: options.i18n,
     time: new Date(),
     pages: pageContents.filter(
       ({ filename }) => filename !== options.staticFrontpage
@@ -183,11 +190,10 @@ exports.run = async ({ paths, octokit, repo, userOptions }) => {
     return acc;
   }, []);
   const indexes = paginatedPosts.map((posts, i, { length: max }) => {
-    const firstPageName = hasStaticFrontpage ? 'posts' : 'index';
     const base = i + 1;
     const prev = base < max ? base + 1 : undefined;
-    const next = base > 2 ? base - 1 : base > 1 ? firstPageName : undefined;
-    const hasNext = typeof next === 'number' || next === firstPageName;
+    const next = base > 2 ? base - 1 : base > 1 ? postsIndexName : undefined;
+    const hasNext = typeof next === 'number' || next === postsIndexName;
     const hasPrev = typeof prev === 'number';
 
     return renderer.render('index.html', {

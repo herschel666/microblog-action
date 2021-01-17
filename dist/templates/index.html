@@ -18,13 +18,13 @@
 {% if hasPrev or hasNext %}
 <nav class="pagination">
   {% if hasPrev %}
-  <a href="{{site.basePath}}{{prev}}.html">&laquo; prev</a>
+  <a href="{{site.basePath}}{{prev}}.html">&laquo; {{site.i18n.prev}}</a>
   {% else %}
   <span>&nbsp;</span>
   {% endif %}
   <!-- -->
   {% if hasNext %}
-  <a href="{{site.basePath}}{{next}}.html">next &raquo;</a>
+  <a href="{{site.basePath}}{{next}}.html">{{site.i18n.next}} &raquo;</a>
   {% else %}
   <span>&nbsp;</span>
   {% endif %}

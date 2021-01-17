@@ -24,18 +24,27 @@ const dateFormat = core.getInput('date-format');
 const postsPerPage = core.getInput('posts-per-page');
 const customStyles = core.getInput('custom-styles');
 const staticFrontpage = core.getInput('static-frontpage');
+const lang = core.getInput('lang');
+const i18nNext = core.getInput('i18n.next');
+const i18nPrev = core.getInput('i18n.prev');
+const i18nPosts = core.getInput('i18n.posts');
+const i18n = {
+  next: i18nNext,
+  prev: i18nPrev,
+  posts: i18nPosts,
+};
 const { repo } = github.context;
 const octokit = github.getOctokit(token);
 const userOptions = {
   url,
+  lang,
+  i18n,
+  maxWidth,
+  dateFormat,
+  postsPerPage,
   ...(title ? { title } : undefined),
   ...(description ? { description } : undefined),
   ...(theme ? { theme } : undefined),
-  ...(maxWidth && !Number.isNaN(parseInt(maxWidth, 10))
-    ? { maxWidth }
-    : undefined),
-  ...(dateFormat ? { dateFormat } : undefined),
-  ...(postsPerPage ? { postsPerPage } : undefined),
   ...(customStyles
     ? { customStyles: path.resolve(CWD, customStyles) }
     : undefined),
