@@ -20,10 +20,7 @@ inputs:
   theme:
     description: 'Theme of the Microblog'
     required: false
-  max-width:
-    description: 'Max width of the content area in px'
-    required: false
-    default: 640
+    default: 'new.css'
   date-format:
     description: 'Date format based on https://date-fns.org/v2.10.0/docs/format'
     required: false

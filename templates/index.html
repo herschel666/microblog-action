@@ -2,7 +2,7 @@
 
 <!-- Main Content -->
 {% block maincontent %} {% for post in posts %}
-<article>
+<article class="wrap">
   <h3>
     <a href="{{site.basePath}}posts/{{post.id}}.html">{{post.meta.title}}</a>
   </h3>
@@ -16,15 +16,19 @@
 
 <!-- Pagination -->
 {% if hasPrev or hasNext %}
-<nav class="pagination">
+<nav class="pagination wrap">
   {% if hasPrev %}
-  <a href="{{site.basePath}}{{prev}}.html">&laquo; {{site.i18n.prev}}</a>
+  <a class="pagination__link" href="{{site.basePath}}{{prev}}.html">
+    &laquo; {{site.i18n.prev}}
+  </a>
   {% else %}
   <span>&nbsp;</span>
   {% endif %}
   <!-- -->
   {% if hasNext %}
-  <a href="{{site.basePath}}{{next}}.html">{{site.i18n.next}} &raquo;</a>
+  <a class="pagination__link" href="{{site.basePath}}{{next}}.html">
+    {{site.i18n.next}} &raquo;
+  </a>
   {% else %}
   <span>&nbsp;</span>
   {% endif %}

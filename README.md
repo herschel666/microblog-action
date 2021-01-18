@@ -42,7 +42,6 @@ jobs:
           title: 'My Awesome Microblog'
           description: 'See what I have written.'
           theme: 'water.css'
-          max-width: 760
           date-format: 'yyyy-M-d'
           posts-per-page: 20
           custom-styles: 'css/custom.css'
@@ -89,14 +88,13 @@ jobs:
 | url              | `true`   | `string`  | ·                     | Full URL of the Microblog. If it's located a sub-folder, add that path here, too (e.g. `mysite.tld/microblog`).                        |
 | title            | `false`  | `string`  | `<owner>'s Microblog` | The title of your Microblog.                                                                                                           |
 | description      | `false`  | `string`  | `undefined`           | Optional description, that's displayed below the title in the Microblog's header.                                                      |
-| theme            | `false`  | `string`  | `undefined`           | Choose from ten available themes. [List of themes](#themes). If not theme is set, the Microblog is completely unstyled.                |
-| max-width        | `false`  | `number`  | `640`                 | Width of the Microblog's content area in px.                                                                                           |
+| theme            | `false`  | `string`  | `'new.css'`           | Choose from ten available themes. [List of themes](#themes). If not theme is set, the Microblog is completely unstyled.                |
 | date-format      | `false`  | `string`  | `'d.M.yyyy H:mm'`     | Format of displayed dates. Powered by [`date-fns`'s `format`-function](https://date-fns.org/v2.16.1/docs/format).                      |
 | posts-per-page   | `false`  | `number`  | `10`                  | Amount of blogposts displayed per page.                                                                                                |
-| custom-styles    | `false`  | `string`  | `undefined`           | Path to a CSS file relative to the repo root. If set, the contents of the file will be inlined in the Microblog's HTML head.           |
+| custom-styles    | `false`  | `string`  | `''`                  | Path to a CSS file relative to the repo root. If set, the contents of the file will be inlined in the Microblog's HTML head.           |
 | static-frontpage | `false`  | `string`  | `undefined`           | To show static content rather than blogposts on the frontpage, set the filename of the Markdown file, that's supposed to be displayed. |
-| label            | `false`  | `string`  | `undefined`           | Set the name of a label, that marks issues that are supposed to be published as blogposts.                                             |
-| closed           | `false`  | `boolean` | `undefined`           | Set this to `true` if you want to maintain your blogposts as closed issues.                                                            |
+| label            | `false`  | `string`  | `''`                  | Set the name of a label, that marks issues that are supposed to be published as blogposts.                                             |
+| closed           | `false`  | `boolean` | `false`               | Set this to `true` if you want to maintain your blogposts as closed issues.                                                            |
 | lang             | `false`  | `string`  | `'en'`                | The Microblog's language as ISO 639-1 language code.                                                                                   |
 | i18n.next        | `false`  | `string`  | `'next'`              | Label of the next-link                                                                                                                 |
 | i18n.prev        | `false`  | `string`  | `'previous'`          | Label of the prev-link                                                                                                                 |

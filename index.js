@@ -19,7 +19,6 @@ const url = core.getInput('url', { required: true });
 const title = core.getInput('title');
 const description = core.getInput('description');
 const theme = core.getInput('theme');
-const maxWidth = core.getInput('max-width');
 const dateFormat = core.getInput('date-format');
 const postsPerPage = core.getInput('posts-per-page');
 const customStyles = core.getInput('custom-styles');
@@ -41,12 +40,11 @@ const userOptions = {
   url,
   lang,
   i18n,
-  maxWidth,
+  theme,
   dateFormat,
   postsPerPage,
   ...(title ? { title } : undefined),
   ...(description ? { description } : undefined),
-  ...(theme ? { theme } : undefined),
   ...(customStyles
     ? { customStyles: path.resolve(CWD, customStyles) }
     : undefined),

@@ -1,17 +1,4 @@
-<footer class="wrap">
-  &copy; {{site.time | date('yyyy')}} {{site.owner}}
-
-  <!-- -->
-
-  {% if site.pages or site.hasStaticFrontpage %}
-  <nav class="nav">
-    {% for page in site.pages %}
-    <a href="{{site.basePath}}{{page.id}}.html">{{page.meta.title}}</a>
-    {% endfor %}
-    <!-- -->
-    {% if site.hasStaticFrontpage %}
-    <a href="{{site.basePath}}posts.html">{{site.i18n.posts}}</a>
-    {% endif %}
-  </nav>
-  {% endif %}
+<footer class="footer wrap">
+  <span class="footer__item">&copy; {{site.time | date('yyyy')}}</span>
+  <span class="footer__item">{{site.owner}}</span>
 </footer>
