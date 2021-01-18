@@ -15,11 +15,11 @@
 
 <!-- Main Content -->
 {% block maincontent %}
-<article>
+<article class="article">
   <h2>{{post.meta.title}}</h2>
   {{post.body | safe}}
   <hr />
-  <time datetime="{{post.meta.createdAt}}">
+  <time class="article__time" datetime="{{post.meta.createdAt}}">
     {{post.meta.createdAt | date(site.dateFormat)}}
   </time>
 </article>

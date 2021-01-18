@@ -13,7 +13,7 @@
   {% if site.pages or site.hasStaticFrontpage %}
   <nav class="nav">
     {% if site.hasStaticFrontpage %}
-    <a href="{{site.basePath}}posts.html" class="nav__link"
+    <a href="{{site.basePath}}{{site.i18n.posts | slug}}.html" class="nav__link"
       >{{site.i18n.posts}}</a
     >
     {% endif %}

@@ -1,0 +1,178 @@
+/* GENERAL */
+.pagination {
+  display: flex;
+  justify-content: space-between;
+}
+
+.wrap {
+  max-width: 640px;
+  margin: 3rem auto;
+}
+
+.nav {
+  margin-top: 2rem;
+}
+
+/* WATER.CSS */
+.theme-water-css .header {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #dbdbdb;
+  border-bottom: 1px solid var(--border);
+}
+
+.theme-water-css .nav__link {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+/* MVP.CSS */
+.theme-mvp-css .nav {
+  justify-content: center;
+  margin-bottom: 4rem;
+}
+
+.theme-mvp-css .nav__link {
+  margin: 0 2rem;
+}
+
+.theme-mvp-css .footer__item {
+  display: inline-block;
+  margin-right: 0.75rem;
+}
+
+/* AWSM.CSS */
+.theme-awsm-css .header {
+  margin-bottom: 4rem;
+}
+
+.theme-awsm-css .header__description {
+  margin-top: 1rem;
+}
+
+.theme-awsm-css .nav__link {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.theme-awsm-css .article {
+  max-width: 100%;
+}
+
+.theme-awsm-css p img,
+.theme-awsm-css p picture {
+  margin-left: 0;
+  float: none;
+}
+
+.theme-awsm-css .article__time {
+  font-size: smaller;
+}
+
+.theme-awsm-css .footer {
+  margin-top: 4rem;
+}
+
+.theme-awsm-css .footer__item {
+  padding: 0 0.5rem;
+}
+
+/* BAHUNYA */
+.theme-bahunya .pagination__link {
+  font-size: larger;
+}
+
+/* SAKURA.CSS */
+.theme-sakura-css .header {
+  margin-bottom: 4rem;
+}
+
+.theme-sakura-css .nav__link {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.theme-sakura-css .article__time {
+  font-size: smaller;
+}
+
+.theme-sakura-css .footer {
+  margin-top: 4rem;
+}
+
+.theme-sakura-css .footer__item {
+  display: inline-block;
+  margin-right: 0.75rem;
+}
+
+/* STYLE.CSS */
+.theme-style-css .nav__link {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.theme-style-css .footer__item {
+  display: inline-block;
+  margin-right: 0.75rem;
+}
+
+/* TUFTE-CSS */
+.theme-tufte-css {
+  width: auto;
+  max-width: 100%;
+  padding-left: 0;
+}
+
+.theme-tufte-css .nav__link {
+  display: inline-block;
+  margin-right: 1rem;
+  font-size: larger;
+}
+
+.theme-tufte-css article {
+  padding: 2rem 0;
+}
+
+/* TACIT */
+.theme-tacit {
+  padding: 0;
+}
+
+.theme-tacit article,
+.theme-tacit header,
+.theme-tacit footer {
+  padding: 1rem;
+}
+
+.theme-tacit .nav__link {
+  display: inline-block;
+  margin: 0 1rem;
+}
+
+/* NEW.CSS */
+.theme-new-css {
+  max-width: 100%;
+}
+
+.theme-new-css .nav__link {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+/* BULLFRAME.CSS */
+.theme-bullframe-css .header {
+  margin-bottom: 6rem;
+}
+
+.theme-bullframe-css .nav__link {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.theme-bullframe-css .footer {
+  margin-top: 6rem;
+}
+
+.theme-bullframe-css .footer__item {
+  display: inline-block;
+  margin-right: 0.75rem;
+}

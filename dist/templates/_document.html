@@ -10,23 +10,10 @@
       title="{{site.title}} &raquo; Feed"
       href="{{site.basePath}}feed.xml"
     />
+    <link rel="stylesheet" href="{{site.themeLink}}" />
+
     <style type="text/css">
-      .nav,
-      .nav a {
-        display: inline-block;
-        margin: 0 1rem;
-      }
-
-      .pagination {
-        display: flex;
-        margin: 2rem auto;
-        justify-content: space-around;
-      }
-
-      .wrap {
-        max-width: {{site.maxWidth}}px;
-        margin: 2rem auto;
-      }
+      {{site.baseStyles}}
     </style>
 
     <!-- Custom Styles -->
@@ -36,12 +23,6 @@
     </style>
     {% endif %}
     <!-- /Custom Styles -->
-
-    {% if site.themeLink %}
-    <link rel="stylesheet" href="{{site.themeLink}}" />
-    {% endif %}
-
-    <!-- -->
 
     {% block title %}
     <title>{{site.title}}</title>
@@ -53,7 +34,7 @@
     <!-- HTML Head -->
     {% endblock %}
   </head>
-  <body>
+  <body class="theme-{{site.theme}}">
     <!-- Header -->
     {% include "partials/header.html" %}
     <!-- /Header -->

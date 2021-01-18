@@ -7,6 +7,8 @@
 
 <!-- Main Content -->
 {% block maincontent %}
-<h2>{{page.meta.title}}</h2>
-<div>{{page.body | safe}}</div>
+<article class="article">
+  <h2>{{page.meta.title}}</h2>
+  <div>{{page.body | safe}}</div>
+</article>
 {% endblock %}
