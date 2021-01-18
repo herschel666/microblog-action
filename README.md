@@ -43,10 +43,10 @@ jobs:
           description: 'See what I have written.'
           theme: 'water.css'
           max-width: 760
-          date-format: yyyy-M-d
+          date-format: 'yyyy-M-d'
           posts-per-page: 20
           custom-styles: 'css/custom.css'
-          static-frontpage: welcome.md
+          static-frontpage: 'welcome.md'
           label: 'blog'
           closed: true
           lang: 'de'
@@ -55,7 +55,7 @@ jobs:
           i18n.posts: 'Artikel'
 
       - Deploy Microblog
-        uses: ... # Use your preferred service to the contents of /_site
+        uses: ... # Use your preferred service to deploy the contents of /_site
 ```
 
 **Minimal configuration**
