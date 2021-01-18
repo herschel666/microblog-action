@@ -35,7 +35,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build Microblog
-        uses: herschel666/microblog-action@v0.1
+        uses: herschel666/microblog-action@v0.2
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           url: 'https://myblog.tld/optional-path'
@@ -74,7 +74,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build Microblog
-        uses: herschel666/microblog-action@v0.1
+        uses: herschel666/microblog-action@v0.2
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           url: 'https://myblog.tld/optional-path'
