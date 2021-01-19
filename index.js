@@ -8,11 +8,10 @@ const { run } = require('./lib/');
 const CWD = execSync('pwd').toString('utf8').trim();
 const DIST = path.join(CWD, '_site');
 const POSTS = path.join(DIST, 'posts');
-const PAGES = path.join(CWD, 'pages');
 const STATIC = path.join(CWD, 'static');
 const TEMPLATES = path.join(__dirname, 'templates');
 // No shorthand for TEMPLATES, because otherwise `ncc build` fails...
-const paths = { DIST, POSTS, PAGES, STATIC, TEMPLATES: TEMPLATES };
+const paths = { CWD, DIST, POSTS, STATIC, TEMPLATES: TEMPLATES };
 
 const token = core.getInput('repo-token', { required: true });
 const url = core.getInput('url', { required: true });
@@ -22,6 +21,7 @@ const theme = core.getInput('theme');
 const dateFormat = core.getInput('date-format');
 const postsPerPage = core.getInput('posts-per-page');
 const customStyles = core.getInput('custom-styles');
+const pages = core.getInput('pages');
 const staticFrontpage = core.getInput('static-frontpage');
 const label = core.getInput('label');
 const closed = core.getInput('closed');
@@ -43,6 +43,7 @@ const userOptions = {
   theme,
   dateFormat,
   postsPerPage,
+  pages,
   ...(title ? { title } : undefined),
   ...(description ? { description } : undefined),
   ...(customStyles

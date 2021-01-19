@@ -32,6 +32,11 @@ inputs:
   custom-styles:
     description: 'Path to a CSS file with custom styles relative to the repo root'
     required: false
+  pages:
+    description: 'A glob or a list of globs pointing to markdown files which will be rendered as
+    static pages'
+    required: false
+    default: 'pages/*.md'
   static-frontpage:
     description: "Set the microblog's frontpage to be one of the static pages"
     required: false

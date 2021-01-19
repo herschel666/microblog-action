@@ -19,9 +19,17 @@
     {% endif %}
     <!-- -->
     {% for page in site.pages %}
-    <a href="{{site.basePath}}{{page.id}}.html" class="nav__link"
-      >{{page.meta.title}}</a
-    >
+    <a href="{{site.basePath}}{{page.id}}.html" class="nav__link">
+      {% if page.meta.title%}
+      <!-- -->
+      {{page.meta.title}}
+      <!-- -->
+      {% else %}
+      <!-- -->
+      {{page.id | capitalize}}
+      <!-- -->
+      {% endif %}
+    </a>
     {% endfor %}
   </nav>
   {% endif %}

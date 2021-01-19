@@ -15,11 +15,10 @@ const { run } = __nccwpck_require__(94822);
 const CWD = execSync('pwd').toString('utf8').trim();
 const DIST = path.join(CWD, '_site');
 const POSTS = path.join(DIST, 'posts');
-const PAGES = path.join(CWD, 'pages');
 const STATIC = path.join(CWD, 'static');
 const TEMPLATES = __nccwpck_require__.ab + "templates";
 // No shorthand for TEMPLATES, because otherwise `ncc build` fails...
-const paths = { DIST, POSTS, PAGES, STATIC, TEMPLATES: __nccwpck_require__.ab + "templates" };
+const paths = { CWD, DIST, POSTS, STATIC, TEMPLATES: __nccwpck_require__.ab + "templates" };
 
 const token = core.getInput('repo-token', { required: true });
 const url = core.getInput('url', { required: true });
@@ -29,6 +28,7 @@ const theme = core.getInput('theme');
 const dateFormat = core.getInput('date-format');
 const postsPerPage = core.getInput('posts-per-page');
 const customStyles = core.getInput('custom-styles');
+const pages = core.getInput('pages');
 const staticFrontpage = core.getInput('static-frontpage');
 const label = core.getInput('label');
 const closed = core.getInput('closed');
@@ -50,6 +50,7 @@ const userOptions = {
   theme,
   dateFormat,
   postsPerPage,
+  pages,
   ...(title ? { title } : undefined),
   ...(description ? { description } : undefined),
   ...(customStyles
@@ -78,14 +79,45 @@ const path = __nccwpck_require__(85622);
 const { promises: fs } = __nccwpck_require__(35747);
 const globby = __nccwpck_require__(43398);
 
+const MARKDOWN_SUFFIXES = ['.md', '.markdown'];
+
+const filterInvalidFiles = (file) => {
+  if (MARKDOWN_SUFFIXES.includes(path.extname(file))) {
+    return true;
+  }
+  console.warn(
+    'Skipping file %s, because it is not a valid markdown file.',
+    file
+  );
+  return false;
+};
+
 const filterWip = ({ labels }) =>
   labels.some(({ name }) => name.toLowerCase() === 'wip') === false;
 
-exports.getPages = async (glob) => {
-  const files = await globby(glob);
-  const data = await Promise.all(files.map((f) => fs.readFile(f, 'utf8')));
+exports.getPages = async (cwd, glob) => {
+  const files = await globby(glob, { gitignore: true, cwd });
+  const validFiles = files.filter((file) => filterInvalidFiles(file));
+  const data = await Promise.all(validFiles.map((f) => fs.readFile(f, 'utf8')));
 
-  return data.map((body, i) => ({ body, filename: path.basename(files[i]) }));
+  return data.reduce((acc, body, i) => {
+    const filename = path.basename(validFiles[i]).toLocaleLowerCase();
+    const isUnique =
+      acc.findIndex(
+        ({ filename: f }) => path.basename(f) === path.basename(filename)
+      ) === -1;
+
+    if (isUnique) {
+      acc.push({ body, filename });
+    } else {
+      console.warn(
+        'Duplicate page %s found; only the first occurrence will be rendered.',
+        validFiles[i]
+      );
+    }
+
+    return acc;
+  }, []);
 };
 
 exports.getPosts = async ({ octokit, repo, label, closed }) => {
@@ -128,7 +160,7 @@ const {
 } = __nccwpck_require__(64024);
 
 exports.run = async ({ paths, octokit, repo, userOptions }) => {
-  const { DIST, POSTS, PAGES, STATIC, TEMPLATES } = paths;
+  const { CWD, DIST, POSTS, STATIC, TEMPLATES } = paths;
   const defaultOptions = {
     title: `${repo.owner}'s Microblog`,
   };
@@ -153,7 +185,7 @@ exports.run = async ({ paths, octokit, repo, userOptions }) => {
       closed: options.closed,
       octokit,
     }),
-    getPages(path.join(PAGES, '/*.{md,markdown}')),
+    getPages(CWD, options.pages),
   ];
   const [posts, pages] = await Promise.all(data);
   const hasStaticFrontpage =

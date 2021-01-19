@@ -8,7 +8,9 @@
 <!-- Main Content -->
 {% block maincontent %}
 <article class="article">
+  {% if page.meta.title %}
   <h2>{{page.meta.title}}</h2>
+  {% endif %}
   <div>{{page.body | safe}}</div>
 </article>
 {% endblock %}
