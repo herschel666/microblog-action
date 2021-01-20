@@ -26,14 +26,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - name: Cache Build artifacts
-        uses: actions/cache@v2
-        with:
-          path: ./.cache
-          key: ${{ runner.os }}-node-${{ hashFiles('**/*') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
       - name: Test the application
         env:
           GH_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
