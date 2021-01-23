@@ -46,6 +46,10 @@ inputs:
   closed:
     description: 'Only publish closed issues'
     required: false
+  out-dir:
+    description: 'Path of the output folder for the rendered site relative to the repo root'
+    required: false
+    default: '_site'
   lang:
     description: 'Language of the Microblog'
     required: false
