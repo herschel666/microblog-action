@@ -49,6 +49,7 @@ jobs:
           custom-styles: 'css/custom.css'
           label: 'blog'
           closed: true
+          out-dir: '.tmp/site'
           lang: 'de'
           i18n.next: 'Nächste Artikel'
           i18n.prev: 'Vorherige Artikel'
@@ -97,6 +98,7 @@ jobs:
 | custom-styles    | `false`  | `string`               | `''`                  | Path to a CSS file relative to the repo root. If set, the contents of the file will be inlined in the Microblog's HTML head.           |
 | label            | `false`  | `string`               | `''`                  | Set the name of a label, that marks issues that are supposed to be published as blogposts.                                             |
 | closed           | `false`  | `boolean`              | `false`               | Set this to `true` if you want to maintain your blogposts as closed issues.                                                            |
+| out-dir          | `false`  | `string`               | `'_site'`             | Path of the output folder for the rendered site relative to the repo root                                                              |
 | lang             | `false`  | `string`               | `'en'`                | The Microblog's language as ISO 639-1 language code.                                                                                   |
 | i18n.next        | `false`  | `string`               | `'next'`              | Label of the next-link                                                                                                                 |
 | i18n.prev        | `false`  | `string`               | `'previous'`          | Label of the prev-link                                                                                                                 |

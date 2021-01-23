@@ -13,12 +13,9 @@ const { execSync } = __nccwpck_require__(63129);
 const { run } = __nccwpck_require__(94822);
 
 const CWD = execSync('pwd').toString('utf8').trim();
-const DIST = path.join(CWD, '_site');
-const POSTS = path.join(DIST, 'posts');
-const STATIC = path.join(CWD, 'static');
 const TEMPLATES = __nccwpck_require__.ab + "templates";
 // No shorthand for TEMPLATES, because otherwise `ncc build` fails...
-const paths = { CWD, DIST, POSTS, STATIC, TEMPLATES: __nccwpck_require__.ab + "templates" };
+const paths = { CWD, TEMPLATES: __nccwpck_require__.ab + "templates" };
 
 const token = core.getInput('repo-token', { required: true });
 const url = core.getInput('url', { required: true });
@@ -32,6 +29,7 @@ const pages = core.getInput('pages');
 const staticFrontpage = core.getInput('static-frontpage');
 const label = core.getInput('label');
 const closed = core.getInput('closed');
+const outDir = core.getInput('out-dir');
 const lang = core.getInput('lang');
 const i18nNext = core.getInput('i18n.next');
 const i18nPrev = core.getInput('i18n.prev');
@@ -51,6 +49,7 @@ const userOptions = {
   dateFormat,
   postsPerPage,
   pages,
+  outDir,
   ...(title ? { title } : undefined),
   ...(description ? { description } : undefined),
   ...(customStyles
@@ -102,10 +101,7 @@ exports.getPages = async (cwd, glob) => {
 
   return data.reduce((acc, body, i) => {
     const filename = path.basename(validFiles[i]).toLocaleLowerCase();
-    const isUnique =
-      acc.findIndex(
-        ({ filename: f }) => path.basename(f) === path.basename(filename)
-      ) === -1;
+    const isUnique = acc.findIndex(({ filename: f }) => f === filename) === -1;
 
     if (isUnique) {
       acc.push({ body, filename });
@@ -160,11 +156,16 @@ const {
 } = __nccwpck_require__(64024);
 
 exports.run = async ({ paths, octokit, repo, userOptions }) => {
-  const { CWD, DIST, POSTS, STATIC, TEMPLATES } = paths;
   const defaultOptions = {
     title: `${repo.owner}'s Microblog`,
   };
   const options = Object.assign(defaultOptions, userOptions);
+
+  const { CWD, TEMPLATES } = paths;
+  const DIST = path.join(CWD, options.outDir);
+  const POSTS = path.join(DIST, 'posts');
+  const STATIC = path.join(CWD, 'static');
+
   const renderer = createRenderer(TEMPLATES, options.lang);
   const themeLink = getThemeLink(options.theme);
   const postsPerPage = Number(options.postsPerPage);
