@@ -7,7 +7,7 @@
     "build": "ncc build index.js --license licenses.txt --target es2018",
     "test": "NODE_OPTIONS=\"-r dotenv/config\" jest",
     "test:watch": "npm run test -- --watchAll --selectProjects test",
-    "serve": "serve -l 8080 -n _site"
+    "serve": "serve -l 8080 -n"
   },
   "engines": {
     "node": "^12"
@@ -29,12 +29,23 @@
         ]
       },
       {
-        "displayName": "test"
+        "displayName": "test",
+        "setupFiles": [
+          "<rootDir>/lib/__integration__/helpers/setup.js"
+        ],
+        "globalTeardown": "<rootDir>/lib/__integration__/helpers/teardown.js",
+        "testPathIgnorePatterns": [
+          "<rootDir>/node_modules>",
+          "fixtures/.+",
+          "helpers/.+"
+        ],
+        "clearMocks": true
       }
     ]
   },
   "devDependencies": {
     "@octokit/rest": "18.0.12",
+    "@testing-library/dom": "7.29.4",
     "@vercel/ncc": "0.27.0",
     "eslint": "7.18.0",
     "eslint-config-prettier": "7.1.0",
