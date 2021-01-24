@@ -50,6 +50,7 @@ jobs:
           label: 'blog'
           closed: true
           out-dir: '.tmp/site'
+          static-dir: 'misc/files'
           lang: 'de'
           i18n.next: 'Nächste Artikel'
           i18n.prev: 'Vorherige Artikel'
@@ -99,6 +100,7 @@ jobs:
 | label            | `false`  | `string`               | `''`                  | Set the name of a label, that marks issues that are supposed to be published as blogposts.                                             |
 | closed           | `false`  | `boolean`              | `false`               | Set this to `true` if you want to maintain your blogposts as closed issues.                                                            |
 | out-dir          | `false`  | `string`               | `'_site'`             | Path of the output folder for the rendered site relative to the repo root                                                              |
+| static-dir       | `false`  | `string`               | `'static'`            | Path of [the static folder](#static-files) relative to the repo root                                                                   |
 | lang             | `false`  | `string`               | `'en'`                | The Microblog's language as ISO 639-1 language code.                                                                                   |
 | i18n.next        | `false`  | `string`               | `'next'`              | Label of the next-link                                                                                                                 |
 | i18n.prev        | `false`  | `string`               | `'previous'`          | Label of the prev-link                                                                                                                 |
