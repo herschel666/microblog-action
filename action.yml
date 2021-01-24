@@ -50,6 +50,10 @@ inputs:
     description: 'Path of the output folder for the rendered site relative to the repo root'
     required: false
     default: '_site'
+  static-dir:
+    description: 'Path of the static folder relative to the repo root'
+    required: false
+    default: 'static'
   lang:
     description: 'Language of the Microblog'
     required: false

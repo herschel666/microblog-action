@@ -23,6 +23,7 @@ const staticFrontpage = core.getInput('static-frontpage');
 const label = core.getInput('label');
 const closed = core.getInput('closed');
 const outDir = core.getInput('out-dir');
+const staticDir = core.getInput('static-dir');
 const lang = core.getInput('lang');
 const i18nNext = core.getInput('i18n.next');
 const i18nPrev = core.getInput('i18n.prev');
@@ -43,6 +44,7 @@ const userOptions = {
   postsPerPage,
   pages,
   outDir,
+  staticDir,
   ...(title ? { title } : undefined),
   ...(description ? { description } : undefined),
   ...(customStyles
