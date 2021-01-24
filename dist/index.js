@@ -93,6 +93,8 @@ const filterInvalidFiles = (file) => {
   return false;
 };
 
+const filterPullRequests = ({ pull_request: pr }) => pr === undefined;
+
 const filterWip = ({ labels }) =>
   labels.some(({ name }) => name.toLowerCase() === 'wip') === false;
 
@@ -127,6 +129,7 @@ exports.getPosts = async ({ octokit, repo, label, closed }) => {
   });
 
   return result
+    .filter(filterPullRequests)
     .filter(filterWip)
     .map(({ id, number, title, body, created_at: createdAt }) => ({
       filename: `${id}.issue`,
