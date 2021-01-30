@@ -7,7 +7,10 @@
     "build": "ncc build index.js --license licenses.txt --target es2018",
     "test": "NODE_OPTIONS=\"-r dotenv/config\" jest",
     "test:watch": "npm run test -- --watchAll --selectProjects test",
-    "serve": "serve -l 8080 -n"
+    "serve": "serve -l 8080 -n",
+    "fmt": "prettier --config ./.prettierrc --ignore-path ./.prettierignore .",
+    "fmt:write": "npm run fmt -- --write",
+    "fmt:check": "npm run fmt -- --check"
   },
   "engines": {
     "node": "^12"

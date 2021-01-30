@@ -1,8 +1,5 @@
 package.json
 package-lock.json
-client/build
-src
 dist
-.cache
-.db
+_site
 .github
