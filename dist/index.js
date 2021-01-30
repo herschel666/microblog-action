@@ -80,16 +80,15 @@ const path = __nccwpck_require__(85622);
 const { promises: fs } = __nccwpck_require__(35747);
 const globby = __nccwpck_require__(43398);
 
+const { warn } = __nccwpck_require__(65228);
+
 const MARKDOWN_SUFFIXES = ['.md', '.markdown'];
 
 const filterInvalidFiles = (file) => {
   if (MARKDOWN_SUFFIXES.includes(path.extname(file))) {
     return true;
   }
-  console.warn(
-    'Skipping file %s, because it is not a valid markdown file.',
-    file
-  );
+  warn('Skipping file %s, because it is not a valid markdown file.', file);
   return false;
 };
 
@@ -110,7 +109,7 @@ exports.getPages = async (cwd, glob) => {
     if (isUnique) {
       acc.push({ body, filename });
     } else {
-      console.warn(
+      warn(
         'Duplicate page %s found; only the first occurrence will be rendered.',
         validFiles[i]
       );
@@ -296,6 +295,14 @@ exports.run = async ({ paths, octokit, repo, userOptions }) => {
 
 /***/ }),
 
+/***/ 65228:
+/***/ ((__unused_webpack_module, exports) => {
+
+exports.warn = (...args) => console.warn(...args);
+
+
+/***/ }),
+
 /***/ 15821:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
@@ -346,6 +353,8 @@ const format = __nccwpck_require__(42168);
 
 const { createSlug } = __nccwpck_require__(64024);
 
+const html = String.raw;
+
 exports.createRenderer = (folder, lang) => {
   const renderer = nunjucks.configure(folder);
 
@@ -359,6 +368,14 @@ exports.createRenderer = (folder, lang) => {
   });
 
   renderer.addFilter('slug', (str) => createSlug(str, lang));
+
+  renderer.addFilter('debug', (str) => {
+    const value = typeof str === 'object' ? JSON.stringify(str, null, 2) : str;
+
+    return new nunjucks.runtime.SafeString(
+      renderer.renderString(html`<pre><code>{{value}}</code></pre>`, { value })
+    );
+  });
 
   return renderer;
 };
