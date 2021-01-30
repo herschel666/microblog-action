@@ -1,7 +1,11 @@
 {% extends "_document.html" %}
 
+<!-- -->
+
+{% block maincontent %}
 <!-- Main Content -->
-{% block maincontent %} {% for post in posts %}
+
+{% for post in posts %}
 <article class="wrap">
   <h3>
     <a href="{{site.basePath}}posts/{{post.id}}.html">{{post.meta.title}}</a>
