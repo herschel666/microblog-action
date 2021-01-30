@@ -35,6 +35,20 @@ npm install
 
 You can also use Yarn, but please don't commit the `yarn.lock`-file in that case!
 
+### Create an `.env`-file
+
+In order for you to be able to run the integration tests, you need [a Github Access
+Token](https://github.com/settings/tokens/new) with scope `repo -> public_repo`, because the data
+needed is fetched from a real repository.
+
+Store the token like this in the `.env`-file in the project's root directory:
+
+```
+GH_ACCESS_TOKEN=<token…>
+```
+
+Now the data will be available.
+
 ### Make your changes
 
 Set up a new branch, make your changes, run the command `npm run build` in the terminal and commit
