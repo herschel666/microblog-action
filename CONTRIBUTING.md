@@ -71,4 +71,4 @@ everything is still running as expected.
    according to the last conventional commits since the last release.
 3. Commit this change as "`chore: release v<x.x.x>`" on the main branch
 4. Create a corresponding Git tag by running `git tag -a v<x.x.x> -m "v<x.x.x>"` in your terminal
-5. Push everything by running `git push origin HEAD --all`
+5. Push everything by running `git push origin HEAD --tags`
