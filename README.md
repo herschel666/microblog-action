@@ -35,7 +35,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build Microblog
-        uses: herschel666/microblog-action@v0.3
+        uses: herschel666/microblog-action@v0.4
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           url: 'https://myblog.tld/optional-path'
@@ -77,7 +77,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build Microblog
-        uses: herschel666/microblog-action@v0.3
+        uses: herschel666/microblog-action@v0.4
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           url: 'https://myblog.tld/optional-path'
@@ -128,7 +128,7 @@ the contents of a `docs/`-folder, set the `pages`-option like this:
 
 ```yaml
 - name: Build Microblog
-  uses: herschel666/microblog-action@v0.3
+  uses: herschel666/microblog-action@v0.4
   with:
     repo-token: ${{ secrets.GITHUB_TOKEN }}
     url: 'https://myblog.tld/optional-path'
