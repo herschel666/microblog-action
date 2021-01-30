@@ -1,6 +1,6 @@
 {
   "name": "microblog",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Render a microblog from Github issues.",
   "main": "dist/index.js",
   "scripts": {
