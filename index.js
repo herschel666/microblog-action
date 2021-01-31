@@ -18,6 +18,7 @@ const theme = core.getInput('theme');
 const dateFormat = core.getInput('date-format');
 const postsPerPage = core.getInput('posts-per-page');
 const customStyles = core.getInput('custom-styles');
+const customJavascript = core.getInput('custom-javascript');
 const pages = core.getInput('pages');
 const staticFrontpage = core.getInput('static-frontpage');
 const label = core.getInput('label');
@@ -49,6 +50,9 @@ const userOptions = {
   ...(description ? { description } : undefined),
   ...(customStyles
     ? { customStyles: path.resolve(CWD, customStyles) }
+    : undefined),
+  ...(customJavascript
+    ? { customJavascript: path.resolve(CWD, customJavascript) }
     : undefined),
   ...(staticFrontpage ? { staticFrontpage } : undefined),
   ...(label ? { label } : undefined),
