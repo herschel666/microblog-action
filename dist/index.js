@@ -25,6 +25,7 @@ const theme = core.getInput('theme');
 const dateFormat = core.getInput('date-format');
 const postsPerPage = core.getInput('posts-per-page');
 const customStyles = core.getInput('custom-styles');
+const customJavascript = core.getInput('custom-javascript');
 const pages = core.getInput('pages');
 const staticFrontpage = core.getInput('static-frontpage');
 const label = core.getInput('label');
@@ -56,6 +57,9 @@ const userOptions = {
   ...(description ? { description } : undefined),
   ...(customStyles
     ? { customStyles: path.resolve(CWD, customStyles) }
+    : undefined),
+  ...(customJavascript
+    ? { customJavascript: path.resolve(CWD, customJavascript) }
     : undefined),
   ...(staticFrontpage ? { staticFrontpage } : undefined),
   ...(label ? { label } : undefined),
@@ -155,7 +159,7 @@ const {
   getThemeLink,
   normalizeSiteUrl,
   copyStatic,
-  loadCustomStyles,
+  loadOptionalFile,
   createSlug,
 } = __nccwpck_require__(64024);
 
@@ -174,9 +178,10 @@ exports.run = async ({ paths, octokit, repo, userOptions }) => {
   const themeLink = getThemeLink(options.theme);
   const postsPerPage = Number(options.postsPerPage);
   const { url, basePath } = normalizeSiteUrl(options.url);
-  const [baseStyles, customStyles] = await Promise.all([
+  const [baseStyles, customStyles, customJavascript] = await Promise.all([
     fs.readFile(__nccwpck_require__.ab + "styles.css", 'utf8'),
-    loadCustomStyles(options.customStyles),
+    loadOptionalFile(options.customStyles),
+    loadOptionalFile(options.customJavascript),
   ]);
 
   await fs.rmdir(DIST, { recursive: true });
@@ -213,6 +218,7 @@ exports.run = async ({ paths, octokit, repo, userOptions }) => {
     basePath,
     baseStyles,
     customStyles,
+    customJavascript,
     hasStaticFrontpage,
     theme: options.theme.replace(/\./g, '-'),
     lang: options.lang,
@@ -428,7 +434,7 @@ exports.copyStatic = async (fromDir, toDir) => {
   await cpy(path.join(fromDir, '**/*'), toDir);
 };
 
-exports.loadCustomStyles = async (file) => {
+exports.loadOptionalFile = async (file) => {
   try {
     return await fs.readFile(file, 'utf8');
   } catch (e) {

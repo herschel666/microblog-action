@@ -48,5 +48,12 @@
     <!-- Footer -->
     {% include "partials/footer.html" %}
     <!-- /Footer -->
+
+    <!-- Custom Javascript -->
+    {% if site.customJavascript %}
+    <!-- prettier-ignore -->
+    <script>{{site.customJavascript | safe}}</script>
+    {% endif %}
+    <!-- /Custom Javascript -->
   </body>
 </html>
