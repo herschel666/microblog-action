@@ -65,10 +65,5 @@ everything is still running as expected.
 
 > :warning: This can only be done by authorized maintainers of the repo.
 
-1. Ensure that all the latest changes are reflected by the current state of the `./dist`-folder. In
-   case of doubt, run `npm run build` in your terminal. There should be no diff afterwards!
-2. Update the version numbers in the `package.json`, the `package-lock.json` & the `README.md`
-   according to the last conventional commits since the last release.
-3. Commit this change as "`chore: release v<x.x.x>`" on the main branch
-4. Create a corresponding Git tag by running `git tag -a v<x.x.x> -m "v<x.x.x>"` in your terminal
-5. Push everything by running `git push origin HEAD --tags`
+1. Run `npx standard-version` in the terminal
+2. Push everything by running `git push origin HEAD --tags`

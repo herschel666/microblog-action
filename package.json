@@ -46,6 +46,14 @@
       }
     ]
   },
+  "standard-version": {
+    "bumpFiles": [
+      {
+        "filename": "README.md",
+        "updater": "lib/helpers/update-readme.js"
+      }
+    ]
+  },
   "devDependencies": {
     "@octokit/rest": "18.0.15",
     "@testing-library/dom": "7.29.4",
@@ -58,7 +66,8 @@
     "jest": "26.6.3",
     "jest-runner-eslint": "0.10.0",
     "prettier": "2.2.1",
-    "serve": "11.3.2"
+    "serve": "11.3.2",
+    "standard-version": "9.1.0"
   },
   "dependencies": {
     "@actions/core": "1.2.6",
