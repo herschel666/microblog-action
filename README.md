@@ -227,7 +227,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build Microblog
-        uses: herschel666/microblog-action@KillYourMaster
+        uses: herschel666/microblog-action@v0.5
         with: ...
 
       - name: Deploy Microblog
@@ -258,7 +258,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build Microblog
-        uses: herschel666/microblog-action@KillYourMaster
+        uses: herschel666/microblog-action@v0.5
         with: ...
 
       - name: Deploy Microblog
