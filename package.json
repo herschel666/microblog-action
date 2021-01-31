@@ -49,6 +49,14 @@
   "standard-version": {
     "bumpFiles": [
       {
+        "filename": "package.json",
+        "type": "json"
+      },
+      {
+        "filename": "package-lock.json",
+        "type": "json"
+      },
+      {
         "filename": "README.md",
         "updater": "lib/helpers/update-readme.js"
       }
