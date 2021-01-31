@@ -32,6 +32,9 @@ inputs:
   custom-styles:
     description: 'Path to a CSS file with custom styles relative to the repo root'
     required: false
+  custom-javascript:
+    description: 'Path to a JS file relative to the repo root; the contents of the file will be inlined at the bottom of each HTML page'
+    required: false
   pages:
     description: 'A glob or a list of globs pointing to markdown files which will be rendered as static pages'
     required: false

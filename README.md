@@ -47,6 +47,7 @@ jobs:
           pages: 'docs/**/*.md'
           static-frontpage: 'welcome.md'
           custom-styles: 'css/custom.css'
+          custom-javascript: 'js/custom.js'
           label: 'blog'
           closed: true
           out-dir: '.tmp/site'
@@ -85,26 +86,27 @@ jobs:
 
 ## Configuration
 
-| Option           | Required | Type                   | Default               | Description                                                                                                                            |
-| ---------------- | -------- | ---------------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| repo-token       | `true`   | `string`               | ·                     | Set to `${{ secrets.GITHUB_TOKEN }}` to enable the Action to fetch the issues via the Github API.                                      |
-| url              | `true`   | `string`               | ·                     | Full URL of the Microblog. If it's located in a sub-folder, add that path here, too (e.g. `mysite.tld/microblog`).                     |
-| title            | `false`  | `string`               | `<owner>'s Microblog` | The title of your Microblog.                                                                                                           |
-| description      | `false`  | `string`               | `''`                  | Optional description, that's displayed below the title in the Microblog's header.                                                      |
-| theme            | `false`  | `string`               | `'new.css'`           | Choose from ten available themes ([list of themes](#themes)).                                                                          |
-| date-format      | `false`  | `string`               | `'d.M.yyyy H:mm'`     | Format of displayed dates. Powered by [`date-fns`'s `format`-function](https://date-fns.org/v2.16.1/docs/format).                      |
-| posts-per-page   | `false`  | `number`               | `10`                  | Amount of blogposts displayed per page.                                                                                                |
-| pages            | `false`  | `string` \| `string[]` | `'pages/*.md'`        | A glob or a list of globs pointing to markdown files, which will be rendered as static pages.                                          |
-| static-frontpage | `false`  | `string`               | `''`                  | To show static content rather than blogposts on the frontpage, set the filename of the Markdown file, that's supposed to be displayed. |
-| custom-styles    | `false`  | `string`               | `''`                  | Path to a CSS file relative to the repo root. If set, the contents of the file will be inlined in the Microblog's HTML head.           |
-| label            | `false`  | `string`               | `''`                  | Set the name of a label, that marks issues that are supposed to be published as blogposts.                                             |
-| closed           | `false`  | `boolean`              | `false`               | Set this to `true` if you want to maintain your blogposts as closed issues.                                                            |
-| out-dir          | `false`  | `string`               | `'_site'`             | Path of the output folder for the rendered site relative to the repo root                                                              |
-| static-dir       | `false`  | `string`               | `'static'`            | Path of [the static folder](#static-files) relative to the repo root                                                                   |
-| lang             | `false`  | `string`               | `'en'`                | The Microblog's language as ISO 639-1 language code.                                                                                   |
-| i18n.next        | `false`  | `string`               | `'next'`              | Label of the next-link                                                                                                                 |
-| i18n.prev        | `false`  | `string`               | `'previous'`          | Label of the prev-link                                                                                                                 |
-| i18n.posts       | `false`  | `string`               | `'Posts'`             | Label of the posts-link                                                                                                                |
+| Option            | Required | Type                   | Default               | Description                                                                                                                            |
+| ----------------- | -------- | ---------------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| repo-token        | `true`   | `string`               | ·                     | Set to `${{ secrets.GITHUB_TOKEN }}` to enable the Action to fetch the issues via the Github API.                                      |
+| url               | `true`   | `string`               | ·                     | Full URL of the Microblog. If it's located in a sub-folder, add that path here, too (e.g. `mysite.tld/microblog`).                     |
+| title             | `false`  | `string`               | `<owner>'s Microblog` | The title of your Microblog.                                                                                                           |
+| description       | `false`  | `string`               | `''`                  | Optional description, that's displayed below the title in the Microblog's header.                                                      |
+| theme             | `false`  | `string`               | `'new.css'`           | Choose from ten available themes ([list of themes](#themes)).                                                                          |
+| date-format       | `false`  | `string`               | `'d.M.yyyy H:mm'`     | Format of displayed dates. Powered by [`date-fns`'s `format`-function](https://date-fns.org/v2.16.1/docs/format).                      |
+| posts-per-page    | `false`  | `number`               | `10`                  | Amount of blogposts displayed per page.                                                                                                |
+| pages             | `false`  | `string` \| `string[]` | `'pages/*.md'`        | A glob or a list of globs pointing to markdown files, which will be rendered as static pages.                                          |
+| static-frontpage  | `false`  | `string`               | `''`                  | To show static content rather than blogposts on the frontpage, set the filename of the Markdown file, that's supposed to be displayed. |
+| custom-styles     | `false`  | `string`               | `''`                  | Path to a CSS file relative to the repo root. If set, the contents of the file will be inlined in the Microblog's HTML head.           |
+| custom-javascript | `false`  | `string`               | `''`                  | Path to a JS file relative to the repo root. The contents of the file will be inlined at the bottom of each HTML page.                 |
+| label             | `false`  | `string`               | `''`                  | Set the name of a label, that marks issues that are supposed to be published as blogposts.                                             |
+| closed            | `false`  | `boolean`              | `false`               | Set this to `true` if you want to maintain your blogposts as closed issues.                                                            |
+| out-dir           | `false`  | `string`               | `'_site'`             | Path of the output folder for the rendered site relative to the repo root                                                              |
+| static-dir        | `false`  | `string`               | `'static'`            | Path of [the static folder](#static-files) relative to the repo root                                                                   |
+| lang              | `false`  | `string`               | `'en'`                | The Microblog's language as ISO 639-1 language code.                                                                                   |
+| i18n.next         | `false`  | `string`               | `'next'`              | Label of the next-link                                                                                                                 |
+| i18n.prev         | `false`  | `string`               | `'previous'`          | Label of the prev-link                                                                                                                 |
+| i18n.posts        | `false`  | `string`               | `'Posts'`             | Label of the posts-link                                                                                                                |
 
 ## Blogposts
 
