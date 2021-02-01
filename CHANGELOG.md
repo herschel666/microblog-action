@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.2](https://github.com/herschel666/microblog-action/compare/v0.5.1...v0.5.2) (2021-02-01)
+
+
+### Bug Fixes
+
+* update version correctly in examples ([ad24687](https://github.com/herschel666/microblog-action/commit/ad246875afb73d0993440d34d9faa5996ccb9aa3))
+
 ### [0.5.1](https://github.com/herschel666/microblog-action/compare/v0.5.0...v0.5.1) (2021-01-31)
 
 
