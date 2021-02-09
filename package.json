@@ -63,7 +63,7 @@
     ]
   },
   "devDependencies": {
-    "@octokit/rest": "18.0.15",
+    "@octokit/rest": "18.1.0",
     "@testing-library/dom": "7.29.4",
     "@vercel/ncc": "0.27.0",
     "eslint": "7.19.0",
