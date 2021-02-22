@@ -13,7 +13,7 @@
     "fmt:check": "npm run fmt -- --check"
   },
   "engines": {
-    "node": "^12"
+    "node": "^14.0.0"
   },
   "keywords": [
     "microblog",
