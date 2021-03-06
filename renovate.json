@@ -4,9 +4,6 @@
   "packageRules": [
     {
       "depTypeList": ["dependencies"],
-      "postUpgradeTasks": {
-        "commands": ["npm run build"]
-      },
       "automerge": false
     },
     {
