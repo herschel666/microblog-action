@@ -1,10 +1,17 @@
 {
   "extends": ["config:base", "config:maintainLockFilesWeekly"],
+  "allowedPostUpgradeTasks": ["npm run build"],
   "packageRules": [
     {
       "depTypeList": ["devDependencies"],
       "updateTypes": ["minor", "patch"],
       "automerge": true
+    },
+    {
+      "depTypeList": ["dependencies"],
+      "postUpgradeTasks": {
+        "commands": ["npm run build"]
+      }
     },
     {
       "groupName": "definitelyTyped",
