@@ -10,19 +10,19 @@ behaviour.
 
 If you feel like solving the issue yourself, fork the repo, clone it to your local machine and set it up like this…
 
-### Use Node v12
+### Use Node v14
 
 I recommend using [`nvm`](https://github.com/nvm-sh/nvm#node-version-manager---). If you don't have
 the correct version installed already, run the following command in your terminal:
 
 ```sh
-nvm install 12
+nvm install 14
 ```
 
 Otherwise start using it in the project's root directory by running the command…
 
 ```sh
-nvm use 12
+nvm use 14
 ```
 
 ### Install dependencies
