@@ -1,6 +1,9 @@
 {
   "extends": ["config:base", ":maintainLockFilesWeekly"],
   "automerge": true,
+  "constraints": {
+    "npm": "^7"
+  },
   "packageRules": [
     {
       "depTypeList": ["dependencies"],
