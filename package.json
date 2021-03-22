@@ -83,7 +83,7 @@
     "cpy": "8.1.1",
     "date-fns": "2.19.0",
     "dotenv": "8.2.0",
-    "globby": "11.0.2",
+    "globby": "11.0.3",
     "js-yaml": "4.0.0",
     "nunjucks": "3.2.3",
     "remark": "13.0.0",
