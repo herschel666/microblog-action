@@ -75,7 +75,7 @@
     "jest-runner-eslint": "0.10.0",
     "prettier": "2.2.1",
     "serve": "11.3.2",
-    "standard-version": "9.1.1"
+    "standard-version": "9.2.0"
   },
   "dependencies": {
     "@actions/core": "1.2.6",
