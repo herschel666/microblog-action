@@ -82,7 +82,7 @@
     "@actions/github": "5.0.0",
     "cpy": "8.1.1",
     "date-fns": "2.21.3",
-    "dotenv": "8.6.0",
+    "dotenv": "10.0.0",
     "globby": "11.0.3",
     "js-yaml": "4.1.0",
     "nunjucks": "3.2.3",
