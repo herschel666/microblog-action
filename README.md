@@ -155,7 +155,6 @@ Set the title at the beginning of a file like this.
 ---
 title: Title of the page
 ---
-
 ```
 
 ### Static frontpage
