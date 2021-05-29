@@ -81,7 +81,7 @@
     "@actions/core": "1.2.7",
     "@actions/github": "5.0.0",
     "cpy": "8.1.1",
-    "date-fns": "2.21.3",
+    "date-fns": "2.22.1",
     "dotenv": "10.0.0",
     "globby": "11.0.3",
     "js-yaml": "4.1.0",
