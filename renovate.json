@@ -12,6 +12,10 @@
     {
       "groupName": "definitelyTyped",
       "packagePatterns": ["^@types/"]
+    },
+    {
+      "matchUpdateTypes": ["lockFileMaintenance"],
+      "semanticCommitType": "fix"
     }
   ]
 }
