@@ -1,81 +1,5 @@
-module.exports =
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
-
-/***/ 32932:
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const path = __nccwpck_require__(85622);
-const core = __nccwpck_require__(42186);
-const github = __nccwpck_require__(95438);
-const { execSync } = __nccwpck_require__(63129);
-
-const { run } = __nccwpck_require__(94822);
-
-const CWD = execSync('pwd').toString('utf8').trim();
-const TEMPLATES = __nccwpck_require__.ab + "templates";
-// No shorthand for TEMPLATES, because otherwise `ncc build` fails...
-const paths = { CWD, TEMPLATES: __nccwpck_require__.ab + "templates" };
-
-const token = core.getInput('repo-token', { required: true });
-const url = core.getInput('url', { required: true });
-const title = core.getInput('title');
-const description = core.getInput('description');
-const theme = core.getInput('theme');
-const dateFormat = core.getInput('date-format');
-const postsPerPage = core.getInput('posts-per-page');
-const customStyles = core.getInput('custom-styles');
-const customJavascript = core.getInput('custom-javascript');
-const pages = core.getInput('pages');
-const staticFrontpage = core.getInput('static-frontpage');
-const label = core.getInput('label');
-const closed = core.getInput('closed');
-const outDir = core.getInput('out-dir');
-const staticDir = core.getInput('static-dir');
-const lang = core.getInput('lang');
-const i18nNext = core.getInput('i18n.next');
-const i18nPrev = core.getInput('i18n.prev');
-const i18nPosts = core.getInput('i18n.posts');
-const i18n = {
-  next: i18nNext,
-  prev: i18nPrev,
-  posts: i18nPosts,
-};
-const { repo } = github.context;
-const octokit = github.getOctokit(token);
-const userOptions = {
-  url,
-  lang,
-  i18n,
-  theme,
-  dateFormat,
-  postsPerPage,
-  pages,
-  outDir,
-  staticDir,
-  ...(title ? { title } : undefined),
-  ...(description ? { description } : undefined),
-  ...(customStyles
-    ? { customStyles: path.resolve(CWD, customStyles) }
-    : undefined),
-  ...(customJavascript
-    ? { customJavascript: path.resolve(CWD, customJavascript) }
-    : undefined),
-  ...(staticFrontpage ? { staticFrontpage } : undefined),
-  ...(label ? { label } : undefined),
-  ...(closed ? { closed } : undefined),
-};
-
-run({ paths, octokit, repo, userOptions }).then(
-  () => console.log('Successfully built Microblog'),
-  (err) => {
-    console.log(err.message);
-    console.log(err.stack);
-  }
-);
-
-
-/***/ }),
 
 /***/ 37383:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
@@ -323,13 +247,15 @@ const yaml = __nccwpck_require__(21917);
 exports.renderMarkdown = async (item) => {
   const { title, number, createdAt, ...intermediaryItem } = item;
   const meta = { title, number, createdAt };
-  const storeMeta = () => ({ children }) => {
-    const { value: frontmatter } =
-      children.find(({ type }) => type === 'yaml') || {};
-    if (frontmatter) {
-      Object.assign(meta, yaml.load(frontmatter));
-    }
-  };
+  const storeMeta =
+    () =>
+    ({ children }) => {
+      const { value: frontmatter } =
+        children.find(({ type }) => type === 'yaml') || {};
+      if (frontmatter) {
+        Object.assign(meta, yaml.load(frontmatter));
+      }
+    };
   const parser = remark()
     .use(parse)
     .use(fm)
@@ -457,14 +383,27 @@ exports.createSlug = (str, locale) =>
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.issue = exports.issueCommand = void 0;
 const os = __importStar(__nccwpck_require__(12087));
 const utils_1 = __nccwpck_require__(5278);
 /**
@@ -543,6 +482,25 @@ function escapeProperty(s) {
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -552,14 +510,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getState = exports.saveState = exports.group = exports.endGroup = exports.startGroup = exports.info = exports.warning = exports.error = exports.debug = exports.isDebug = exports.setFailed = exports.setCommandEcho = exports.setOutput = exports.getBooleanInput = exports.getInput = exports.addPath = exports.setSecret = exports.exportVariable = exports.ExitCode = void 0;
 const command_1 = __nccwpck_require__(87351);
 const file_command_1 = __nccwpck_require__(717);
 const utils_1 = __nccwpck_require__(5278);
@@ -626,7 +578,9 @@ function addPath(inputPath) {
 }
 exports.addPath = addPath;
 /**
- * Gets the value of an input.  The value is also trimmed.
+ * Gets the value of an input.
+ * Unless trimWhitespace is set to false in InputOptions, the value is also trimmed.
+ * Returns an empty string if the value is not defined.
  *
  * @param     name     name of the input to get
  * @param     options  optional. See InputOptions.
@@ -637,9 +591,34 @@ function getInput(name, options) {
     if (options && options.required && !val) {
         throw new Error(`Input required and not supplied: ${name}`);
     }
+    if (options && options.trimWhitespace === false) {
+        return val;
+    }
     return val.trim();
 }
 exports.getInput = getInput;
+/**
+ * Gets the input value of the boolean type in the YAML 1.2 "core schema" specification.
+ * Support boolean input list: `true | True | TRUE | false | False | FALSE` .
+ * The return value is also in boolean type.
+ * ref: https://yaml.org/spec/1.2/spec.html#id2804923
+ *
+ * @param     name     name of the input to get
+ * @param     options  optional. See InputOptions.
+ * @returns   boolean
+ */
+function getBooleanInput(name, options) {
+    const trueValue = ['true', 'True', 'TRUE'];
+    const falseValue = ['false', 'False', 'FALSE'];
+    const val = getInput(name, options);
+    if (trueValue.includes(val))
+        return true;
+    if (falseValue.includes(val))
+        return false;
+    throw new TypeError(`Input does not meet YAML 1.2 "Core Schema" specification: ${name}\n` +
+        `Support boolean input list: \`true | True | TRUE | false | False | FALSE\``);
+}
+exports.getBooleanInput = getBooleanInput;
 /**
  * Sets the value of an output.
  *
@@ -648,6 +627,7 @@ exports.getInput = getInput;
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function setOutput(name, value) {
+    process.stdout.write(os.EOL);
     command_1.issueCommand('set-output', { name }, value);
 }
 exports.setOutput = setOutput;
@@ -789,14 +769,27 @@ exports.getState = getState;
 "use strict";
 
 // For internal use, subject to change.
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.issueCommand = void 0;
 // We use any as a valid input type
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const fs = __importStar(__nccwpck_require__(35747));
@@ -827,6 +820,7 @@ exports.issueCommand = issueCommand;
 // We use any as a valid input type
 /* eslint-disable @typescript-eslint/no-explicit-any */
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.toCommandValue = void 0;
 /**
  * Sanitizes an input into a string so it can be passed into issueCommand safely
  * @param input input to sanitize into a string
@@ -859,6 +853,7 @@ class Context {
      * Hydrate the context from the environment
      */
     constructor() {
+        var _a, _b, _c;
         this.payload = {};
         if (process.env.GITHUB_EVENT_PATH) {
             if (fs_1.existsSync(process.env.GITHUB_EVENT_PATH)) {
@@ -878,6 +873,9 @@ class Context {
         this.job = process.env.GITHUB_JOB;
         this.runNumber = parseInt(process.env.GITHUB_RUN_NUMBER, 10);
         this.runId = parseInt(process.env.GITHUB_RUN_ID, 10);
+        this.apiUrl = (_a = process.env.GITHUB_API_URL) !== null && _a !== void 0 ? _a : `https://api.github.com`;
+        this.serverUrl = (_b = process.env.GITHUB_SERVER_URL) !== null && _b !== void 0 ? _b : `https://github.com`;
+        this.graphqlUrl = (_c = process.env.GITHUB_GRAPHQL_URL) !== null && _c !== void 0 ? _c : `https://api.github.com/graphql`;
     }
     get issue() {
         const payload = this.payload;
@@ -922,7 +920,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -965,7 +963,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -1015,7 +1013,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -1489,7 +1487,9 @@ class HttpClient {
                 maxSockets: maxSockets,
                 keepAlive: this._keepAlive,
                 proxy: {
-                    proxyAuth: `${proxyUrl.username}:${proxyUrl.password}`,
+                    ...((proxyUrl.username || proxyUrl.password) && {
+                        proxyAuth: `${proxyUrl.username}:${proxyUrl.password}`
+                    }),
                     host: proxyUrl.hostname,
                     port: proxyUrl.port
                 }
@@ -3747,7 +3747,7 @@ function _objectWithoutProperties(source, excluded) {
   return target;
 }
 
-const VERSION = "3.2.4";
+const VERSION = "3.4.0";
 
 class Octokit {
   constructor(options = {}) {
@@ -3756,6 +3756,7 @@ class Octokit {
       baseUrl: request.request.endpoint.DEFAULTS.baseUrl,
       headers: {},
       request: Object.assign({}, options.request, {
+        // @ts-ignore internal usage only, no need to type
         hook: hook.bind(null, "request")
       }),
       mediaType: {
@@ -4251,7 +4252,7 @@ function withDefaults(oldDefaults, newDefaults) {
   });
 }
 
-const VERSION = "6.0.10";
+const VERSION = "6.0.11";
 
 const userAgent = `octokit-endpoint.js/${VERSION} ${universalUserAgent.getUserAgent()}`; // DEFAULTS has all properties set that EndpointOptions has, except url.
 // So we use RequestParameters and add method as additional required property.
@@ -4288,7 +4289,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 var request = __nccwpck_require__(36234);
 var universalUserAgent = __nccwpck_require__(45030);
 
-const VERSION = "4.5.8";
+const VERSION = "4.6.2";
 
 class GraphqlError extends Error {
   constructor(request, response) {
@@ -4311,10 +4312,18 @@ class GraphqlError extends Error {
 }
 
 const NON_VARIABLE_OPTIONS = ["method", "baseUrl", "url", "headers", "request", "query", "mediaType"];
+const FORBIDDEN_VARIABLE_OPTIONS = ["query", "method", "url"];
 const GHES_V3_SUFFIX_REGEX = /\/api\/v3\/?$/;
 function graphql(request, query, options) {
-  if (typeof query === "string" && options && "query" in options) {
-    return Promise.reject(new Error(`[@octokit/graphql] "query" cannot be used as variable name`));
+  if (options) {
+    if (typeof query === "string" && "query" in options) {
+      return Promise.reject(new Error(`[@octokit/graphql] "query" cannot be used as variable name`));
+    }
+
+    for (const key in options) {
+      if (!FORBIDDEN_VARIABLE_OPTIONS.includes(key)) continue;
+      return Promise.reject(new Error(`[@octokit/graphql] "${key}" cannot be used as variable name`));
+    }
   }
 
   const parsedOptions = typeof query === "string" ? Object.assign({
@@ -4401,7 +4410,7 @@ exports.withCustomRequest = withCustomRequest;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 
-const VERSION = "2.7.0";
+const VERSION = "2.13.3";
 
 /**
  * Some “list” response that can be paginated have a different response structure
@@ -4512,6 +4521,16 @@ const composePaginateRest = Object.assign(paginate, {
   iterator
 });
 
+const paginatingEndpoints = ["GET /app/installations", "GET /applications/grants", "GET /authorizations", "GET /enterprises/{enterprise}/actions/permissions/organizations", "GET /enterprises/{enterprise}/actions/runner-groups", "GET /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations", "GET /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners", "GET /enterprises/{enterprise}/actions/runners", "GET /enterprises/{enterprise}/actions/runners/downloads", "GET /events", "GET /gists", "GET /gists/public", "GET /gists/starred", "GET /gists/{gist_id}/comments", "GET /gists/{gist_id}/commits", "GET /gists/{gist_id}/forks", "GET /installation/repositories", "GET /issues", "GET /marketplace_listing/plans", "GET /marketplace_listing/plans/{plan_id}/accounts", "GET /marketplace_listing/stubbed/plans", "GET /marketplace_listing/stubbed/plans/{plan_id}/accounts", "GET /networks/{owner}/{repo}/events", "GET /notifications", "GET /organizations", "GET /orgs/{org}/actions/permissions/repositories", "GET /orgs/{org}/actions/runner-groups", "GET /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories", "GET /orgs/{org}/actions/runner-groups/{runner_group_id}/runners", "GET /orgs/{org}/actions/runners", "GET /orgs/{org}/actions/runners/downloads", "GET /orgs/{org}/actions/secrets", "GET /orgs/{org}/actions/secrets/{secret_name}/repositories", "GET /orgs/{org}/blocks", "GET /orgs/{org}/credential-authorizations", "GET /orgs/{org}/events", "GET /orgs/{org}/failed_invitations", "GET /orgs/{org}/hooks", "GET /orgs/{org}/installations", "GET /orgs/{org}/invitations", "GET /orgs/{org}/invitations/{invitation_id}/teams", "GET /orgs/{org}/issues", "GET /orgs/{org}/members", "GET /orgs/{org}/migrations", "GET /orgs/{org}/migrations/{migration_id}/repositories", "GET /orgs/{org}/outside_collaborators", "GET /orgs/{org}/projects", "GET /orgs/{org}/public_members", "GET /orgs/{org}/repos", "GET /orgs/{org}/team-sync/groups", "GET /orgs/{org}/teams", "GET /orgs/{org}/teams/{team_slug}/discussions", "GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments", "GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions", "GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions", "GET /orgs/{org}/teams/{team_slug}/invitations", "GET /orgs/{org}/teams/{team_slug}/members", "GET /orgs/{org}/teams/{team_slug}/projects", "GET /orgs/{org}/teams/{team_slug}/repos", "GET /orgs/{org}/teams/{team_slug}/team-sync/group-mappings", "GET /orgs/{org}/teams/{team_slug}/teams", "GET /projects/columns/{column_id}/cards", "GET /projects/{project_id}/collaborators", "GET /projects/{project_id}/columns", "GET /repos/{owner}/{repo}/actions/artifacts", "GET /repos/{owner}/{repo}/actions/runners", "GET /repos/{owner}/{repo}/actions/runners/downloads", "GET /repos/{owner}/{repo}/actions/runs", "GET /repos/{owner}/{repo}/actions/runs/{run_id}/artifacts", "GET /repos/{owner}/{repo}/actions/runs/{run_id}/jobs", "GET /repos/{owner}/{repo}/actions/secrets", "GET /repos/{owner}/{repo}/actions/workflows", "GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs", "GET /repos/{owner}/{repo}/assignees", "GET /repos/{owner}/{repo}/branches", "GET /repos/{owner}/{repo}/check-runs/{check_run_id}/annotations", "GET /repos/{owner}/{repo}/check-suites/{check_suite_id}/check-runs", "GET /repos/{owner}/{repo}/code-scanning/alerts", "GET /repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/instances", "GET /repos/{owner}/{repo}/code-scanning/analyses", "GET /repos/{owner}/{repo}/collaborators", "GET /repos/{owner}/{repo}/comments", "GET /repos/{owner}/{repo}/comments/{comment_id}/reactions", "GET /repos/{owner}/{repo}/commits", "GET /repos/{owner}/{repo}/commits/{commit_sha}/branches-where-head", "GET /repos/{owner}/{repo}/commits/{commit_sha}/comments", "GET /repos/{owner}/{repo}/commits/{commit_sha}/pulls", "GET /repos/{owner}/{repo}/commits/{ref}/check-runs", "GET /repos/{owner}/{repo}/commits/{ref}/check-suites", "GET /repos/{owner}/{repo}/commits/{ref}/statuses", "GET /repos/{owner}/{repo}/contributors", "GET /repos/{owner}/{repo}/deployments", "GET /repos/{owner}/{repo}/deployments/{deployment_id}/statuses", "GET /repos/{owner}/{repo}/events", "GET /repos/{owner}/{repo}/forks", "GET /repos/{owner}/{repo}/git/matching-refs/{ref}", "GET /repos/{owner}/{repo}/hooks", "GET /repos/{owner}/{repo}/invitations", "GET /repos/{owner}/{repo}/issues", "GET /repos/{owner}/{repo}/issues/comments", "GET /repos/{owner}/{repo}/issues/comments/{comment_id}/reactions", "GET /repos/{owner}/{repo}/issues/events", "GET /repos/{owner}/{repo}/issues/{issue_number}/comments", "GET /repos/{owner}/{repo}/issues/{issue_number}/events", "GET /repos/{owner}/{repo}/issues/{issue_number}/labels", "GET /repos/{owner}/{repo}/issues/{issue_number}/reactions", "GET /repos/{owner}/{repo}/issues/{issue_number}/timeline", "GET /repos/{owner}/{repo}/keys", "GET /repos/{owner}/{repo}/labels", "GET /repos/{owner}/{repo}/milestones", "GET /repos/{owner}/{repo}/milestones/{milestone_number}/labels", "GET /repos/{owner}/{repo}/notifications", "GET /repos/{owner}/{repo}/pages/builds", "GET /repos/{owner}/{repo}/projects", "GET /repos/{owner}/{repo}/pulls", "GET /repos/{owner}/{repo}/pulls/comments", "GET /repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions", "GET /repos/{owner}/{repo}/pulls/{pull_number}/comments", "GET /repos/{owner}/{repo}/pulls/{pull_number}/commits", "GET /repos/{owner}/{repo}/pulls/{pull_number}/files", "GET /repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers", "GET /repos/{owner}/{repo}/pulls/{pull_number}/reviews", "GET /repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/comments", "GET /repos/{owner}/{repo}/releases", "GET /repos/{owner}/{repo}/releases/{release_id}/assets", "GET /repos/{owner}/{repo}/secret-scanning/alerts", "GET /repos/{owner}/{repo}/stargazers", "GET /repos/{owner}/{repo}/subscribers", "GET /repos/{owner}/{repo}/tags", "GET /repos/{owner}/{repo}/teams", "GET /repositories", "GET /repositories/{repository_id}/environments/{environment_name}/secrets", "GET /scim/v2/enterprises/{enterprise}/Groups", "GET /scim/v2/enterprises/{enterprise}/Users", "GET /scim/v2/organizations/{org}/Users", "GET /search/code", "GET /search/commits", "GET /search/issues", "GET /search/labels", "GET /search/repositories", "GET /search/topics", "GET /search/users", "GET /teams/{team_id}/discussions", "GET /teams/{team_id}/discussions/{discussion_number}/comments", "GET /teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}/reactions", "GET /teams/{team_id}/discussions/{discussion_number}/reactions", "GET /teams/{team_id}/invitations", "GET /teams/{team_id}/members", "GET /teams/{team_id}/projects", "GET /teams/{team_id}/repos", "GET /teams/{team_id}/team-sync/group-mappings", "GET /teams/{team_id}/teams", "GET /user/blocks", "GET /user/emails", "GET /user/followers", "GET /user/following", "GET /user/gpg_keys", "GET /user/installations", "GET /user/installations/{installation_id}/repositories", "GET /user/issues", "GET /user/keys", "GET /user/marketplace_purchases", "GET /user/marketplace_purchases/stubbed", "GET /user/memberships/orgs", "GET /user/migrations", "GET /user/migrations/{migration_id}/repositories", "GET /user/orgs", "GET /user/public_emails", "GET /user/repos", "GET /user/repository_invitations", "GET /user/starred", "GET /user/subscriptions", "GET /user/teams", "GET /users", "GET /users/{username}/events", "GET /users/{username}/events/orgs/{org}", "GET /users/{username}/events/public", "GET /users/{username}/followers", "GET /users/{username}/following", "GET /users/{username}/gists", "GET /users/{username}/gpg_keys", "GET /users/{username}/keys", "GET /users/{username}/orgs", "GET /users/{username}/projects", "GET /users/{username}/received_events", "GET /users/{username}/received_events/public", "GET /users/{username}/repos", "GET /users/{username}/starred", "GET /users/{username}/subscriptions"];
+
+function isPaginatingEndpoint(arg) {
+  if (typeof arg === "string") {
+    return paginatingEndpoints.includes(arg);
+  } else {
+    return false;
+  }
+}
+
 /**
  * @param octokit Octokit instance
  * @param options Options passed to Octokit constructor
@@ -4527,7 +4546,9 @@ function paginateRest(octokit) {
 paginateRest.VERSION = VERSION;
 
 exports.composePaginateRest = composePaginateRest;
+exports.isPaginatingEndpoint = isPaginatingEndpoint;
 exports.paginateRest = paginateRest;
+exports.paginatingEndpoints = paginatingEndpoints;
 //# sourceMappingURL=index.js.map
 
 
@@ -4541,10 +4562,60 @@ exports.paginateRest = paginateRest;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys(Object(source), true).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
 const Endpoints = {
   actions: {
     addSelectedRepoToOrgSecret: ["PUT /orgs/{org}/actions/secrets/{secret_name}/repositories/{repository_id}"],
     cancelWorkflowRun: ["POST /repos/{owner}/{repo}/actions/runs/{run_id}/cancel"],
+    createOrUpdateEnvironmentSecret: ["PUT /repositories/{repository_id}/environments/{environment_name}/secrets/{secret_name}"],
     createOrUpdateOrgSecret: ["PUT /orgs/{org}/actions/secrets/{secret_name}"],
     createOrUpdateRepoSecret: ["PUT /repos/{owner}/{repo}/actions/secrets/{secret_name}"],
     createRegistrationTokenForOrg: ["POST /orgs/{org}/actions/runners/registration-token"],
@@ -4553,6 +4624,7 @@ const Endpoints = {
     createRemoveTokenForRepo: ["POST /repos/{owner}/{repo}/actions/runners/remove-token"],
     createWorkflowDispatch: ["POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches"],
     deleteArtifact: ["DELETE /repos/{owner}/{repo}/actions/artifacts/{artifact_id}"],
+    deleteEnvironmentSecret: ["DELETE /repositories/{repository_id}/environments/{environment_name}/secrets/{secret_name}"],
     deleteOrgSecret: ["DELETE /orgs/{org}/actions/secrets/{secret_name}"],
     deleteRepoSecret: ["DELETE /repos/{owner}/{repo}/actions/secrets/{secret_name}"],
     deleteSelfHostedRunnerFromOrg: ["DELETE /orgs/{org}/actions/runners/{runner_id}"],
@@ -4569,16 +4641,20 @@ const Endpoints = {
     getAllowedActionsOrganization: ["GET /orgs/{org}/actions/permissions/selected-actions"],
     getAllowedActionsRepository: ["GET /repos/{owner}/{repo}/actions/permissions/selected-actions"],
     getArtifact: ["GET /repos/{owner}/{repo}/actions/artifacts/{artifact_id}"],
+    getEnvironmentPublicKey: ["GET /repositories/{repository_id}/environments/{environment_name}/secrets/public-key"],
+    getEnvironmentSecret: ["GET /repositories/{repository_id}/environments/{environment_name}/secrets/{secret_name}"],
     getGithubActionsPermissionsOrganization: ["GET /orgs/{org}/actions/permissions"],
     getGithubActionsPermissionsRepository: ["GET /repos/{owner}/{repo}/actions/permissions"],
     getJobForWorkflowRun: ["GET /repos/{owner}/{repo}/actions/jobs/{job_id}"],
     getOrgPublicKey: ["GET /orgs/{org}/actions/secrets/public-key"],
     getOrgSecret: ["GET /orgs/{org}/actions/secrets/{secret_name}"],
+    getPendingDeploymentsForRun: ["GET /repos/{owner}/{repo}/actions/runs/{run_id}/pending_deployments"],
     getRepoPermissions: ["GET /repos/{owner}/{repo}/actions/permissions", {}, {
       renamed: ["actions", "getGithubActionsPermissionsRepository"]
     }],
     getRepoPublicKey: ["GET /repos/{owner}/{repo}/actions/secrets/public-key"],
     getRepoSecret: ["GET /repos/{owner}/{repo}/actions/secrets/{secret_name}"],
+    getReviewsForRun: ["GET /repos/{owner}/{repo}/actions/runs/{run_id}/approvals"],
     getSelfHostedRunnerForOrg: ["GET /orgs/{org}/actions/runners/{runner_id}"],
     getSelfHostedRunnerForRepo: ["GET /repos/{owner}/{repo}/actions/runners/{runner_id}"],
     getWorkflow: ["GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}"],
@@ -4586,6 +4662,7 @@ const Endpoints = {
     getWorkflowRunUsage: ["GET /repos/{owner}/{repo}/actions/runs/{run_id}/timing"],
     getWorkflowUsage: ["GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/timing"],
     listArtifactsForRepo: ["GET /repos/{owner}/{repo}/actions/artifacts"],
+    listEnvironmentSecrets: ["GET /repositories/{repository_id}/environments/{environment_name}/secrets"],
     listJobsForWorkflowRun: ["GET /repos/{owner}/{repo}/actions/runs/{run_id}/jobs"],
     listOrgSecrets: ["GET /orgs/{org}/actions/secrets"],
     listRepoSecrets: ["GET /repos/{owner}/{repo}/actions/secrets"],
@@ -4601,6 +4678,7 @@ const Endpoints = {
     listWorkflowRunsForRepo: ["GET /repos/{owner}/{repo}/actions/runs"],
     reRunWorkflow: ["POST /repos/{owner}/{repo}/actions/runs/{run_id}/rerun"],
     removeSelectedRepoFromOrgSecret: ["DELETE /orgs/{org}/actions/secrets/{secret_name}/repositories/{repository_id}"],
+    reviewPendingDeploymentsForRun: ["POST /repos/{owner}/{repo}/actions/runs/{run_id}/pending_deployments"],
     setAllowedActionsOrganization: ["PUT /orgs/{org}/actions/permissions/selected-actions"],
     setAllowedActionsRepository: ["PUT /repos/{owner}/{repo}/actions/permissions/selected-actions"],
     setGithubActionsPermissionsOrganization: ["PUT /orgs/{org}/actions/permissions"],
@@ -4676,6 +4754,7 @@ const Endpoints = {
     removeRepoFromInstallation: ["DELETE /user/installations/{installation_id}/repositories/{repository_id}"],
     resetToken: ["PATCH /applications/{client_id}/token"],
     revokeInstallationAccessToken: ["DELETE /installation/token"],
+    scopeToken: ["POST /applications/{client_id}/token/scoped"],
     suspendInstallation: ["PUT /app/installations/{installation_id}/suspended"],
     unsuspendInstallation: ["DELETE /app/installations/{installation_id}/suspended"],
     updateWebhookConfigForApp: ["PATCH /app/hook/config"]
@@ -4702,12 +4781,16 @@ const Endpoints = {
     update: ["PATCH /repos/{owner}/{repo}/check-runs/{check_run_id}"]
   },
   codeScanning: {
+    deleteAnalysis: ["DELETE /repos/{owner}/{repo}/code-scanning/analyses/{analysis_id}{?confirm_delete}"],
     getAlert: ["GET /repos/{owner}/{repo}/code-scanning/alerts/{alert_number}", {}, {
       renamedParameters: {
         alert_id: "alert_number"
       }
     }],
+    getAnalysis: ["GET /repos/{owner}/{repo}/code-scanning/analyses/{analysis_id}"],
+    getSarif: ["GET /repos/{owner}/{repo}/code-scanning/sarifs/{sarif_id}"],
     listAlertsForRepo: ["GET /repos/{owner}/{repo}/code-scanning/alerts"],
+    listAlertsInstances: ["GET /repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/instances"],
     listRecentAnalyses: ["GET /repos/{owner}/{repo}/code-scanning/analyses"],
     updateAlert: ["PATCH /repos/{owner}/{repo}/code-scanning/alerts/{alert_number}"],
     uploadSarif: ["POST /repos/{owner}/{repo}/code-scanning/sarifs"]
@@ -4784,15 +4867,24 @@ const Endpoints = {
     getTemplate: ["GET /gitignore/templates/{name}"]
   },
   interactions: {
+    getRestrictionsForAuthenticatedUser: ["GET /user/interaction-limits"],
     getRestrictionsForOrg: ["GET /orgs/{org}/interaction-limits"],
     getRestrictionsForRepo: ["GET /repos/{owner}/{repo}/interaction-limits"],
-    getRestrictionsForYourPublicRepos: ["GET /user/interaction-limits"],
+    getRestrictionsForYourPublicRepos: ["GET /user/interaction-limits", {}, {
+      renamed: ["interactions", "getRestrictionsForAuthenticatedUser"]
+    }],
+    removeRestrictionsForAuthenticatedUser: ["DELETE /user/interaction-limits"],
     removeRestrictionsForOrg: ["DELETE /orgs/{org}/interaction-limits"],
     removeRestrictionsForRepo: ["DELETE /repos/{owner}/{repo}/interaction-limits"],
-    removeRestrictionsForYourPublicRepos: ["DELETE /user/interaction-limits"],
+    removeRestrictionsForYourPublicRepos: ["DELETE /user/interaction-limits", {}, {
+      renamed: ["interactions", "removeRestrictionsForAuthenticatedUser"]
+    }],
+    setRestrictionsForAuthenticatedUser: ["PUT /user/interaction-limits"],
     setRestrictionsForOrg: ["PUT /orgs/{org}/interaction-limits"],
     setRestrictionsForRepo: ["PUT /repos/{owner}/{repo}/interaction-limits"],
-    setRestrictionsForYourPublicRepos: ["PUT /user/interaction-limits"]
+    setRestrictionsForYourPublicRepos: ["PUT /user/interaction-limits", {}, {
+      renamed: ["interactions", "setRestrictionsForAuthenticatedUser"]
+    }]
   },
   issues: {
     addAssignees: ["POST /repos/{owner}/{repo}/issues/{issue_number}/assignees"],
@@ -4932,6 +5024,7 @@ const Endpoints = {
   },
   orgs: {
     blockUser: ["PUT /orgs/{org}/blocks/{username}"],
+    cancelInvitation: ["DELETE /orgs/{org}/invitations/{invitation_id}"],
     checkBlockedUser: ["GET /orgs/{org}/blocks/{username}"],
     checkMembershipForUser: ["GET /orgs/{org}/members/{username}"],
     checkPublicMembershipForUser: ["GET /orgs/{org}/public_members/{username}"],
@@ -4947,6 +5040,7 @@ const Endpoints = {
     list: ["GET /organizations"],
     listAppInstallations: ["GET /orgs/{org}/installations"],
     listBlockedUsers: ["GET /orgs/{org}/blocks"],
+    listFailedInvitations: ["GET /orgs/{org}/failed_invitations"],
     listForAuthenticatedUser: ["GET /user/orgs"],
     listForUser: ["GET /users/{username}/orgs"],
     listInvitationTeams: ["GET /orgs/{org}/invitations/{invitation_id}/teams"],
@@ -4968,6 +5062,31 @@ const Endpoints = {
     updateMembershipForAuthenticatedUser: ["PATCH /user/memberships/orgs/{org}"],
     updateWebhook: ["PATCH /orgs/{org}/hooks/{hook_id}"],
     updateWebhookConfigForOrg: ["PATCH /orgs/{org}/hooks/{hook_id}/config"]
+  },
+  packages: {
+    deletePackageForAuthenticatedUser: ["DELETE /user/packages/{package_type}/{package_name}"],
+    deletePackageForOrg: ["DELETE /orgs/{org}/packages/{package_type}/{package_name}"],
+    deletePackageVersionForAuthenticatedUser: ["DELETE /user/packages/{package_type}/{package_name}/versions/{package_version_id}"],
+    deletePackageVersionForOrg: ["DELETE /orgs/{org}/packages/{package_type}/{package_name}/versions/{package_version_id}"],
+    getAllPackageVersionsForAPackageOwnedByAnOrg: ["GET /orgs/{org}/packages/{package_type}/{package_name}/versions", {}, {
+      renamed: ["packages", "getAllPackageVersionsForPackageOwnedByOrg"]
+    }],
+    getAllPackageVersionsForAPackageOwnedByTheAuthenticatedUser: ["GET /user/packages/{package_type}/{package_name}/versions", {}, {
+      renamed: ["packages", "getAllPackageVersionsForPackageOwnedByAuthenticatedUser"]
+    }],
+    getAllPackageVersionsForPackageOwnedByAuthenticatedUser: ["GET /user/packages/{package_type}/{package_name}/versions"],
+    getAllPackageVersionsForPackageOwnedByOrg: ["GET /orgs/{org}/packages/{package_type}/{package_name}/versions"],
+    getAllPackageVersionsForPackageOwnedByUser: ["GET /users/{username}/packages/{package_type}/{package_name}/versions"],
+    getPackageForAuthenticatedUser: ["GET /user/packages/{package_type}/{package_name}"],
+    getPackageForOrganization: ["GET /orgs/{org}/packages/{package_type}/{package_name}"],
+    getPackageForUser: ["GET /users/{username}/packages/{package_type}/{package_name}"],
+    getPackageVersionForAuthenticatedUser: ["GET /user/packages/{package_type}/{package_name}/versions/{package_version_id}"],
+    getPackageVersionForOrganization: ["GET /orgs/{org}/packages/{package_type}/{package_name}/versions/{package_version_id}"],
+    getPackageVersionForUser: ["GET /users/{username}/packages/{package_type}/{package_name}/versions/{package_version_id}"],
+    restorePackageForAuthenticatedUser: ["POST /user/packages/{package_type}/{package_name}/restore{?token}"],
+    restorePackageForOrg: ["POST /orgs/{org}/packages/{package_type}/{package_name}/restore{?token}"],
+    restorePackageVersionForAuthenticatedUser: ["POST /user/packages/{package_type}/{package_name}/versions/{package_version_id}/restore"],
+    restorePackageVersionForOrg: ["POST /orgs/{org}/packages/{package_type}/{package_name}/versions/{package_version_id}/restore"]
   },
   projects: {
     addCollaborator: ["PUT /projects/{project_id}/collaborators/{username}", {
@@ -5198,7 +5317,7 @@ const Endpoints = {
         previews: ["squirrel-girl"]
       }
     }, {
-      deprecated: "octokit.reactions.deleteLegacy() is deprecated, see https://docs.github.com/v3/reactions/#delete-a-reaction-legacy"
+      deprecated: "octokit.rest.reactions.deleteLegacy() is deprecated, see https://docs.github.com/rest/reference/reactions/#delete-a-reaction-legacy"
     }],
     listForCommitComment: ["GET /repos/{owner}/{repo}/comments/{comment_id}/reactions", {
       mediaType: {
@@ -5267,6 +5386,7 @@ const Endpoints = {
     createForAuthenticatedUser: ["POST /user/repos"],
     createFork: ["POST /repos/{owner}/{repo}/forks"],
     createInOrg: ["POST /orgs/{org}/repos"],
+    createOrUpdateEnvironment: ["PUT /repos/{owner}/{repo}/environments/{environment_name}"],
     createOrUpdateFileContents: ["PUT /repos/{owner}/{repo}/contents/{path}"],
     createPagesSite: ["POST /repos/{owner}/{repo}/pages", {
       mediaType: {
@@ -5284,6 +5404,7 @@ const Endpoints = {
     delete: ["DELETE /repos/{owner}/{repo}"],
     deleteAccessRestrictions: ["DELETE /repos/{owner}/{repo}/branches/{branch}/protection/restrictions"],
     deleteAdminBranchProtection: ["DELETE /repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins"],
+    deleteAnEnvironment: ["DELETE /repos/{owner}/{repo}/environments/{environment_name}"],
     deleteBranchProtection: ["DELETE /repos/{owner}/{repo}/branches/{branch}/protection"],
     deleteCommitComment: ["DELETE /repos/{owner}/{repo}/comments/{comment_id}"],
     deleteCommitSignatureProtection: ["DELETE /repos/{owner}/{repo}/branches/{branch}/protection/required_signatures", {
@@ -5332,6 +5453,7 @@ const Endpoints = {
     get: ["GET /repos/{owner}/{repo}"],
     getAccessRestrictions: ["GET /repos/{owner}/{repo}/branches/{branch}/protection/restrictions"],
     getAdminBranchProtection: ["GET /repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins"],
+    getAllEnvironments: ["GET /repos/{owner}/{repo}/environments"],
     getAllStatusCheckContexts: ["GET /repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts"],
     getAllTopics: ["GET /repos/{owner}/{repo}/topics", {
       mediaType: {
@@ -5359,14 +5481,17 @@ const Endpoints = {
     getDeployKey: ["GET /repos/{owner}/{repo}/keys/{key_id}"],
     getDeployment: ["GET /repos/{owner}/{repo}/deployments/{deployment_id}"],
     getDeploymentStatus: ["GET /repos/{owner}/{repo}/deployments/{deployment_id}/statuses/{status_id}"],
+    getEnvironment: ["GET /repos/{owner}/{repo}/environments/{environment_name}"],
     getLatestPagesBuild: ["GET /repos/{owner}/{repo}/pages/builds/latest"],
     getLatestRelease: ["GET /repos/{owner}/{repo}/releases/latest"],
     getPages: ["GET /repos/{owner}/{repo}/pages"],
     getPagesBuild: ["GET /repos/{owner}/{repo}/pages/builds/{build_id}"],
+    getPagesHealthCheck: ["GET /repos/{owner}/{repo}/pages/health"],
     getParticipationStats: ["GET /repos/{owner}/{repo}/stats/participation"],
     getPullRequestReviewProtection: ["GET /repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews"],
     getPunchCardStats: ["GET /repos/{owner}/{repo}/stats/punch_card"],
     getReadme: ["GET /repos/{owner}/{repo}/readme"],
+    getReadmeInDirectory: ["GET /repos/{owner}/{repo}/readme/{dir}"],
     getRelease: ["GET /repos/{owner}/{repo}/releases/{release_id}"],
     getReleaseAsset: ["GET /repos/{owner}/{repo}/releases/assets/{asset_id}"],
     getReleaseByTag: ["GET /repos/{owner}/{repo}/releases/tags/{tag}"],
@@ -5428,6 +5553,7 @@ const Endpoints = {
     removeUserAccessRestrictions: ["DELETE /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users", {}, {
       mapToData: "users"
     }],
+    renameBranch: ["POST /repos/{owner}/{repo}/branches/{branch}/rename"],
     replaceAllTopics: ["PUT /repos/{owner}/{repo}/topics", {
       mediaType: {
         previews: ["mercy"]
@@ -5569,7 +5695,7 @@ const Endpoints = {
   }
 };
 
-const VERSION = "4.4.1";
+const VERSION = "5.1.1";
 
 function endpointsToMethods(octokit, endpointsMap) {
   const newMethods = {};
@@ -5652,22 +5778,22 @@ function decorate(octokit, scope, methodName, defaults, decorations) {
   return Object.assign(withDecorations, requestWithDefaults);
 }
 
-/**
- * This plugin is a 1:1 copy of internal @octokit/rest plugins. The primary
- * goal is to rebuild @octokit/rest on top of @octokit/core. Once that is
- * done, we will remove the registerEndpoints methods and return the methods
- * directly as with the other plugins. At that point we will also remove the
- * legacy workarounds and deprecations.
- *
- * See the plan at
- * https://github.com/octokit/plugin-rest-endpoint-methods.js/pull/1
- */
-
 function restEndpointMethods(octokit) {
-  return endpointsToMethods(octokit, Endpoints);
+  const api = endpointsToMethods(octokit, Endpoints);
+  return {
+    rest: api
+  };
 }
 restEndpointMethods.VERSION = VERSION;
+function legacyRestEndpointMethods(octokit) {
+  const api = endpointsToMethods(octokit, Endpoints);
+  return _objectSpread2(_objectSpread2({}, api), {}, {
+    rest: api
+  });
+}
+legacyRestEndpointMethods.VERSION = VERSION;
 
+exports.legacyRestEndpointMethods = legacyRestEndpointMethods;
 exports.restEndpointMethods = restEndpointMethods;
 //# sourceMappingURL=index.js.map
 
@@ -5753,7 +5879,7 @@ var isPlainObject = __nccwpck_require__(63287);
 var nodeFetch = _interopDefault(__nccwpck_require__(80467));
 var requestError = __nccwpck_require__(10537);
 
-const VERSION = "5.4.12";
+const VERSION = "5.4.15";
 
 function getBufferResponse(response) {
   return response.arrayBuffer();
@@ -5773,7 +5899,9 @@ function fetchWrapper(requestOptions) {
     body: requestOptions.body,
     headers: requestOptions.headers,
     redirect: requestOptions.redirect
-  }, requestOptions.request)).then(response => {
+  }, // `requestOptions.request.agent` type is incompatible
+  // see https://github.com/octokit/types.ts/pull/264
+  requestOptions.request)).then(response => {
     url = response.url;
     status = response.status;
 
@@ -6621,6 +6749,9 @@ function range(a, b, str) {
   var i = ai;
 
   if (ai >= 0 && bi > 0) {
+    if(a===b) {
+      return [ai, bi];
+    }
     begs = [];
     left = str.length;
 
@@ -7110,7 +7241,7 @@ module.exports.namespace = namespace;
 
 
 
-var isDescriptor = __nccwpck_require__(17412);
+var isDescriptor = __nccwpck_require__(20567);
 
 module.exports = function defineProperty(obj, prop, val) {
   if (typeof obj !== 'object' && typeof obj !== 'function') {
@@ -7131,170 +7262,6 @@ module.exports = function defineProperty(obj, prop, val) {
     writable: true,
     value: val
   });
-};
-
-
-/***/ }),
-
-/***/ 45050:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-"use strict";
-/*!
- * is-accessor-descriptor <https://github.com/jonschlinkert/is-accessor-descriptor>
- *
- * Copyright (c) 2015-2017, Jon Schlinkert.
- * Released under the MIT License.
- */
-
-
-
-var typeOf = __nccwpck_require__(86961);
-
-// accessor descriptor properties
-var accessor = {
-  get: 'function',
-  set: 'function',
-  configurable: 'boolean',
-  enumerable: 'boolean'
-};
-
-function isAccessorDescriptor(obj, prop) {
-  if (typeof prop === 'string') {
-    var val = Object.getOwnPropertyDescriptor(obj, prop);
-    return typeof val !== 'undefined';
-  }
-
-  if (typeOf(obj) !== 'object') {
-    return false;
-  }
-
-  if (has(obj, 'value') || has(obj, 'writable')) {
-    return false;
-  }
-
-  if (!has(obj, 'get') || typeof obj.get !== 'function') {
-    return false;
-  }
-
-  // tldr: it's valid to have "set" be undefined
-  // "set" might be undefined if `Object.getOwnPropertyDescriptor`
-  // was used to get the value, and only `get` was defined by the user
-  if (has(obj, 'set') && typeof obj[key] !== 'function' && typeof obj[key] !== 'undefined') {
-    return false;
-  }
-
-  for (var key in obj) {
-    if (!accessor.hasOwnProperty(key)) {
-      continue;
-    }
-
-    if (typeOf(obj[key]) === accessor[key]) {
-      continue;
-    }
-
-    if (typeof obj[key] !== 'undefined') {
-      return false;
-    }
-  }
-  return true;
-}
-
-function has(obj, key) {
-  return {}.hasOwnProperty.call(obj, key);
-}
-
-/**
- * Expose `isAccessorDescriptor`
- */
-
-module.exports = isAccessorDescriptor;
-
-
-/***/ }),
-
-/***/ 11365:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-"use strict";
-/*!
- * is-data-descriptor <https://github.com/jonschlinkert/is-data-descriptor>
- *
- * Copyright (c) 2015-2017, Jon Schlinkert.
- * Released under the MIT License.
- */
-
-
-
-var typeOf = __nccwpck_require__(86961);
-
-module.exports = function isDataDescriptor(obj, prop) {
-  // data descriptor properties
-  var data = {
-    configurable: 'boolean',
-    enumerable: 'boolean',
-    writable: 'boolean'
-  };
-
-  if (typeOf(obj) !== 'object') {
-    return false;
-  }
-
-  if (typeof prop === 'string') {
-    var val = Object.getOwnPropertyDescriptor(obj, prop);
-    return typeof val !== 'undefined';
-  }
-
-  if (!('value' in obj) && !('writable' in obj)) {
-    return false;
-  }
-
-  for (var key in obj) {
-    if (key === 'value') continue;
-
-    if (!data.hasOwnProperty(key)) {
-      continue;
-    }
-
-    if (typeOf(obj[key]) === data[key]) {
-      continue;
-    }
-
-    if (typeof obj[key] !== 'undefined') {
-      return false;
-    }
-  }
-  return true;
-};
-
-
-/***/ }),
-
-/***/ 17412:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-"use strict";
-/*!
- * is-descriptor <https://github.com/jonschlinkert/is-descriptor>
- *
- * Copyright (c) 2015-2017, Jon Schlinkert.
- * Released under the MIT License.
- */
-
-
-
-var typeOf = __nccwpck_require__(86961);
-var isAccessor = __nccwpck_require__(45050);
-var isData = __nccwpck_require__(11365);
-
-module.exports = function isDescriptor(obj, key) {
-  if (typeOf(obj) !== 'object') {
-    return false;
-  }
-  if ('get' in obj) {
-    return isAccessor(obj, key);
-  }
-  return isData(obj, key);
 };
 
 
@@ -7367,51 +7334,51 @@ module.exports.Collection = Hook.Collection
 /***/ 5549:
 /***/ ((module) => {
 
-module.exports = addHook
+module.exports = addHook;
 
-function addHook (state, kind, name, hook) {
-  var orig = hook
+function addHook(state, kind, name, hook) {
+  var orig = hook;
   if (!state.registry[name]) {
-    state.registry[name] = []
+    state.registry[name] = [];
   }
 
-  if (kind === 'before') {
+  if (kind === "before") {
     hook = function (method, options) {
       return Promise.resolve()
         .then(orig.bind(null, options))
-        .then(method.bind(null, options))
-    }
+        .then(method.bind(null, options));
+    };
   }
 
-  if (kind === 'after') {
+  if (kind === "after") {
     hook = function (method, options) {
-      var result
+      var result;
       return Promise.resolve()
         .then(method.bind(null, options))
         .then(function (result_) {
-          result = result_
-          return orig(result, options)
+          result = result_;
+          return orig(result, options);
         })
         .then(function () {
-          return result
-        })
-    }
+          return result;
+        });
+    };
   }
 
-  if (kind === 'error') {
+  if (kind === "error") {
     hook = function (method, options) {
       return Promise.resolve()
         .then(method.bind(null, options))
         .catch(function (error) {
-          return orig(error, options)
-        })
-    }
+          return orig(error, options);
+        });
+    };
   }
 
   state.registry[name].push({
     hook: hook,
-    orig: orig
-  })
+    orig: orig,
+  });
 }
 
 
@@ -7420,33 +7387,32 @@ function addHook (state, kind, name, hook) {
 /***/ 44670:
 /***/ ((module) => {
 
-module.exports = register
+module.exports = register;
 
-function register (state, name, method, options) {
-  if (typeof method !== 'function') {
-    throw new Error('method for before hook must be a function')
+function register(state, name, method, options) {
+  if (typeof method !== "function") {
+    throw new Error("method for before hook must be a function");
   }
 
   if (!options) {
-    options = {}
+    options = {};
   }
 
   if (Array.isArray(name)) {
     return name.reverse().reduce(function (callback, name) {
-      return register.bind(null, state, name, callback, options)
-    }, method)()
+      return register.bind(null, state, name, callback, options);
+    }, method)();
   }
 
-  return Promise.resolve()
-    .then(function () {
-      if (!state.registry[name]) {
-        return method(options)
-      }
+  return Promise.resolve().then(function () {
+    if (!state.registry[name]) {
+      return method(options);
+    }
 
-      return (state.registry[name]).reduce(function (method, registered) {
-        return registered.hook.bind(null, method, options)
-      }, method)()
-    })
+    return state.registry[name].reduce(function (method, registered) {
+      return registered.hook.bind(null, method, options);
+    }, method)();
+  });
 }
 
 
@@ -7455,22 +7421,24 @@ function register (state, name, method, options) {
 /***/ 6819:
 /***/ ((module) => {
 
-module.exports = removeHook
+module.exports = removeHook;
 
-function removeHook (state, name, method) {
+function removeHook(state, name, method) {
   if (!state.registry[name]) {
-    return
+    return;
   }
 
   var index = state.registry[name]
-    .map(function (registered) { return registered.orig })
-    .indexOf(method)
+    .map(function (registered) {
+      return registered.orig;
+    })
+    .indexOf(method);
 
   if (index === -1) {
-    return
+    return;
   }
 
-  state.registry[name].splice(index, 1)
+  state.registry[name].splice(index, 1);
 }
 
 
@@ -9332,7 +9300,7 @@ cu.bubble = function(Parent, events) {
 
 
 
-var isDescriptor = __nccwpck_require__(20567);
+var isDescriptor = __nccwpck_require__(81358);
 
 module.exports = function defineProperty(obj, prop, val) {
   if (typeof obj !== 'object' && typeof obj !== 'function') {
@@ -9354,6 +9322,604 @@ module.exports = function defineProperty(obj, prop, val) {
     value: val
   });
 };
+
+
+/***/ }),
+
+/***/ 84797:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+/*!
+ * is-accessor-descriptor <https://github.com/jonschlinkert/is-accessor-descriptor>
+ *
+ * Copyright (c) 2015, Jon Schlinkert.
+ * Licensed under the MIT License.
+ */
+
+
+
+var typeOf = __nccwpck_require__(83443);
+
+// accessor descriptor properties
+var accessor = {
+  get: 'function',
+  set: 'function',
+  configurable: 'boolean',
+  enumerable: 'boolean'
+};
+
+function isAccessorDescriptor(obj, prop) {
+  if (typeof prop === 'string') {
+    var val = Object.getOwnPropertyDescriptor(obj, prop);
+    return typeof val !== 'undefined';
+  }
+
+  if (typeOf(obj) !== 'object') {
+    return false;
+  }
+
+  if (has(obj, 'value') || has(obj, 'writable')) {
+    return false;
+  }
+
+  if (!has(obj, 'get') || typeof obj.get !== 'function') {
+    return false;
+  }
+
+  // tldr: it's valid to have "set" be undefined
+  // "set" might be undefined if `Object.getOwnPropertyDescriptor`
+  // was used to get the value, and only `get` was defined by the user
+  if (has(obj, 'set') && typeof obj[key] !== 'function' && typeof obj[key] !== 'undefined') {
+    return false;
+  }
+
+  for (var key in obj) {
+    if (!accessor.hasOwnProperty(key)) {
+      continue;
+    }
+
+    if (typeOf(obj[key]) === accessor[key]) {
+      continue;
+    }
+
+    if (typeof obj[key] !== 'undefined') {
+      return false;
+    }
+  }
+  return true;
+}
+
+function has(obj, key) {
+  return {}.hasOwnProperty.call(obj, key);
+}
+
+/**
+ * Expose `isAccessorDescriptor`
+ */
+
+module.exports = isAccessorDescriptor;
+
+
+/***/ }),
+
+/***/ 83443:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+var isBuffer = __nccwpck_require__(3984);
+var toString = Object.prototype.toString;
+
+/**
+ * Get the native `typeof` a value.
+ *
+ * @param  {*} `val`
+ * @return {*} Native javascript type
+ */
+
+module.exports = function kindOf(val) {
+  // primitivies
+  if (typeof val === 'undefined') {
+    return 'undefined';
+  }
+  if (val === null) {
+    return 'null';
+  }
+  if (val === true || val === false || val instanceof Boolean) {
+    return 'boolean';
+  }
+  if (typeof val === 'string' || val instanceof String) {
+    return 'string';
+  }
+  if (typeof val === 'number' || val instanceof Number) {
+    return 'number';
+  }
+
+  // functions
+  if (typeof val === 'function' || val instanceof Function) {
+    return 'function';
+  }
+
+  // array
+  if (typeof Array.isArray !== 'undefined' && Array.isArray(val)) {
+    return 'array';
+  }
+
+  // check for instances of RegExp and Date before calling `toString`
+  if (val instanceof RegExp) {
+    return 'regexp';
+  }
+  if (val instanceof Date) {
+    return 'date';
+  }
+
+  // other objects
+  var type = toString.call(val);
+
+  if (type === '[object RegExp]') {
+    return 'regexp';
+  }
+  if (type === '[object Date]') {
+    return 'date';
+  }
+  if (type === '[object Arguments]') {
+    return 'arguments';
+  }
+  if (type === '[object Error]') {
+    return 'error';
+  }
+
+  // buffer
+  if (isBuffer(val)) {
+    return 'buffer';
+  }
+
+  // es6: Map, WeakMap, Set, WeakSet
+  if (type === '[object Set]') {
+    return 'set';
+  }
+  if (type === '[object WeakSet]') {
+    return 'weakset';
+  }
+  if (type === '[object Map]') {
+    return 'map';
+  }
+  if (type === '[object WeakMap]') {
+    return 'weakmap';
+  }
+  if (type === '[object Symbol]') {
+    return 'symbol';
+  }
+
+  // typed arrays
+  if (type === '[object Int8Array]') {
+    return 'int8array';
+  }
+  if (type === '[object Uint8Array]') {
+    return 'uint8array';
+  }
+  if (type === '[object Uint8ClampedArray]') {
+    return 'uint8clampedarray';
+  }
+  if (type === '[object Int16Array]') {
+    return 'int16array';
+  }
+  if (type === '[object Uint16Array]') {
+    return 'uint16array';
+  }
+  if (type === '[object Int32Array]') {
+    return 'int32array';
+  }
+  if (type === '[object Uint32Array]') {
+    return 'uint32array';
+  }
+  if (type === '[object Float32Array]') {
+    return 'float32array';
+  }
+  if (type === '[object Float64Array]') {
+    return 'float64array';
+  }
+
+  // must be a plain object
+  return 'object';
+};
+
+
+/***/ }),
+
+/***/ 3984:
+/***/ ((module) => {
+
+/*!
+ * Determine if an object is a Buffer
+ *
+ * @author   Feross Aboukhadijeh <https://feross.org>
+ * @license  MIT
+ */
+
+// The _isBuffer check is for Safari 5-7 support, because it's missing
+// Object.prototype.constructor. Remove this eventually
+module.exports = function (obj) {
+  return obj != null && (isBuffer(obj) || isSlowBuffer(obj) || !!obj._isBuffer)
+}
+
+function isBuffer (obj) {
+  return !!obj.constructor && typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
+}
+
+// For Node v0.10 support. Remove this eventually.
+function isSlowBuffer (obj) {
+  return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
+}
+
+
+/***/ }),
+
+/***/ 57339:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+/*!
+ * is-data-descriptor <https://github.com/jonschlinkert/is-data-descriptor>
+ *
+ * Copyright (c) 2015, Jon Schlinkert.
+ * Licensed under the MIT License.
+ */
+
+
+
+var typeOf = __nccwpck_require__(25940);
+
+// data descriptor properties
+var data = {
+  configurable: 'boolean',
+  enumerable: 'boolean',
+  writable: 'boolean'
+};
+
+function isDataDescriptor(obj, prop) {
+  if (typeOf(obj) !== 'object') {
+    return false;
+  }
+
+  if (typeof prop === 'string') {
+    var val = Object.getOwnPropertyDescriptor(obj, prop);
+    return typeof val !== 'undefined';
+  }
+
+  if (!('value' in obj) && !('writable' in obj)) {
+    return false;
+  }
+
+  for (var key in obj) {
+    if (key === 'value') continue;
+
+    if (!data.hasOwnProperty(key)) {
+      continue;
+    }
+
+    if (typeOf(obj[key]) === data[key]) {
+      continue;
+    }
+
+    if (typeof obj[key] !== 'undefined') {
+      return false;
+    }
+  }
+  return true;
+}
+
+/**
+ * Expose `isDataDescriptor`
+ */
+
+module.exports = isDataDescriptor;
+
+
+/***/ }),
+
+/***/ 25940:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+var isBuffer = __nccwpck_require__(3984);
+var toString = Object.prototype.toString;
+
+/**
+ * Get the native `typeof` a value.
+ *
+ * @param  {*} `val`
+ * @return {*} Native javascript type
+ */
+
+module.exports = function kindOf(val) {
+  // primitivies
+  if (typeof val === 'undefined') {
+    return 'undefined';
+  }
+  if (val === null) {
+    return 'null';
+  }
+  if (val === true || val === false || val instanceof Boolean) {
+    return 'boolean';
+  }
+  if (typeof val === 'string' || val instanceof String) {
+    return 'string';
+  }
+  if (typeof val === 'number' || val instanceof Number) {
+    return 'number';
+  }
+
+  // functions
+  if (typeof val === 'function' || val instanceof Function) {
+    return 'function';
+  }
+
+  // array
+  if (typeof Array.isArray !== 'undefined' && Array.isArray(val)) {
+    return 'array';
+  }
+
+  // check for instances of RegExp and Date before calling `toString`
+  if (val instanceof RegExp) {
+    return 'regexp';
+  }
+  if (val instanceof Date) {
+    return 'date';
+  }
+
+  // other objects
+  var type = toString.call(val);
+
+  if (type === '[object RegExp]') {
+    return 'regexp';
+  }
+  if (type === '[object Date]') {
+    return 'date';
+  }
+  if (type === '[object Arguments]') {
+    return 'arguments';
+  }
+  if (type === '[object Error]') {
+    return 'error';
+  }
+
+  // buffer
+  if (isBuffer(val)) {
+    return 'buffer';
+  }
+
+  // es6: Map, WeakMap, Set, WeakSet
+  if (type === '[object Set]') {
+    return 'set';
+  }
+  if (type === '[object WeakSet]') {
+    return 'weakset';
+  }
+  if (type === '[object Map]') {
+    return 'map';
+  }
+  if (type === '[object WeakMap]') {
+    return 'weakmap';
+  }
+  if (type === '[object Symbol]') {
+    return 'symbol';
+  }
+
+  // typed arrays
+  if (type === '[object Int8Array]') {
+    return 'int8array';
+  }
+  if (type === '[object Uint8Array]') {
+    return 'uint8array';
+  }
+  if (type === '[object Uint8ClampedArray]') {
+    return 'uint8clampedarray';
+  }
+  if (type === '[object Int16Array]') {
+    return 'int16array';
+  }
+  if (type === '[object Uint16Array]') {
+    return 'uint16array';
+  }
+  if (type === '[object Int32Array]') {
+    return 'int32array';
+  }
+  if (type === '[object Uint32Array]') {
+    return 'uint32array';
+  }
+  if (type === '[object Float32Array]') {
+    return 'float32array';
+  }
+  if (type === '[object Float64Array]') {
+    return 'float64array';
+  }
+
+  // must be a plain object
+  return 'object';
+};
+
+
+/***/ }),
+
+/***/ 81358:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+/*!
+ * is-descriptor <https://github.com/jonschlinkert/is-descriptor>
+ *
+ * Copyright (c) 2015-2017, Jon Schlinkert.
+ * Released under the MIT License.
+ */
+
+
+
+var typeOf = __nccwpck_require__(78163);
+var isAccessor = __nccwpck_require__(84797);
+var isData = __nccwpck_require__(57339);
+
+module.exports = function isDescriptor(obj, key) {
+  if (typeOf(obj) !== 'object') {
+    return false;
+  }
+  if ('get' in obj) {
+    return isAccessor(obj, key);
+  }
+  return isData(obj, key);
+};
+
+
+/***/ }),
+
+/***/ 78163:
+/***/ ((module) => {
+
+var toString = Object.prototype.toString;
+
+/**
+ * Get the native `typeof` a value.
+ *
+ * @param  {*} `val`
+ * @return {*} Native javascript type
+ */
+
+module.exports = function kindOf(val) {
+  var type = typeof val;
+
+  // primitivies
+  if (type === 'undefined') {
+    return 'undefined';
+  }
+  if (val === null) {
+    return 'null';
+  }
+  if (val === true || val === false || val instanceof Boolean) {
+    return 'boolean';
+  }
+  if (type === 'string' || val instanceof String) {
+    return 'string';
+  }
+  if (type === 'number' || val instanceof Number) {
+    return 'number';
+  }
+
+  // functions
+  if (type === 'function' || val instanceof Function) {
+    if (typeof val.constructor.name !== 'undefined' && val.constructor.name.slice(0, 9) === 'Generator') {
+      return 'generatorfunction';
+    }
+    return 'function';
+  }
+
+  // array
+  if (typeof Array.isArray !== 'undefined' && Array.isArray(val)) {
+    return 'array';
+  }
+
+  // check for instances of RegExp and Date before calling `toString`
+  if (val instanceof RegExp) {
+    return 'regexp';
+  }
+  if (val instanceof Date) {
+    return 'date';
+  }
+
+  // other objects
+  type = toString.call(val);
+
+  if (type === '[object RegExp]') {
+    return 'regexp';
+  }
+  if (type === '[object Date]') {
+    return 'date';
+  }
+  if (type === '[object Arguments]') {
+    return 'arguments';
+  }
+  if (type === '[object Error]') {
+    return 'error';
+  }
+  if (type === '[object Promise]') {
+    return 'promise';
+  }
+
+  // buffer
+  if (isBuffer(val)) {
+    return 'buffer';
+  }
+
+  // es6: Map, WeakMap, Set, WeakSet
+  if (type === '[object Set]') {
+    return 'set';
+  }
+  if (type === '[object WeakSet]') {
+    return 'weakset';
+  }
+  if (type === '[object Map]') {
+    return 'map';
+  }
+  if (type === '[object WeakMap]') {
+    return 'weakmap';
+  }
+  if (type === '[object Symbol]') {
+    return 'symbol';
+  }
+  
+  if (type === '[object Map Iterator]') {
+    return 'mapiterator';
+  }
+  if (type === '[object Set Iterator]') {
+    return 'setiterator';
+  }
+  if (type === '[object String Iterator]') {
+    return 'stringiterator';
+  }
+  if (type === '[object Array Iterator]') {
+    return 'arrayiterator';
+  }
+  
+  // typed arrays
+  if (type === '[object Int8Array]') {
+    return 'int8array';
+  }
+  if (type === '[object Uint8Array]') {
+    return 'uint8array';
+  }
+  if (type === '[object Uint8ClampedArray]') {
+    return 'uint8clampedarray';
+  }
+  if (type === '[object Int16Array]') {
+    return 'int16array';
+  }
+  if (type === '[object Uint16Array]') {
+    return 'uint16array';
+  }
+  if (type === '[object Int32Array]') {
+    return 'int32array';
+  }
+  if (type === '[object Uint32Array]') {
+    return 'uint32array';
+  }
+  if (type === '[object Float32Array]') {
+    return 'float32array';
+  }
+  if (type === '[object Float64Array]') {
+    return 'float64array';
+  }
+
+  // must be a plain object
+  return 'object';
+};
+
+/**
+ * If you need to support Safari 5-7 (8-10 yr-old browser),
+ * take a look at https://github.com/feross/is-buffer
+ */
+
+function isBuffer(val) {
+  return val.constructor
+    && typeof val.constructor.isBuffer === 'function'
+    && val.constructor.isBuffer(val);
+}
 
 
 /***/ }),
@@ -11879,7 +12445,7 @@ utils.escapeRegex = function(str) {
 "use strict";
 
 
-var isObject = __nccwpck_require__(70429);
+var isObject = __nccwpck_require__(57334);
 
 module.exports = function extend(o/*, objects*/) {
   if (!isObject(o)) { o = {}; }
@@ -13356,7 +13922,7 @@ module.exports = fillRange;
 "use strict";
 
 
-var isObject = __nccwpck_require__(70429);
+var isObject = __nccwpck_require__(57334);
 
 module.exports = function extend(o/*, objects*/) {
   if (!isObject(o)) { o = {}; }
@@ -13463,7 +14029,7 @@ module.exports = function isGlob(str) {
 const fs = __nccwpck_require__(35747);
 const path = __nccwpck_require__(85622);
 const fastGlob = __nccwpck_require__(94445);
-const gitIgnore = __nccwpck_require__(53956);
+const gitIgnore = __nccwpck_require__(91230);
 const pify = __nccwpck_require__(97691);
 const slash = __nccwpck_require__(58470);
 
@@ -13720,476 +14286,6 @@ module.exports.gitignore = gitignore;
 
 /***/ }),
 
-/***/ 53956:
-/***/ ((module) => {
-
-// A simple implementation of make-array
-function make_array (subject) {
-  return Array.isArray(subject)
-    ? subject
-    : [subject]
-}
-
-const REGEX_BLANK_LINE = /^\s+$/
-const REGEX_LEADING_EXCAPED_EXCLAMATION = /^\\!/
-const REGEX_LEADING_EXCAPED_HASH = /^\\#/
-const SLASH = '/'
-const KEY_IGNORE = typeof Symbol !== 'undefined'
-  ? Symbol.for('node-ignore')
-  /* istanbul ignore next */
-  : 'node-ignore'
-
-const define = (object, key, value) =>
-  Object.defineProperty(object, key, {value})
-
-const REGEX_REGEXP_RANGE = /([0-z])-([0-z])/g
-
-// Sanitize the range of a regular expression
-// The cases are complicated, see test cases for details
-const sanitizeRange = range => range.replace(
-  REGEX_REGEXP_RANGE,
-  (match, from, to) => from.charCodeAt(0) <= to.charCodeAt(0)
-    ? match
-    // Invalid range (out of order) which is ok for gitignore rules but
-    //   fatal for JavaScript regular expression, so eliminate it.
-    : ''
-)
-
-// > If the pattern ends with a slash,
-// > it is removed for the purpose of the following description,
-// > but it would only find a match with a directory.
-// > In other words, foo/ will match a directory foo and paths underneath it,
-// > but will not match a regular file or a symbolic link foo
-// >  (this is consistent with the way how pathspec works in general in Git).
-// '`foo/`' will not match regular file '`foo`' or symbolic link '`foo`'
-// -> ignore-rules will not deal with it, because it costs extra `fs.stat` call
-//      you could use option `mark: true` with `glob`
-
-// '`foo/`' should not continue with the '`..`'
-const DEFAULT_REPLACER_PREFIX = [
-
-  // > Trailing spaces are ignored unless they are quoted with backslash ("\")
-  [
-    // (a\ ) -> (a )
-    // (a  ) -> (a)
-    // (a \ ) -> (a  )
-    /\\?\s+$/,
-    match => match.indexOf('\\') === 0
-      ? ' '
-      : ''
-  ],
-
-  // replace (\ ) with ' '
-  [
-    /\\\s/g,
-    () => ' '
-  ],
-
-  // Escape metacharacters
-  // which is written down by users but means special for regular expressions.
-
-  // > There are 12 characters with special meanings:
-  // > - the backslash \,
-  // > - the caret ^,
-  // > - the dollar sign $,
-  // > - the period or dot .,
-  // > - the vertical bar or pipe symbol |,
-  // > - the question mark ?,
-  // > - the asterisk or star *,
-  // > - the plus sign +,
-  // > - the opening parenthesis (,
-  // > - the closing parenthesis ),
-  // > - and the opening square bracket [,
-  // > - the opening curly brace {,
-  // > These special characters are often called "metacharacters".
-  [
-    /[\\^$.|*+(){]/g,
-    match => `\\${match}`
-  ],
-
-  [
-    // > [abc] matches any character inside the brackets
-    // >    (in this case a, b, or c);
-    /\[([^\]/]*)($|\])/g,
-    (match, p1, p2) => p2 === ']'
-      ? `[${sanitizeRange(p1)}]`
-      : `\\${match}`
-  ],
-
-  [
-    // > a question mark (?) matches a single character
-    /(?!\\)\?/g,
-    () => '[^/]'
-  ],
-
-  // leading slash
-  [
-
-    // > A leading slash matches the beginning of the pathname.
-    // > For example, "/*.c" matches "cat-file.c" but not "mozilla-sha1/sha1.c".
-    // A leading slash matches the beginning of the pathname
-    /^\//,
-    () => '^'
-  ],
-
-  // replace special metacharacter slash after the leading slash
-  [
-    /\//g,
-    () => '\\/'
-  ],
-
-  [
-    // > A leading "**" followed by a slash means match in all directories.
-    // > For example, "**/foo" matches file or directory "foo" anywhere,
-    // > the same as pattern "foo".
-    // > "**/foo/bar" matches file or directory "bar" anywhere that is directly
-    // >   under directory "foo".
-    // Notice that the '*'s have been replaced as '\\*'
-    /^\^*\\\*\\\*\\\//,
-
-    // '**/foo' <-> 'foo'
-    () => '^(?:.*\\/)?'
-  ]
-]
-
-const DEFAULT_REPLACER_SUFFIX = [
-  // starting
-  [
-    // there will be no leading '/'
-    //   (which has been replaced by section "leading slash")
-    // If starts with '**', adding a '^' to the regular expression also works
-    /^(?=[^^])/,
-    function startingReplacer () {
-      return !/\/(?!$)/.test(this)
-        // > If the pattern does not contain a slash /,
-        // >   Git treats it as a shell glob pattern
-        // Actually, if there is only a trailing slash,
-        //   git also treats it as a shell glob pattern
-        ? '(?:^|\\/)'
-
-        // > Otherwise, Git treats the pattern as a shell glob suitable for
-        // >   consumption by fnmatch(3)
-        : '^'
-    }
-  ],
-
-  // two globstars
-  [
-    // Use lookahead assertions so that we could match more than one `'/**'`
-    /\\\/\\\*\\\*(?=\\\/|$)/g,
-
-    // Zero, one or several directories
-    // should not use '*', or it will be replaced by the next replacer
-
-    // Check if it is not the last `'/**'`
-    (match, index, str) => index + 6 < str.length
-
-      // case: /**/
-      // > A slash followed by two consecutive asterisks then a slash matches
-      // >   zero or more directories.
-      // > For example, "a/**/b" matches "a/b", "a/x/b", "a/x/y/b" and so on.
-      // '/**/'
-      ? '(?:\\/[^\\/]+)*'
-
-      // case: /**
-      // > A trailing `"/**"` matches everything inside.
-
-      // #21: everything inside but it should not include the current folder
-      : '\\/.+'
-  ],
-
-  // intermediate wildcards
-  [
-    // Never replace escaped '*'
-    // ignore rule '\*' will match the path '*'
-
-    // 'abc.*/' -> go
-    // 'abc.*'  -> skip this rule
-    /(^|[^\\]+)\\\*(?=.+)/g,
-
-    // '*.js' matches '.js'
-    // '*.js' doesn't match 'abc'
-    (match, p1) => `${p1}[^\\/]*`
-  ],
-
-  // trailing wildcard
-  [
-    /(\^|\\\/)?\\\*$/,
-    (match, p1) => {
-      const prefix = p1
-        // '\^':
-        // '/*' does not match ''
-        // '/*' does not match everything
-
-        // '\\\/':
-        // 'abc/*' does not match 'abc/'
-        ? `${p1}[^/]+`
-
-        // 'a*' matches 'a'
-        // 'a*' matches 'aa'
-        : '[^/]*'
-
-      return `${prefix}(?=$|\\/$)`
-    }
-  ],
-
-  [
-    // unescape
-    /\\\\\\/g,
-    () => '\\'
-  ]
-]
-
-const POSITIVE_REPLACERS = [
-  ...DEFAULT_REPLACER_PREFIX,
-
-  // 'f'
-  // matches
-  // - /f(end)
-  // - /f/
-  // - (start)f(end)
-  // - (start)f/
-  // doesn't match
-  // - oof
-  // - foo
-  // pseudo:
-  // -> (^|/)f(/|$)
-
-  // ending
-  [
-    // 'js' will not match 'js.'
-    // 'ab' will not match 'abc'
-    /(?:[^*/])$/,
-
-    // 'js*' will not match 'a.js'
-    // 'js/' will not match 'a.js'
-    // 'js' will match 'a.js' and 'a.js/'
-    match => `${match}(?=$|\\/)`
-  ],
-
-  ...DEFAULT_REPLACER_SUFFIX
-]
-
-const NEGATIVE_REPLACERS = [
-  ...DEFAULT_REPLACER_PREFIX,
-
-  // #24, #38
-  // The MISSING rule of [gitignore docs](https://git-scm.com/docs/gitignore)
-  // A negative pattern without a trailing wildcard should not
-  // re-include the things inside that directory.
-
-  // eg:
-  // ['node_modules/*', '!node_modules']
-  // should ignore `node_modules/a.js`
-  [
-    /(?:[^*])$/,
-    match => `${match}(?=$|\\/$)`
-  ],
-
-  ...DEFAULT_REPLACER_SUFFIX
-]
-
-// A simple cache, because an ignore rule only has only one certain meaning
-const cache = Object.create(null)
-
-// @param {pattern}
-const make_regex = (pattern, negative, ignorecase) => {
-  const r = cache[pattern]
-  if (r) {
-    return r
-  }
-
-  const replacers = negative
-    ? NEGATIVE_REPLACERS
-    : POSITIVE_REPLACERS
-
-  const source = replacers.reduce(
-    (prev, current) => prev.replace(current[0], current[1].bind(pattern)),
-    pattern
-  )
-
-  return cache[pattern] = ignorecase
-    ? new RegExp(source, 'i')
-    : new RegExp(source)
-}
-
-// > A blank line matches no files, so it can serve as a separator for readability.
-const checkPattern = pattern => pattern
-  && typeof pattern === 'string'
-  && !REGEX_BLANK_LINE.test(pattern)
-
-  // > A line starting with # serves as a comment.
-  && pattern.indexOf('#') !== 0
-
-const createRule = (pattern, ignorecase) => {
-  const origin = pattern
-  let negative = false
-
-  // > An optional prefix "!" which negates the pattern;
-  if (pattern.indexOf('!') === 0) {
-    negative = true
-    pattern = pattern.substr(1)
-  }
-
-  pattern = pattern
-  // > Put a backslash ("\") in front of the first "!" for patterns that
-  // >   begin with a literal "!", for example, `"\!important!.txt"`.
-  .replace(REGEX_LEADING_EXCAPED_EXCLAMATION, '!')
-  // > Put a backslash ("\") in front of the first hash for patterns that
-  // >   begin with a hash.
-  .replace(REGEX_LEADING_EXCAPED_HASH, '#')
-
-  const regex = make_regex(pattern, negative, ignorecase)
-
-  return {
-    origin,
-    pattern,
-    negative,
-    regex
-  }
-}
-
-class IgnoreBase {
-  constructor ({
-    ignorecase = true
-  } = {}) {
-    this._rules = []
-    this._ignorecase = ignorecase
-    define(this, KEY_IGNORE, true)
-    this._initCache()
-  }
-
-  _initCache () {
-    this._cache = Object.create(null)
-  }
-
-  // @param {Array.<string>|string|Ignore} pattern
-  add (pattern) {
-    this._added = false
-
-    if (typeof pattern === 'string') {
-      pattern = pattern.split(/\r?\n/g)
-    }
-
-    make_array(pattern).forEach(this._addPattern, this)
-
-    // Some rules have just added to the ignore,
-    // making the behavior changed.
-    if (this._added) {
-      this._initCache()
-    }
-
-    return this
-  }
-
-  // legacy
-  addPattern (pattern) {
-    return this.add(pattern)
-  }
-
-  _addPattern (pattern) {
-    // #32
-    if (pattern && pattern[KEY_IGNORE]) {
-      this._rules = this._rules.concat(pattern._rules)
-      this._added = true
-      return
-    }
-
-    if (checkPattern(pattern)) {
-      const rule = createRule(pattern, this._ignorecase)
-      this._added = true
-      this._rules.push(rule)
-    }
-  }
-
-  filter (paths) {
-    return make_array(paths).filter(path => this._filter(path))
-  }
-
-  createFilter () {
-    return path => this._filter(path)
-  }
-
-  ignores (path) {
-    return !this._filter(path)
-  }
-
-  // @returns `Boolean` true if the `path` is NOT ignored
-  _filter (path, slices) {
-    if (!path) {
-      return false
-    }
-
-    if (path in this._cache) {
-      return this._cache[path]
-    }
-
-    if (!slices) {
-      // path/to/a.js
-      // ['path', 'to', 'a.js']
-      slices = path.split(SLASH)
-    }
-
-    slices.pop()
-
-    return this._cache[path] = slices.length
-      // > It is not possible to re-include a file if a parent directory of
-      // >   that file is excluded.
-      // If the path contains a parent directory, check the parent first
-      ? this._filter(slices.join(SLASH) + SLASH, slices)
-        && this._test(path)
-
-      // Or only test the path
-      : this._test(path)
-  }
-
-  // @returns {Boolean} true if a file is NOT ignored
-  _test (path) {
-    // Explicitly define variable type by setting matched to `0`
-    let matched = 0
-
-    this._rules.forEach(rule => {
-      // if matched = true, then we only test negative rules
-      // if matched = false, then we test non-negative rules
-      if (!(matched ^ rule.negative)) {
-        matched = rule.negative ^ rule.regex.test(path)
-      }
-    })
-
-    return !matched
-  }
-}
-
-// Windows
-// --------------------------------------------------------------
-/* istanbul ignore if  */
-if (
-  // Detect `process` so that it can run in browsers.
-  typeof process !== 'undefined'
-  && (
-    process.env && process.env.IGNORE_TEST_WIN32
-    || process.platform === 'win32'
-  )
-) {
-  const filter = IgnoreBase.prototype._filter
-
-  /* eslint no-control-regex: "off" */
-  const make_posix = str => /^\\\\\?\\/.test(str)
-  || /[^\x00-\x80]+/.test(str)
-    ? str
-    : str.replace(/\\/g, '/')
-
-  IgnoreBase.prototype._filter = function filterWin32 (path, slices) {
-    path = make_posix(path)
-    return filter.call(this, path, slices)
-  }
-}
-
-module.exports = options => new IgnoreBase(options)
-
-
-/***/ }),
-
 /***/ 22779:
 /***/ ((module) => {
 
@@ -14214,6 +14310,27 @@ function isBuffer (obj) {
 function isSlowBuffer (obj) {
   return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
 }
+
+
+/***/ }),
+
+/***/ 57334:
+/***/ ((module) => {
+
+"use strict";
+/*!
+ * is-extendable <https://github.com/jonschlinkert/is-extendable>
+ *
+ * Copyright (c) 2015, Jon Schlinkert.
+ * Licensed under the MIT License.
+ */
+
+
+
+module.exports = function isExtendable(val) {
+  return typeof val !== 'undefined' && val !== null
+    && (typeof val === 'object' || typeof val === 'function');
+};
 
 
 /***/ }),
@@ -18163,7 +18280,7 @@ var unescapedLatinCharacterRegExp = /[a-zA-Z]/;
  * |                                 | ss      | 00, 01, ..., 59                   |       |
  * | Fraction of second              | S       | 0, 1, ..., 9                      |       |
  * |                                 | SS      | 00, 01, ..., 99                   |       |
- * |                                 | SSS     | 000, 0001, ..., 999               |       |
+ * |                                 | SSS     | 000, 001, ..., 999                |       |
  * |                                 | SSSS    | ...                               | 3     |
  * | Timezone (ISO-8601 w/ Z)        | X       | -08, +0530, Z                     |       |
  * |                                 | XX      | -0800, +0530, Z                   |       |
@@ -19441,7 +19558,7 @@ module.exports = function (encodedURI) {
 
 
 var isobject = __nccwpck_require__(5509);
-var isDescriptor = __nccwpck_require__(25530);
+var isDescriptor = __nccwpck_require__(20567);
 var define = (typeof Reflect !== 'undefined' && Reflect.defineProperty)
   ? Reflect.defineProperty
   : Object.defineProperty;
@@ -19468,170 +19585,6 @@ module.exports = function defineProperty(obj, key, val) {
   });
 
   return obj;
-};
-
-
-/***/ }),
-
-/***/ 82774:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-"use strict";
-/*!
- * is-accessor-descriptor <https://github.com/jonschlinkert/is-accessor-descriptor>
- *
- * Copyright (c) 2015-2017, Jon Schlinkert.
- * Released under the MIT License.
- */
-
-
-
-var typeOf = __nccwpck_require__(86961);
-
-// accessor descriptor properties
-var accessor = {
-  get: 'function',
-  set: 'function',
-  configurable: 'boolean',
-  enumerable: 'boolean'
-};
-
-function isAccessorDescriptor(obj, prop) {
-  if (typeof prop === 'string') {
-    var val = Object.getOwnPropertyDescriptor(obj, prop);
-    return typeof val !== 'undefined';
-  }
-
-  if (typeOf(obj) !== 'object') {
-    return false;
-  }
-
-  if (has(obj, 'value') || has(obj, 'writable')) {
-    return false;
-  }
-
-  if (!has(obj, 'get') || typeof obj.get !== 'function') {
-    return false;
-  }
-
-  // tldr: it's valid to have "set" be undefined
-  // "set" might be undefined if `Object.getOwnPropertyDescriptor`
-  // was used to get the value, and only `get` was defined by the user
-  if (has(obj, 'set') && typeof obj[key] !== 'function' && typeof obj[key] !== 'undefined') {
-    return false;
-  }
-
-  for (var key in obj) {
-    if (!accessor.hasOwnProperty(key)) {
-      continue;
-    }
-
-    if (typeOf(obj[key]) === accessor[key]) {
-      continue;
-    }
-
-    if (typeof obj[key] !== 'undefined') {
-      return false;
-    }
-  }
-  return true;
-}
-
-function has(obj, key) {
-  return {}.hasOwnProperty.call(obj, key);
-}
-
-/**
- * Expose `isAccessorDescriptor`
- */
-
-module.exports = isAccessorDescriptor;
-
-
-/***/ }),
-
-/***/ 86013:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-"use strict";
-/*!
- * is-data-descriptor <https://github.com/jonschlinkert/is-data-descriptor>
- *
- * Copyright (c) 2015-2017, Jon Schlinkert.
- * Released under the MIT License.
- */
-
-
-
-var typeOf = __nccwpck_require__(86961);
-
-module.exports = function isDataDescriptor(obj, prop) {
-  // data descriptor properties
-  var data = {
-    configurable: 'boolean',
-    enumerable: 'boolean',
-    writable: 'boolean'
-  };
-
-  if (typeOf(obj) !== 'object') {
-    return false;
-  }
-
-  if (typeof prop === 'string') {
-    var val = Object.getOwnPropertyDescriptor(obj, prop);
-    return typeof val !== 'undefined';
-  }
-
-  if (!('value' in obj) && !('writable' in obj)) {
-    return false;
-  }
-
-  for (var key in obj) {
-    if (key === 'value') continue;
-
-    if (!data.hasOwnProperty(key)) {
-      continue;
-    }
-
-    if (typeOf(obj[key]) === data[key]) {
-      continue;
-    }
-
-    if (typeof obj[key] !== 'undefined') {
-      return false;
-    }
-  }
-  return true;
-};
-
-
-/***/ }),
-
-/***/ 25530:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-"use strict";
-/*!
- * is-descriptor <https://github.com/jonschlinkert/is-descriptor>
- *
- * Copyright (c) 2015-2017, Jon Schlinkert.
- * Released under the MIT License.
- */
-
-
-
-var typeOf = __nccwpck_require__(86961);
-var isAccessor = __nccwpck_require__(82774);
-var isData = __nccwpck_require__(86013);
-
-module.exports = function isDescriptor(obj, key) {
-  if (typeOf(obj) !== 'object') {
-    return false;
-  }
-  if ('get' in obj) {
-    return isAccessor(obj, key);
-  }
-  return isData(obj, key);
 };
 
 
@@ -19743,6 +19696,27 @@ module.exports.sync = (input, options) => {
 	const globs = [].concat(input).map(x => pathType.isDirectorySync(getPath(x, options.cwd)) ? getGlob(x, options) : x);
 
 	return [].concat.apply([], globs); // eslint-disable-line prefer-spread
+};
+
+
+/***/ }),
+
+/***/ 98691:
+/***/ ((module) => {
+
+"use strict";
+
+
+module.exports = string => {
+	if (typeof string !== 'string') {
+		throw new TypeError('Expected a string');
+	}
+
+	// Escape characters with special meaning either inside or outside character sets.
+	// Use a simple backslash escape when it’s always valid, and a \unnnn escape when the simpler form would be disallowed by Unicode patterns’ stricter grammar.
+	return string
+		.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&')
+		.replace(/-/g, '\\x2d');
 };
 
 
@@ -21017,7 +20991,7 @@ exports.enable(load());
 
 
 
-var isDescriptor = __nccwpck_require__(20567);
+var isDescriptor = __nccwpck_require__(95102);
 
 module.exports = function defineProperty(obj, prop, val) {
   if (typeof obj !== 'object' && typeof obj !== 'function') {
@@ -21049,7 +21023,7 @@ module.exports = function defineProperty(obj, prop, val) {
 "use strict";
 
 
-var isObject = __nccwpck_require__(70429);
+var isObject = __nccwpck_require__(29851);
 
 module.exports = function extend(o/*, objects*/) {
   if (!isObject(o)) { o = {}; }
@@ -21079,6 +21053,625 @@ function assign(a, b) {
 
 function hasOwn(obj, key) {
   return Object.prototype.hasOwnProperty.call(obj, key);
+}
+
+
+/***/ }),
+
+/***/ 14549:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+/*!
+ * is-accessor-descriptor <https://github.com/jonschlinkert/is-accessor-descriptor>
+ *
+ * Copyright (c) 2015, Jon Schlinkert.
+ * Licensed under the MIT License.
+ */
+
+
+
+var typeOf = __nccwpck_require__(66149);
+
+// accessor descriptor properties
+var accessor = {
+  get: 'function',
+  set: 'function',
+  configurable: 'boolean',
+  enumerable: 'boolean'
+};
+
+function isAccessorDescriptor(obj, prop) {
+  if (typeof prop === 'string') {
+    var val = Object.getOwnPropertyDescriptor(obj, prop);
+    return typeof val !== 'undefined';
+  }
+
+  if (typeOf(obj) !== 'object') {
+    return false;
+  }
+
+  if (has(obj, 'value') || has(obj, 'writable')) {
+    return false;
+  }
+
+  if (!has(obj, 'get') || typeof obj.get !== 'function') {
+    return false;
+  }
+
+  // tldr: it's valid to have "set" be undefined
+  // "set" might be undefined if `Object.getOwnPropertyDescriptor`
+  // was used to get the value, and only `get` was defined by the user
+  if (has(obj, 'set') && typeof obj[key] !== 'function' && typeof obj[key] !== 'undefined') {
+    return false;
+  }
+
+  for (var key in obj) {
+    if (!accessor.hasOwnProperty(key)) {
+      continue;
+    }
+
+    if (typeOf(obj[key]) === accessor[key]) {
+      continue;
+    }
+
+    if (typeof obj[key] !== 'undefined') {
+      return false;
+    }
+  }
+  return true;
+}
+
+function has(obj, key) {
+  return {}.hasOwnProperty.call(obj, key);
+}
+
+/**
+ * Expose `isAccessorDescriptor`
+ */
+
+module.exports = isAccessorDescriptor;
+
+
+/***/ }),
+
+/***/ 66149:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+var isBuffer = __nccwpck_require__(66069);
+var toString = Object.prototype.toString;
+
+/**
+ * Get the native `typeof` a value.
+ *
+ * @param  {*} `val`
+ * @return {*} Native javascript type
+ */
+
+module.exports = function kindOf(val) {
+  // primitivies
+  if (typeof val === 'undefined') {
+    return 'undefined';
+  }
+  if (val === null) {
+    return 'null';
+  }
+  if (val === true || val === false || val instanceof Boolean) {
+    return 'boolean';
+  }
+  if (typeof val === 'string' || val instanceof String) {
+    return 'string';
+  }
+  if (typeof val === 'number' || val instanceof Number) {
+    return 'number';
+  }
+
+  // functions
+  if (typeof val === 'function' || val instanceof Function) {
+    return 'function';
+  }
+
+  // array
+  if (typeof Array.isArray !== 'undefined' && Array.isArray(val)) {
+    return 'array';
+  }
+
+  // check for instances of RegExp and Date before calling `toString`
+  if (val instanceof RegExp) {
+    return 'regexp';
+  }
+  if (val instanceof Date) {
+    return 'date';
+  }
+
+  // other objects
+  var type = toString.call(val);
+
+  if (type === '[object RegExp]') {
+    return 'regexp';
+  }
+  if (type === '[object Date]') {
+    return 'date';
+  }
+  if (type === '[object Arguments]') {
+    return 'arguments';
+  }
+  if (type === '[object Error]') {
+    return 'error';
+  }
+
+  // buffer
+  if (isBuffer(val)) {
+    return 'buffer';
+  }
+
+  // es6: Map, WeakMap, Set, WeakSet
+  if (type === '[object Set]') {
+    return 'set';
+  }
+  if (type === '[object WeakSet]') {
+    return 'weakset';
+  }
+  if (type === '[object Map]') {
+    return 'map';
+  }
+  if (type === '[object WeakMap]') {
+    return 'weakmap';
+  }
+  if (type === '[object Symbol]') {
+    return 'symbol';
+  }
+
+  // typed arrays
+  if (type === '[object Int8Array]') {
+    return 'int8array';
+  }
+  if (type === '[object Uint8Array]') {
+    return 'uint8array';
+  }
+  if (type === '[object Uint8ClampedArray]') {
+    return 'uint8clampedarray';
+  }
+  if (type === '[object Int16Array]') {
+    return 'int16array';
+  }
+  if (type === '[object Uint16Array]') {
+    return 'uint16array';
+  }
+  if (type === '[object Int32Array]') {
+    return 'int32array';
+  }
+  if (type === '[object Uint32Array]') {
+    return 'uint32array';
+  }
+  if (type === '[object Float32Array]') {
+    return 'float32array';
+  }
+  if (type === '[object Float64Array]') {
+    return 'float64array';
+  }
+
+  // must be a plain object
+  return 'object';
+};
+
+
+/***/ }),
+
+/***/ 66069:
+/***/ ((module) => {
+
+/*!
+ * Determine if an object is a Buffer
+ *
+ * @author   Feross Aboukhadijeh <https://feross.org>
+ * @license  MIT
+ */
+
+// The _isBuffer check is for Safari 5-7 support, because it's missing
+// Object.prototype.constructor. Remove this eventually
+module.exports = function (obj) {
+  return obj != null && (isBuffer(obj) || isSlowBuffer(obj) || !!obj._isBuffer)
+}
+
+function isBuffer (obj) {
+  return !!obj.constructor && typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
+}
+
+// For Node v0.10 support. Remove this eventually.
+function isSlowBuffer (obj) {
+  return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
+}
+
+
+/***/ }),
+
+/***/ 3951:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+/*!
+ * is-data-descriptor <https://github.com/jonschlinkert/is-data-descriptor>
+ *
+ * Copyright (c) 2015, Jon Schlinkert.
+ * Licensed under the MIT License.
+ */
+
+
+
+var typeOf = __nccwpck_require__(41313);
+
+// data descriptor properties
+var data = {
+  configurable: 'boolean',
+  enumerable: 'boolean',
+  writable: 'boolean'
+};
+
+function isDataDescriptor(obj, prop) {
+  if (typeOf(obj) !== 'object') {
+    return false;
+  }
+
+  if (typeof prop === 'string') {
+    var val = Object.getOwnPropertyDescriptor(obj, prop);
+    return typeof val !== 'undefined';
+  }
+
+  if (!('value' in obj) && !('writable' in obj)) {
+    return false;
+  }
+
+  for (var key in obj) {
+    if (key === 'value') continue;
+
+    if (!data.hasOwnProperty(key)) {
+      continue;
+    }
+
+    if (typeOf(obj[key]) === data[key]) {
+      continue;
+    }
+
+    if (typeof obj[key] !== 'undefined') {
+      return false;
+    }
+  }
+  return true;
+}
+
+/**
+ * Expose `isDataDescriptor`
+ */
+
+module.exports = isDataDescriptor;
+
+
+/***/ }),
+
+/***/ 41313:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+var isBuffer = __nccwpck_require__(66069);
+var toString = Object.prototype.toString;
+
+/**
+ * Get the native `typeof` a value.
+ *
+ * @param  {*} `val`
+ * @return {*} Native javascript type
+ */
+
+module.exports = function kindOf(val) {
+  // primitivies
+  if (typeof val === 'undefined') {
+    return 'undefined';
+  }
+  if (val === null) {
+    return 'null';
+  }
+  if (val === true || val === false || val instanceof Boolean) {
+    return 'boolean';
+  }
+  if (typeof val === 'string' || val instanceof String) {
+    return 'string';
+  }
+  if (typeof val === 'number' || val instanceof Number) {
+    return 'number';
+  }
+
+  // functions
+  if (typeof val === 'function' || val instanceof Function) {
+    return 'function';
+  }
+
+  // array
+  if (typeof Array.isArray !== 'undefined' && Array.isArray(val)) {
+    return 'array';
+  }
+
+  // check for instances of RegExp and Date before calling `toString`
+  if (val instanceof RegExp) {
+    return 'regexp';
+  }
+  if (val instanceof Date) {
+    return 'date';
+  }
+
+  // other objects
+  var type = toString.call(val);
+
+  if (type === '[object RegExp]') {
+    return 'regexp';
+  }
+  if (type === '[object Date]') {
+    return 'date';
+  }
+  if (type === '[object Arguments]') {
+    return 'arguments';
+  }
+  if (type === '[object Error]') {
+    return 'error';
+  }
+
+  // buffer
+  if (isBuffer(val)) {
+    return 'buffer';
+  }
+
+  // es6: Map, WeakMap, Set, WeakSet
+  if (type === '[object Set]') {
+    return 'set';
+  }
+  if (type === '[object WeakSet]') {
+    return 'weakset';
+  }
+  if (type === '[object Map]') {
+    return 'map';
+  }
+  if (type === '[object WeakMap]') {
+    return 'weakmap';
+  }
+  if (type === '[object Symbol]') {
+    return 'symbol';
+  }
+
+  // typed arrays
+  if (type === '[object Int8Array]') {
+    return 'int8array';
+  }
+  if (type === '[object Uint8Array]') {
+    return 'uint8array';
+  }
+  if (type === '[object Uint8ClampedArray]') {
+    return 'uint8clampedarray';
+  }
+  if (type === '[object Int16Array]') {
+    return 'int16array';
+  }
+  if (type === '[object Uint16Array]') {
+    return 'uint16array';
+  }
+  if (type === '[object Int32Array]') {
+    return 'int32array';
+  }
+  if (type === '[object Uint32Array]') {
+    return 'uint32array';
+  }
+  if (type === '[object Float32Array]') {
+    return 'float32array';
+  }
+  if (type === '[object Float64Array]') {
+    return 'float64array';
+  }
+
+  // must be a plain object
+  return 'object';
+};
+
+
+/***/ }),
+
+/***/ 95102:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+/*!
+ * is-descriptor <https://github.com/jonschlinkert/is-descriptor>
+ *
+ * Copyright (c) 2015-2017, Jon Schlinkert.
+ * Released under the MIT License.
+ */
+
+
+
+var typeOf = __nccwpck_require__(37348);
+var isAccessor = __nccwpck_require__(14549);
+var isData = __nccwpck_require__(3951);
+
+module.exports = function isDescriptor(obj, key) {
+  if (typeOf(obj) !== 'object') {
+    return false;
+  }
+  if ('get' in obj) {
+    return isAccessor(obj, key);
+  }
+  return isData(obj, key);
+};
+
+
+/***/ }),
+
+/***/ 29851:
+/***/ ((module) => {
+
+"use strict";
+/*!
+ * is-extendable <https://github.com/jonschlinkert/is-extendable>
+ *
+ * Copyright (c) 2015, Jon Schlinkert.
+ * Licensed under the MIT License.
+ */
+
+
+
+module.exports = function isExtendable(val) {
+  return typeof val !== 'undefined' && val !== null
+    && (typeof val === 'object' || typeof val === 'function');
+};
+
+
+/***/ }),
+
+/***/ 37348:
+/***/ ((module) => {
+
+var toString = Object.prototype.toString;
+
+/**
+ * Get the native `typeof` a value.
+ *
+ * @param  {*} `val`
+ * @return {*} Native javascript type
+ */
+
+module.exports = function kindOf(val) {
+  var type = typeof val;
+
+  // primitivies
+  if (type === 'undefined') {
+    return 'undefined';
+  }
+  if (val === null) {
+    return 'null';
+  }
+  if (val === true || val === false || val instanceof Boolean) {
+    return 'boolean';
+  }
+  if (type === 'string' || val instanceof String) {
+    return 'string';
+  }
+  if (type === 'number' || val instanceof Number) {
+    return 'number';
+  }
+
+  // functions
+  if (type === 'function' || val instanceof Function) {
+    if (typeof val.constructor.name !== 'undefined' && val.constructor.name.slice(0, 9) === 'Generator') {
+      return 'generatorfunction';
+    }
+    return 'function';
+  }
+
+  // array
+  if (typeof Array.isArray !== 'undefined' && Array.isArray(val)) {
+    return 'array';
+  }
+
+  // check for instances of RegExp and Date before calling `toString`
+  if (val instanceof RegExp) {
+    return 'regexp';
+  }
+  if (val instanceof Date) {
+    return 'date';
+  }
+
+  // other objects
+  type = toString.call(val);
+
+  if (type === '[object RegExp]') {
+    return 'regexp';
+  }
+  if (type === '[object Date]') {
+    return 'date';
+  }
+  if (type === '[object Arguments]') {
+    return 'arguments';
+  }
+  if (type === '[object Error]') {
+    return 'error';
+  }
+  if (type === '[object Promise]') {
+    return 'promise';
+  }
+
+  // buffer
+  if (isBuffer(val)) {
+    return 'buffer';
+  }
+
+  // es6: Map, WeakMap, Set, WeakSet
+  if (type === '[object Set]') {
+    return 'set';
+  }
+  if (type === '[object WeakSet]') {
+    return 'weakset';
+  }
+  if (type === '[object Map]') {
+    return 'map';
+  }
+  if (type === '[object WeakMap]') {
+    return 'weakmap';
+  }
+  if (type === '[object Symbol]') {
+    return 'symbol';
+  }
+  
+  if (type === '[object Map Iterator]') {
+    return 'mapiterator';
+  }
+  if (type === '[object Set Iterator]') {
+    return 'setiterator';
+  }
+  if (type === '[object String Iterator]') {
+    return 'stringiterator';
+  }
+  if (type === '[object Array Iterator]') {
+    return 'arrayiterator';
+  }
+  
+  // typed arrays
+  if (type === '[object Int8Array]') {
+    return 'int8array';
+  }
+  if (type === '[object Uint8Array]') {
+    return 'uint8array';
+  }
+  if (type === '[object Uint8ClampedArray]') {
+    return 'uint8clampedarray';
+  }
+  if (type === '[object Int16Array]') {
+    return 'int16array';
+  }
+  if (type === '[object Uint16Array]') {
+    return 'uint16array';
+  }
+  if (type === '[object Int32Array]') {
+    return 'int32array';
+  }
+  if (type === '[object Uint32Array]') {
+    return 'uint32array';
+  }
+  if (type === '[object Float32Array]') {
+    return 'float32array';
+  }
+  if (type === '[object Float64Array]') {
+    return 'float64array';
+  }
+
+  // must be a plain object
+  return 'object';
+};
+
+/**
+ * If you need to support Safari 5-7 (8-10 yr-old browser),
+ * take a look at https://github.com/feross/is-buffer
+ */
+
+function isBuffer(val) {
+  return val.constructor
+    && typeof val.constructor.isBuffer === 'function'
+    && val.constructor.isBuffer(val);
 }
 
 
@@ -21249,7 +21842,7 @@ function plural(ms, n, name) {
 "use strict";
 
 
-var isExtendable = __nccwpck_require__(18831);
+var isExtendable = __nccwpck_require__(70429);
 var assignSymbols = __nccwpck_require__(68782);
 
 module.exports = Object.assign || function(obj/*, objects*/) {
@@ -21307,73 +21900,6 @@ function hasOwn(obj, key) {
 function isEnum(obj, key) {
   return Object.prototype.propertyIsEnumerable.call(obj, key);
 }
-
-
-/***/ }),
-
-/***/ 18831:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-"use strict";
-/*!
- * is-extendable <https://github.com/jonschlinkert/is-extendable>
- *
- * Copyright (c) 2015-2017, Jon Schlinkert.
- * Released under the MIT License.
- */
-
-
-
-var isPlainObject = __nccwpck_require__(21375);
-
-module.exports = function isExtendable(val) {
-  return isPlainObject(val) || typeof val === 'function' || Array.isArray(val);
-};
-
-
-/***/ }),
-
-/***/ 21375:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-"use strict";
-/*!
- * is-plain-object <https://github.com/jonschlinkert/is-plain-object>
- *
- * Copyright (c) 2014-2017, Jon Schlinkert.
- * Released under the MIT License.
- */
-
-
-
-var isObject = __nccwpck_require__(5509);
-
-function isObjectObject(o) {
-  return isObject(o) === true
-    && Object.prototype.toString.call(o) === '[object Object]';
-}
-
-module.exports = function isPlainObject(o) {
-  var ctor,prot;
-
-  if (isObjectObject(o) === false) return false;
-
-  // If has modified constructor
-  ctor = o.constructor;
-  if (typeof ctor !== 'function') return false;
-
-  // If has modified prototype
-  prot = ctor.prototype;
-  if (isObjectObject(prot) === false) return false;
-
-  // If constructor does not have an Object-specific method
-  if (prot.hasOwnProperty('isPrototypeOf') === false) {
-    return false;
-  }
-
-  // Most likely a plain Object
-  return true;
-};
 
 
 /***/ }),
@@ -22359,7 +22885,7 @@ utils.createRegex = function(str) {
 
 
 
-var isDescriptor = __nccwpck_require__(19436);
+var isDescriptor = __nccwpck_require__(20567);
 
 module.exports = function defineProperty(obj, prop, val) {
   if (typeof obj !== 'object' && typeof obj !== 'function') {
@@ -22391,7 +22917,7 @@ module.exports = function defineProperty(obj, prop, val) {
 "use strict";
 
 
-var isObject = __nccwpck_require__(70429);
+var isObject = __nccwpck_require__(61286);
 
 module.exports = function extend(o/*, objects*/) {
   if (!isObject(o)) { o = {}; }
@@ -22426,165 +22952,22 @@ function hasOwn(obj, key) {
 
 /***/ }),
 
-/***/ 34747:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+/***/ 61286:
+/***/ ((module) => {
 
 "use strict";
 /*!
- * is-accessor-descriptor <https://github.com/jonschlinkert/is-accessor-descriptor>
+ * is-extendable <https://github.com/jonschlinkert/is-extendable>
  *
- * Copyright (c) 2015-2017, Jon Schlinkert.
- * Released under the MIT License.
+ * Copyright (c) 2015, Jon Schlinkert.
+ * Licensed under the MIT License.
  */
 
 
 
-var typeOf = __nccwpck_require__(86961);
-
-// accessor descriptor properties
-var accessor = {
-  get: 'function',
-  set: 'function',
-  configurable: 'boolean',
-  enumerable: 'boolean'
-};
-
-function isAccessorDescriptor(obj, prop) {
-  if (typeof prop === 'string') {
-    var val = Object.getOwnPropertyDescriptor(obj, prop);
-    return typeof val !== 'undefined';
-  }
-
-  if (typeOf(obj) !== 'object') {
-    return false;
-  }
-
-  if (has(obj, 'value') || has(obj, 'writable')) {
-    return false;
-  }
-
-  if (!has(obj, 'get') || typeof obj.get !== 'function') {
-    return false;
-  }
-
-  // tldr: it's valid to have "set" be undefined
-  // "set" might be undefined if `Object.getOwnPropertyDescriptor`
-  // was used to get the value, and only `get` was defined by the user
-  if (has(obj, 'set') && typeof obj[key] !== 'function' && typeof obj[key] !== 'undefined') {
-    return false;
-  }
-
-  for (var key in obj) {
-    if (!accessor.hasOwnProperty(key)) {
-      continue;
-    }
-
-    if (typeOf(obj[key]) === accessor[key]) {
-      continue;
-    }
-
-    if (typeof obj[key] !== 'undefined') {
-      return false;
-    }
-  }
-  return true;
-}
-
-function has(obj, key) {
-  return {}.hasOwnProperty.call(obj, key);
-}
-
-/**
- * Expose `isAccessorDescriptor`
- */
-
-module.exports = isAccessorDescriptor;
-
-
-/***/ }),
-
-/***/ 8770:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-"use strict";
-/*!
- * is-data-descriptor <https://github.com/jonschlinkert/is-data-descriptor>
- *
- * Copyright (c) 2015-2017, Jon Schlinkert.
- * Released under the MIT License.
- */
-
-
-
-var typeOf = __nccwpck_require__(86961);
-
-module.exports = function isDataDescriptor(obj, prop) {
-  // data descriptor properties
-  var data = {
-    configurable: 'boolean',
-    enumerable: 'boolean',
-    writable: 'boolean'
-  };
-
-  if (typeOf(obj) !== 'object') {
-    return false;
-  }
-
-  if (typeof prop === 'string') {
-    var val = Object.getOwnPropertyDescriptor(obj, prop);
-    return typeof val !== 'undefined';
-  }
-
-  if (!('value' in obj) && !('writable' in obj)) {
-    return false;
-  }
-
-  for (var key in obj) {
-    if (key === 'value') continue;
-
-    if (!data.hasOwnProperty(key)) {
-      continue;
-    }
-
-    if (typeOf(obj[key]) === data[key]) {
-      continue;
-    }
-
-    if (typeof obj[key] !== 'undefined') {
-      return false;
-    }
-  }
-  return true;
-};
-
-
-/***/ }),
-
-/***/ 19436:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-"use strict";
-/*!
- * is-descriptor <https://github.com/jonschlinkert/is-descriptor>
- *
- * Copyright (c) 2015-2017, Jon Schlinkert.
- * Released under the MIT License.
- */
-
-
-
-var typeOf = __nccwpck_require__(86961);
-var isAccessor = __nccwpck_require__(34747);
-var isData = __nccwpck_require__(8770);
-
-module.exports = function isDescriptor(obj, key) {
-  if (typeOf(obj) !== 'object') {
-    return false;
-  }
-  if ('get' in obj) {
-    return isAccessor(obj, key);
-  }
-  return isData(obj, key);
+module.exports = function isExtendable(val) {
+  return typeof val !== 'undefined' && val !== null
+    && (typeof val === 'object' || typeof val === 'function');
 };
 
 
@@ -23359,7 +23742,11 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DEFAULT_FILE_SYSTEM_ADAPTER = void 0;
 const fs = __nccwpck_require__(35747);
 const os = __nccwpck_require__(12087);
-const CPU_COUNT = os.cpus().length;
+/**
+ * The `os.cpus` method can return zero. We expect the number of cores to be greater than zero.
+ * https://github.com/nodejs/node/blob/7faeddf23a98c53896f8b574a6e66589e8fb1eb8/lib/os.js#L106-L107
+ */
+const CPU_COUNT = Math.max(os.cpus().length, 1);
 exports.DEFAULT_FILE_SYSTEM_ADAPTER = {
     lstat: fs.lstat,
     lstatSync: fs.lstatSync,
@@ -23939,7 +24326,57 @@ function Task () {
   }
 }
 
+function queueAsPromised (context, worker, concurrency) {
+  if (typeof context === 'function') {
+    concurrency = worker
+    worker = context
+    context = null
+  }
+
+  function asyncWrapper (arg, cb) {
+    worker.call(this, arg)
+      .then(function (res) {
+        cb(null, res)
+      }, cb)
+  }
+
+  var queue = fastqueue(context, asyncWrapper, concurrency)
+
+  var pushCb = queue.push
+  var unshiftCb = queue.unshift
+
+  queue.push = push
+  queue.unshift = unshift
+
+  return queue
+
+  function push (value) {
+    return new Promise(function (resolve, reject) {
+      pushCb(value, function (err, result) {
+        if (err) {
+          reject(err)
+          return
+        }
+        resolve(result)
+      })
+    })
+  }
+
+  function unshift (value) {
+    return new Promise(function (resolve, reject) {
+      unshiftCb(value, function (err, result) {
+        if (err) {
+          reject(err)
+          return
+        }
+        resolve(result)
+      })
+    })
+  }
+}
+
 module.exports = fastqueue
+module.exports.promise = queueAsPromised
 
 
 /***/ }),
@@ -24984,7 +25421,7 @@ var isWin32 = __nccwpck_require__(12087).platform() === 'win32';
 
 var slash = '/';
 var backslash = /\\/g;
-var enclosure = /[\{\[].*[\/]*.*[\}\]]$/;
+var enclosure = /[\{\[].*[\}\]]$/;
 var globby = /(^|[^\\])([\{\[]|\([^\)]+$)/;
 var escaped = /\\([\!\*\?\|\[\]\(\)\{\}])/g;
 
@@ -24992,6 +25429,7 @@ var escaped = /\\([\!\*\?\|\[\]\(\)\{\}])/g;
  * @param {string} str
  * @param {Object} opts
  * @param {boolean} [opts.flipBackslashes=true]
+ * @returns {string}
  */
 module.exports = function globParent(str, opts) {
   var options = Object.assign({ flipBackslashes: true }, opts);
@@ -25162,8 +25600,6 @@ module.exports = function (glob, opts) {
 /***/ 47625:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
-exports.alphasort = alphasort
-exports.alphasorti = alphasorti
 exports.setopts = setopts
 exports.ownProp = ownProp
 exports.makeAbs = makeAbs
@@ -25181,12 +25617,8 @@ var minimatch = __nccwpck_require__(83973)
 var isAbsolute = __nccwpck_require__(38714)
 var Minimatch = minimatch.Minimatch
 
-function alphasorti (a, b) {
-  return a.toLowerCase().localeCompare(b.toLowerCase())
-}
-
 function alphasort (a, b) {
-  return a.localeCompare(b)
+  return a.localeCompare(b, 'en')
 }
 
 function setupIgnores (self, options) {
@@ -25314,7 +25746,7 @@ function finish (self) {
     all = Object.keys(all)
 
   if (!self.nosort)
-    all = all.sort(self.nocase ? alphasorti : alphasort)
+    all = all.sort(alphasort)
 
   // at *some* point we statted all of these
   if (self.mark) {
@@ -25462,8 +25894,6 @@ var assert = __nccwpck_require__(42357)
 var isAbsolute = __nccwpck_require__(38714)
 var globSync = __nccwpck_require__(29010)
 var common = __nccwpck_require__(47625)
-var alphasort = common.alphasort
-var alphasorti = common.alphasorti
 var setopts = common.setopts
 var ownProp = common.ownProp
 var inflight = __nccwpck_require__(52492)
@@ -26219,8 +26649,6 @@ var path = __nccwpck_require__(85622)
 var assert = __nccwpck_require__(42357)
 var isAbsolute = __nccwpck_require__(38714)
 var common = __nccwpck_require__(47625)
-var alphasort = common.alphasort
-var alphasorti = common.alphasorti
 var setopts = common.setopts
 var ownProp = common.ownProp
 var childrenIgnored = common.childrenIgnored
@@ -26705,7 +27133,7 @@ const {promisify} = __nccwpck_require__(31669);
 const fs = __nccwpck_require__(35747);
 const path = __nccwpck_require__(85622);
 const fastGlob = __nccwpck_require__(43664);
-const gitIgnore = __nccwpck_require__(91230);
+const gitIgnore = __nccwpck_require__(12069);
 const slash = __nccwpck_require__(97543);
 
 const DEFAULT_IGNORE = [
@@ -26750,7 +27178,7 @@ const reduceIgnore = files => {
 const ensureAbsolutePathForCwd = (cwd, p) => {
 	cwd = slash(cwd);
 	if (path.isAbsolute(p)) {
-		if (p.startsWith(cwd)) {
+		if (slash(p).startsWith(cwd)) {
 			return p;
 		}
 
@@ -27013,6 +27441,610 @@ module.exports.gitignore = gitignore;
 
 /***/ }),
 
+/***/ 12069:
+/***/ ((module) => {
+
+// A simple implementation of make-array
+function makeArray (subject) {
+  return Array.isArray(subject)
+    ? subject
+    : [subject]
+}
+
+const EMPTY = ''
+const SPACE = ' '
+const ESCAPE = '\\'
+const REGEX_TEST_BLANK_LINE = /^\s+$/
+const REGEX_REPLACE_LEADING_EXCAPED_EXCLAMATION = /^\\!/
+const REGEX_REPLACE_LEADING_EXCAPED_HASH = /^\\#/
+const REGEX_SPLITALL_CRLF = /\r?\n/g
+// /foo,
+// ./foo,
+// ../foo,
+// .
+// ..
+const REGEX_TEST_INVALID_PATH = /^\.*\/|^\.+$/
+
+const SLASH = '/'
+const KEY_IGNORE = typeof Symbol !== 'undefined'
+  ? Symbol.for('node-ignore')
+  /* istanbul ignore next */
+  : 'node-ignore'
+
+const define = (object, key, value) =>
+  Object.defineProperty(object, key, {value})
+
+const REGEX_REGEXP_RANGE = /([0-z])-([0-z])/g
+
+// Sanitize the range of a regular expression
+// The cases are complicated, see test cases for details
+const sanitizeRange = range => range.replace(
+  REGEX_REGEXP_RANGE,
+  (match, from, to) => from.charCodeAt(0) <= to.charCodeAt(0)
+    ? match
+    // Invalid range (out of order) which is ok for gitignore rules but
+    //   fatal for JavaScript regular expression, so eliminate it.
+    : EMPTY
+)
+
+// See fixtures #59
+const cleanRangeBackSlash = slashes => {
+  const {length} = slashes
+  return slashes.slice(0, length - length % 2)
+}
+
+// > If the pattern ends with a slash,
+// > it is removed for the purpose of the following description,
+// > but it would only find a match with a directory.
+// > In other words, foo/ will match a directory foo and paths underneath it,
+// > but will not match a regular file or a symbolic link foo
+// >  (this is consistent with the way how pathspec works in general in Git).
+// '`foo/`' will not match regular file '`foo`' or symbolic link '`foo`'
+// -> ignore-rules will not deal with it, because it costs extra `fs.stat` call
+//      you could use option `mark: true` with `glob`
+
+// '`foo/`' should not continue with the '`..`'
+const REPLACERS = [
+
+  // > Trailing spaces are ignored unless they are quoted with backslash ("\")
+  [
+    // (a\ ) -> (a )
+    // (a  ) -> (a)
+    // (a \ ) -> (a  )
+    /\\?\s+$/,
+    match => match.indexOf('\\') === 0
+      ? SPACE
+      : EMPTY
+  ],
+
+  // replace (\ ) with ' '
+  [
+    /\\\s/g,
+    () => SPACE
+  ],
+
+  // Escape metacharacters
+  // which is written down by users but means special for regular expressions.
+
+  // > There are 12 characters with special meanings:
+  // > - the backslash \,
+  // > - the caret ^,
+  // > - the dollar sign $,
+  // > - the period or dot .,
+  // > - the vertical bar or pipe symbol |,
+  // > - the question mark ?,
+  // > - the asterisk or star *,
+  // > - the plus sign +,
+  // > - the opening parenthesis (,
+  // > - the closing parenthesis ),
+  // > - and the opening square bracket [,
+  // > - the opening curly brace {,
+  // > These special characters are often called "metacharacters".
+  [
+    /[\\$.|*+(){^]/g,
+    match => `\\${match}`
+  ],
+
+  [
+    // > a question mark (?) matches a single character
+    /(?!\\)\?/g,
+    () => '[^/]'
+  ],
+
+  // leading slash
+  [
+
+    // > A leading slash matches the beginning of the pathname.
+    // > For example, "/*.c" matches "cat-file.c" but not "mozilla-sha1/sha1.c".
+    // A leading slash matches the beginning of the pathname
+    /^\//,
+    () => '^'
+  ],
+
+  // replace special metacharacter slash after the leading slash
+  [
+    /\//g,
+    () => '\\/'
+  ],
+
+  [
+    // > A leading "**" followed by a slash means match in all directories.
+    // > For example, "**/foo" matches file or directory "foo" anywhere,
+    // > the same as pattern "foo".
+    // > "**/foo/bar" matches file or directory "bar" anywhere that is directly
+    // >   under directory "foo".
+    // Notice that the '*'s have been replaced as '\\*'
+    /^\^*\\\*\\\*\\\//,
+
+    // '**/foo' <-> 'foo'
+    () => '^(?:.*\\/)?'
+  ],
+
+  // starting
+  [
+    // there will be no leading '/'
+    //   (which has been replaced by section "leading slash")
+    // If starts with '**', adding a '^' to the regular expression also works
+    /^(?=[^^])/,
+    function startingReplacer () {
+      // If has a slash `/` at the beginning or middle
+      return !/\/(?!$)/.test(this)
+        // > Prior to 2.22.1
+        // > If the pattern does not contain a slash /,
+        // >   Git treats it as a shell glob pattern
+        // Actually, if there is only a trailing slash,
+        //   git also treats it as a shell glob pattern
+
+        // After 2.22.1 (compatible but clearer)
+        // > If there is a separator at the beginning or middle (or both)
+        // > of the pattern, then the pattern is relative to the directory
+        // > level of the particular .gitignore file itself.
+        // > Otherwise the pattern may also match at any level below
+        // > the .gitignore level.
+        ? '(?:^|\\/)'
+
+        // > Otherwise, Git treats the pattern as a shell glob suitable for
+        // >   consumption by fnmatch(3)
+        : '^'
+    }
+  ],
+
+  // two globstars
+  [
+    // Use lookahead assertions so that we could match more than one `'/**'`
+    /\\\/\\\*\\\*(?=\\\/|$)/g,
+
+    // Zero, one or several directories
+    // should not use '*', or it will be replaced by the next replacer
+
+    // Check if it is not the last `'/**'`
+    (_, index, str) => index + 6 < str.length
+
+      // case: /**/
+      // > A slash followed by two consecutive asterisks then a slash matches
+      // >   zero or more directories.
+      // > For example, "a/**/b" matches "a/b", "a/x/b", "a/x/y/b" and so on.
+      // '/**/'
+      ? '(?:\\/[^\\/]+)*'
+
+      // case: /**
+      // > A trailing `"/**"` matches everything inside.
+
+      // #21: everything inside but it should not include the current folder
+      : '\\/.+'
+  ],
+
+  // intermediate wildcards
+  [
+    // Never replace escaped '*'
+    // ignore rule '\*' will match the path '*'
+
+    // 'abc.*/' -> go
+    // 'abc.*'  -> skip this rule
+    /(^|[^\\]+)\\\*(?=.+)/g,
+
+    // '*.js' matches '.js'
+    // '*.js' doesn't match 'abc'
+    (_, p1) => `${p1}[^\\/]*`
+  ],
+
+  [
+    // unescape, revert step 3 except for back slash
+    // For example, if a user escape a '\\*',
+    // after step 3, the result will be '\\\\\\*'
+    /\\\\\\(?=[$.|*+(){^])/g,
+    () => ESCAPE
+  ],
+
+  [
+    // '\\\\' -> '\\'
+    /\\\\/g,
+    () => ESCAPE
+  ],
+
+  [
+    // > The range notation, e.g. [a-zA-Z],
+    // > can be used to match one of the characters in a range.
+
+    // `\` is escaped by step 3
+    /(\\)?\[([^\]/]*?)(\\*)($|\])/g,
+    (match, leadEscape, range, endEscape, close) => leadEscape === ESCAPE
+      // '\\[bar]' -> '\\\\[bar\\]'
+      ? `\\[${range}${cleanRangeBackSlash(endEscape)}${close}`
+      : close === ']'
+        ? endEscape.length % 2 === 0
+          // A normal case, and it is a range notation
+          // '[bar]'
+          // '[bar\\\\]'
+          ? `[${sanitizeRange(range)}${endEscape}]`
+          // Invalid range notaton
+          // '[bar\\]' -> '[bar\\\\]'
+          : '[]'
+        : '[]'
+  ],
+
+  // ending
+  [
+    // 'js' will not match 'js.'
+    // 'ab' will not match 'abc'
+    /(?:[^*])$/,
+
+    // WTF!
+    // https://git-scm.com/docs/gitignore
+    // changes in [2.22.1](https://git-scm.com/docs/gitignore/2.22.1)
+    // which re-fixes #24, #38
+
+    // > If there is a separator at the end of the pattern then the pattern
+    // > will only match directories, otherwise the pattern can match both
+    // > files and directories.
+
+    // 'js*' will not match 'a.js'
+    // 'js/' will not match 'a.js'
+    // 'js' will match 'a.js' and 'a.js/'
+    match => /\/$/.test(match)
+      // foo/ will not match 'foo'
+      ? `${match}$`
+      // foo matches 'foo' and 'foo/'
+      : `${match}(?=$|\\/$)`
+  ],
+
+  // trailing wildcard
+  [
+    /(\^|\\\/)?\\\*$/,
+    (_, p1) => {
+      const prefix = p1
+        // '\^':
+        // '/*' does not match EMPTY
+        // '/*' does not match everything
+
+        // '\\\/':
+        // 'abc/*' does not match 'abc/'
+        ? `${p1}[^/]+`
+
+        // 'a*' matches 'a'
+        // 'a*' matches 'aa'
+        : '[^/]*'
+
+      return `${prefix}(?=$|\\/$)`
+    }
+  ],
+]
+
+// A simple cache, because an ignore rule only has only one certain meaning
+const regexCache = Object.create(null)
+
+// @param {pattern}
+const makeRegex = (pattern, negative, ignorecase) => {
+  const r = regexCache[pattern]
+  if (r) {
+    return r
+  }
+
+  // const replacers = negative
+  //   ? NEGATIVE_REPLACERS
+  //   : POSITIVE_REPLACERS
+
+  const source = REPLACERS.reduce(
+    (prev, current) => prev.replace(current[0], current[1].bind(pattern)),
+    pattern
+  )
+
+  return regexCache[pattern] = ignorecase
+    ? new RegExp(source, 'i')
+    : new RegExp(source)
+}
+
+const isString = subject => typeof subject === 'string'
+
+// > A blank line matches no files, so it can serve as a separator for readability.
+const checkPattern = pattern => pattern
+  && isString(pattern)
+  && !REGEX_TEST_BLANK_LINE.test(pattern)
+
+  // > A line starting with # serves as a comment.
+  && pattern.indexOf('#') !== 0
+
+const splitPattern = pattern => pattern.split(REGEX_SPLITALL_CRLF)
+
+class IgnoreRule {
+  constructor (
+    origin,
+    pattern,
+    negative,
+    regex
+  ) {
+    this.origin = origin
+    this.pattern = pattern
+    this.negative = negative
+    this.regex = regex
+  }
+}
+
+const createRule = (pattern, ignorecase) => {
+  const origin = pattern
+  let negative = false
+
+  // > An optional prefix "!" which negates the pattern;
+  if (pattern.indexOf('!') === 0) {
+    negative = true
+    pattern = pattern.substr(1)
+  }
+
+  pattern = pattern
+  // > Put a backslash ("\") in front of the first "!" for patterns that
+  // >   begin with a literal "!", for example, `"\!important!.txt"`.
+  .replace(REGEX_REPLACE_LEADING_EXCAPED_EXCLAMATION, '!')
+  // > Put a backslash ("\") in front of the first hash for patterns that
+  // >   begin with a hash.
+  .replace(REGEX_REPLACE_LEADING_EXCAPED_HASH, '#')
+
+  const regex = makeRegex(pattern, negative, ignorecase)
+
+  return new IgnoreRule(
+    origin,
+    pattern,
+    negative,
+    regex
+  )
+}
+
+const throwError = (message, Ctor) => {
+  throw new Ctor(message)
+}
+
+const checkPath = (path, originalPath, doThrow) => {
+  if (!isString(path)) {
+    return doThrow(
+      `path must be a string, but got \`${originalPath}\``,
+      TypeError
+    )
+  }
+
+  // We don't know if we should ignore EMPTY, so throw
+  if (!path) {
+    return doThrow(`path must not be empty`, TypeError)
+  }
+
+  // Check if it is a relative path
+  if (checkPath.isNotRelative(path)) {
+    const r = '`path.relative()`d'
+    return doThrow(
+      `path should be a ${r} string, but got "${originalPath}"`,
+      RangeError
+    )
+  }
+
+  return true
+}
+
+const isNotRelative = path => REGEX_TEST_INVALID_PATH.test(path)
+
+checkPath.isNotRelative = isNotRelative
+checkPath.convert = p => p
+
+class Ignore {
+  constructor ({
+    ignorecase = true
+  } = {}) {
+    this._rules = []
+    this._ignorecase = ignorecase
+    define(this, KEY_IGNORE, true)
+    this._initCache()
+  }
+
+  _initCache () {
+    this._ignoreCache = Object.create(null)
+    this._testCache = Object.create(null)
+  }
+
+  _addPattern (pattern) {
+    // #32
+    if (pattern && pattern[KEY_IGNORE]) {
+      this._rules = this._rules.concat(pattern._rules)
+      this._added = true
+      return
+    }
+
+    if (checkPattern(pattern)) {
+      const rule = createRule(pattern, this._ignorecase)
+      this._added = true
+      this._rules.push(rule)
+    }
+  }
+
+  // @param {Array<string> | string | Ignore} pattern
+  add (pattern) {
+    this._added = false
+
+    makeArray(
+      isString(pattern)
+        ? splitPattern(pattern)
+        : pattern
+    ).forEach(this._addPattern, this)
+
+    // Some rules have just added to the ignore,
+    // making the behavior changed.
+    if (this._added) {
+      this._initCache()
+    }
+
+    return this
+  }
+
+  // legacy
+  addPattern (pattern) {
+    return this.add(pattern)
+  }
+
+  //          |           ignored : unignored
+  // negative |   0:0   |   0:1   |   1:0   |   1:1
+  // -------- | ------- | ------- | ------- | --------
+  //     0    |  TEST   |  TEST   |  SKIP   |    X
+  //     1    |  TESTIF |  SKIP   |  TEST   |    X
+
+  // - SKIP: always skip
+  // - TEST: always test
+  // - TESTIF: only test if checkUnignored
+  // - X: that never happen
+
+  // @param {boolean} whether should check if the path is unignored,
+  //   setting `checkUnignored` to `false` could reduce additional
+  //   path matching.
+
+  // @returns {TestResult} true if a file is ignored
+  _testOne (path, checkUnignored) {
+    let ignored = false
+    let unignored = false
+
+    this._rules.forEach(rule => {
+      const {negative} = rule
+      if (
+        unignored === negative && ignored !== unignored
+        || negative && !ignored && !unignored && !checkUnignored
+      ) {
+        return
+      }
+
+      const matched = rule.regex.test(path)
+
+      if (matched) {
+        ignored = !negative
+        unignored = negative
+      }
+    })
+
+    return {
+      ignored,
+      unignored
+    }
+  }
+
+  // @returns {TestResult}
+  _test (originalPath, cache, checkUnignored, slices) {
+    const path = originalPath
+      // Supports nullable path
+      && checkPath.convert(originalPath)
+
+    checkPath(path, originalPath, throwError)
+
+    return this._t(path, cache, checkUnignored, slices)
+  }
+
+  _t (path, cache, checkUnignored, slices) {
+    if (path in cache) {
+      return cache[path]
+    }
+
+    if (!slices) {
+      // path/to/a.js
+      // ['path', 'to', 'a.js']
+      slices = path.split(SLASH)
+    }
+
+    slices.pop()
+
+    // If the path has no parent directory, just test it
+    if (!slices.length) {
+      return cache[path] = this._testOne(path, checkUnignored)
+    }
+
+    const parent = this._t(
+      slices.join(SLASH) + SLASH,
+      cache,
+      checkUnignored,
+      slices
+    )
+
+    // If the path contains a parent directory, check the parent first
+    return cache[path] = parent.ignored
+      // > It is not possible to re-include a file if a parent directory of
+      // >   that file is excluded.
+      ? parent
+      : this._testOne(path, checkUnignored)
+  }
+
+  ignores (path) {
+    return this._test(path, this._ignoreCache, false).ignored
+  }
+
+  createFilter () {
+    return path => !this.ignores(path)
+  }
+
+  filter (paths) {
+    return makeArray(paths).filter(this.createFilter())
+  }
+
+  // @returns {TestResult}
+  test (path) {
+    return this._test(path, this._testCache, true)
+  }
+}
+
+const factory = options => new Ignore(options)
+
+const returnFalse = () => false
+
+const isPathValid = path =>
+  checkPath(path && checkPath.convert(path), path, returnFalse)
+
+factory.isPathValid = isPathValid
+
+// Fixes typescript
+factory.default = factory
+
+module.exports = factory
+
+// Windows
+// --------------------------------------------------------------
+/* istanbul ignore if  */
+if (
+  // Detect `process` so that it can run in browsers.
+  typeof process !== 'undefined'
+  && (
+    process.env && process.env.IGNORE_TEST_WIN32
+    || process.platform === 'win32'
+  )
+) {
+  /* eslint no-control-regex: "off" */
+  const makePosix = str => /^\\\\\?\\/.test(str)
+  || /["<>|\u0000-\u001F]+/u.test(str)
+    ? str
+    : str.replace(/\\/g, '/')
+
+  checkPath.convert = makePosix
+
+  // 'C:\\foo'     <- 'C:\\foo' has been converted to 'C:/'
+  // 'd:\\foo'
+  const REGIX_IS_WINDOWS_PATH_ABSOLUTE = /^[a-z]:\//i
+  checkPath.isNotRelative = path =>
+    REGIX_IS_WINDOWS_PATH_ABSOLUTE.test(path)
+    || isNotRelative(path)
+}
+
+
+/***/ }),
+
 /***/ 32408:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
@@ -27075,12 +28107,16 @@ module.exports = {
 
 module.exports = clone
 
+var getPrototypeOf = Object.getPrototypeOf || function (obj) {
+  return obj.__proto__
+}
+
 function clone (obj) {
   if (obj === null || typeof obj !== 'object')
     return obj
 
   if (obj instanceof Object)
-    var copy = { __proto__: obj.__proto__ }
+    var copy = { __proto__: getPrototypeOf(obj) }
   else
     var copy = Object.create(null)
 
@@ -27267,6 +28303,25 @@ function patch (fs) {
         }
       })
     }
+  }
+
+  var fs$copyFile = fs.copyFile
+  if (fs$copyFile)
+    fs.copyFile = copyFile
+  function copyFile (src, dest, flags, cb) {
+    if (typeof flags === 'function') {
+      cb = flags
+      flags = 0
+    }
+    return fs$copyFile(src, dest, flags, function (err) {
+      if (err && (err.code === 'EMFILE' || err.code === 'ENFILE'))
+        enqueue([fs$copyFile, [src, dest, flags, cb]])
+      else {
+        if (typeof cb === 'function')
+          cb.apply(this, arguments)
+        retry()
+      }
+    })
   }
 
   var fs$readdir = fs.readdir
@@ -27599,10 +28654,14 @@ try {
   process.cwd()
 } catch (er) {}
 
-var chdir = process.chdir
-process.chdir = function(d) {
-  cwd = null
-  chdir.call(process, d)
+// This check is needed until node.js 12 is required
+if (typeof process.chdir === 'function') {
+  var chdir = process.chdir
+  process.chdir = function (d) {
+    cwd = null
+    chdir.call(process, d)
+  }
+  if (Object.setPrototypeOf) Object.setPrototypeOf(process.chdir, chdir)
 }
 
 module.exports = patch
@@ -27717,7 +28776,7 @@ function patch (fs) {
     }
 
     // This ensures `util.promisify` works as it does for native `fs.read`.
-    read.__proto__ = fs$read
+    if (Object.setPrototypeOf) Object.setPrototypeOf(read, fs$read)
     return read
   })(fs.read)
 
@@ -29030,13 +30089,15 @@ function serializeElement(ctx, node, index, parent) {
     schema.space === 'svg'
       ? ctx.closeEmpty
       : ctx.voids.indexOf(node.tagName.toLowerCase()) > -1
-  var attrs = serializeAttributes(ctx, node.properties)
+  var attrs
   var content
   var last
 
   if (schema.space === 'html' && node.tagName === 'svg') {
     ctx.schema = svg
   }
+
+  attrs = serializeAttributes(ctx, node.properties)
 
   content = all(
     ctx,
@@ -29752,26 +30813,15 @@ function interElementWhiteSpace(node) {
 /***/ ((module) => {
 
 // A simple implementation of make-array
-function makeArray (subject) {
+function make_array (subject) {
   return Array.isArray(subject)
     ? subject
     : [subject]
 }
 
-const EMPTY = ''
-const SPACE = ' '
-const ESCAPE = '\\'
-const REGEX_TEST_BLANK_LINE = /^\s+$/
-const REGEX_REPLACE_LEADING_EXCAPED_EXCLAMATION = /^\\!/
-const REGEX_REPLACE_LEADING_EXCAPED_HASH = /^\\#/
-const REGEX_SPLITALL_CRLF = /\r?\n/g
-// /foo,
-// ./foo,
-// ../foo,
-// .
-// ..
-const REGEX_TEST_INVALID_PATH = /^\.*\/|^\.+$/
-
+const REGEX_BLANK_LINE = /^\s+$/
+const REGEX_LEADING_EXCAPED_EXCLAMATION = /^\\!/
+const REGEX_LEADING_EXCAPED_HASH = /^\\#/
 const SLASH = '/'
 const KEY_IGNORE = typeof Symbol !== 'undefined'
   ? Symbol.for('node-ignore')
@@ -29791,14 +30841,8 @@ const sanitizeRange = range => range.replace(
     ? match
     // Invalid range (out of order) which is ok for gitignore rules but
     //   fatal for JavaScript regular expression, so eliminate it.
-    : EMPTY
+    : ''
 )
-
-// See fixtures #59
-const cleanRangeBackSlash = slashes => {
-  const {length} = slashes
-  return slashes.slice(0, length - length % 2)
-}
 
 // > If the pattern ends with a slash,
 // > it is removed for the purpose of the following description,
@@ -29811,7 +30855,7 @@ const cleanRangeBackSlash = slashes => {
 //      you could use option `mark: true` with `glob`
 
 // '`foo/`' should not continue with the '`..`'
-const REPLACERS = [
+const DEFAULT_REPLACER_PREFIX = [
 
   // > Trailing spaces are ignored unless they are quoted with backslash ("\")
   [
@@ -29820,14 +30864,14 @@ const REPLACERS = [
     // (a \ ) -> (a  )
     /\\?\s+$/,
     match => match.indexOf('\\') === 0
-      ? SPACE
-      : EMPTY
+      ? ' '
+      : ''
   ],
 
   // replace (\ ) with ' '
   [
     /\\\s/g,
-    () => SPACE
+    () => ' '
   ],
 
   // Escape metacharacters
@@ -29848,8 +30892,17 @@ const REPLACERS = [
   // > - the opening curly brace {,
   // > These special characters are often called "metacharacters".
   [
-    /[\\$.|*+(){^]/g,
+    /[\\^$.|*+(){]/g,
     match => `\\${match}`
+  ],
+
+  [
+    // > [abc] matches any character inside the brackets
+    // >    (in this case a, b, or c);
+    /\[([^\]/]*)($|\])/g,
+    (match, p1, p2) => p2 === ']'
+      ? `[${sanitizeRange(p1)}]`
+      : `\\${match}`
   ],
 
   [
@@ -29885,8 +30938,10 @@ const REPLACERS = [
 
     // '**/foo' <-> 'foo'
     () => '^(?:.*\\/)?'
-  ],
+  ]
+]
 
+const DEFAULT_REPLACER_SUFFIX = [
   // starting
   [
     // there will be no leading '/'
@@ -29894,20 +30949,11 @@ const REPLACERS = [
     // If starts with '**', adding a '^' to the regular expression also works
     /^(?=[^^])/,
     function startingReplacer () {
-      // If has a slash `/` at the beginning or middle
       return !/\/(?!$)/.test(this)
-        // > Prior to 2.22.1
         // > If the pattern does not contain a slash /,
         // >   Git treats it as a shell glob pattern
         // Actually, if there is only a trailing slash,
         //   git also treats it as a shell glob pattern
-
-        // After 2.22.1 (compatible but clearer)
-        // > If there is a separator at the beginning or middle (or both)
-        // > of the pattern, then the pattern is relative to the directory
-        // > level of the particular .gitignore file itself.
-        // > Otherwise the pattern may also match at any level below
-        // > the .gitignore level.
         ? '(?:^|\\/)'
 
         // > Otherwise, Git treats the pattern as a shell glob suitable for
@@ -29925,7 +30971,7 @@ const REPLACERS = [
     // should not use '*', or it will be replaced by the next replacer
 
     // Check if it is not the last `'/**'`
-    (_, index, str) => index + 6 < str.length
+    (match, index, str) => index + 6 < str.length
 
       // case: /**/
       // > A slash followed by two consecutive asterisks then a slash matches
@@ -29952,76 +30998,16 @@ const REPLACERS = [
 
     // '*.js' matches '.js'
     // '*.js' doesn't match 'abc'
-    (_, p1) => `${p1}[^\\/]*`
-  ],
-
-  [
-    // unescape, revert step 3 except for back slash
-    // For example, if a user escape a '\\*',
-    // after step 3, the result will be '\\\\\\*'
-    /\\\\\\(?=[$.|*+(){^])/g,
-    () => ESCAPE
-  ],
-
-  [
-    // '\\\\' -> '\\'
-    /\\\\/g,
-    () => ESCAPE
-  ],
-
-  [
-    // > The range notation, e.g. [a-zA-Z],
-    // > can be used to match one of the characters in a range.
-
-    // `\` is escaped by step 3
-    /(\\)?\[([^\]/]*?)(\\*)($|\])/g,
-    (match, leadEscape, range, endEscape, close) => leadEscape === ESCAPE
-      // '\\[bar]' -> '\\\\[bar\\]'
-      ? `\\[${range}${cleanRangeBackSlash(endEscape)}${close}`
-      : close === ']'
-        ? endEscape.length % 2 === 0
-          // A normal case, and it is a range notation
-          // '[bar]'
-          // '[bar\\\\]'
-          ? `[${sanitizeRange(range)}${endEscape}]`
-          // Invalid range notaton
-          // '[bar\\]' -> '[bar\\\\]'
-          : '[]'
-        : '[]'
-  ],
-
-  // ending
-  [
-    // 'js' will not match 'js.'
-    // 'ab' will not match 'abc'
-    /(?:[^*])$/,
-
-    // WTF!
-    // https://git-scm.com/docs/gitignore
-    // changes in [2.22.1](https://git-scm.com/docs/gitignore/2.22.1)
-    // which re-fixes #24, #38
-
-    // > If there is a separator at the end of the pattern then the pattern
-    // > will only match directories, otherwise the pattern can match both
-    // > files and directories.
-
-    // 'js*' will not match 'a.js'
-    // 'js/' will not match 'a.js'
-    // 'js' will match 'a.js' and 'a.js/'
-    match => /\/$/.test(match)
-      // foo/ will not match 'foo'
-      ? `${match}$`
-      // foo matches 'foo' and 'foo/'
-      : `${match}(?=$|\\/$)`
+    (match, p1) => `${p1}[^\\/]*`
   ],
 
   // trailing wildcard
   [
     /(\^|\\\/)?\\\*$/,
-    (_, p1) => {
+    (match, p1) => {
       const prefix = p1
         // '\^':
-        // '/*' does not match EMPTY
+        // '/*' does not match ''
         // '/*' does not match everything
 
         // '\\\/':
@@ -30035,57 +31021,94 @@ const REPLACERS = [
       return `${prefix}(?=$|\\/$)`
     }
   ],
+
+  [
+    // unescape
+    /\\\\\\/g,
+    () => '\\'
+  ]
+]
+
+const POSITIVE_REPLACERS = [
+  ...DEFAULT_REPLACER_PREFIX,
+
+  // 'f'
+  // matches
+  // - /f(end)
+  // - /f/
+  // - (start)f(end)
+  // - (start)f/
+  // doesn't match
+  // - oof
+  // - foo
+  // pseudo:
+  // -> (^|/)f(/|$)
+
+  // ending
+  [
+    // 'js' will not match 'js.'
+    // 'ab' will not match 'abc'
+    /(?:[^*/])$/,
+
+    // 'js*' will not match 'a.js'
+    // 'js/' will not match 'a.js'
+    // 'js' will match 'a.js' and 'a.js/'
+    match => `${match}(?=$|\\/)`
+  ],
+
+  ...DEFAULT_REPLACER_SUFFIX
+]
+
+const NEGATIVE_REPLACERS = [
+  ...DEFAULT_REPLACER_PREFIX,
+
+  // #24, #38
+  // The MISSING rule of [gitignore docs](https://git-scm.com/docs/gitignore)
+  // A negative pattern without a trailing wildcard should not
+  // re-include the things inside that directory.
+
+  // eg:
+  // ['node_modules/*', '!node_modules']
+  // should ignore `node_modules/a.js`
+  [
+    /(?:[^*])$/,
+    match => `${match}(?=$|\\/$)`
+  ],
+
+  ...DEFAULT_REPLACER_SUFFIX
 ]
 
 // A simple cache, because an ignore rule only has only one certain meaning
-const regexCache = Object.create(null)
+const cache = Object.create(null)
 
 // @param {pattern}
-const makeRegex = (pattern, negative, ignorecase) => {
-  const r = regexCache[pattern]
+const make_regex = (pattern, negative, ignorecase) => {
+  const r = cache[pattern]
   if (r) {
     return r
   }
 
-  // const replacers = negative
-  //   ? NEGATIVE_REPLACERS
-  //   : POSITIVE_REPLACERS
+  const replacers = negative
+    ? NEGATIVE_REPLACERS
+    : POSITIVE_REPLACERS
 
-  const source = REPLACERS.reduce(
+  const source = replacers.reduce(
     (prev, current) => prev.replace(current[0], current[1].bind(pattern)),
     pattern
   )
 
-  return regexCache[pattern] = ignorecase
+  return cache[pattern] = ignorecase
     ? new RegExp(source, 'i')
     : new RegExp(source)
 }
 
-const isString = subject => typeof subject === 'string'
-
 // > A blank line matches no files, so it can serve as a separator for readability.
 const checkPattern = pattern => pattern
-  && isString(pattern)
-  && !REGEX_TEST_BLANK_LINE.test(pattern)
+  && typeof pattern === 'string'
+  && !REGEX_BLANK_LINE.test(pattern)
 
   // > A line starting with # serves as a comment.
   && pattern.indexOf('#') !== 0
-
-const splitPattern = pattern => pattern.split(REGEX_SPLITALL_CRLF)
-
-class IgnoreRule {
-  constructor (
-    origin,
-    pattern,
-    negative,
-    regex
-  ) {
-    this.origin = origin
-    this.pattern = pattern
-    this.negative = negative
-    this.regex = regex
-  }
-}
 
 const createRule = (pattern, ignorecase) => {
   const origin = pattern
@@ -30100,56 +31123,22 @@ const createRule = (pattern, ignorecase) => {
   pattern = pattern
   // > Put a backslash ("\") in front of the first "!" for patterns that
   // >   begin with a literal "!", for example, `"\!important!.txt"`.
-  .replace(REGEX_REPLACE_LEADING_EXCAPED_EXCLAMATION, '!')
+  .replace(REGEX_LEADING_EXCAPED_EXCLAMATION, '!')
   // > Put a backslash ("\") in front of the first hash for patterns that
   // >   begin with a hash.
-  .replace(REGEX_REPLACE_LEADING_EXCAPED_HASH, '#')
+  .replace(REGEX_LEADING_EXCAPED_HASH, '#')
 
-  const regex = makeRegex(pattern, negative, ignorecase)
+  const regex = make_regex(pattern, negative, ignorecase)
 
-  return new IgnoreRule(
+  return {
     origin,
     pattern,
     negative,
     regex
-  )
+  }
 }
 
-const throwError = (message, Ctor) => {
-  throw new Ctor(message)
-}
-
-const checkPath = (path, originalPath, doThrow) => {
-  if (!isString(path)) {
-    return doThrow(
-      `path must be a string, but got \`${originalPath}\``,
-      TypeError
-    )
-  }
-
-  // We don't know if we should ignore EMPTY, so throw
-  if (!path) {
-    return doThrow(`path must not be empty`, TypeError)
-  }
-
-  // Check if it is a relative path
-  if (checkPath.isNotRelative(path)) {
-    const r = '`path.relative()`d'
-    return doThrow(
-      `path should be a ${r} string, but got "${originalPath}"`,
-      RangeError
-    )
-  }
-
-  return true
-}
-
-const isNotRelative = path => REGEX_TEST_INVALID_PATH.test(path)
-
-checkPath.isNotRelative = isNotRelative
-checkPath.convert = p => p
-
-class Ignore {
+class IgnoreBase {
   constructor ({
     ignorecase = true
   } = {}) {
@@ -30160,8 +31149,31 @@ class Ignore {
   }
 
   _initCache () {
-    this._ignoreCache = Object.create(null)
-    this._testCache = Object.create(null)
+    this._cache = Object.create(null)
+  }
+
+  // @param {Array.<string>|string|Ignore} pattern
+  add (pattern) {
+    this._added = false
+
+    if (typeof pattern === 'string') {
+      pattern = pattern.split(/\r?\n/g)
+    }
+
+    make_array(pattern).forEach(this._addPattern, this)
+
+    // Some rules have just added to the ignore,
+    // making the behavior changed.
+    if (this._added) {
+      this._initCache()
+    }
+
+    return this
+  }
+
+  // legacy
+  addPattern (pattern) {
+    return this.add(pattern)
   }
 
   _addPattern (pattern) {
@@ -30179,87 +31191,26 @@ class Ignore {
     }
   }
 
-  // @param {Array<string> | string | Ignore} pattern
-  add (pattern) {
-    this._added = false
+  filter (paths) {
+    return make_array(paths).filter(path => this._filter(path))
+  }
 
-    makeArray(
-      isString(pattern)
-        ? splitPattern(pattern)
-        : pattern
-    ).forEach(this._addPattern, this)
+  createFilter () {
+    return path => this._filter(path)
+  }
 
-    // Some rules have just added to the ignore,
-    // making the behavior changed.
-    if (this._added) {
-      this._initCache()
+  ignores (path) {
+    return !this._filter(path)
+  }
+
+  // @returns `Boolean` true if the `path` is NOT ignored
+  _filter (path, slices) {
+    if (!path) {
+      return false
     }
 
-    return this
-  }
-
-  // legacy
-  addPattern (pattern) {
-    return this.add(pattern)
-  }
-
-  //          |           ignored : unignored
-  // negative |   0:0   |   0:1   |   1:0   |   1:1
-  // -------- | ------- | ------- | ------- | --------
-  //     0    |  TEST   |  TEST   |  SKIP   |    X
-  //     1    |  TESTIF |  SKIP   |  TEST   |    X
-
-  // - SKIP: always skip
-  // - TEST: always test
-  // - TESTIF: only test if checkUnignored
-  // - X: that never happen
-
-  // @param {boolean} whether should check if the path is unignored,
-  //   setting `checkUnignored` to `false` could reduce additional
-  //   path matching.
-
-  // @returns {TestResult} true if a file is ignored
-  _testOne (path, checkUnignored) {
-    let ignored = false
-    let unignored = false
-
-    this._rules.forEach(rule => {
-      const {negative} = rule
-      if (
-        unignored === negative && ignored !== unignored
-        || negative && !ignored && !unignored && !checkUnignored
-      ) {
-        return
-      }
-
-      const matched = rule.regex.test(path)
-
-      if (matched) {
-        ignored = !negative
-        unignored = negative
-      }
-    })
-
-    return {
-      ignored,
-      unignored
-    }
-  }
-
-  // @returns {TestResult}
-  _test (originalPath, cache, checkUnignored, slices) {
-    const path = originalPath
-      // Supports nullable path
-      && checkPath.convert(originalPath)
-
-    checkPath(path, originalPath, throwError)
-
-    return this._t(path, cache, checkUnignored, slices)
-  }
-
-  _t (path, cache, checkUnignored, slices) {
-    if (path in cache) {
-      return cache[path]
+    if (path in this._cache) {
+      return this._cache[path]
     }
 
     if (!slices) {
@@ -30270,57 +31221,33 @@ class Ignore {
 
     slices.pop()
 
-    // If the path has no parent directory, just test it
-    if (!slices.length) {
-      return cache[path] = this._testOne(path, checkUnignored)
-    }
-
-    const parent = this._t(
-      slices.join(SLASH) + SLASH,
-      cache,
-      checkUnignored,
-      slices
-    )
-
-    // If the path contains a parent directory, check the parent first
-    return cache[path] = parent.ignored
+    return this._cache[path] = slices.length
       // > It is not possible to re-include a file if a parent directory of
       // >   that file is excluded.
-      ? parent
-      : this._testOne(path, checkUnignored)
+      // If the path contains a parent directory, check the parent first
+      ? this._filter(slices.join(SLASH) + SLASH, slices)
+        && this._test(path)
+
+      // Or only test the path
+      : this._test(path)
   }
 
-  ignores (path) {
-    return this._test(path, this._ignoreCache, false).ignored
-  }
+  // @returns {Boolean} true if a file is NOT ignored
+  _test (path) {
+    // Explicitly define variable type by setting matched to `0`
+    let matched = 0
 
-  createFilter () {
-    return path => !this.ignores(path)
-  }
+    this._rules.forEach(rule => {
+      // if matched = true, then we only test negative rules
+      // if matched = false, then we test non-negative rules
+      if (!(matched ^ rule.negative)) {
+        matched = rule.negative ^ rule.regex.test(path)
+      }
+    })
 
-  filter (paths) {
-    return makeArray(paths).filter(this.createFilter())
-  }
-
-  // @returns {TestResult}
-  test (path) {
-    return this._test(path, this._testCache, true)
+    return !matched
   }
 }
-
-const factory = options => new Ignore(options)
-
-const returnFalse = () => false
-
-const isPathValid = path =>
-  checkPath(path && checkPath.convert(path), path, returnFalse)
-
-factory.isPathValid = isPathValid
-
-// Fixes typescript
-factory.default = factory
-
-module.exports = factory
 
 // Windows
 // --------------------------------------------------------------
@@ -30333,21 +31260,21 @@ if (
     || process.platform === 'win32'
   )
 ) {
+  const filter = IgnoreBase.prototype._filter
+
   /* eslint no-control-regex: "off" */
-  const makePosix = str => /^\\\\\?\\/.test(str)
-  || /["<>|\u0000-\u001F]+/u.test(str)
+  const make_posix = str => /^\\\\\?\\/.test(str)
+  || /[^\x00-\x80]+/.test(str)
     ? str
     : str.replace(/\\/g, '/')
 
-  checkPath.convert = makePosix
-
-  // 'C:\\foo'     <- 'C:\\foo' has been converted to 'C:/'
-  // 'd:\\foo'
-  const REGIX_IS_WINDOWS_PATH_ABSOLUTE = /^[a-z]:\//i
-  checkPath.isNotRelative = path =>
-    REGIX_IS_WINDOWS_PATH_ABSOLUTE.test(path)
-    || isNotRelative(path)
+  IgnoreBase.prototype._filter = function filterWin32 (path, slices) {
+    path = make_posix(path)
+    return filter.call(this, path, slices)
+  }
 }
+
+module.exports = options => new IgnoreBase(options)
 
 
 /***/ }),
@@ -30513,13 +31440,13 @@ if (typeof Object.create === 'function') {
 /*!
  * is-accessor-descriptor <https://github.com/jonschlinkert/is-accessor-descriptor>
  *
- * Copyright (c) 2015, Jon Schlinkert.
- * Licensed under the MIT License.
+ * Copyright (c) 2015-2017, Jon Schlinkert.
+ * Released under the MIT License.
  */
 
 
 
-var typeOf = __nccwpck_require__(45619);
+var typeOf = __nccwpck_require__(86961);
 
 // accessor descriptor properties
 var accessor = {
@@ -30583,157 +31510,6 @@ module.exports = isAccessorDescriptor;
 
 /***/ }),
 
-/***/ 5835:
-/***/ ((module) => {
-
-/*!
- * Determine if an object is a Buffer
- *
- * @author   Feross Aboukhadijeh <https://feross.org>
- * @license  MIT
- */
-
-// The _isBuffer check is for Safari 5-7 support, because it's missing
-// Object.prototype.constructor. Remove this eventually
-module.exports = function (obj) {
-  return obj != null && (isBuffer(obj) || isSlowBuffer(obj) || !!obj._isBuffer)
-}
-
-function isBuffer (obj) {
-  return !!obj.constructor && typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
-}
-
-// For Node v0.10 support. Remove this eventually.
-function isSlowBuffer (obj) {
-  return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
-}
-
-
-/***/ }),
-
-/***/ 45619:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-var isBuffer = __nccwpck_require__(5835);
-var toString = Object.prototype.toString;
-
-/**
- * Get the native `typeof` a value.
- *
- * @param  {*} `val`
- * @return {*} Native javascript type
- */
-
-module.exports = function kindOf(val) {
-  // primitivies
-  if (typeof val === 'undefined') {
-    return 'undefined';
-  }
-  if (val === null) {
-    return 'null';
-  }
-  if (val === true || val === false || val instanceof Boolean) {
-    return 'boolean';
-  }
-  if (typeof val === 'string' || val instanceof String) {
-    return 'string';
-  }
-  if (typeof val === 'number' || val instanceof Number) {
-    return 'number';
-  }
-
-  // functions
-  if (typeof val === 'function' || val instanceof Function) {
-    return 'function';
-  }
-
-  // array
-  if (typeof Array.isArray !== 'undefined' && Array.isArray(val)) {
-    return 'array';
-  }
-
-  // check for instances of RegExp and Date before calling `toString`
-  if (val instanceof RegExp) {
-    return 'regexp';
-  }
-  if (val instanceof Date) {
-    return 'date';
-  }
-
-  // other objects
-  var type = toString.call(val);
-
-  if (type === '[object RegExp]') {
-    return 'regexp';
-  }
-  if (type === '[object Date]') {
-    return 'date';
-  }
-  if (type === '[object Arguments]') {
-    return 'arguments';
-  }
-  if (type === '[object Error]') {
-    return 'error';
-  }
-
-  // buffer
-  if (isBuffer(val)) {
-    return 'buffer';
-  }
-
-  // es6: Map, WeakMap, Set, WeakSet
-  if (type === '[object Set]') {
-    return 'set';
-  }
-  if (type === '[object WeakSet]') {
-    return 'weakset';
-  }
-  if (type === '[object Map]') {
-    return 'map';
-  }
-  if (type === '[object WeakMap]') {
-    return 'weakmap';
-  }
-  if (type === '[object Symbol]') {
-    return 'symbol';
-  }
-
-  // typed arrays
-  if (type === '[object Int8Array]') {
-    return 'int8array';
-  }
-  if (type === '[object Uint8Array]') {
-    return 'uint8array';
-  }
-  if (type === '[object Uint8ClampedArray]') {
-    return 'uint8clampedarray';
-  }
-  if (type === '[object Int16Array]') {
-    return 'int16array';
-  }
-  if (type === '[object Uint16Array]') {
-    return 'uint16array';
-  }
-  if (type === '[object Int32Array]') {
-    return 'int32array';
-  }
-  if (type === '[object Uint32Array]') {
-    return 'uint32array';
-  }
-  if (type === '[object Float32Array]') {
-    return 'float32array';
-  }
-  if (type === '[object Float64Array]') {
-    return 'float64array';
-  }
-
-  // must be a plain object
-  return 'object';
-};
-
-
-/***/ }),
-
 /***/ 35625:
 /***/ ((module) => {
 
@@ -30759,22 +31535,22 @@ module.exports = function isBuffer (obj) {
 /*!
  * is-data-descriptor <https://github.com/jonschlinkert/is-data-descriptor>
  *
- * Copyright (c) 2015, Jon Schlinkert.
- * Licensed under the MIT License.
+ * Copyright (c) 2015-2017, Jon Schlinkert.
+ * Released under the MIT License.
  */
 
 
 
-var typeOf = __nccwpck_require__(13131);
+var typeOf = __nccwpck_require__(86961);
 
-// data descriptor properties
-var data = {
-  configurable: 'boolean',
-  enumerable: 'boolean',
-  writable: 'boolean'
-};
+module.exports = function isDataDescriptor(obj, prop) {
+  // data descriptor properties
+  var data = {
+    configurable: 'boolean',
+    enumerable: 'boolean',
+    writable: 'boolean'
+  };
 
-function isDataDescriptor(obj, prop) {
   if (typeOf(obj) !== 'object') {
     return false;
   }
@@ -30804,163 +31580,6 @@ function isDataDescriptor(obj, prop) {
     }
   }
   return true;
-}
-
-/**
- * Expose `isDataDescriptor`
- */
-
-module.exports = isDataDescriptor;
-
-
-/***/ }),
-
-/***/ 86211:
-/***/ ((module) => {
-
-/*!
- * Determine if an object is a Buffer
- *
- * @author   Feross Aboukhadijeh <https://feross.org>
- * @license  MIT
- */
-
-// The _isBuffer check is for Safari 5-7 support, because it's missing
-// Object.prototype.constructor. Remove this eventually
-module.exports = function (obj) {
-  return obj != null && (isBuffer(obj) || isSlowBuffer(obj) || !!obj._isBuffer)
-}
-
-function isBuffer (obj) {
-  return !!obj.constructor && typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
-}
-
-// For Node v0.10 support. Remove this eventually.
-function isSlowBuffer (obj) {
-  return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
-}
-
-
-/***/ }),
-
-/***/ 13131:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-var isBuffer = __nccwpck_require__(86211);
-var toString = Object.prototype.toString;
-
-/**
- * Get the native `typeof` a value.
- *
- * @param  {*} `val`
- * @return {*} Native javascript type
- */
-
-module.exports = function kindOf(val) {
-  // primitivies
-  if (typeof val === 'undefined') {
-    return 'undefined';
-  }
-  if (val === null) {
-    return 'null';
-  }
-  if (val === true || val === false || val instanceof Boolean) {
-    return 'boolean';
-  }
-  if (typeof val === 'string' || val instanceof String) {
-    return 'string';
-  }
-  if (typeof val === 'number' || val instanceof Number) {
-    return 'number';
-  }
-
-  // functions
-  if (typeof val === 'function' || val instanceof Function) {
-    return 'function';
-  }
-
-  // array
-  if (typeof Array.isArray !== 'undefined' && Array.isArray(val)) {
-    return 'array';
-  }
-
-  // check for instances of RegExp and Date before calling `toString`
-  if (val instanceof RegExp) {
-    return 'regexp';
-  }
-  if (val instanceof Date) {
-    return 'date';
-  }
-
-  // other objects
-  var type = toString.call(val);
-
-  if (type === '[object RegExp]') {
-    return 'regexp';
-  }
-  if (type === '[object Date]') {
-    return 'date';
-  }
-  if (type === '[object Arguments]') {
-    return 'arguments';
-  }
-  if (type === '[object Error]') {
-    return 'error';
-  }
-
-  // buffer
-  if (isBuffer(val)) {
-    return 'buffer';
-  }
-
-  // es6: Map, WeakMap, Set, WeakSet
-  if (type === '[object Set]') {
-    return 'set';
-  }
-  if (type === '[object WeakSet]') {
-    return 'weakset';
-  }
-  if (type === '[object Map]') {
-    return 'map';
-  }
-  if (type === '[object WeakMap]') {
-    return 'weakmap';
-  }
-  if (type === '[object Symbol]') {
-    return 'symbol';
-  }
-
-  // typed arrays
-  if (type === '[object Int8Array]') {
-    return 'int8array';
-  }
-  if (type === '[object Uint8Array]') {
-    return 'uint8array';
-  }
-  if (type === '[object Uint8ClampedArray]') {
-    return 'uint8clampedarray';
-  }
-  if (type === '[object Int16Array]') {
-    return 'int16array';
-  }
-  if (type === '[object Uint16Array]') {
-    return 'uint16array';
-  }
-  if (type === '[object Int32Array]') {
-    return 'int32array';
-  }
-  if (type === '[object Uint32Array]') {
-    return 'uint32array';
-  }
-  if (type === '[object Float32Array]') {
-    return 'float32array';
-  }
-  if (type === '[object Float64Array]') {
-    return 'float64array';
-  }
-
-  // must be a plain object
-  return 'object';
 };
 
 
@@ -30979,7 +31598,7 @@ module.exports = function kindOf(val) {
 
 
 
-var typeOf = __nccwpck_require__(98267);
+var typeOf = __nccwpck_require__(86961);
 var isAccessor = __nccwpck_require__(6649);
 var isData = __nccwpck_require__(11598);
 
@@ -30996,176 +31615,68 @@ module.exports = function isDescriptor(obj, key) {
 
 /***/ }),
 
-/***/ 98267:
-/***/ ((module) => {
-
-var toString = Object.prototype.toString;
-
-/**
- * Get the native `typeof` a value.
- *
- * @param  {*} `val`
- * @return {*} Native javascript type
- */
-
-module.exports = function kindOf(val) {
-  var type = typeof val;
-
-  // primitivies
-  if (type === 'undefined') {
-    return 'undefined';
-  }
-  if (val === null) {
-    return 'null';
-  }
-  if (val === true || val === false || val instanceof Boolean) {
-    return 'boolean';
-  }
-  if (type === 'string' || val instanceof String) {
-    return 'string';
-  }
-  if (type === 'number' || val instanceof Number) {
-    return 'number';
-  }
-
-  // functions
-  if (type === 'function' || val instanceof Function) {
-    if (typeof val.constructor.name !== 'undefined' && val.constructor.name.slice(0, 9) === 'Generator') {
-      return 'generatorfunction';
-    }
-    return 'function';
-  }
-
-  // array
-  if (typeof Array.isArray !== 'undefined' && Array.isArray(val)) {
-    return 'array';
-  }
-
-  // check for instances of RegExp and Date before calling `toString`
-  if (val instanceof RegExp) {
-    return 'regexp';
-  }
-  if (val instanceof Date) {
-    return 'date';
-  }
-
-  // other objects
-  type = toString.call(val);
-
-  if (type === '[object RegExp]') {
-    return 'regexp';
-  }
-  if (type === '[object Date]') {
-    return 'date';
-  }
-  if (type === '[object Arguments]') {
-    return 'arguments';
-  }
-  if (type === '[object Error]') {
-    return 'error';
-  }
-  if (type === '[object Promise]') {
-    return 'promise';
-  }
-
-  // buffer
-  if (isBuffer(val)) {
-    return 'buffer';
-  }
-
-  // es6: Map, WeakMap, Set, WeakSet
-  if (type === '[object Set]') {
-    return 'set';
-  }
-  if (type === '[object WeakSet]') {
-    return 'weakset';
-  }
-  if (type === '[object Map]') {
-    return 'map';
-  }
-  if (type === '[object WeakMap]') {
-    return 'weakmap';
-  }
-  if (type === '[object Symbol]') {
-    return 'symbol';
-  }
-  
-  if (type === '[object Map Iterator]') {
-    return 'mapiterator';
-  }
-  if (type === '[object Set Iterator]') {
-    return 'setiterator';
-  }
-  if (type === '[object String Iterator]') {
-    return 'stringiterator';
-  }
-  if (type === '[object Array Iterator]') {
-    return 'arrayiterator';
-  }
-  
-  // typed arrays
-  if (type === '[object Int8Array]') {
-    return 'int8array';
-  }
-  if (type === '[object Uint8Array]') {
-    return 'uint8array';
-  }
-  if (type === '[object Uint8ClampedArray]') {
-    return 'uint8clampedarray';
-  }
-  if (type === '[object Int16Array]') {
-    return 'int16array';
-  }
-  if (type === '[object Uint16Array]') {
-    return 'uint16array';
-  }
-  if (type === '[object Int32Array]') {
-    return 'int32array';
-  }
-  if (type === '[object Uint32Array]') {
-    return 'uint32array';
-  }
-  if (type === '[object Float32Array]') {
-    return 'float32array';
-  }
-  if (type === '[object Float64Array]') {
-    return 'float64array';
-  }
-
-  // must be a plain object
-  return 'object';
-};
-
-/**
- * If you need to support Safari 5-7 (8-10 yr-old browser),
- * take a look at https://github.com/feross/is-buffer
- */
-
-function isBuffer(val) {
-  return val.constructor
-    && typeof val.constructor.isBuffer === 'function'
-    && val.constructor.isBuffer(val);
-}
-
-
-/***/ }),
-
 /***/ 70429:
-/***/ ((module) => {
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 /*!
  * is-extendable <https://github.com/jonschlinkert/is-extendable>
  *
- * Copyright (c) 2015, Jon Schlinkert.
- * Licensed under the MIT License.
+ * Copyright (c) 2015-2017, Jon Schlinkert.
+ * Released under the MIT License.
  */
 
 
 
+var isPlainObject = __nccwpck_require__(65835);
+
 module.exports = function isExtendable(val) {
-  return typeof val !== 'undefined' && val !== null
-    && (typeof val === 'object' || typeof val === 'function');
+  return isPlainObject(val) || typeof val === 'function' || Array.isArray(val);
+};
+
+
+/***/ }),
+
+/***/ 65835:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+/*!
+ * is-plain-object <https://github.com/jonschlinkert/is-plain-object>
+ *
+ * Copyright (c) 2014-2017, Jon Schlinkert.
+ * Released under the MIT License.
+ */
+
+
+
+var isObject = __nccwpck_require__(5509);
+
+function isObjectObject(o) {
+  return isObject(o) === true
+    && Object.prototype.toString.call(o) === '[object Object]';
+}
+
+module.exports = function isPlainObject(o) {
+  var ctor,prot;
+
+  if (isObjectObject(o) === false) return false;
+
+  // If has modified constructor
+  ctor = o.constructor;
+  if (typeof ctor !== 'function') return false;
+
+  // If has modified prototype
+  prot = ctor.prototype;
+  if (isObjectObject(prot) === false) return false;
+
+  // If constructor does not have an Object-specific method
+  if (prot.hasOwnProperty('isPrototypeOf') === false) {
+    return false;
+  }
+
+  // Most likely a plain Object
+  return true;
 };
 
 
@@ -31274,24 +31785,6 @@ module.exports = function(num) {
     return Number.isFinite ? Number.isFinite(+num) : isFinite(+num);
   }
   return false;
-};
-
-
-/***/ }),
-
-/***/ 20864:
-/***/ ((module) => {
-
-"use strict";
-
-
-module.exports = value => {
-	if (Object.prototype.toString.call(value) !== '[object Object]') {
-		return false;
-	}
-
-	const prototype = Object.getPrototypeOf(value);
-	return prototype === null || prototype === Object.prototype;
 };
 
 
@@ -31438,6 +31931,23 @@ module.exports.load                = loader.load;
 module.exports.loadAll             = loader.loadAll;
 module.exports.dump                = dumper.dump;
 module.exports.YAMLException = __nccwpck_require__(68179);
+
+// Re-export all types in case user wants to create custom schema
+module.exports.types = {
+  binary:    __nccwpck_require__(77900),
+  float:     __nccwpck_require__(42705),
+  map:       __nccwpck_require__(86150),
+  null:      __nccwpck_require__(20721),
+  pairs:     __nccwpck_require__(96860),
+  set:       __nccwpck_require__(79548),
+  timestamp: __nccwpck_require__(99212),
+  bool:      __nccwpck_require__(64993),
+  int:       __nccwpck_require__(43266),
+  merge:     __nccwpck_require__(86104),
+  omap:      __nccwpck_require__(19046),
+  seq:       __nccwpck_require__(67283),
+  str:       __nccwpck_require__(23619)
+};
 
 // Removed functions from JS-YAML 3.0.x
 module.exports.safeLoad            = renamed('safeLoad', 'load');
@@ -34297,25 +34807,25 @@ var YAMLException = __nccwpck_require__(68179);
 var Type          = __nccwpck_require__(6073);
 
 
-function compileList(schema, name, result) {
-  var exclude = [];
+function compileList(schema, name) {
+  var result = [];
 
   schema[name].forEach(function (currentType) {
+    var newIndex = result.length;
+
     result.forEach(function (previousType, previousIndex) {
       if (previousType.tag === currentType.tag &&
           previousType.kind === currentType.kind &&
           previousType.multi === currentType.multi) {
 
-        exclude.push(previousIndex);
+        newIndex = previousIndex;
       }
     });
 
-    result.push(currentType);
+    result[newIndex] = currentType;
   });
 
-  return result.filter(function (type, index) {
-    return exclude.indexOf(index) === -1;
-  });
+  return result;
 }
 
 
@@ -34401,8 +34911,8 @@ Schema.prototype.extend = function extend(definition) {
   result.implicit = (this.implicit || []).concat(implicit);
   result.explicit = (this.explicit || []).concat(explicit);
 
-  result.compiledImplicit = compileList(result, 'implicit', []);
-  result.compiledExplicit = compileList(result, 'explicit', []);
+  result.compiledImplicit = compileList(result, 'implicit');
+  result.compiledExplicit = compileList(result, 'explicit');
   result.compiledTypeMap  = compileMap(result.compiledImplicit, result.compiledExplicit);
 
   return result;
@@ -34675,6 +35185,7 @@ function Type(tag, options) {
   });
 
   // TODO: Add tag format check.
+  this.options       = options; // keep original options in case user wants to extend this type later
   this.tag           = tag;
   this.kind          = options['kind']          || null;
   this.resolve       = options['resolve']       || function () { return true; };
@@ -37958,6 +38469,194 @@ function normalise(identifier) {
 
 /***/ }),
 
+/***/ 66855:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+module.exports = findAndReplace
+
+var visit = __nccwpck_require__(13246)
+var convert = __nccwpck_require__(64070)
+var escape = __nccwpck_require__(98691)
+
+var splice = [].splice
+
+function findAndReplace(tree, find, replace, options) {
+  var settings
+  var schema
+
+  if (typeof find === 'string' || (find && typeof find.exec === 'function')) {
+    schema = [[find, replace]]
+  } else {
+    schema = find
+    options = replace
+  }
+
+  settings = options || {}
+
+  search(tree, settings, handlerFactory(toPairs(schema)))
+
+  return tree
+
+  function handlerFactory(pairs) {
+    var pair = pairs[0]
+
+    return handler
+
+    function handler(node, parent) {
+      var find = pair[0]
+      var replace = pair[1]
+      var nodes = []
+      var start = 0
+      var index = parent.children.indexOf(node)
+      var position
+      var match
+      var subhandler
+      var value
+
+      find.lastIndex = 0
+
+      match = find.exec(node.value)
+
+      while (match) {
+        position = match.index
+        value = replace.apply(
+          null,
+          [].concat(match, {index: match.index, input: match.input})
+        )
+
+        if (value !== false) {
+          if (start !== position) {
+            nodes.push({type: 'text', value: node.value.slice(start, position)})
+          }
+
+          if (typeof value === 'string' && value.length > 0) {
+            value = {type: 'text', value: value}
+          }
+
+          if (value) {
+            nodes = [].concat(nodes, value)
+          }
+
+          start = position + match[0].length
+        }
+
+        if (!find.global) {
+          break
+        }
+
+        match = find.exec(node.value)
+      }
+
+      if (position === undefined) {
+        nodes = [node]
+        index--
+      } else {
+        if (start < node.value.length) {
+          nodes.push({type: 'text', value: node.value.slice(start)})
+        }
+
+        nodes.unshift(index, 1)
+        splice.apply(parent.children, nodes)
+      }
+
+      if (pairs.length > 1) {
+        subhandler = handlerFactory(pairs.slice(1))
+        position = -1
+
+        while (++position < nodes.length) {
+          node = nodes[position]
+
+          if (node.type === 'text') {
+            subhandler(node, parent)
+          } else {
+            search(node, settings, subhandler)
+          }
+        }
+      }
+
+      return index + nodes.length + 1
+    }
+  }
+}
+
+function search(tree, settings, handler) {
+  var ignored = convert(settings.ignore || [])
+  var result = []
+
+  visit(tree, 'text', visitor)
+
+  return result
+
+  function visitor(node, parents) {
+    var index = -1
+    var parent
+    var grandparent
+
+    while (++index < parents.length) {
+      parent = parents[index]
+
+      if (
+        ignored(
+          parent,
+          grandparent ? grandparent.children.indexOf(parent) : undefined,
+          grandparent
+        )
+      ) {
+        return
+      }
+
+      grandparent = parent
+    }
+
+    return handler(node, grandparent)
+  }
+}
+
+function toPairs(schema) {
+  var result = []
+  var key
+  var index
+
+  if (typeof schema !== 'object') {
+    throw new Error('Expected array or object as schema')
+  }
+
+  if ('length' in schema) {
+    index = -1
+
+    while (++index < schema.length) {
+      result.push([
+        toExpression(schema[index][0]),
+        toFunction(schema[index][1])
+      ])
+    }
+  } else {
+    for (key in schema) {
+      result.push([toExpression(key), toFunction(schema[key])])
+    }
+  }
+
+  return result
+}
+
+function toExpression(find) {
+  return typeof find === 'string' ? new RegExp(escape(find), 'g') : find
+}
+
+function toFunction(replace) {
+  return typeof replace === 'function' ? replace : returner
+
+  function returner() {
+    return replace
+  }
+}
+
+
+/***/ }),
+
 /***/ 6869:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
@@ -37997,6 +38696,7 @@ function compiler(options) {
   var settings = options || {}
   var config = configure(
     {
+      transforms: [],
       canContainEols: [
         'emphasis',
         'fragment',
@@ -38109,7 +38809,8 @@ function compiler(options) {
   return compile
 
   function compile(events) {
-    var stack = [{type: 'root', children: []}]
+    var tree = {type: 'root', children: []}
+    var stack = [tree]
     var tokenStack = []
     var listStack = []
     var index = -1
@@ -38171,7 +38872,7 @@ function compiler(options) {
     }
 
     // Figure out `root` position.
-    stack[0].position = {
+    tree.position = {
       start: point(
         events.length ? events[0][1].start : {line: 1, column: 1, offset: 0}
       ),
@@ -38183,7 +38884,12 @@ function compiler(options) {
       )
     }
 
-    return stack[0]
+    index = -1
+    while (++index < config.transforms.length) {
+      tree = config.transforms[index](tree) || tree
+    }
+
+    return tree
   }
 
   function prepareList(events, start, length) {
@@ -38771,7 +39477,7 @@ function extension(config, extension) {
   for (key in extension) {
     left = own.call(config, key) ? config[key] : (config[key] = {})
 
-    if (key === 'canContainEols') {
+    if (key === 'canContainEols' || key === 'transforms') {
       config[key] = [].concat(left, extension[key])
     } else {
       Object.assign(left, extension[key])
@@ -38894,8 +39600,14 @@ function pick(schema, prop) {
 /***/ }),
 
 /***/ 84857:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
+var ccount = __nccwpck_require__(61291)
+var findAndReplace = __nccwpck_require__(66855)
+var unicodePunctuation = __nccwpck_require__(79372)
+var unicodeWhitespace = __nccwpck_require__(59968)
+
+exports.transforms = [transformGfmAutolinkLiterals]
 exports.enter = {
   literalAutolink: enterLiteralAutolink,
   literalAutolinkEmail: enterLiteralAutolinkValue,
@@ -38932,6 +39644,120 @@ function exitLiteralAutolinkEmail(token) {
 
 function exitLiteralAutolink(token) {
   this.exit(token)
+}
+
+function transformGfmAutolinkLiterals(tree) {
+  findAndReplace(
+    tree,
+    [
+      [/(https?:\/\/|www(?=\.))([-.\w]+)([^ \t\r\n]*)/i, findUrl],
+      [/([-.\w+]+)@([-\w]+(?:\.[-\w]+)+)/, findEmail]
+    ],
+    {ignore: ['link', 'linkReference']}
+  )
+}
+
+function findUrl($0, protocol, domain, path, match) {
+  var prefix = ''
+  var parts
+  var result
+
+  // Not an expected previous character.
+  if (!previous(match)) {
+    return false
+  }
+
+  // Treat `www` as part of the domain.
+  if (/^w/i.test(protocol)) {
+    domain = protocol + domain
+    protocol = ''
+    prefix = 'http://'
+  }
+
+  if (!isCorrectDomain(domain)) {
+    return false
+  }
+
+  parts = splitUrl(domain + path)
+
+  if (!parts[0]) return false
+
+  result = {
+    type: 'link',
+    title: null,
+    url: prefix + protocol + parts[0],
+    children: [{type: 'text', value: protocol + parts[0]}]
+  }
+
+  if (parts[1]) {
+    result = [result, {type: 'text', value: parts[1]}]
+  }
+
+  return result
+}
+
+function findEmail($0, atext, label, match) {
+  // Not an expected previous character.
+  if (!previous(match, true) || /[_-]$/.test(label)) {
+    return false
+  }
+
+  return {
+    type: 'link',
+    title: null,
+    url: 'mailto:' + atext + '@' + label,
+    children: [{type: 'text', value: atext + '@' + label}]
+  }
+}
+
+function isCorrectDomain(domain) {
+  var parts = domain.split('.')
+
+  if (
+    parts.length < 2 ||
+    (parts[parts.length - 1] &&
+      (/_/.test(parts[parts.length - 1]) ||
+        !/[a-zA-Z\d]/.test(parts[parts.length - 1]))) ||
+    (parts[parts.length - 2] &&
+      (/_/.test(parts[parts.length - 2]) ||
+        !/[a-zA-Z\d]/.test(parts[parts.length - 2])))
+  ) {
+    return false
+  }
+
+  return true
+}
+
+function splitUrl(url) {
+  var trail = /[!"&'),.:;<>?\]}]+$/.exec(url)
+  var closingParenIndex
+  var openingParens
+  var closingParens
+
+  if (trail) {
+    url = url.slice(0, trail.index)
+    trail = trail[0]
+    closingParenIndex = trail.indexOf(')')
+    openingParens = ccount(url, '(')
+    closingParens = ccount(url, ')')
+
+    while (closingParenIndex !== -1 && openingParens > closingParens) {
+      url += trail.slice(0, closingParenIndex + 1)
+      trail = trail.slice(closingParenIndex + 1)
+      closingParenIndex = trail.indexOf(')')
+      closingParens++
+    }
+  }
+
+  return [url, trail]
+}
+
+function previous(match, email) {
+  var code = match.input.charCodeAt(match.index - 1)
+  return (
+    (code !== code || unicodeWhitespace(code) || unicodePunctuation(code)) &&
+    (!email || code !== 47)
+  )
 }
 
 
@@ -39295,7 +40121,7 @@ module.exports = configure([
 ])
 
 function configure(extensions) {
-  var config = {canContainEols: []}
+  var config = {transforms: [], canContainEols: []}
   var length = extensions.length
   var index = -1
 
@@ -39315,7 +40141,7 @@ function extension(config, extension) {
     left = own.call(config, key) ? config[key] : (config[key] = {})
     right = extension[key]
 
-    if (key === 'canContainEols') {
+    if (key === 'canContainEols' || key === 'transforms') {
       config[key] = [].concat(left, right)
     } else {
       Object.assign(left, right)
@@ -39531,14 +40357,23 @@ var u = __nccwpck_require__(42637)
 
 function code(h, node) {
   var value = node.value ? node.value + '\n' : ''
+  // To do: next major, use `node.lang` w/o regex, the splitting’s been going
+  // on for years in remark now.
   var lang = node.lang && node.lang.match(/^[^ \t]+(?=[ \t]|$)/)
   var props = {}
+  var code
 
   if (lang) {
     props.className = ['language-' + lang]
   }
 
-  return h(node.position, 'pre', [h(node, 'code', props, [u('text', value)])])
+  code = h(node, 'code', props, [u('text', value)])
+
+  if (node.meta) {
+    code.data = {meta: node.meta}
+  }
+
+  return h(node.position, 'pre', [code])
 }
 
 
@@ -40507,11 +41342,26 @@ function map(line, index, blank) {
 /***/ }),
 
 /***/ 229:
-/***/ ((module) => {
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 module.exports = hardBreak
 
-function hardBreak() {
+var patternInScope = __nccwpck_require__(18850)
+
+function hardBreak(node, _, context, safe) {
+  var index = -1
+
+  while (++index < context.unsafe.length) {
+    // If we can’t put eols in this construct (setext headings, tables), use a
+    // space instead.
+    if (
+      context.unsafe[index].character === '\n' &&
+      patternInScope(context.stack, context.unsafe[index])
+    ) {
+      return /[ \t]/.test(safe.before) ? '' : ' '
+    }
+  }
+
   return '\\\n'
 }
 
@@ -40729,9 +41579,14 @@ function heading(node, _, context) {
 /***/ ((module) => {
 
 module.exports = html
+html.peek = htmlPeek
 
 function html(node) {
   return node.value || ''
+}
+
+function htmlPeek() {
+  return '<'
 }
 
 
@@ -40869,15 +41724,21 @@ exports.thematicBreak = __nccwpck_require__(13960)
 /***/ }),
 
 /***/ 95645:
-/***/ ((module) => {
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 module.exports = inlineCode
 inlineCode.peek = inlineCodePeek
 
-function inlineCode(node) {
+var patternCompile = __nccwpck_require__(24810)
+
+function inlineCode(node, parent, context) {
   var value = node.value || ''
   var sequence = '`'
-  var pad = ''
+  var index = -1
+  var pattern
+  var expression
+  var match
+  var position
 
   // If there is a single grave accent on its own in the code, use a fence of
   // two.
@@ -40893,10 +41754,42 @@ function inlineCode(node) {
     (/[ \r\n`]/.test(value.charAt(0)) ||
       /[ \r\n`]/.test(value.charAt(value.length - 1)))
   ) {
-    pad = ' '
+    value = ' ' + value + ' '
   }
 
-  return sequence + pad + value + pad + sequence
+  // We have a potential problem: certain characters after eols could result in
+  // blocks being seen.
+  // For example, if someone injected the string `'\n# b'`, then that would
+  // result in an ATX heading.
+  // We can’t escape characters in `inlineCode`, but because eols are
+  // transformed to spaces when going from markdown to HTML anyway, we can swap
+  // them out.
+  while (++index < context.unsafe.length) {
+    pattern = context.unsafe[index]
+
+    // Only look for `atBreak`s.
+    // Btw: note that `atBreak` patterns will always start the regex at LF or
+    // CR.
+    if (!pattern.atBreak) continue
+
+    expression = patternCompile(pattern)
+
+    while ((match = expression.exec(value))) {
+      position = match.index
+
+      // Support CRLF (patterns only look for one of the characters).
+      if (
+        value.charCodeAt(position) === 10 /* `\n` */ &&
+        value.charCodeAt(position - 1) === 13 /* `\r` */
+      ) {
+        position--
+      }
+
+      value = value.slice(0, position) + ' ' + value.slice(match.index + 1)
+    }
+  }
+
+  return sequence + value + sequence
 }
 
 function inlineCodePeek() {
@@ -41360,6 +42253,7 @@ module.exports = [
   {character: '"', inConstruct: 'titleQuote'},
   // A number sign could start an ATX heading if it starts a line.
   {atBreak: true, character: '#'},
+  {character: '#', inConstruct: 'headingAtx', after: '(?:[\r\n]|$)'},
   // Dollar sign and percentage are not used in markdown.
   // An ampersand could start a character reference.
   {character: '&', after: '[#A-Za-z]', inConstruct: 'phrasing'},
@@ -41400,13 +42294,10 @@ module.exports = [
   // Question mark and at sign are not used in markdown for constructs.
   // A left bracket can start definitions, references, labels,
   {atBreak: true, character: '['},
-  {
-    character: '[',
-    inConstruct: ['phrasing', 'label', 'reference']
-  },
+  {character: '[', inConstruct: ['phrasing', 'label', 'reference']},
   // A backslash can start an escape (when followed by punctuation) or a
   // hard break (when followed by an eol).
-  {character: '\\', after: '[!-/:-@[-`{-~]'},
+  // Note: typical escapes are handled in `safe`!
   {character: '\\', after: '[\\r\\n]', inConstruct: 'phrasing'},
   // A right bracket can exit labels.
   {
@@ -41739,12 +42630,31 @@ function phrasing(parent, context, safeOptions) {
       after = safeOptions.after
     }
 
+    // In some cases, html (text) can be found in phrasing right after an eol.
+    // When we’d serialize that, in most cases that would be seen as html
+    // (flow).
+    // As we can’t escape or so to prevent it from happening, we take a somewhat
+    // reasonable approach: replace that eol with a space.
+    // See: <https://github.com/syntax-tree/mdast-util-to-markdown/issues/15>
+    if (
+      results.length > 0 &&
+      (before === '\r' || before === '\n') &&
+      child.type === 'html'
+    ) {
+      results[results.length - 1] = results[results.length - 1].replace(
+        /(\r?\n|\r)$/,
+        ' '
+      )
+      before = ' '
+    }
+
     results.push(
       context.handle(child, parent, context, {
         before: before,
         after: after
       })
     )
+
     before = results[results.length - 1].slice(-1)
   }
 
@@ -41768,7 +42678,7 @@ function formatCodeAsIndented(node, context) {
     // And there’s a non-whitespace character…
     /[^ \r\n]/.test(node.value) &&
     // And the value doesn’t start or end in a blank…
-    !/^[\t ]*[\r\n]|[\r\n][\t ]*$/.test(node.value)
+    !/^[\t ]*(?:[\r\n]|$)|(?:^|[\r\n])[\t ]*$/.test(node.value)
   )
 }
 
@@ -41856,10 +42766,82 @@ function indentLines(value, map) {
 
 /***/ }),
 
-/***/ 83906:
+/***/ 24810:
 /***/ ((module) => {
 
+module.exports = patternCompile
+
+function patternCompile(pattern) {
+  var before
+  var after
+
+  if (!pattern._compiled) {
+    before = pattern.before ? '(?:' + pattern.before + ')' : ''
+    after = pattern.after ? '(?:' + pattern.after + ')' : ''
+
+    if (pattern.atBreak) {
+      before = '[\\r\\n][\\t ]*' + before
+    }
+
+    pattern._compiled = new RegExp(
+      (before ? '(' + before + ')' : '') +
+        (/[|\\{}()[\]^$+*?.-]/.test(pattern.character) ? '\\' : '') +
+        pattern.character +
+        (after || ''),
+      'g'
+    )
+  }
+
+  return pattern._compiled
+}
+
+
+/***/ }),
+
+/***/ 18850:
+/***/ ((module) => {
+
+module.exports = patternInScope
+
+function patternInScope(stack, pattern) {
+  return (
+    listInScope(stack, pattern.inConstruct, true) &&
+    !listInScope(stack, pattern.notInConstruct)
+  )
+}
+
+function listInScope(stack, list, none) {
+  var index
+
+  if (!list) {
+    return none
+  }
+
+  if (typeof list === 'string') {
+    list = [list]
+  }
+
+  index = -1
+
+  while (++index < list.length) {
+    if (stack.indexOf(list[index]) !== -1) {
+      return true
+    }
+  }
+
+  return false
+}
+
+
+/***/ }),
+
+/***/ 83906:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
 module.exports = safe
+
+var patternCompile = __nccwpck_require__(24810)
+var patternInScope = __nccwpck_require__(18850)
 
 function safe(context, input, config) {
   var value = (config.before || '') + (input || '') + (config.after || '')
@@ -41879,19 +42861,16 @@ function safe(context, input, config) {
   while (++index < context.unsafe.length) {
     pattern = context.unsafe[index]
 
-    if (
-      !inScope(context.stack, pattern.inConstruct, true) ||
-      inScope(context.stack, pattern.notInConstruct)
-    ) {
+    if (!patternInScope(context.stack, pattern)) {
       continue
     }
 
-    expression =
-      pattern._compiled || (pattern._compiled = toExpression(pattern))
+    expression = patternCompile(pattern)
 
     while ((match = expression.exec(value))) {
       before = 'before' in pattern || pattern.atBreak
       after = 'after' in pattern
+
       position = match.index + (before ? match[1].length : 0)
 
       if (positions.indexOf(position) === -1) {
@@ -41940,7 +42919,10 @@ function safe(context, input, config) {
     }
 
     if (start !== position) {
-      result.push(value.slice(start, position))
+      // If we have to use a character reference, an ampersand would be more
+      // correct, but as backslashes only care about punctuation, either will
+      // do the trick
+      result.push(escapeBackslashes(value.slice(start, position), '\\'))
     }
 
     start = position
@@ -41960,52 +42942,40 @@ function safe(context, input, config) {
     }
   }
 
-  result.push(value.slice(start, end))
+  result.push(escapeBackslashes(value.slice(start, end), config.after))
 
   return result.join('')
 }
 
-function inScope(stack, list, none) {
-  var index
-
-  if (!list) {
-    return none
-  }
-
-  if (typeof list === 'string') {
-    list = [list]
-  }
-
-  index = -1
-
-  while (++index < list.length) {
-    if (stack.indexOf(list[index]) !== -1) {
-      return true
-    }
-  }
-
-  return false
-}
-
-function toExpression(pattern) {
-  var before = pattern.before ? '(?:' + pattern.before + ')' : ''
-  var after = pattern.after ? '(?:' + pattern.after + ')' : ''
-
-  if (pattern.atBreak) {
-    before = '[\\r\\n][\\t ]*' + before
-  }
-
-  return new RegExp(
-    (before ? '(' + before + ')' : '') +
-      (/[|\\{}()[\]^$+*?.-]/.test(pattern.character) ? '\\' : '') +
-      pattern.character +
-      (after || ''),
-    'g'
-  )
-}
-
 function numerical(a, b) {
   return a - b
+}
+
+function escapeBackslashes(value, after) {
+  var expression = /\\(?=[!-/:-@[-`{-~])/g
+  var positions = []
+  var results = []
+  var index = -1
+  var start = 0
+  var whole = value + after
+  var match
+
+  while ((match = expression.exec(whole))) {
+    positions.push(match.index)
+  }
+
+  while (++index < positions.length) {
+    if (start !== positions[index]) {
+      results.push(value.slice(start, positions[index]))
+    }
+
+    results.push('\\')
+    start = positions[index]
+  }
+
+  results.push(value.slice(start))
+
+  return results.join('')
 }
 
 
@@ -42564,18 +43534,18 @@ var markdownLineEnding = __nccwpck_require__(67506)
 var unicodePunctuation = __nccwpck_require__(79372)
 var unicodeWhitespace = __nccwpck_require__(59968)
 
-var www = {tokenize: tokenizeWww}
-var http = {tokenize: tokenizeHttp}
-var domain = {tokenize: tokenizeDomain}
-var path = {tokenize: tokenizePath}
-var punctuation = {tokenize: tokenizePunctuation}
-var domainPunctuation = {tokenize: tokenizeDomainPunctuation}
-var paren = {tokenize: tokenizeParen}
-var namedCharacterReference = {tokenize: tokenizeNamedCharacterReference}
+var www = {tokenize: tokenizeWww, partial: true}
+var domain = {tokenize: tokenizeDomain, partial: true}
+var path = {tokenize: tokenizePath, partial: true}
+var punctuation = {tokenize: tokenizePunctuation, partial: true}
+var namedCharacterReference = {
+  tokenize: tokenizeNamedCharacterReference,
+  partial: true
+}
 
-var wwwAutolink = {tokenize: tokenizeWwwAutolink, previous: previous}
-var httpAutolink = {tokenize: tokenizeHttpAutolink, previous: previous}
-var emailAutolink = {tokenize: tokenizeEmailAutolink, previous: previous}
+var wwwAutolink = {tokenize: tokenizeWwwAutolink, previous: previousWww}
+var httpAutolink = {tokenize: tokenizeHttpAutolink, previous: previousHttp}
+var emailAutolink = {tokenize: tokenizeEmailAutolink, previous: previousEmail}
 
 var text = {}
 
@@ -42618,7 +43588,11 @@ function tokenizeEmailAutolink(effects, ok, nok) {
 
   function start(code) {
     /* istanbul ignore next - hooks. */
-    if (!gfmAtext(code) || !previous(self.previous)) {
+    if (
+      !gfmAtext(code) ||
+      !previousEmail(self.previous) ||
+      previous(self.events)
+    ) {
       return nok(code)
     }
 
@@ -42703,12 +43677,19 @@ function tokenizeWwwAutolink(effects, ok, nok) {
 
   function start(code) {
     /* istanbul ignore next - hooks. */
-    if ((code !== 87 && code - 32 !== 87) || !previous(self.previous)) {
+    if (
+      (code !== 87 && code - 32 !== 87) ||
+      !previousWww(self.previous) ||
+      previous(self.events)
+    ) {
       return nok(code)
     }
 
     effects.enter('literalAutolink')
     effects.enter('literalAutolinkWww')
+    // For `www.` we check instead of attempt, because when it matches, GH
+    // treats it as part of a domain (yes, it says a valid domain must come
+    // after `www.`, but that’s not how it’s implemented by them).
     return effects.check(
       www,
       effects.attempt(domain, effects.attempt(path, done), nok),
@@ -42730,31 +43711,16 @@ function tokenizeHttpAutolink(effects, ok, nok) {
 
   function start(code) {
     /* istanbul ignore next - hooks. */
-    if ((code !== 72 && code - 32 !== 72) || !previous(self.previous)) {
+    if (
+      (code !== 72 && code - 32 !== 72) ||
+      !previousHttp(self.previous) ||
+      previous(self.events)
+    ) {
       return nok(code)
     }
 
     effects.enter('literalAutolink')
     effects.enter('literalAutolinkHttp')
-    return effects.check(
-      http,
-      effects.attempt(domain, effects.attempt(path, done), nok),
-      nok
-    )(code)
-  }
-
-  function done(code) {
-    effects.exit('literalAutolinkHttp')
-    effects.exit('literalAutolink')
-    return ok(code)
-  }
-}
-
-function tokenizeHttp(effects, ok, nok) {
-  return start
-
-  function start(code) {
-    // Assume a `h`.
     effects.consume(code)
     return t1
   }
@@ -42834,7 +43800,13 @@ function tokenizeHttp(effects, ok, nok) {
       unicodeWhitespace(code) ||
       unicodePunctuation(code)
       ? nok(code)
-      : ok(code)
+      : effects.attempt(domain, effects.attempt(path, done), nok)(code)
+  }
+
+  function done(code) {
+    effects.exit('literalAutolinkHttp')
+    effects.exit('literalAutolink')
+    return ok(code)
   }
 }
 
@@ -42883,22 +43855,12 @@ function tokenizeWww(effects, ok, nok) {
 }
 
 function tokenizeDomain(effects, ok, nok) {
-  var opened
   var hasUnderscoreInLastSegment
   var hasUnderscoreInLastLastSegment
 
   return domain
 
   function domain(code) {
-    if (
-      // `/`
-      code === 47 ||
-      asciiControl(code) ||
-      unicodeWhitespace(code)
-    ) {
-      return done(code)
-    }
-
     // `&`
     if (code === 38) {
       return effects.check(
@@ -42908,19 +43870,23 @@ function tokenizeDomain(effects, ok, nok) {
       )(code)
     }
 
-    if (
-      // `.`
-      code === 46 ||
-      trailingPunctuation(code)
-    ) {
-      return effects.check(
-        domainPunctuation,
-        done,
-        punctuationContinuation
-      )(code)
+    if (code === 46 /* `.` */ || code === 95 /* `_` */) {
+      return effects.check(punctuation, done, punctuationContinuation)(code)
     }
 
-    open()
+    // GH documents that only alphanumerics (other than `-`, `.`, and `_`) can
+    // occur, which sounds like ASCII only, but they also support `www.點看.com`,
+    // so that’s Unicode.
+    // Instead of some new production for Unicode alphanumerics, markdown
+    // already has that for Unicode punctuation and whitespace, so use those.
+    if (
+      asciiControl(code) ||
+      unicodeWhitespace(code) ||
+      (code !== 45 /* `-` */ && unicodePunctuation(code))
+    ) {
+      return done(code)
+    }
+
     effects.consume(code)
     return domain
   }
@@ -42930,7 +43896,6 @@ function tokenizeDomain(effects, ok, nok) {
     if (code === 46) {
       hasUnderscoreInLastLastSegment = hasUnderscoreInLastSegment
       hasUnderscoreInLastSegment = undefined
-      open()
       effects.consume(code)
       return domain
     }
@@ -42938,25 +43903,12 @@ function tokenizeDomain(effects, ok, nok) {
     // `_`
     if (code === 95) hasUnderscoreInLastSegment = true
 
-    open()
     effects.consume(code)
     return domain
   }
 
-  function open() {
-    if (!opened) {
-      effects.enter('literalAutolinkDomain')
-      opened = true
-    }
-  }
-
   function done(code) {
-    if (
-      opened &&
-      !hasUnderscoreInLastLastSegment &&
-      !hasUnderscoreInLastSegment
-    ) {
-      effects.exit('literalAutolinkDomain')
+    if (!hasUnderscoreInLastLastSegment && !hasUnderscoreInLastSegment) {
       return ok(code)
     }
 
@@ -42967,24 +43919,14 @@ function tokenizeDomain(effects, ok, nok) {
 function tokenizePath(effects, ok) {
   var balance = 0
 
-  return start
-
-  function start(code) {
-    // `/`
-    return code === 47 ? atPathStart(code) : ok(code)
-  }
-
-  function atPathStart(code) {
-    effects.enter('literalAutolinkPath')
-    return inPath(code)
-  }
+  return inPath
 
   function inPath(code) {
     // `&`
     if (code === 38) {
       return effects.check(
         namedCharacterReference,
-        atPathEnd,
+        ok,
         continuedPunctuation
       )(code)
     }
@@ -42996,15 +43938,19 @@ function tokenizePath(effects, ok) {
 
     // `)`
     if (code === 41) {
-      return effects.check(paren, parenAtPathEnd, continuedPunctuation)(code)
+      return effects.check(
+        punctuation,
+        parenAtPathEnd,
+        continuedPunctuation
+      )(code)
     }
 
     if (pathEnd(code)) {
-      return atPathEnd(code)
+      return ok(code)
     }
 
     if (trailingPunctuation(code)) {
-      return effects.check(punctuation, atPathEnd, continuedPunctuation)(code)
+      return effects.check(punctuation, ok, continuedPunctuation)(code)
     }
 
     effects.consume(code)
@@ -43018,12 +43964,7 @@ function tokenizePath(effects, ok) {
 
   function parenAtPathEnd(code) {
     balance--
-    return balance < 0 ? atPathEnd(code) : continuedPunctuation(code)
-  }
-
-  function atPathEnd(code) {
-    effects.exit('literalAutolinkPath')
-    return ok(code)
+    return balance < 0 ? ok(code) : continuedPunctuation(code)
   }
 }
 
@@ -43032,7 +43973,6 @@ function tokenizeNamedCharacterReference(effects, ok, nok) {
 
   function start(code) {
     // Assume an ampersand.
-    effects.enter('literalAutolinkCharacterReferenceNamed')
     effects.consume(code)
     return inside
   }
@@ -43055,30 +43995,7 @@ function tokenizeNamedCharacterReference(effects, ok, nok) {
   function after(code) {
     // If the named character reference is followed by the end of the path, it’s
     // not continued punctuation.
-    effects.exit('literalAutolinkCharacterReferenceNamed')
     return pathEnd(code) ? ok(code) : nok(code)
-  }
-}
-
-function tokenizeParen(effects, ok, nok) {
-  return start
-
-  function start(code) {
-    // Assume a right paren.
-    effects.enter('literalAutolinkParen')
-    effects.consume(code)
-    return after
-  }
-
-  function after(code) {
-    // If the punctuation marker is followed by the end of the path, it’s not
-    // continued punctuation.
-    effects.exit('literalAutolinkParen')
-    return pathEnd(code) ||
-      // `)`
-      code === 41
-      ? ok(code)
-      : nok(code)
   }
 }
 
@@ -43086,25 +44003,6 @@ function tokenizePunctuation(effects, ok, nok) {
   return start
 
   function start(code) {
-    effects.enter('literalAutolinkPunctuation')
-    // Always a valid trailing punctuation marker.
-    effects.consume(code)
-    return after
-  }
-
-  function after(code) {
-    // If the punctuation marker is followed by the end of the path, it’s not
-    // continued punctuation.
-    effects.exit('literalAutolinkPunctuation')
-    return pathEnd(code) ? ok(code) : nok(code)
-  }
-}
-
-function tokenizeDomainPunctuation(effects, ok, nok) {
-  return start
-
-  function start(code) {
-    effects.enter('literalAutolinkPunctuation')
     // Always a valid trailing punctuation marker.
     effects.consume(code)
     return after
@@ -43119,7 +44017,6 @@ function tokenizeDomainPunctuation(effects, ok, nok) {
 
     // If the punctuation marker is followed by the end of the path, it’s not
     // continued punctuation.
-    effects.exit('literalAutolinkPunctuation')
     return pathEnd(code) ? ok(code) : nok(code)
   }
 }
@@ -43170,35 +44067,46 @@ function pathEnd(code) {
 
 function gfmAtext(code) {
   return (
-    // `+`
-    code === 43 ||
-    // `-`
-    code === 45 ||
-    // `.`
-    code === 46 ||
-    // `_`
-    code === 95 ||
+    code === 43 /* `+` */ ||
+    code === 45 /* `-` */ ||
+    code === 46 /* `.` */ ||
+    code === 95 /* `_` */ ||
     asciiAlphanumeric(code)
   )
 }
 
-function previous(code) {
+function previousWww(code) {
   return (
-    // EOF.
     code === null ||
-    // CR, LF, CRLF, HT, VS.
     code < 0 ||
-    // Space.
-    code === 32 ||
-    // `(`
-    code === 40 ||
-    // `*`
-    code === 42 ||
-    // `_`.
-    code === 95 ||
-    // `~`
-    code === 126
+    code === 32 /* ` ` */ ||
+    code === 40 /* `(` */ ||
+    code === 42 /* `*` */ ||
+    code === 95 /* `_` */ ||
+    code === 126 /* `~` */
   )
+}
+
+function previousHttp(code) {
+  return code === null || !asciiAlpha(code)
+}
+
+function previousEmail(code) {
+  return code !== 47 /* `/` */ && previousHttp(code)
+}
+
+function previous(events) {
+  var index = events.length
+
+  while (index--) {
+    if (
+      (events[index][1].type === 'labelLink' ||
+        events[index][1].type === 'labelImage') &&
+      !events[index][1]._balanced
+    ) {
+      return true
+    }
+  }
 }
 
 
@@ -43448,9 +44356,12 @@ function resolveTable(events, context) {
 
     if (
       events[index][0] === 'exit' &&
-      (token.type === 'tableCellDivider' || token.type === 'tableRow') &&
       cellStart &&
-      cellStart + 1 < index
+      cellStart + 1 < index &&
+      (token.type === 'tableCellDivider' ||
+        (token.type === 'tableRow' &&
+          (cellStart + 3 < index ||
+            events[cellStart][1].type !== 'whitespace')))
     ) {
       cell = {
         type: inDelimiterRow
@@ -44241,8 +45152,8 @@ module.exports = markdownSpace
 "use strict";
 
 
-var regexCheck = __nccwpck_require__(31028)
 var unicodePunctuationRegex = __nccwpck_require__(69994)
+var regexCheck = __nccwpck_require__(31028)
 
 // In fact adds to the bundle size.
 
@@ -44456,9 +45367,9 @@ var labelEnd = __nccwpck_require__(39797)
 var labelStartImage = __nccwpck_require__(37860)
 var labelStartLink = __nccwpck_require__(65908)
 var lineEnding = __nccwpck_require__(75183)
-var thematicBreak = __nccwpck_require__(35590)
 var list = __nccwpck_require__(53107)
 var setextUnderline = __nccwpck_require__(21196)
+var thematicBreak = __nccwpck_require__(35590)
 
 var document = {
   42: list,
@@ -44895,9 +45806,9 @@ exports.tokenize = tokenize
 
 Object.defineProperty(exports, "__esModule", ({value: true}))
 
+var content = __nccwpck_require__(71259)
 var factorySpace = __nccwpck_require__(38200)
 var partialBlankLine = __nccwpck_require__(72244)
-var content = __nccwpck_require__(71259)
 
 var tokenize = initializeFlow
 
@@ -45170,13 +46081,13 @@ exports.text = text
 "use strict";
 
 
-var miniflat = __nccwpck_require__(39042)
 var content = __nccwpck_require__(45834)
 var document = __nccwpck_require__(49517)
 var flow = __nccwpck_require__(99670)
 var text = __nccwpck_require__(67492)
 var combineExtensions = __nccwpck_require__(78602)
 var createTokenizer = __nccwpck_require__(44845)
+var miniflat = __nccwpck_require__(39042)
 var constructs = __nccwpck_require__(30289)
 
 function parse(options) {
@@ -45330,12 +46241,12 @@ module.exports = preprocess
 "use strict";
 
 
-var chunkedSplice = __nccwpck_require__(80778)
 var chunkedPush = __nccwpck_require__(34455)
-var shallow = __nccwpck_require__(1479)
-var resolveAll = __nccwpck_require__(32004)
+var chunkedSplice = __nccwpck_require__(80778)
 var classifyCharacter = __nccwpck_require__(81324)
 var movePoint = __nccwpck_require__(6985)
+var resolveAll = __nccwpck_require__(32004)
+var shallow = __nccwpck_require__(1479)
 
 var attention = {
   name: 'attention',
@@ -45524,8 +46435,8 @@ module.exports = attention
 "use strict";
 
 
-var asciiAlphanumeric = __nccwpck_require__(30598)
 var asciiAlpha = __nccwpck_require__(43847)
+var asciiAlphanumeric = __nccwpck_require__(30598)
 var asciiAtext = __nccwpck_require__(80245)
 var asciiControl = __nccwpck_require__(1336)
 
@@ -45877,9 +46788,9 @@ module.exports = characterReference
 
 
 var markdownLineEnding = __nccwpck_require__(67506)
-var factorySpace = __nccwpck_require__(38200)
-var prefixSize = __nccwpck_require__(63722)
 var markdownLineEndingOrSpace = __nccwpck_require__(9180)
+var prefixSize = __nccwpck_require__(63722)
+var factorySpace = __nccwpck_require__(38200)
 
 var codeFenced = {
   name: 'codeFenced',
@@ -46060,10 +46971,10 @@ module.exports = codeFenced
 "use strict";
 
 
-var chunkedSplice = __nccwpck_require__(80778)
 var markdownLineEnding = __nccwpck_require__(67506)
-var factorySpace = __nccwpck_require__(38200)
+var chunkedSplice = __nccwpck_require__(80778)
 var prefixSize = __nccwpck_require__(63722)
+var factorySpace = __nccwpck_require__(38200)
 
 var codeIndented = {
   name: 'codeIndented',
@@ -46311,9 +47222,9 @@ module.exports = codeText
 
 
 var markdownLineEnding = __nccwpck_require__(67506)
-var factorySpace = __nccwpck_require__(38200)
 var prefixSize = __nccwpck_require__(63722)
 var subtokenize = __nccwpck_require__(10014)
+var factorySpace = __nccwpck_require__(38200)
 
 // No name because it must not be turned off.
 var content = {
@@ -46417,12 +47328,12 @@ module.exports = content
 "use strict";
 
 
-var normalizeIdentifier = __nccwpck_require__(80712)
 var markdownLineEnding = __nccwpck_require__(67506)
-var factorySpace = __nccwpck_require__(38200)
 var markdownLineEndingOrSpace = __nccwpck_require__(9180)
+var normalizeIdentifier = __nccwpck_require__(80712)
 var factoryDestination = __nccwpck_require__(9851)
 var factoryLabel = __nccwpck_require__(90349)
+var factorySpace = __nccwpck_require__(38200)
 var factoryWhitespace = __nccwpck_require__(93168)
 var factoryTitle = __nccwpck_require__(89469)
 
@@ -46540,9 +47451,9 @@ module.exports = definition
 "use strict";
 
 
-var markdownLineEnding = __nccwpck_require__(67506)
-var markdownLineEndingOrSpace = __nccwpck_require__(9180)
 var asciiControl = __nccwpck_require__(1336)
+var markdownLineEndingOrSpace = __nccwpck_require__(9180)
+var markdownLineEnding = __nccwpck_require__(67506)
 
 // eslint-disable-next-line max-params
 function destinationFactory(
@@ -46570,7 +47481,7 @@ function destinationFactory(
       return destinationEnclosedBefore
     }
 
-    if (asciiControl(code)) {
+    if (asciiControl(code) || code === 41) {
       return nok(code)
     }
 
@@ -46975,11 +47886,11 @@ module.exports = hardBreakEscape
 "use strict";
 
 
-var chunkedSplice = __nccwpck_require__(80778)
 var markdownLineEnding = __nccwpck_require__(67506)
-var markdownSpace = __nccwpck_require__(95989)
-var factorySpace = __nccwpck_require__(38200)
 var markdownLineEndingOrSpace = __nccwpck_require__(9180)
+var markdownSpace = __nccwpck_require__(95989)
+var chunkedSplice = __nccwpck_require__(80778)
+var factorySpace = __nccwpck_require__(38200)
 
 var headingAtx = {
   name: 'headingAtx',
@@ -47112,15 +48023,15 @@ module.exports = headingAtx
 "use strict";
 
 
-var fromCharCode = __nccwpck_require__(63531)
+var asciiAlpha = __nccwpck_require__(43847)
 var asciiAlphanumeric = __nccwpck_require__(30598)
 var markdownLineEnding = __nccwpck_require__(67506)
-var markdownSpace = __nccwpck_require__(95989)
-var partialBlankLine = __nccwpck_require__(72244)
 var markdownLineEndingOrSpace = __nccwpck_require__(9180)
-var asciiAlpha = __nccwpck_require__(43847)
+var markdownSpace = __nccwpck_require__(95989)
+var fromCharCode = __nccwpck_require__(63531)
 var htmlBlockNames = __nccwpck_require__(5159)
 var htmlRawNames = __nccwpck_require__(74677)
+var partialBlankLine = __nccwpck_require__(72244)
 
 var htmlFlow = {
   name: 'htmlFlow',
@@ -47606,12 +48517,12 @@ module.exports = htmlFlow
 "use strict";
 
 
+var asciiAlpha = __nccwpck_require__(43847)
 var asciiAlphanumeric = __nccwpck_require__(30598)
 var markdownLineEnding = __nccwpck_require__(67506)
+var markdownLineEndingOrSpace = __nccwpck_require__(9180)
 var markdownSpace = __nccwpck_require__(95989)
 var factorySpace = __nccwpck_require__(38200)
-var markdownLineEndingOrSpace = __nccwpck_require__(9180)
-var asciiAlpha = __nccwpck_require__(43847)
 
 var htmlText = {
   name: 'htmlText',
@@ -48049,16 +48960,16 @@ module.exports = htmlText
 "use strict";
 
 
-var chunkedSplice = __nccwpck_require__(80778)
-var chunkedPush = __nccwpck_require__(34455)
-var normalizeIdentifier = __nccwpck_require__(80712)
-var shallow = __nccwpck_require__(1479)
-var resolveAll = __nccwpck_require__(32004)
 var markdownLineEndingOrSpace = __nccwpck_require__(9180)
+var chunkedPush = __nccwpck_require__(34455)
+var chunkedSplice = __nccwpck_require__(80778)
+var normalizeIdentifier = __nccwpck_require__(80712)
+var resolveAll = __nccwpck_require__(32004)
+var shallow = __nccwpck_require__(1479)
 var factoryDestination = __nccwpck_require__(9851)
 var factoryLabel = __nccwpck_require__(90349)
-var factoryWhitespace = __nccwpck_require__(93168)
 var factoryTitle = __nccwpck_require__(89469)
+var factoryWhitespace = __nccwpck_require__(93168)
 
 var labelEnd = {
   name: 'labelEnd',
@@ -48513,12 +49424,12 @@ module.exports = lineEnding
 "use strict";
 
 
+var asciiDigit = __nccwpck_require__(86996)
 var markdownSpace = __nccwpck_require__(95989)
+var prefixSize = __nccwpck_require__(63722)
+var sizeChunks = __nccwpck_require__(45041)
 var factorySpace = __nccwpck_require__(38200)
 var partialBlankLine = __nccwpck_require__(72244)
-var sizeChunks = __nccwpck_require__(45041)
-var prefixSize = __nccwpck_require__(63722)
-var asciiDigit = __nccwpck_require__(86996)
 var thematicBreak = __nccwpck_require__(35590)
 
 var list = {
@@ -48647,8 +49558,15 @@ function tokenizeListContinuation(effects, ok, nok) {
   function onBlank(code) {
     self.containerState.furtherBlankLines =
       self.containerState.furtherBlankLines ||
-      self.containerState.initialBlankLine
-    return ok(code)
+      self.containerState.initialBlankLine // We have a blank line.
+    // Still, try to consume at most the items size.
+
+    return factorySpace(
+      effects,
+      ok,
+      'listItemIndent',
+      self.containerState.size + 1
+    )(code)
   }
 
   function notBlank(code) {
@@ -48756,8 +49674,8 @@ module.exports = partialBlankLine
 
 
 var markdownLineEnding = __nccwpck_require__(67506)
-var factorySpace = __nccwpck_require__(38200)
 var shallow = __nccwpck_require__(1479)
+var factorySpace = __nccwpck_require__(38200)
 
 var setextUnderline = {
   name: 'setextUnderline',
@@ -49100,13 +50018,13 @@ module.exports = combineExtensions
 
 
 var assign = __nccwpck_require__(93512)
-var chunkedSplice = __nccwpck_require__(80778)
-var chunkedPush = __nccwpck_require__(34455)
-var miniflat = __nccwpck_require__(39042)
 var markdownLineEnding = __nccwpck_require__(67506)
-var shallow = __nccwpck_require__(1479)
+var chunkedPush = __nccwpck_require__(34455)
+var chunkedSplice = __nccwpck_require__(80778)
+var miniflat = __nccwpck_require__(39042)
 var resolveAll = __nccwpck_require__(32004)
 var serializeChunks = __nccwpck_require__(74363)
+var shallow = __nccwpck_require__(1479)
 var sliceChunks = __nccwpck_require__(97271)
 
 // Create a tokenizer.
@@ -49925,7 +50843,7 @@ const util = __nccwpck_require__(31669);
 const braces = __nccwpck_require__(50610);
 const picomatch = __nccwpck_require__(78569);
 const utils = __nccwpck_require__(30479);
-const isEmptyString = val => typeof val === 'string' && (val === '' || val === './');
+const isEmptyString = val => val === '' || val === './';
 
 /**
  * Returns an array of strings that match one or more glob patterns.
@@ -49937,9 +50855,9 @@ const isEmptyString = val => typeof val === 'string' && (val === '' || val === '
  * console.log(mm(['a.js', 'a.txt'], ['*.js']));
  * //=> [ 'a.js' ]
  * ```
- * @param {String|Array<string>} list List of strings to match.
- * @param {String|Array<string>} patterns One or more glob patterns to use for matching.
- * @param {Object} options See available [options](#options)
+ * @param {String|Array<string>} `list` List of strings to match.
+ * @param {String|Array<string>} `patterns` One or more glob patterns to use for matching.
+ * @param {Object} `options` See available [options](#options)
  * @return {Array} Returns an array of matches
  * @summary false
  * @api public
@@ -50034,9 +50952,9 @@ micromatch.matcher = (pattern, options) => picomatch(pattern, options);
  * console.log(mm.isMatch('a.a', ['b.*', '*.a'])); //=> true
  * console.log(mm.isMatch('a.a', 'b.*')); //=> false
  * ```
- * @param {String} str The string to test.
- * @param {String|Array} patterns One or more glob patterns to use for matching.
- * @param {Object} [options] See available [options](#options).
+ * @param {String} `str` The string to test.
+ * @param {String|Array} `patterns` One or more glob patterns to use for matching.
+ * @param {Object} `[options]` See available [options](#options).
  * @return {Boolean} Returns true if any patterns match `str`
  * @api public
  */
@@ -50102,7 +51020,7 @@ micromatch.not = (list, patterns, options = {}) => {
  * @param {String} `str` The string to match.
  * @param {String|Array} `patterns` Glob pattern to use for matching.
  * @param {Object} `options` See available [options](#options) for changing how matches are performed
- * @return {Boolean} Returns true if the patter matches any part of `str`.
+ * @return {Boolean} Returns true if any of the patterns matches any part of `str`.
  * @api public
  */
 
@@ -50173,7 +51091,7 @@ micromatch.matchKeys = (obj, patterns, options) => {
  * @param {String|Array} `list` The string or array of strings to test. Returns as soon as the first match is found.
  * @param {String|Array} `patterns` One or more glob patterns to use for matching.
  * @param {Object} `options` See available [options](#options) for changing how matches are performed
- * @return {Boolean} Returns true if any patterns match `str`
+ * @return {Boolean} Returns true if any `patterns` matches any of the strings in `list`
  * @api public
  */
 
@@ -50209,7 +51127,7 @@ micromatch.some = (list, patterns, options) => {
  * @param {String|Array} `list` The string or array of strings to test.
  * @param {String|Array} `patterns` One or more glob patterns to use for matching.
  * @param {Object} `options` See available [options](#options) for changing how matches are performed
- * @return {Boolean} Returns true if any patterns match `str`
+ * @return {Boolean} Returns true if all `patterns` matches all of the strings in `list`
  * @api public
  */
 
@@ -50275,7 +51193,7 @@ micromatch.all = (str, patterns, options) => {
  * @param {String} `glob` Glob pattern to use for matching.
  * @param {String} `input` String to match
  * @param {Object} `options` See available [options](#options) for changing how matches are performed
- * @return {Boolean} Returns an array of captures if the input matches the glob pattern, otherwise `null`.
+ * @return {Array|null} Returns an array of captures if the input matches the glob pattern, otherwise `null`.
  * @api public
  */
 
@@ -51326,7 +52244,7 @@ function regExpEscape (s) {
 "use strict";
 
 
-var isExtendable = __nccwpck_require__(99395);
+var isExtendable = __nccwpck_require__(70429);
 var forIn = __nccwpck_require__(27198);
 
 function mixinDeep(target, objects) {
@@ -51388,73 +52306,6 @@ function isValidKey(key) {
  */
 
 module.exports = mixinDeep;
-
-
-/***/ }),
-
-/***/ 99395:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-"use strict";
-/*!
- * is-extendable <https://github.com/jonschlinkert/is-extendable>
- *
- * Copyright (c) 2015-2017, Jon Schlinkert.
- * Released under the MIT License.
- */
-
-
-
-var isPlainObject = __nccwpck_require__(16804);
-
-module.exports = function isExtendable(val) {
-  return isPlainObject(val) || typeof val === 'function' || Array.isArray(val);
-};
-
-
-/***/ }),
-
-/***/ 16804:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-"use strict";
-/*!
- * is-plain-object <https://github.com/jonschlinkert/is-plain-object>
- *
- * Copyright (c) 2014-2017, Jon Schlinkert.
- * Released under the MIT License.
- */
-
-
-
-var isObject = __nccwpck_require__(5509);
-
-function isObjectObject(o) {
-  return isObject(o) === true
-    && Object.prototype.toString.call(o) === '[object Object]';
-}
-
-module.exports = function isPlainObject(o) {
-  var ctor,prot;
-
-  if (isObjectObject(o) === false) return false;
-
-  // If has modified constructor
-  ctor = o.constructor;
-  if (typeof ctor !== 'function') return false;
-
-  // If has modified prototype
-  prot = ctor.prototype;
-  if (isObjectObject(prot) === false) return false;
-
-  // If constructor does not have an Object-specific method
-  if (prot.hasOwnProperty('isPrototypeOf') === false) {
-    return false;
-  }
-
-  // Most likely a plain Object
-  return true;
-};
 
 
 /***/ }),
@@ -62889,7 +63740,7 @@ module.exports.has = has;
 
 
 
-var isDescriptor = __nccwpck_require__(20567);
+var isDescriptor = __nccwpck_require__(24119);
 
 module.exports = function defineProperty(obj, prop, val) {
   if (typeof obj !== 'object' && typeof obj !== 'function') {
@@ -62911,6 +63762,83 @@ module.exports = function defineProperty(obj, prop, val) {
     value: val
   });
 };
+
+
+/***/ }),
+
+/***/ 76238:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+/*!
+ * is-accessor-descriptor <https://github.com/jonschlinkert/is-accessor-descriptor>
+ *
+ * Copyright (c) 2015, Jon Schlinkert.
+ * Licensed under the MIT License.
+ */
+
+
+
+var typeOf = __nccwpck_require__(25295);
+
+// accessor descriptor properties
+var accessor = {
+  get: 'function',
+  set: 'function',
+  configurable: 'boolean',
+  enumerable: 'boolean'
+};
+
+function isAccessorDescriptor(obj, prop) {
+  if (typeof prop === 'string') {
+    var val = Object.getOwnPropertyDescriptor(obj, prop);
+    return typeof val !== 'undefined';
+  }
+
+  if (typeOf(obj) !== 'object') {
+    return false;
+  }
+
+  if (has(obj, 'value') || has(obj, 'writable')) {
+    return false;
+  }
+
+  if (!has(obj, 'get') || typeof obj.get !== 'function') {
+    return false;
+  }
+
+  // tldr: it's valid to have "set" be undefined
+  // "set" might be undefined if `Object.getOwnPropertyDescriptor`
+  // was used to get the value, and only `get` was defined by the user
+  if (has(obj, 'set') && typeof obj[key] !== 'function' && typeof obj[key] !== 'undefined') {
+    return false;
+  }
+
+  for (var key in obj) {
+    if (!accessor.hasOwnProperty(key)) {
+      continue;
+    }
+
+    if (typeOf(obj[key]) === accessor[key]) {
+      continue;
+    }
+
+    if (typeof obj[key] !== 'undefined') {
+      return false;
+    }
+  }
+  return true;
+}
+
+function has(obj, key) {
+  return {}.hasOwnProperty.call(obj, key);
+}
+
+/**
+ * Expose `isAccessorDescriptor`
+ */
+
+module.exports = isAccessorDescriptor;
 
 
 /***/ }),
@@ -62938,6 +63866,253 @@ function isBuffer (obj) {
 // For Node v0.10 support. Remove this eventually.
 function isSlowBuffer (obj) {
   return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
+}
+
+
+/***/ }),
+
+/***/ 25135:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+/*!
+ * is-data-descriptor <https://github.com/jonschlinkert/is-data-descriptor>
+ *
+ * Copyright (c) 2015, Jon Schlinkert.
+ * Licensed under the MIT License.
+ */
+
+
+
+var typeOf = __nccwpck_require__(25295);
+
+// data descriptor properties
+var data = {
+  configurable: 'boolean',
+  enumerable: 'boolean',
+  writable: 'boolean'
+};
+
+function isDataDescriptor(obj, prop) {
+  if (typeOf(obj) !== 'object') {
+    return false;
+  }
+
+  if (typeof prop === 'string') {
+    var val = Object.getOwnPropertyDescriptor(obj, prop);
+    return typeof val !== 'undefined';
+  }
+
+  if (!('value' in obj) && !('writable' in obj)) {
+    return false;
+  }
+
+  for (var key in obj) {
+    if (key === 'value') continue;
+
+    if (!data.hasOwnProperty(key)) {
+      continue;
+    }
+
+    if (typeOf(obj[key]) === data[key]) {
+      continue;
+    }
+
+    if (typeof obj[key] !== 'undefined') {
+      return false;
+    }
+  }
+  return true;
+}
+
+/**
+ * Expose `isDataDescriptor`
+ */
+
+module.exports = isDataDescriptor;
+
+
+/***/ }),
+
+/***/ 24119:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+/*!
+ * is-descriptor <https://github.com/jonschlinkert/is-descriptor>
+ *
+ * Copyright (c) 2015-2017, Jon Schlinkert.
+ * Released under the MIT License.
+ */
+
+
+
+var typeOf = __nccwpck_require__(79252);
+var isAccessor = __nccwpck_require__(76238);
+var isData = __nccwpck_require__(25135);
+
+module.exports = function isDescriptor(obj, key) {
+  if (typeOf(obj) !== 'object') {
+    return false;
+  }
+  if ('get' in obj) {
+    return isAccessor(obj, key);
+  }
+  return isData(obj, key);
+};
+
+
+/***/ }),
+
+/***/ 79252:
+/***/ ((module) => {
+
+var toString = Object.prototype.toString;
+
+/**
+ * Get the native `typeof` a value.
+ *
+ * @param  {*} `val`
+ * @return {*} Native javascript type
+ */
+
+module.exports = function kindOf(val) {
+  var type = typeof val;
+
+  // primitivies
+  if (type === 'undefined') {
+    return 'undefined';
+  }
+  if (val === null) {
+    return 'null';
+  }
+  if (val === true || val === false || val instanceof Boolean) {
+    return 'boolean';
+  }
+  if (type === 'string' || val instanceof String) {
+    return 'string';
+  }
+  if (type === 'number' || val instanceof Number) {
+    return 'number';
+  }
+
+  // functions
+  if (type === 'function' || val instanceof Function) {
+    if (typeof val.constructor.name !== 'undefined' && val.constructor.name.slice(0, 9) === 'Generator') {
+      return 'generatorfunction';
+    }
+    return 'function';
+  }
+
+  // array
+  if (typeof Array.isArray !== 'undefined' && Array.isArray(val)) {
+    return 'array';
+  }
+
+  // check for instances of RegExp and Date before calling `toString`
+  if (val instanceof RegExp) {
+    return 'regexp';
+  }
+  if (val instanceof Date) {
+    return 'date';
+  }
+
+  // other objects
+  type = toString.call(val);
+
+  if (type === '[object RegExp]') {
+    return 'regexp';
+  }
+  if (type === '[object Date]') {
+    return 'date';
+  }
+  if (type === '[object Arguments]') {
+    return 'arguments';
+  }
+  if (type === '[object Error]') {
+    return 'error';
+  }
+  if (type === '[object Promise]') {
+    return 'promise';
+  }
+
+  // buffer
+  if (isBuffer(val)) {
+    return 'buffer';
+  }
+
+  // es6: Map, WeakMap, Set, WeakSet
+  if (type === '[object Set]') {
+    return 'set';
+  }
+  if (type === '[object WeakSet]') {
+    return 'weakset';
+  }
+  if (type === '[object Map]') {
+    return 'map';
+  }
+  if (type === '[object WeakMap]') {
+    return 'weakmap';
+  }
+  if (type === '[object Symbol]') {
+    return 'symbol';
+  }
+  
+  if (type === '[object Map Iterator]') {
+    return 'mapiterator';
+  }
+  if (type === '[object Set Iterator]') {
+    return 'setiterator';
+  }
+  if (type === '[object String Iterator]') {
+    return 'stringiterator';
+  }
+  if (type === '[object Array Iterator]') {
+    return 'arrayiterator';
+  }
+  
+  // typed arrays
+  if (type === '[object Int8Array]') {
+    return 'int8array';
+  }
+  if (type === '[object Uint8Array]') {
+    return 'uint8array';
+  }
+  if (type === '[object Uint8ClampedArray]') {
+    return 'uint8clampedarray';
+  }
+  if (type === '[object Int16Array]') {
+    return 'int16array';
+  }
+  if (type === '[object Uint16Array]') {
+    return 'uint16array';
+  }
+  if (type === '[object Int32Array]') {
+    return 'int32array';
+  }
+  if (type === '[object Uint32Array]') {
+    return 'uint32array';
+  }
+  if (type === '[object Float32Array]') {
+    return 'float32array';
+  }
+  if (type === '[object Float64Array]') {
+    return 'float64array';
+  }
+
+  // must be a plain object
+  return 'object';
+};
+
+/**
+ * If you need to support Safari 5-7 (8-10 yr-old browser),
+ * take a look at https://github.com/feross/is-buffer
+ */
+
+function isBuffer(val) {
+  return val.constructor
+    && typeof val.constructor.isBuffer === 'function'
+    && val.constructor.isBuffer(val);
 }
 
 
@@ -64353,7 +65528,7 @@ const parse = (input, options) => {
     START_ANCHOR
   } = PLATFORM_CHARS;
 
-  const globstar = (opts) => {
+  const globstar = opts => {
     return `(${capture}(?:(?!${START_ANCHOR}${opts.dot ? DOTS_SLASH : DOT_LITERAL}).)*?)`;
   };
 
@@ -64403,12 +65578,13 @@ const parse = (input, options) => {
 
   const eos = () => state.index === len - 1;
   const peek = state.peek = (n = 1) => input[state.index + n];
-  const advance = state.advance = () => input[++state.index];
+  const advance = state.advance = () => input[++state.index] || '';
   const remaining = () => input.slice(state.index + 1);
   const consume = (value = '', num = 0) => {
     state.consumed += value;
     state.index += num;
   };
+
   const append = token => {
     state.output += token.output != null ? token.output : token.value;
     consume(token.value);
@@ -64464,7 +65640,7 @@ const parse = (input, options) => {
       }
     }
 
-    if (extglobs.length && tok.type !== 'paren' && !EXTGLOB_CHARS[tok.value]) {
+    if (extglobs.length && tok.type !== 'paren') {
       extglobs[extglobs.length - 1].inner += tok.value;
     }
 
@@ -64496,6 +65672,7 @@ const parse = (input, options) => {
 
   const extglobClose = token => {
     let output = token.close + (opts.capture ? ')' : '');
+    let rest;
 
     if (token.type === 'negate') {
       let extglobStar = star;
@@ -64508,7 +65685,11 @@ const parse = (input, options) => {
         output = token.close = `)$))${extglobStar}`;
       }
 
-      if (token.prev.type === 'bos' && eos()) {
+      if (token.inner.includes('*') && (rest = remaining()) && /^\.[^\\/.]+$/.test(rest)) {
+        output = token.close = `)${rest})${extglobStar})`;
+      }
+
+      if (token.prev.type === 'bos') {
         state.negatedExtglob = true;
       }
     }
@@ -64617,9 +65798,9 @@ const parse = (input, options) => {
       }
 
       if (opts.unescape === true) {
-        value = advance() || '';
+        value = advance();
       } else {
-        value += advance() || '';
+        value += advance();
       }
 
       if (state.brackets === 0) {
@@ -65283,7 +66464,7 @@ parse.fastpaths = (input, options) => {
     star = `(${star})`;
   }
 
-  const globstar = (opts) => {
+  const globstar = opts => {
     if (opts.noglobstar === true) return star;
     return `(${capture}(?:(?!${START_ANCHOR}${opts.dot ? DOTS_SLASH : DOT_LITERAL}).)*?)`;
   };
@@ -65578,6 +66759,40 @@ picomatch.parse = (pattern, options) => {
 picomatch.scan = (input, options) => scan(input, options);
 
 /**
+ * Compile a regular expression from the `state` object returned by the
+ * [parse()](#parse) method.
+ *
+ * @param {Object} `state`
+ * @param {Object} `options`
+ * @param {Boolean} `returnOutput` Intended for implementors, this argument allows you to return the raw output from the parser.
+ * @param {Boolean} `returnState` Adds the state to a `state` property on the returned regex. Useful for implementors and debugging.
+ * @return {RegExp}
+ * @api public
+ */
+
+picomatch.compileRe = (state, options, returnOutput = false, returnState = false) => {
+  if (returnOutput === true) {
+    return state.output;
+  }
+
+  const opts = options || {};
+  const prepend = opts.contains ? '' : '^';
+  const append = opts.contains ? '' : '$';
+
+  let source = `${prepend}(?:${state.output})${append}`;
+  if (state && state.negated === true) {
+    source = `^(?!${source}).*$`;
+  }
+
+  const regex = picomatch.toRegex(source, options);
+  if (returnState === true) {
+    regex.state = state;
+  }
+
+  return regex;
+};
+
+/**
  * Create a regular expression from a parsed glob pattern.
  *
  * ```js
@@ -65590,56 +66805,25 @@ picomatch.scan = (input, options) => scan(input, options);
  * ```
  * @param {String} `state` The object returned from the `.parse` method.
  * @param {Object} `options`
+ * @param {Boolean} `returnOutput` Implementors may use this argument to return the compiled output, instead of a regular expression. This is not exposed on the options to prevent end-users from mutating the result.
+ * @param {Boolean} `returnState` Implementors may use this argument to return the state from the parsed glob with the returned regular expression.
  * @return {RegExp} Returns a regex created from the given pattern.
  * @api public
  */
 
-picomatch.compileRe = (parsed, options, returnOutput = false, returnState = false) => {
-  if (returnOutput === true) {
-    return parsed.output;
-  }
-
-  const opts = options || {};
-  const prepend = opts.contains ? '' : '^';
-  const append = opts.contains ? '' : '$';
-
-  let source = `${prepend}(?:${parsed.output})${append}`;
-  if (parsed && parsed.negated === true) {
-    source = `^(?!${source}).*$`;
-  }
-
-  const regex = picomatch.toRegex(source, options);
-  if (returnState === true) {
-    regex.state = parsed;
-  }
-
-  return regex;
-};
-
-picomatch.makeRe = (input, options, returnOutput = false, returnState = false) => {
+picomatch.makeRe = (input, options = {}, returnOutput = false, returnState = false) => {
   if (!input || typeof input !== 'string') {
     throw new TypeError('Expected a non-empty string');
   }
 
-  const opts = options || {};
   let parsed = { negated: false, fastpaths: true };
-  let prefix = '';
-  let output;
 
-  if (input.startsWith('./')) {
-    input = input.slice(2);
-    prefix = parsed.prefix = './';
+  if (options.fastpaths !== false && (input[0] === '.' || input[0] === '*')) {
+    parsed.output = parse.fastpaths(input, options);
   }
 
-  if (opts.fastpaths !== false && (input[0] === '.' || input[0] === '*')) {
-    output = parse.fastpaths(input, options);
-  }
-
-  if (output === undefined) {
+  if (!parsed.output) {
     parsed = parse(input, options);
-    parsed.prefix = prefix + (parsed.prefix || '');
-  } else {
-    parsed.output = output;
   }
 
   return picomatch.compileRe(parsed, options, returnOutput, returnState);
@@ -65726,7 +66910,8 @@ const depth = token => {
 /**
  * Quickly scans a glob pattern and returns an object with a handful of
  * useful properties, like `isGlob`, `path` (the leading non-glob, if it exists),
- * `glob` (the actual pattern), and `negated` (true if the path starts with `!`).
+ * `glob` (the actual pattern), `negated` (true if the path starts with `!` but not
+ * with `!(`) and `negatedExtglob` (true if the path starts with `!(`).
  *
  * ```js
  * const pm = require('picomatch');
@@ -65760,6 +66945,7 @@ const scan = (input, options) => {
   let braceEscaped = false;
   let backslashes = false;
   let negated = false;
+  let negatedExtglob = false;
   let finished = false;
   let braces = 0;
   let prev;
@@ -65871,6 +67057,9 @@ const scan = (input, options) => {
         isGlob = token.isGlob = true;
         isExtglob = token.isExtglob = true;
         finished = true;
+        if (code === CHAR_EXCLAMATION_MARK && index === start) {
+          negatedExtglob = true;
+        }
 
         if (scanToEnd === true) {
           while (eos() !== true && (code = advance())) {
@@ -65925,13 +67114,15 @@ const scan = (input, options) => {
           isBracket = token.isBracket = true;
           isGlob = token.isGlob = true;
           finished = true;
-
-          if (scanToEnd === true) {
-            continue;
-          }
           break;
         }
       }
+
+      if (scanToEnd === true) {
+        continue;
+      }
+
+      break;
     }
 
     if (opts.nonegate !== true && code === CHAR_EXCLAMATION_MARK && index === start) {
@@ -66022,7 +67213,8 @@ const scan = (input, options) => {
     isGlob,
     isExtglob,
     isGlobstar,
-    negated
+    negated,
+    negatedExtglob
   };
 
   if (opts.tokens === true) {
@@ -67593,6 +68785,22 @@ module.exports = merge([xml, xlink, xmlns, aria, svg])
 
 /***/ }),
 
+/***/ 89795:
+/***/ ((module) => {
+
+/*! queue-microtask. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
+let promise
+
+module.exports = typeof queueMicrotask === 'function'
+  ? queueMicrotask.bind(typeof window !== 'undefined' ? window : global)
+  // reuse resolved promise, and allocate it lazily
+  : cb => (promise || (promise = Promise.resolve()))
+    .then(cb)
+    .catch(err => setTimeout(() => { throw err }, 0))
+
+
+/***/ }),
+
 /***/ 32527:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
@@ -67948,6 +69156,10 @@ module.exports = unified().use(parse).use(stringify).freeze()
 
 
 module.exports = function repeat(ele, num) {
+  if (Array.prototype.fill) {
+    return new Array(num).fill(ele);
+  }
+
   var arr = new Array(num);
 
   for (var i = 0; i < num; i++) {
@@ -68617,14 +69829,16 @@ module.exports = reusify
 /***/ }),
 
 /***/ 75288:
-/***/ ((module) => {
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 /*! run-parallel. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
 module.exports = runParallel
 
+const queueMicrotask = __nccwpck_require__(89795)
+
 function runParallel (tasks, cb) {
-  var results, pending, keys
-  var isSync = true
+  let results, pending, keys
+  let isSync = true
 
   if (Array.isArray(tasks)) {
     results = []
@@ -68640,7 +69854,7 @@ function runParallel (tasks, cb) {
       if (cb) cb(err, results)
       cb = null
     }
-    if (isSync) process.nextTick(end)
+    if (isSync) queueMicrotask(end)
     else end()
   }
 
@@ -68738,7 +69952,7 @@ function isRegExp (x) {
 var split = __nccwpck_require__(84960);
 var extend = __nccwpck_require__(51321);
 var isPlainObject = __nccwpck_require__(48321);
-var isObject = __nccwpck_require__(70429);
+var isObject = __nccwpck_require__(32187);
 
 module.exports = function(obj, prop, val) {
   if (!isObject(obj)) {
@@ -68791,7 +70005,7 @@ function isValidKey(key) {
 "use strict";
 
 
-var isObject = __nccwpck_require__(70429);
+var isObject = __nccwpck_require__(32187);
 
 module.exports = function extend(o/*, objects*/) {
   if (!isObject(o)) { o = {}; }
@@ -68822,6 +70036,27 @@ function assign(a, b) {
 function hasOwn(obj, key) {
   return Object.prototype.hasOwnProperty.call(obj, key);
 }
+
+
+/***/ }),
+
+/***/ 32187:
+/***/ ((module) => {
+
+"use strict";
+/*!
+ * is-extendable <https://github.com/jonschlinkert/is-extendable>
+ *
+ * Copyright (c) 2015, Jon Schlinkert.
+ * Licensed under the MIT License.
+ */
+
+
+
+module.exports = function isExtendable(val) {
+  return typeof val !== 'undefined' && val !== null
+    && (typeof val === 'object' || typeof val === 'function');
+};
 
 
 /***/ }),
@@ -68902,8 +70137,8 @@ module.exports = path => {
   /* istanbul ignore next */
   else {}
 }('slugify', this, function () {
-  var charMap = JSON.parse('{"$":"dollar","%":"percent","&":"and","<":"less",">":"greater","|":"or","¢":"cent","£":"pound","¤":"currency","¥":"yen","©":"(c)","ª":"a","®":"(r)","º":"o","À":"A","Á":"A","Â":"A","Ã":"A","Ä":"A","Å":"A","Æ":"AE","Ç":"C","È":"E","É":"E","Ê":"E","Ë":"E","Ì":"I","Í":"I","Î":"I","Ï":"I","Ð":"D","Ñ":"N","Ò":"O","Ó":"O","Ô":"O","Õ":"O","Ö":"O","Ø":"O","Ù":"U","Ú":"U","Û":"U","Ü":"U","Ý":"Y","Þ":"TH","ß":"ss","à":"a","á":"a","â":"a","ã":"a","ä":"a","å":"a","æ":"ae","ç":"c","è":"e","é":"e","ê":"e","ë":"e","ì":"i","í":"i","î":"i","ï":"i","ð":"d","ñ":"n","ò":"o","ó":"o","ô":"o","õ":"o","ö":"o","ø":"o","ù":"u","ú":"u","û":"u","ü":"u","ý":"y","þ":"th","ÿ":"y","Ā":"A","ā":"a","Ă":"A","ă":"a","Ą":"A","ą":"a","Ć":"C","ć":"c","Č":"C","č":"c","Ď":"D","ď":"d","Đ":"DJ","đ":"dj","Ē":"E","ē":"e","Ė":"E","ė":"e","Ę":"e","ę":"e","Ě":"E","ě":"e","Ğ":"G","ğ":"g","Ģ":"G","ģ":"g","Ĩ":"I","ĩ":"i","Ī":"i","ī":"i","Į":"I","į":"i","İ":"I","ı":"i","Ķ":"k","ķ":"k","Ļ":"L","ļ":"l","Ľ":"L","ľ":"l","Ł":"L","ł":"l","Ń":"N","ń":"n","Ņ":"N","ņ":"n","Ň":"N","ň":"n","Ō":"O","ō":"o","Ő":"O","ő":"o","Œ":"OE","œ":"oe","Ŕ":"R","ŕ":"r","Ř":"R","ř":"r","Ś":"S","ś":"s","Ş":"S","ş":"s","Š":"S","š":"s","Ţ":"T","ţ":"t","Ť":"T","ť":"t","Ũ":"U","ũ":"u","Ū":"u","ū":"u","Ů":"U","ů":"u","Ű":"U","ű":"u","Ų":"U","ų":"u","Ŵ":"W","ŵ":"w","Ŷ":"Y","ŷ":"y","Ÿ":"Y","Ź":"Z","ź":"z","Ż":"Z","ż":"z","Ž":"Z","ž":"z","Ə":"E","ƒ":"f","Ơ":"O","ơ":"o","Ư":"U","ư":"u","ǈ":"LJ","ǉ":"lj","ǋ":"NJ","ǌ":"nj","Ș":"S","ș":"s","Ț":"T","ț":"t","ə":"e","˚":"o","Ά":"A","Έ":"E","Ή":"H","Ί":"I","Ό":"O","Ύ":"Y","Ώ":"W","ΐ":"i","Α":"A","Β":"B","Γ":"G","Δ":"D","Ε":"E","Ζ":"Z","Η":"H","Θ":"8","Ι":"I","Κ":"K","Λ":"L","Μ":"M","Ν":"N","Ξ":"3","Ο":"O","Π":"P","Ρ":"R","Σ":"S","Τ":"T","Υ":"Y","Φ":"F","Χ":"X","Ψ":"PS","Ω":"W","Ϊ":"I","Ϋ":"Y","ά":"a","έ":"e","ή":"h","ί":"i","ΰ":"y","α":"a","β":"b","γ":"g","δ":"d","ε":"e","ζ":"z","η":"h","θ":"8","ι":"i","κ":"k","λ":"l","μ":"m","ν":"n","ξ":"3","ο":"o","π":"p","ρ":"r","ς":"s","σ":"s","τ":"t","υ":"y","φ":"f","χ":"x","ψ":"ps","ω":"w","ϊ":"i","ϋ":"y","ό":"o","ύ":"y","ώ":"w","Ё":"Yo","Ђ":"DJ","Є":"Ye","І":"I","Ї":"Yi","Ј":"J","Љ":"LJ","Њ":"NJ","Ћ":"C","Џ":"DZ","А":"A","Б":"B","В":"V","Г":"G","Д":"D","Е":"E","Ж":"Zh","З":"Z","И":"I","Й":"J","К":"K","Л":"L","М":"M","Н":"N","О":"O","П":"P","Р":"R","С":"S","Т":"T","У":"U","Ф":"F","Х":"H","Ц":"C","Ч":"Ch","Ш":"Sh","Щ":"Sh","Ъ":"U","Ы":"Y","Ь":"","Э":"E","Ю":"Yu","Я":"Ya","а":"a","б":"b","в":"v","г":"g","д":"d","е":"e","ж":"zh","з":"z","и":"i","й":"j","к":"k","л":"l","м":"m","н":"n","о":"o","п":"p","р":"r","с":"s","т":"t","у":"u","ф":"f","х":"h","ц":"c","ч":"ch","ш":"sh","щ":"sh","ъ":"u","ы":"y","ь":"","э":"e","ю":"yu","я":"ya","ё":"yo","ђ":"dj","є":"ye","і":"i","ї":"yi","ј":"j","љ":"lj","њ":"nj","ћ":"c","ѝ":"u","џ":"dz","Ґ":"G","ґ":"g","Ғ":"GH","ғ":"gh","Қ":"KH","қ":"kh","Ң":"NG","ң":"ng","Ү":"UE","ү":"ue","Ұ":"U","ұ":"u","Һ":"H","һ":"h","Ә":"AE","ә":"ae","Ө":"OE","ө":"oe","฿":"baht","ა":"a","ბ":"b","გ":"g","დ":"d","ე":"e","ვ":"v","ზ":"z","თ":"t","ი":"i","კ":"k","ლ":"l","მ":"m","ნ":"n","ო":"o","პ":"p","ჟ":"zh","რ":"r","ს":"s","ტ":"t","უ":"u","ფ":"f","ქ":"k","ღ":"gh","ყ":"q","შ":"sh","ჩ":"ch","ც":"ts","ძ":"dz","წ":"ts","ჭ":"ch","ხ":"kh","ჯ":"j","ჰ":"h","Ẁ":"W","ẁ":"w","Ẃ":"W","ẃ":"w","Ẅ":"W","ẅ":"w","ẞ":"SS","Ạ":"A","ạ":"a","Ả":"A","ả":"a","Ấ":"A","ấ":"a","Ầ":"A","ầ":"a","Ẩ":"A","ẩ":"a","Ẫ":"A","ẫ":"a","Ậ":"A","ậ":"a","Ắ":"A","ắ":"a","Ằ":"A","ằ":"a","Ẳ":"A","ẳ":"a","Ẵ":"A","ẵ":"a","Ặ":"A","ặ":"a","Ẹ":"E","ẹ":"e","Ẻ":"E","ẻ":"e","Ẽ":"E","ẽ":"e","Ế":"E","ế":"e","Ề":"E","ề":"e","Ể":"E","ể":"e","Ễ":"E","ễ":"e","Ệ":"E","ệ":"e","Ỉ":"I","ỉ":"i","Ị":"I","ị":"i","Ọ":"O","ọ":"o","Ỏ":"O","ỏ":"o","Ố":"O","ố":"o","Ồ":"O","ồ":"o","Ổ":"O","ổ":"o","Ỗ":"O","ỗ":"o","Ộ":"O","ộ":"o","Ớ":"O","ớ":"o","Ờ":"O","ờ":"o","Ở":"O","ở":"o","Ỡ":"O","ỡ":"o","Ợ":"O","ợ":"o","Ụ":"U","ụ":"u","Ủ":"U","ủ":"u","Ứ":"U","ứ":"u","Ừ":"U","ừ":"u","Ử":"U","ử":"u","Ữ":"U","ữ":"u","Ự":"U","ự":"u","Ỳ":"Y","ỳ":"y","Ỵ":"Y","ỵ":"y","Ỷ":"Y","ỷ":"y","Ỹ":"Y","ỹ":"y","‘":"\'","’":"\'","“":"\\\"","”":"\\\"","†":"+","•":"*","…":"...","₠":"ecu","₢":"cruzeiro","₣":"french franc","₤":"lira","₥":"mill","₦":"naira","₧":"peseta","₨":"rupee","₩":"won","₪":"new shequel","₫":"dong","€":"euro","₭":"kip","₮":"tugrik","₯":"drachma","₰":"penny","₱":"peso","₲":"guarani","₳":"austral","₴":"hryvnia","₵":"cedi","₸":"kazakhstani tenge","₹":"indian rupee","₺":"turkish lira","₽":"russian ruble","₿":"bitcoin","℠":"sm","™":"tm","∂":"d","∆":"delta","∑":"sum","∞":"infinity","♥":"love","元":"yuan","円":"yen","﷼":"rial"}')
-  var locales = JSON.parse('{"de":{"Ä":"AE","ä":"ae","Ö":"OE","ö":"oe","Ü":"UE","ü":"ue","%":"prozent","&":"und","|":"oder","∑":"summe","∞":"unendlich","♥":"liebe"},"vi":{"Đ":"D","đ":"d"},"fr":{"%":"pourcent","&":"et","<":"plus petit",">":"plus grand","|":"ou","¢":"centime","£":"livre","¤":"devise","₣":"franc","∑":"somme","∞":"infini","♥":"amour"}}')
+  var charMap = JSON.parse('{"$":"dollar","%":"percent","&":"and","<":"less",">":"greater","|":"or","¢":"cent","£":"pound","¤":"currency","¥":"yen","©":"(c)","ª":"a","®":"(r)","º":"o","À":"A","Á":"A","Â":"A","Ã":"A","Ä":"A","Å":"A","Æ":"AE","Ç":"C","È":"E","É":"E","Ê":"E","Ë":"E","Ì":"I","Í":"I","Î":"I","Ï":"I","Ð":"D","Ñ":"N","Ò":"O","Ó":"O","Ô":"O","Õ":"O","Ö":"O","Ø":"O","Ù":"U","Ú":"U","Û":"U","Ü":"U","Ý":"Y","Þ":"TH","ß":"ss","à":"a","á":"a","â":"a","ã":"a","ä":"a","å":"a","æ":"ae","ç":"c","è":"e","é":"e","ê":"e","ë":"e","ì":"i","í":"i","î":"i","ï":"i","ð":"d","ñ":"n","ò":"o","ó":"o","ô":"o","õ":"o","ö":"o","ø":"o","ù":"u","ú":"u","û":"u","ü":"u","ý":"y","þ":"th","ÿ":"y","Ā":"A","ā":"a","Ă":"A","ă":"a","Ą":"A","ą":"a","Ć":"C","ć":"c","Č":"C","č":"c","Ď":"D","ď":"d","Đ":"DJ","đ":"dj","Ē":"E","ē":"e","Ė":"E","ė":"e","Ę":"e","ę":"e","Ě":"E","ě":"e","Ğ":"G","ğ":"g","Ģ":"G","ģ":"g","Ĩ":"I","ĩ":"i","Ī":"i","ī":"i","Į":"I","į":"i","İ":"I","ı":"i","Ķ":"k","ķ":"k","Ļ":"L","ļ":"l","Ľ":"L","ľ":"l","Ł":"L","ł":"l","Ń":"N","ń":"n","Ņ":"N","ņ":"n","Ň":"N","ň":"n","Ō":"O","ō":"o","Ő":"O","ő":"o","Œ":"OE","œ":"oe","Ŕ":"R","ŕ":"r","Ř":"R","ř":"r","Ś":"S","ś":"s","Ş":"S","ş":"s","Š":"S","š":"s","Ţ":"T","ţ":"t","Ť":"T","ť":"t","Ũ":"U","ũ":"u","Ū":"u","ū":"u","Ů":"U","ů":"u","Ű":"U","ű":"u","Ų":"U","ų":"u","Ŵ":"W","ŵ":"w","Ŷ":"Y","ŷ":"y","Ÿ":"Y","Ź":"Z","ź":"z","Ż":"Z","ż":"z","Ž":"Z","ž":"z","Ə":"E","ƒ":"f","Ơ":"O","ơ":"o","Ư":"U","ư":"u","ǈ":"LJ","ǉ":"lj","ǋ":"NJ","ǌ":"nj","Ș":"S","ș":"s","Ț":"T","ț":"t","ə":"e","˚":"o","Ά":"A","Έ":"E","Ή":"H","Ί":"I","Ό":"O","Ύ":"Y","Ώ":"W","ΐ":"i","Α":"A","Β":"B","Γ":"G","Δ":"D","Ε":"E","Ζ":"Z","Η":"H","Θ":"8","Ι":"I","Κ":"K","Λ":"L","Μ":"M","Ν":"N","Ξ":"3","Ο":"O","Π":"P","Ρ":"R","Σ":"S","Τ":"T","Υ":"Y","Φ":"F","Χ":"X","Ψ":"PS","Ω":"W","Ϊ":"I","Ϋ":"Y","ά":"a","έ":"e","ή":"h","ί":"i","ΰ":"y","α":"a","β":"b","γ":"g","δ":"d","ε":"e","ζ":"z","η":"h","θ":"8","ι":"i","κ":"k","λ":"l","μ":"m","ν":"n","ξ":"3","ο":"o","π":"p","ρ":"r","ς":"s","σ":"s","τ":"t","υ":"y","φ":"f","χ":"x","ψ":"ps","ω":"w","ϊ":"i","ϋ":"y","ό":"o","ύ":"y","ώ":"w","Ё":"Yo","Ђ":"DJ","Є":"Ye","І":"I","Ї":"Yi","Ј":"J","Љ":"LJ","Њ":"NJ","Ћ":"C","Џ":"DZ","А":"A","Б":"B","В":"V","Г":"G","Д":"D","Е":"E","Ж":"Zh","З":"Z","И":"I","Й":"J","К":"K","Л":"L","М":"M","Н":"N","О":"O","П":"P","Р":"R","С":"S","Т":"T","У":"U","Ф":"F","Х":"H","Ц":"C","Ч":"Ch","Ш":"Sh","Щ":"Sh","Ъ":"U","Ы":"Y","Ь":"","Э":"E","Ю":"Yu","Я":"Ya","а":"a","б":"b","в":"v","г":"g","д":"d","е":"e","ж":"zh","з":"z","и":"i","й":"j","к":"k","л":"l","м":"m","н":"n","о":"o","п":"p","р":"r","с":"s","т":"t","у":"u","ф":"f","х":"h","ц":"c","ч":"ch","ш":"sh","щ":"sh","ъ":"u","ы":"y","ь":"","э":"e","ю":"yu","я":"ya","ё":"yo","ђ":"dj","є":"ye","і":"i","ї":"yi","ј":"j","љ":"lj","њ":"nj","ћ":"c","ѝ":"u","џ":"dz","Ґ":"G","ґ":"g","Ғ":"GH","ғ":"gh","Қ":"KH","қ":"kh","Ң":"NG","ң":"ng","Ү":"UE","ү":"ue","Ұ":"U","ұ":"u","Һ":"H","һ":"h","Ә":"AE","ә":"ae","Ө":"OE","ө":"oe","฿":"baht","ა":"a","ბ":"b","გ":"g","დ":"d","ე":"e","ვ":"v","ზ":"z","თ":"t","ი":"i","კ":"k","ლ":"l","მ":"m","ნ":"n","ო":"o","პ":"p","ჟ":"zh","რ":"r","ს":"s","ტ":"t","უ":"u","ფ":"f","ქ":"k","ღ":"gh","ყ":"q","შ":"sh","ჩ":"ch","ც":"ts","ძ":"dz","წ":"ts","ჭ":"ch","ხ":"kh","ჯ":"j","ჰ":"h","Ẁ":"W","ẁ":"w","Ẃ":"W","ẃ":"w","Ẅ":"W","ẅ":"w","ẞ":"SS","Ạ":"A","ạ":"a","Ả":"A","ả":"a","Ấ":"A","ấ":"a","Ầ":"A","ầ":"a","Ẩ":"A","ẩ":"a","Ẫ":"A","ẫ":"a","Ậ":"A","ậ":"a","Ắ":"A","ắ":"a","Ằ":"A","ằ":"a","Ẳ":"A","ẳ":"a","Ẵ":"A","ẵ":"a","Ặ":"A","ặ":"a","Ẹ":"E","ẹ":"e","Ẻ":"E","ẻ":"e","Ẽ":"E","ẽ":"e","Ế":"E","ế":"e","Ề":"E","ề":"e","Ể":"E","ể":"e","Ễ":"E","ễ":"e","Ệ":"E","ệ":"e","Ỉ":"I","ỉ":"i","Ị":"I","ị":"i","Ọ":"O","ọ":"o","Ỏ":"O","ỏ":"o","Ố":"O","ố":"o","Ồ":"O","ồ":"o","Ổ":"O","ổ":"o","Ỗ":"O","ỗ":"o","Ộ":"O","ộ":"o","Ớ":"O","ớ":"o","Ờ":"O","ờ":"o","Ở":"O","ở":"o","Ỡ":"O","ỡ":"o","Ợ":"O","ợ":"o","Ụ":"U","ụ":"u","Ủ":"U","ủ":"u","Ứ":"U","ứ":"u","Ừ":"U","ừ":"u","Ử":"U","ử":"u","Ữ":"U","ữ":"u","Ự":"U","ự":"u","Ỳ":"Y","ỳ":"y","Ỵ":"Y","ỵ":"y","Ỷ":"Y","ỷ":"y","Ỹ":"Y","ỹ":"y","–":"-","‘":"\'","’":"\'","“":"\\\"","”":"\\\"","„":"\\\"","†":"+","•":"*","…":"...","₠":"ecu","₢":"cruzeiro","₣":"french franc","₤":"lira","₥":"mill","₦":"naira","₧":"peseta","₨":"rupee","₩":"won","₪":"new shequel","₫":"dong","€":"euro","₭":"kip","₮":"tugrik","₯":"drachma","₰":"penny","₱":"peso","₲":"guarani","₳":"austral","₴":"hryvnia","₵":"cedi","₸":"kazakhstani tenge","₹":"indian rupee","₺":"turkish lira","₽":"russian ruble","₿":"bitcoin","℠":"sm","™":"tm","∂":"d","∆":"delta","∑":"sum","∞":"infinity","♥":"love","元":"yuan","円":"yen","﷼":"rial"}')
+  var locales = JSON.parse('{"de":{"Ä":"AE","ä":"ae","Ö":"OE","ö":"oe","Ü":"UE","ü":"ue","%":"prozent","&":"und","|":"oder","∑":"summe","∞":"unendlich","♥":"liebe"},"es":{"%":"por ciento","&":"y","<":"menor que",">":"mayor que","|":"o","¢":"centavos","£":"libras","¤":"moneda","₣":"francos","∑":"suma","∞":"infinito","♥":"amor"},"fr":{"%":"pourcent","&":"et","<":"plus petit",">":"plus grand","|":"ou","¢":"centime","£":"livre","¤":"devise","₣":"franc","∑":"somme","∞":"infini","♥":"amour"},"pt":{"%":"porcento","&":"e","<":"menor",">":"maior","|":"ou","¢":"centavo","∑":"soma","£":"libra","∞":"infinito","♥":"amor"},"uk":{"И":"Y","и":"y","Й":"Y","й":"y","Ц":"Ts","ц":"ts","Х":"Kh","х":"kh","Щ":"Shch","щ":"shch","Г":"H","г":"h"},"vi":{"Đ":"D","đ":"d"}}')
 
   function replace (string, options) {
     if (typeof string !== 'string') {
@@ -68918,38 +70153,33 @@ module.exports = path => {
 
     var replacement = options.replacement === undefined ? '-' : options.replacement
 
-    var slug = string.split('')
+    var slug = string.normalize().split('')
       // replace characters based on charMap
       .reduce(function (result, ch) {
-        return result + (locale[ch] || charMap[ch] || ch)
+        return result + (locale[ch] || charMap[ch] ||  (ch === replacement ? ' ' : ch))
           // remove not allowed characters
           .replace(options.remove || /[^\w\s$*_+~.()'"!\-:@]+/g, '')
-      }, '')
-      // trim leading/trailing spaces
-      .trim()
-      // convert spaces to replacement character
-      // also remove duplicates of the replacement character
-      .replace(new RegExp('[\\s' + replacement + ']+', 'g'), replacement)
+      }, '');
+
+    if (options.strict) {
+      slug = slug.replace(/[^A-Za-z0-9\s]/g, '');
+    }
+
+    // Remove leading/trailing spaces, then replace all other spaces with
+    // replacement character, treating multiple consecutive spaces as a single
+    // space.
+    slug = slug.trim()
+      .replace(/\s+/g, replacement);
 
     if (options.lower) {
       slug = slug.toLowerCase()
-    }
-
-    if (options.strict) {
-      // remove anything besides letters, numbers, and the replacement char
-      slug = slug
-        .replace(new RegExp('[^a-zA-Z0-9' + replacement + ']', 'g'), '')
-        // remove duplicates of the replacement character
-        .replace(new RegExp('[\\s' + replacement + ']+', 'g'), replacement)
     }
 
     return slug
   }
 
   replace.extend = function (customMap) {
-    for (var key in customMap) {
-      charMap[key] = customMap[key]
-    }
+    Object.assign(charMap, customMap)
   }
 
   return replace
@@ -69471,7 +70701,7 @@ exports = module.exports = Node;
 
 
 
-var isDescriptor = __nccwpck_require__(41992);
+var isDescriptor = __nccwpck_require__(20567);
 
 module.exports = function defineProperty(obj, prop, val) {
   if (typeof obj !== 'object' && typeof obj !== 'function') {
@@ -69492,170 +70722,6 @@ module.exports = function defineProperty(obj, prop, val) {
     writable: true,
     value: val
   });
-};
-
-
-/***/ }),
-
-/***/ 65872:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-"use strict";
-/*!
- * is-accessor-descriptor <https://github.com/jonschlinkert/is-accessor-descriptor>
- *
- * Copyright (c) 2015-2017, Jon Schlinkert.
- * Released under the MIT License.
- */
-
-
-
-var typeOf = __nccwpck_require__(86961);
-
-// accessor descriptor properties
-var accessor = {
-  get: 'function',
-  set: 'function',
-  configurable: 'boolean',
-  enumerable: 'boolean'
-};
-
-function isAccessorDescriptor(obj, prop) {
-  if (typeof prop === 'string') {
-    var val = Object.getOwnPropertyDescriptor(obj, prop);
-    return typeof val !== 'undefined';
-  }
-
-  if (typeOf(obj) !== 'object') {
-    return false;
-  }
-
-  if (has(obj, 'value') || has(obj, 'writable')) {
-    return false;
-  }
-
-  if (!has(obj, 'get') || typeof obj.get !== 'function') {
-    return false;
-  }
-
-  // tldr: it's valid to have "set" be undefined
-  // "set" might be undefined if `Object.getOwnPropertyDescriptor`
-  // was used to get the value, and only `get` was defined by the user
-  if (has(obj, 'set') && typeof obj[key] !== 'function' && typeof obj[key] !== 'undefined') {
-    return false;
-  }
-
-  for (var key in obj) {
-    if (!accessor.hasOwnProperty(key)) {
-      continue;
-    }
-
-    if (typeOf(obj[key]) === accessor[key]) {
-      continue;
-    }
-
-    if (typeof obj[key] !== 'undefined') {
-      return false;
-    }
-  }
-  return true;
-}
-
-function has(obj, key) {
-  return {}.hasOwnProperty.call(obj, key);
-}
-
-/**
- * Expose `isAccessorDescriptor`
- */
-
-module.exports = isAccessorDescriptor;
-
-
-/***/ }),
-
-/***/ 16047:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-"use strict";
-/*!
- * is-data-descriptor <https://github.com/jonschlinkert/is-data-descriptor>
- *
- * Copyright (c) 2015-2017, Jon Schlinkert.
- * Released under the MIT License.
- */
-
-
-
-var typeOf = __nccwpck_require__(86961);
-
-module.exports = function isDataDescriptor(obj, prop) {
-  // data descriptor properties
-  var data = {
-    configurable: 'boolean',
-    enumerable: 'boolean',
-    writable: 'boolean'
-  };
-
-  if (typeOf(obj) !== 'object') {
-    return false;
-  }
-
-  if (typeof prop === 'string') {
-    var val = Object.getOwnPropertyDescriptor(obj, prop);
-    return typeof val !== 'undefined';
-  }
-
-  if (!('value' in obj) && !('writable' in obj)) {
-    return false;
-  }
-
-  for (var key in obj) {
-    if (key === 'value') continue;
-
-    if (!data.hasOwnProperty(key)) {
-      continue;
-    }
-
-    if (typeOf(obj[key]) === data[key]) {
-      continue;
-    }
-
-    if (typeof obj[key] !== 'undefined') {
-      return false;
-    }
-  }
-  return true;
-};
-
-
-/***/ }),
-
-/***/ 41992:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-"use strict";
-/*!
- * is-descriptor <https://github.com/jonschlinkert/is-descriptor>
- *
- * Copyright (c) 2015-2017, Jon Schlinkert.
- * Released under the MIT License.
- */
-
-
-
-var typeOf = __nccwpck_require__(86961);
-var isAccessor = __nccwpck_require__(65872);
-var isData = __nccwpck_require__(16047);
-
-module.exports = function isDescriptor(obj, key) {
-  if (typeOf(obj) !== 'object') {
-    return false;
-  }
-  if ('get' in obj) {
-    return isAccessor(obj, key);
-  }
-  return isData(obj, key);
 };
 
 
@@ -72664,7 +73730,7 @@ exports.enable(load());
 
 
 
-var isDescriptor = __nccwpck_require__(20567);
+var isDescriptor = __nccwpck_require__(93656);
 
 module.exports = function defineProperty(obj, prop, val) {
   if (typeof obj !== 'object' && typeof obj !== 'function') {
@@ -72696,7 +73762,7 @@ module.exports = function defineProperty(obj, prop, val) {
 "use strict";
 
 
-var isObject = __nccwpck_require__(70429);
+var isObject = __nccwpck_require__(75836);
 
 module.exports = function extend(o/*, objects*/) {
   if (!isObject(o)) { o = {}; }
@@ -72726,6 +73792,625 @@ function assign(a, b) {
 
 function hasOwn(obj, key) {
   return Object.prototype.hasOwnProperty.call(obj, key);
+}
+
+
+/***/ }),
+
+/***/ 74681:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+/*!
+ * is-accessor-descriptor <https://github.com/jonschlinkert/is-accessor-descriptor>
+ *
+ * Copyright (c) 2015, Jon Schlinkert.
+ * Licensed under the MIT License.
+ */
+
+
+
+var typeOf = __nccwpck_require__(12237);
+
+// accessor descriptor properties
+var accessor = {
+  get: 'function',
+  set: 'function',
+  configurable: 'boolean',
+  enumerable: 'boolean'
+};
+
+function isAccessorDescriptor(obj, prop) {
+  if (typeof prop === 'string') {
+    var val = Object.getOwnPropertyDescriptor(obj, prop);
+    return typeof val !== 'undefined';
+  }
+
+  if (typeOf(obj) !== 'object') {
+    return false;
+  }
+
+  if (has(obj, 'value') || has(obj, 'writable')) {
+    return false;
+  }
+
+  if (!has(obj, 'get') || typeof obj.get !== 'function') {
+    return false;
+  }
+
+  // tldr: it's valid to have "set" be undefined
+  // "set" might be undefined if `Object.getOwnPropertyDescriptor`
+  // was used to get the value, and only `get` was defined by the user
+  if (has(obj, 'set') && typeof obj[key] !== 'function' && typeof obj[key] !== 'undefined') {
+    return false;
+  }
+
+  for (var key in obj) {
+    if (!accessor.hasOwnProperty(key)) {
+      continue;
+    }
+
+    if (typeOf(obj[key]) === accessor[key]) {
+      continue;
+    }
+
+    if (typeof obj[key] !== 'undefined') {
+      return false;
+    }
+  }
+  return true;
+}
+
+function has(obj, key) {
+  return {}.hasOwnProperty.call(obj, key);
+}
+
+/**
+ * Expose `isAccessorDescriptor`
+ */
+
+module.exports = isAccessorDescriptor;
+
+
+/***/ }),
+
+/***/ 12237:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+var isBuffer = __nccwpck_require__(66569);
+var toString = Object.prototype.toString;
+
+/**
+ * Get the native `typeof` a value.
+ *
+ * @param  {*} `val`
+ * @return {*} Native javascript type
+ */
+
+module.exports = function kindOf(val) {
+  // primitivies
+  if (typeof val === 'undefined') {
+    return 'undefined';
+  }
+  if (val === null) {
+    return 'null';
+  }
+  if (val === true || val === false || val instanceof Boolean) {
+    return 'boolean';
+  }
+  if (typeof val === 'string' || val instanceof String) {
+    return 'string';
+  }
+  if (typeof val === 'number' || val instanceof Number) {
+    return 'number';
+  }
+
+  // functions
+  if (typeof val === 'function' || val instanceof Function) {
+    return 'function';
+  }
+
+  // array
+  if (typeof Array.isArray !== 'undefined' && Array.isArray(val)) {
+    return 'array';
+  }
+
+  // check for instances of RegExp and Date before calling `toString`
+  if (val instanceof RegExp) {
+    return 'regexp';
+  }
+  if (val instanceof Date) {
+    return 'date';
+  }
+
+  // other objects
+  var type = toString.call(val);
+
+  if (type === '[object RegExp]') {
+    return 'regexp';
+  }
+  if (type === '[object Date]') {
+    return 'date';
+  }
+  if (type === '[object Arguments]') {
+    return 'arguments';
+  }
+  if (type === '[object Error]') {
+    return 'error';
+  }
+
+  // buffer
+  if (isBuffer(val)) {
+    return 'buffer';
+  }
+
+  // es6: Map, WeakMap, Set, WeakSet
+  if (type === '[object Set]') {
+    return 'set';
+  }
+  if (type === '[object WeakSet]') {
+    return 'weakset';
+  }
+  if (type === '[object Map]') {
+    return 'map';
+  }
+  if (type === '[object WeakMap]') {
+    return 'weakmap';
+  }
+  if (type === '[object Symbol]') {
+    return 'symbol';
+  }
+
+  // typed arrays
+  if (type === '[object Int8Array]') {
+    return 'int8array';
+  }
+  if (type === '[object Uint8Array]') {
+    return 'uint8array';
+  }
+  if (type === '[object Uint8ClampedArray]') {
+    return 'uint8clampedarray';
+  }
+  if (type === '[object Int16Array]') {
+    return 'int16array';
+  }
+  if (type === '[object Uint16Array]') {
+    return 'uint16array';
+  }
+  if (type === '[object Int32Array]') {
+    return 'int32array';
+  }
+  if (type === '[object Uint32Array]') {
+    return 'uint32array';
+  }
+  if (type === '[object Float32Array]') {
+    return 'float32array';
+  }
+  if (type === '[object Float64Array]') {
+    return 'float64array';
+  }
+
+  // must be a plain object
+  return 'object';
+};
+
+
+/***/ }),
+
+/***/ 66569:
+/***/ ((module) => {
+
+/*!
+ * Determine if an object is a Buffer
+ *
+ * @author   Feross Aboukhadijeh <https://feross.org>
+ * @license  MIT
+ */
+
+// The _isBuffer check is for Safari 5-7 support, because it's missing
+// Object.prototype.constructor. Remove this eventually
+module.exports = function (obj) {
+  return obj != null && (isBuffer(obj) || isSlowBuffer(obj) || !!obj._isBuffer)
+}
+
+function isBuffer (obj) {
+  return !!obj.constructor && typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
+}
+
+// For Node v0.10 support. Remove this eventually.
+function isSlowBuffer (obj) {
+  return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
+}
+
+
+/***/ }),
+
+/***/ 36683:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+/*!
+ * is-data-descriptor <https://github.com/jonschlinkert/is-data-descriptor>
+ *
+ * Copyright (c) 2015, Jon Schlinkert.
+ * Licensed under the MIT License.
+ */
+
+
+
+var typeOf = __nccwpck_require__(20517);
+
+// data descriptor properties
+var data = {
+  configurable: 'boolean',
+  enumerable: 'boolean',
+  writable: 'boolean'
+};
+
+function isDataDescriptor(obj, prop) {
+  if (typeOf(obj) !== 'object') {
+    return false;
+  }
+
+  if (typeof prop === 'string') {
+    var val = Object.getOwnPropertyDescriptor(obj, prop);
+    return typeof val !== 'undefined';
+  }
+
+  if (!('value' in obj) && !('writable' in obj)) {
+    return false;
+  }
+
+  for (var key in obj) {
+    if (key === 'value') continue;
+
+    if (!data.hasOwnProperty(key)) {
+      continue;
+    }
+
+    if (typeOf(obj[key]) === data[key]) {
+      continue;
+    }
+
+    if (typeof obj[key] !== 'undefined') {
+      return false;
+    }
+  }
+  return true;
+}
+
+/**
+ * Expose `isDataDescriptor`
+ */
+
+module.exports = isDataDescriptor;
+
+
+/***/ }),
+
+/***/ 20517:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+var isBuffer = __nccwpck_require__(66569);
+var toString = Object.prototype.toString;
+
+/**
+ * Get the native `typeof` a value.
+ *
+ * @param  {*} `val`
+ * @return {*} Native javascript type
+ */
+
+module.exports = function kindOf(val) {
+  // primitivies
+  if (typeof val === 'undefined') {
+    return 'undefined';
+  }
+  if (val === null) {
+    return 'null';
+  }
+  if (val === true || val === false || val instanceof Boolean) {
+    return 'boolean';
+  }
+  if (typeof val === 'string' || val instanceof String) {
+    return 'string';
+  }
+  if (typeof val === 'number' || val instanceof Number) {
+    return 'number';
+  }
+
+  // functions
+  if (typeof val === 'function' || val instanceof Function) {
+    return 'function';
+  }
+
+  // array
+  if (typeof Array.isArray !== 'undefined' && Array.isArray(val)) {
+    return 'array';
+  }
+
+  // check for instances of RegExp and Date before calling `toString`
+  if (val instanceof RegExp) {
+    return 'regexp';
+  }
+  if (val instanceof Date) {
+    return 'date';
+  }
+
+  // other objects
+  var type = toString.call(val);
+
+  if (type === '[object RegExp]') {
+    return 'regexp';
+  }
+  if (type === '[object Date]') {
+    return 'date';
+  }
+  if (type === '[object Arguments]') {
+    return 'arguments';
+  }
+  if (type === '[object Error]') {
+    return 'error';
+  }
+
+  // buffer
+  if (isBuffer(val)) {
+    return 'buffer';
+  }
+
+  // es6: Map, WeakMap, Set, WeakSet
+  if (type === '[object Set]') {
+    return 'set';
+  }
+  if (type === '[object WeakSet]') {
+    return 'weakset';
+  }
+  if (type === '[object Map]') {
+    return 'map';
+  }
+  if (type === '[object WeakMap]') {
+    return 'weakmap';
+  }
+  if (type === '[object Symbol]') {
+    return 'symbol';
+  }
+
+  // typed arrays
+  if (type === '[object Int8Array]') {
+    return 'int8array';
+  }
+  if (type === '[object Uint8Array]') {
+    return 'uint8array';
+  }
+  if (type === '[object Uint8ClampedArray]') {
+    return 'uint8clampedarray';
+  }
+  if (type === '[object Int16Array]') {
+    return 'int16array';
+  }
+  if (type === '[object Uint16Array]') {
+    return 'uint16array';
+  }
+  if (type === '[object Int32Array]') {
+    return 'int32array';
+  }
+  if (type === '[object Uint32Array]') {
+    return 'uint32array';
+  }
+  if (type === '[object Float32Array]') {
+    return 'float32array';
+  }
+  if (type === '[object Float64Array]') {
+    return 'float64array';
+  }
+
+  // must be a plain object
+  return 'object';
+};
+
+
+/***/ }),
+
+/***/ 93656:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+/*!
+ * is-descriptor <https://github.com/jonschlinkert/is-descriptor>
+ *
+ * Copyright (c) 2015-2017, Jon Schlinkert.
+ * Released under the MIT License.
+ */
+
+
+
+var typeOf = __nccwpck_require__(33742);
+var isAccessor = __nccwpck_require__(74681);
+var isData = __nccwpck_require__(36683);
+
+module.exports = function isDescriptor(obj, key) {
+  if (typeOf(obj) !== 'object') {
+    return false;
+  }
+  if ('get' in obj) {
+    return isAccessor(obj, key);
+  }
+  return isData(obj, key);
+};
+
+
+/***/ }),
+
+/***/ 75836:
+/***/ ((module) => {
+
+"use strict";
+/*!
+ * is-extendable <https://github.com/jonschlinkert/is-extendable>
+ *
+ * Copyright (c) 2015, Jon Schlinkert.
+ * Licensed under the MIT License.
+ */
+
+
+
+module.exports = function isExtendable(val) {
+  return typeof val !== 'undefined' && val !== null
+    && (typeof val === 'object' || typeof val === 'function');
+};
+
+
+/***/ }),
+
+/***/ 33742:
+/***/ ((module) => {
+
+var toString = Object.prototype.toString;
+
+/**
+ * Get the native `typeof` a value.
+ *
+ * @param  {*} `val`
+ * @return {*} Native javascript type
+ */
+
+module.exports = function kindOf(val) {
+  var type = typeof val;
+
+  // primitivies
+  if (type === 'undefined') {
+    return 'undefined';
+  }
+  if (val === null) {
+    return 'null';
+  }
+  if (val === true || val === false || val instanceof Boolean) {
+    return 'boolean';
+  }
+  if (type === 'string' || val instanceof String) {
+    return 'string';
+  }
+  if (type === 'number' || val instanceof Number) {
+    return 'number';
+  }
+
+  // functions
+  if (type === 'function' || val instanceof Function) {
+    if (typeof val.constructor.name !== 'undefined' && val.constructor.name.slice(0, 9) === 'Generator') {
+      return 'generatorfunction';
+    }
+    return 'function';
+  }
+
+  // array
+  if (typeof Array.isArray !== 'undefined' && Array.isArray(val)) {
+    return 'array';
+  }
+
+  // check for instances of RegExp and Date before calling `toString`
+  if (val instanceof RegExp) {
+    return 'regexp';
+  }
+  if (val instanceof Date) {
+    return 'date';
+  }
+
+  // other objects
+  type = toString.call(val);
+
+  if (type === '[object RegExp]') {
+    return 'regexp';
+  }
+  if (type === '[object Date]') {
+    return 'date';
+  }
+  if (type === '[object Arguments]') {
+    return 'arguments';
+  }
+  if (type === '[object Error]') {
+    return 'error';
+  }
+  if (type === '[object Promise]') {
+    return 'promise';
+  }
+
+  // buffer
+  if (isBuffer(val)) {
+    return 'buffer';
+  }
+
+  // es6: Map, WeakMap, Set, WeakSet
+  if (type === '[object Set]') {
+    return 'set';
+  }
+  if (type === '[object WeakSet]') {
+    return 'weakset';
+  }
+  if (type === '[object Map]') {
+    return 'map';
+  }
+  if (type === '[object WeakMap]') {
+    return 'weakmap';
+  }
+  if (type === '[object Symbol]') {
+    return 'symbol';
+  }
+  
+  if (type === '[object Map Iterator]') {
+    return 'mapiterator';
+  }
+  if (type === '[object Set Iterator]') {
+    return 'setiterator';
+  }
+  if (type === '[object String Iterator]') {
+    return 'stringiterator';
+  }
+  if (type === '[object Array Iterator]') {
+    return 'arrayiterator';
+  }
+  
+  // typed arrays
+  if (type === '[object Int8Array]') {
+    return 'int8array';
+  }
+  if (type === '[object Uint8Array]') {
+    return 'uint8array';
+  }
+  if (type === '[object Uint8ClampedArray]') {
+    return 'uint8clampedarray';
+  }
+  if (type === '[object Int16Array]') {
+    return 'int16array';
+  }
+  if (type === '[object Uint16Array]') {
+    return 'uint16array';
+  }
+  if (type === '[object Int32Array]') {
+    return 'int32array';
+  }
+  if (type === '[object Uint32Array]') {
+    return 'uint32array';
+  }
+  if (type === '[object Float32Array]') {
+    return 'float32array';
+  }
+  if (type === '[object Float64Array]') {
+    return 'float64array';
+  }
+
+  // must be a plain object
+  return 'object';
+};
+
+/**
+ * If you need to support Safari 5-7 (8-10 yr-old browser),
+ * take a look at https://github.com/feross/is-buffer
+ */
+
+function isBuffer(val) {
+  return val.constructor
+    && typeof val.constructor.isBuffer === 'function'
+    && val.constructor.isBuffer(val);
 }
 
 
@@ -76693,7 +78378,7 @@ module.exports = extend;
 
 
 
-var isDescriptor = __nccwpck_require__(20567);
+var isDescriptor = __nccwpck_require__(33131);
 
 module.exports = function defineProperty(obj, prop, val) {
   if (typeof obj !== 'object' && typeof obj !== 'function') {
@@ -76715,6 +78400,604 @@ module.exports = function defineProperty(obj, prop, val) {
     value: val
   });
 };
+
+
+/***/ }),
+
+/***/ 61529:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+/*!
+ * is-accessor-descriptor <https://github.com/jonschlinkert/is-accessor-descriptor>
+ *
+ * Copyright (c) 2015, Jon Schlinkert.
+ * Licensed under the MIT License.
+ */
+
+
+
+var typeOf = __nccwpck_require__(94184);
+
+// accessor descriptor properties
+var accessor = {
+  get: 'function',
+  set: 'function',
+  configurable: 'boolean',
+  enumerable: 'boolean'
+};
+
+function isAccessorDescriptor(obj, prop) {
+  if (typeof prop === 'string') {
+    var val = Object.getOwnPropertyDescriptor(obj, prop);
+    return typeof val !== 'undefined';
+  }
+
+  if (typeOf(obj) !== 'object') {
+    return false;
+  }
+
+  if (has(obj, 'value') || has(obj, 'writable')) {
+    return false;
+  }
+
+  if (!has(obj, 'get') || typeof obj.get !== 'function') {
+    return false;
+  }
+
+  // tldr: it's valid to have "set" be undefined
+  // "set" might be undefined if `Object.getOwnPropertyDescriptor`
+  // was used to get the value, and only `get` was defined by the user
+  if (has(obj, 'set') && typeof obj[key] !== 'function' && typeof obj[key] !== 'undefined') {
+    return false;
+  }
+
+  for (var key in obj) {
+    if (!accessor.hasOwnProperty(key)) {
+      continue;
+    }
+
+    if (typeOf(obj[key]) === accessor[key]) {
+      continue;
+    }
+
+    if (typeof obj[key] !== 'undefined') {
+      return false;
+    }
+  }
+  return true;
+}
+
+function has(obj, key) {
+  return {}.hasOwnProperty.call(obj, key);
+}
+
+/**
+ * Expose `isAccessorDescriptor`
+ */
+
+module.exports = isAccessorDescriptor;
+
+
+/***/ }),
+
+/***/ 94184:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+var isBuffer = __nccwpck_require__(63611);
+var toString = Object.prototype.toString;
+
+/**
+ * Get the native `typeof` a value.
+ *
+ * @param  {*} `val`
+ * @return {*} Native javascript type
+ */
+
+module.exports = function kindOf(val) {
+  // primitivies
+  if (typeof val === 'undefined') {
+    return 'undefined';
+  }
+  if (val === null) {
+    return 'null';
+  }
+  if (val === true || val === false || val instanceof Boolean) {
+    return 'boolean';
+  }
+  if (typeof val === 'string' || val instanceof String) {
+    return 'string';
+  }
+  if (typeof val === 'number' || val instanceof Number) {
+    return 'number';
+  }
+
+  // functions
+  if (typeof val === 'function' || val instanceof Function) {
+    return 'function';
+  }
+
+  // array
+  if (typeof Array.isArray !== 'undefined' && Array.isArray(val)) {
+    return 'array';
+  }
+
+  // check for instances of RegExp and Date before calling `toString`
+  if (val instanceof RegExp) {
+    return 'regexp';
+  }
+  if (val instanceof Date) {
+    return 'date';
+  }
+
+  // other objects
+  var type = toString.call(val);
+
+  if (type === '[object RegExp]') {
+    return 'regexp';
+  }
+  if (type === '[object Date]') {
+    return 'date';
+  }
+  if (type === '[object Arguments]') {
+    return 'arguments';
+  }
+  if (type === '[object Error]') {
+    return 'error';
+  }
+
+  // buffer
+  if (isBuffer(val)) {
+    return 'buffer';
+  }
+
+  // es6: Map, WeakMap, Set, WeakSet
+  if (type === '[object Set]') {
+    return 'set';
+  }
+  if (type === '[object WeakSet]') {
+    return 'weakset';
+  }
+  if (type === '[object Map]') {
+    return 'map';
+  }
+  if (type === '[object WeakMap]') {
+    return 'weakmap';
+  }
+  if (type === '[object Symbol]') {
+    return 'symbol';
+  }
+
+  // typed arrays
+  if (type === '[object Int8Array]') {
+    return 'int8array';
+  }
+  if (type === '[object Uint8Array]') {
+    return 'uint8array';
+  }
+  if (type === '[object Uint8ClampedArray]') {
+    return 'uint8clampedarray';
+  }
+  if (type === '[object Int16Array]') {
+    return 'int16array';
+  }
+  if (type === '[object Uint16Array]') {
+    return 'uint16array';
+  }
+  if (type === '[object Int32Array]') {
+    return 'int32array';
+  }
+  if (type === '[object Uint32Array]') {
+    return 'uint32array';
+  }
+  if (type === '[object Float32Array]') {
+    return 'float32array';
+  }
+  if (type === '[object Float64Array]') {
+    return 'float64array';
+  }
+
+  // must be a plain object
+  return 'object';
+};
+
+
+/***/ }),
+
+/***/ 63611:
+/***/ ((module) => {
+
+/*!
+ * Determine if an object is a Buffer
+ *
+ * @author   Feross Aboukhadijeh <https://feross.org>
+ * @license  MIT
+ */
+
+// The _isBuffer check is for Safari 5-7 support, because it's missing
+// Object.prototype.constructor. Remove this eventually
+module.exports = function (obj) {
+  return obj != null && (isBuffer(obj) || isSlowBuffer(obj) || !!obj._isBuffer)
+}
+
+function isBuffer (obj) {
+  return !!obj.constructor && typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
+}
+
+// For Node v0.10 support. Remove this eventually.
+function isSlowBuffer (obj) {
+  return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
+}
+
+
+/***/ }),
+
+/***/ 69273:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+/*!
+ * is-data-descriptor <https://github.com/jonschlinkert/is-data-descriptor>
+ *
+ * Copyright (c) 2015, Jon Schlinkert.
+ * Licensed under the MIT License.
+ */
+
+
+
+var typeOf = __nccwpck_require__(47505);
+
+// data descriptor properties
+var data = {
+  configurable: 'boolean',
+  enumerable: 'boolean',
+  writable: 'boolean'
+};
+
+function isDataDescriptor(obj, prop) {
+  if (typeOf(obj) !== 'object') {
+    return false;
+  }
+
+  if (typeof prop === 'string') {
+    var val = Object.getOwnPropertyDescriptor(obj, prop);
+    return typeof val !== 'undefined';
+  }
+
+  if (!('value' in obj) && !('writable' in obj)) {
+    return false;
+  }
+
+  for (var key in obj) {
+    if (key === 'value') continue;
+
+    if (!data.hasOwnProperty(key)) {
+      continue;
+    }
+
+    if (typeOf(obj[key]) === data[key]) {
+      continue;
+    }
+
+    if (typeof obj[key] !== 'undefined') {
+      return false;
+    }
+  }
+  return true;
+}
+
+/**
+ * Expose `isDataDescriptor`
+ */
+
+module.exports = isDataDescriptor;
+
+
+/***/ }),
+
+/***/ 47505:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+var isBuffer = __nccwpck_require__(63611);
+var toString = Object.prototype.toString;
+
+/**
+ * Get the native `typeof` a value.
+ *
+ * @param  {*} `val`
+ * @return {*} Native javascript type
+ */
+
+module.exports = function kindOf(val) {
+  // primitivies
+  if (typeof val === 'undefined') {
+    return 'undefined';
+  }
+  if (val === null) {
+    return 'null';
+  }
+  if (val === true || val === false || val instanceof Boolean) {
+    return 'boolean';
+  }
+  if (typeof val === 'string' || val instanceof String) {
+    return 'string';
+  }
+  if (typeof val === 'number' || val instanceof Number) {
+    return 'number';
+  }
+
+  // functions
+  if (typeof val === 'function' || val instanceof Function) {
+    return 'function';
+  }
+
+  // array
+  if (typeof Array.isArray !== 'undefined' && Array.isArray(val)) {
+    return 'array';
+  }
+
+  // check for instances of RegExp and Date before calling `toString`
+  if (val instanceof RegExp) {
+    return 'regexp';
+  }
+  if (val instanceof Date) {
+    return 'date';
+  }
+
+  // other objects
+  var type = toString.call(val);
+
+  if (type === '[object RegExp]') {
+    return 'regexp';
+  }
+  if (type === '[object Date]') {
+    return 'date';
+  }
+  if (type === '[object Arguments]') {
+    return 'arguments';
+  }
+  if (type === '[object Error]') {
+    return 'error';
+  }
+
+  // buffer
+  if (isBuffer(val)) {
+    return 'buffer';
+  }
+
+  // es6: Map, WeakMap, Set, WeakSet
+  if (type === '[object Set]') {
+    return 'set';
+  }
+  if (type === '[object WeakSet]') {
+    return 'weakset';
+  }
+  if (type === '[object Map]') {
+    return 'map';
+  }
+  if (type === '[object WeakMap]') {
+    return 'weakmap';
+  }
+  if (type === '[object Symbol]') {
+    return 'symbol';
+  }
+
+  // typed arrays
+  if (type === '[object Int8Array]') {
+    return 'int8array';
+  }
+  if (type === '[object Uint8Array]') {
+    return 'uint8array';
+  }
+  if (type === '[object Uint8ClampedArray]') {
+    return 'uint8clampedarray';
+  }
+  if (type === '[object Int16Array]') {
+    return 'int16array';
+  }
+  if (type === '[object Uint16Array]') {
+    return 'uint16array';
+  }
+  if (type === '[object Int32Array]') {
+    return 'int32array';
+  }
+  if (type === '[object Uint32Array]') {
+    return 'uint32array';
+  }
+  if (type === '[object Float32Array]') {
+    return 'float32array';
+  }
+  if (type === '[object Float64Array]') {
+    return 'float64array';
+  }
+
+  // must be a plain object
+  return 'object';
+};
+
+
+/***/ }),
+
+/***/ 33131:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+/*!
+ * is-descriptor <https://github.com/jonschlinkert/is-descriptor>
+ *
+ * Copyright (c) 2015-2017, Jon Schlinkert.
+ * Released under the MIT License.
+ */
+
+
+
+var typeOf = __nccwpck_require__(48463);
+var isAccessor = __nccwpck_require__(61529);
+var isData = __nccwpck_require__(69273);
+
+module.exports = function isDescriptor(obj, key) {
+  if (typeOf(obj) !== 'object') {
+    return false;
+  }
+  if ('get' in obj) {
+    return isAccessor(obj, key);
+  }
+  return isData(obj, key);
+};
+
+
+/***/ }),
+
+/***/ 48463:
+/***/ ((module) => {
+
+var toString = Object.prototype.toString;
+
+/**
+ * Get the native `typeof` a value.
+ *
+ * @param  {*} `val`
+ * @return {*} Native javascript type
+ */
+
+module.exports = function kindOf(val) {
+  var type = typeof val;
+
+  // primitivies
+  if (type === 'undefined') {
+    return 'undefined';
+  }
+  if (val === null) {
+    return 'null';
+  }
+  if (val === true || val === false || val instanceof Boolean) {
+    return 'boolean';
+  }
+  if (type === 'string' || val instanceof String) {
+    return 'string';
+  }
+  if (type === 'number' || val instanceof Number) {
+    return 'number';
+  }
+
+  // functions
+  if (type === 'function' || val instanceof Function) {
+    if (typeof val.constructor.name !== 'undefined' && val.constructor.name.slice(0, 9) === 'Generator') {
+      return 'generatorfunction';
+    }
+    return 'function';
+  }
+
+  // array
+  if (typeof Array.isArray !== 'undefined' && Array.isArray(val)) {
+    return 'array';
+  }
+
+  // check for instances of RegExp and Date before calling `toString`
+  if (val instanceof RegExp) {
+    return 'regexp';
+  }
+  if (val instanceof Date) {
+    return 'date';
+  }
+
+  // other objects
+  type = toString.call(val);
+
+  if (type === '[object RegExp]') {
+    return 'regexp';
+  }
+  if (type === '[object Date]') {
+    return 'date';
+  }
+  if (type === '[object Arguments]') {
+    return 'arguments';
+  }
+  if (type === '[object Error]') {
+    return 'error';
+  }
+  if (type === '[object Promise]') {
+    return 'promise';
+  }
+
+  // buffer
+  if (isBuffer(val)) {
+    return 'buffer';
+  }
+
+  // es6: Map, WeakMap, Set, WeakSet
+  if (type === '[object Set]') {
+    return 'set';
+  }
+  if (type === '[object WeakSet]') {
+    return 'weakset';
+  }
+  if (type === '[object Map]') {
+    return 'map';
+  }
+  if (type === '[object WeakMap]') {
+    return 'weakmap';
+  }
+  if (type === '[object Symbol]') {
+    return 'symbol';
+  }
+  
+  if (type === '[object Map Iterator]') {
+    return 'mapiterator';
+  }
+  if (type === '[object Set Iterator]') {
+    return 'setiterator';
+  }
+  if (type === '[object String Iterator]') {
+    return 'stringiterator';
+  }
+  if (type === '[object Array Iterator]') {
+    return 'arrayiterator';
+  }
+  
+  // typed arrays
+  if (type === '[object Int8Array]') {
+    return 'int8array';
+  }
+  if (type === '[object Uint8Array]') {
+    return 'uint8array';
+  }
+  if (type === '[object Uint8ClampedArray]') {
+    return 'uint8clampedarray';
+  }
+  if (type === '[object Int16Array]') {
+    return 'int16array';
+  }
+  if (type === '[object Uint16Array]') {
+    return 'uint16array';
+  }
+  if (type === '[object Int32Array]') {
+    return 'int32array';
+  }
+  if (type === '[object Uint32Array]') {
+    return 'uint32array';
+  }
+  if (type === '[object Float32Array]') {
+    return 'float32array';
+  }
+  if (type === '[object Float64Array]') {
+    return 'float64array';
+  }
+
+  // must be a plain object
+  return 'object';
+};
+
+/**
+ * If you need to support Safari 5-7 (8-10 yr-old browser),
+ * take a look at https://github.com/feross/is-buffer
+ */
+
+function isBuffer(val) {
+  return val.constructor
+    && typeof val.constructor.isBuffer === 'function'
+    && val.constructor.isBuffer(val);
+}
 
 
 /***/ }),
@@ -78111,7 +80394,7 @@ exports.debug = debug; // for test
 var bail = __nccwpck_require__(17240)
 var buffer = __nccwpck_require__(35625)
 var extend = __nccwpck_require__(38171)
-var plain = __nccwpck_require__(20864)
+var plain = __nccwpck_require__(44118)
 var trough = __nccwpck_require__(73604)
 var vfile = __nccwpck_require__(34860)
 
@@ -78134,9 +80417,9 @@ function pipelineParse(p, ctx) {
 function pipelineRun(p, ctx, next) {
   p.run(ctx.tree, ctx.file, done)
 
-  function done(err, tree, file) {
-    if (err) {
-      next(err)
+  function done(error, tree, file) {
+    if (error) {
+      next(error)
     } else {
       ctx.tree = tree
       ctx.file = file
@@ -78147,14 +80430,13 @@ function pipelineRun(p, ctx, next) {
 
 function pipelineStringify(p, ctx) {
   var result = p.stringify(ctx.tree, ctx.file)
-  var file = ctx.file
 
   if (result === undefined || result === null) {
     // Empty.
   } else if (typeof result === 'string' || buffer(result)) {
-    file.contents = result
+    ctx.file.contents = result
   } else {
-    file.result = result
+    ctx.file.result = result
   }
 }
 
@@ -78163,8 +80445,8 @@ function unified() {
   var attachers = []
   var transformers = trough()
   var namespace = {}
-  var frozen = false
   var freezeIndex = -1
+  var frozen
 
   // Data management.
   processor.data = data
@@ -78190,10 +80472,9 @@ function unified() {
   // Create a new processor based on the processor in the current scope.
   function processor() {
     var destination = unified()
-    var length = attachers.length
     var index = -1
 
-    while (++index < length) {
+    while (++index < attachers.length) {
       destination.use.apply(null, attachers[index])
     }
 
@@ -78211,8 +80492,6 @@ function unified() {
   // In essence, always invoke this when exporting a processor.
   function freeze() {
     var values
-    var plugin
-    var options
     var transformer
 
     if (frozen) {
@@ -78221,19 +80500,16 @@ function unified() {
 
     while (++freezeIndex < attachers.length) {
       values = attachers[freezeIndex]
-      plugin = values[0]
-      options = values[1]
-      transformer = null
 
-      if (options === false) {
+      if (values[1] === false) {
         continue
       }
 
-      if (options === true) {
+      if (values[1] === true) {
         values[1] = undefined
       }
 
-      transformer = plugin.apply(processor, values.slice(1))
+      transformer = values[0].apply(processor, values.slice(1))
 
       if (typeof transformer === 'function') {
         transformers.use(transformer)
@@ -78253,9 +80529,7 @@ function unified() {
       // Set `key`.
       if (arguments.length === 2) {
         assertUnfrozen('data', frozen)
-
         namespace[key] = value
-
         return processor
       }
 
@@ -78329,16 +80603,12 @@ function unified() {
     }
 
     function addList(plugins) {
-      var length
-      var index
+      var index = -1
 
       if (plugins === null || plugins === undefined) {
         // Empty.
       } else if (typeof plugins === 'object' && 'length' in plugins) {
-        length = plugins.length
-        index = -1
-
-        while (++index < length) {
+        while (++index < plugins.length) {
           add(plugins[index])
         }
       } else {
@@ -78351,7 +80621,7 @@ function unified() {
 
       if (entry) {
         if (plain(entry[1]) && plain(value)) {
-          value = extend(entry[1], value)
+          value = extend(true, entry[1], value)
         }
 
         entry[1] = value
@@ -78362,15 +80632,11 @@ function unified() {
   }
 
   function find(plugin) {
-    var length = attachers.length
     var index = -1
-    var entry
 
-    while (++index < length) {
-      entry = attachers[index]
-
-      if (entry[0] === plugin) {
-        return entry
+    while (++index < attachers.length) {
+      if (attachers[index][0] === plugin) {
+        return attachers[index]
       }
     }
   }
@@ -78412,10 +80678,10 @@ function unified() {
     function executor(resolve, reject) {
       transformers.run(node, vfile(file), done)
 
-      function done(err, tree, file) {
+      function done(error, tree, file) {
         tree = tree || node
-        if (err) {
-          reject(err)
+        if (error) {
+          reject(error)
         } else if (resolve) {
           resolve(tree)
         } else {
@@ -78428,8 +80694,8 @@ function unified() {
   // Run transforms on a unist node representation of a file (in string or
   // vfile representation), sync.
   function runSync(node, file) {
-    var complete = false
     var result
+    var complete
 
     run(node, file, done)
 
@@ -78437,10 +80703,10 @@ function unified() {
 
     return result
 
-    function done(err, tree) {
+    function done(error, tree) {
       complete = true
-      bail(err)
       result = tree
+      bail(error)
     }
   }
 
@@ -78482,9 +80748,9 @@ function unified() {
 
       pipeline.run(processor, {file: file}, done)
 
-      function done(err) {
-        if (err) {
-          reject(err)
+      function done(error) {
+        if (error) {
+          reject(error)
         } else if (resolve) {
           resolve(file)
         } else {
@@ -78496,8 +80762,8 @@ function unified() {
 
   // Process the given document (in string or vfile representation), sync.
   function processSync(doc) {
-    var complete = false
     var file
+    var complete
 
     freeze()
     assertParser('processSync', processor.Parser)
@@ -78510,9 +80776,9 @@ function unified() {
 
     return file
 
-    function done(err) {
+    function done(error) {
       complete = true
-      bail(err)
+      bail(error)
     }
   }
 }
@@ -78583,13 +80849,31 @@ function assertDone(name, asyncName, complete) {
 
 /***/ }),
 
+/***/ 44118:
+/***/ ((module) => {
+
+"use strict";
+
+
+module.exports = value => {
+	if (Object.prototype.toString.call(value) !== '[object Object]') {
+		return false;
+	}
+
+	const prototype = Object.getPrototypeOf(value);
+	return prototype === null || prototype === Object.prototype;
+};
+
+
+/***/ }),
+
 /***/ 17303:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var isObject = __nccwpck_require__(70429);
+var isObject = __nccwpck_require__(18990);
 var union = __nccwpck_require__(38815);
 var get = __nccwpck_require__(79611);
 var set = __nccwpck_require__(74269);
@@ -78617,6 +80901,27 @@ function arrayify(val) {
   }
   return [val];
 }
+
+
+/***/ }),
+
+/***/ 18990:
+/***/ ((module) => {
+
+"use strict";
+/*!
+ * is-extendable <https://github.com/jonschlinkert/is-extendable>
+ *
+ * Copyright (c) 2015, Jon Schlinkert.
+ * Licensed under the MIT License.
+ */
+
+
+
+module.exports = function isExtendable(val) {
+  return typeof val !== 'undefined' && val !== null
+    && (typeof val === 'object' || typeof val === 'function');
+};
 
 
 /***/ }),
@@ -79845,7 +82150,7 @@ module.exports = eval("require")("encoding");
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse("{\"nbsp\":\" \",\"iexcl\":\"¡\",\"cent\":\"¢\",\"pound\":\"£\",\"curren\":\"¤\",\"yen\":\"¥\",\"brvbar\":\"¦\",\"sect\":\"§\",\"uml\":\"¨\",\"copy\":\"©\",\"ordf\":\"ª\",\"laquo\":\"«\",\"not\":\"¬\",\"shy\":\"­\",\"reg\":\"®\",\"macr\":\"¯\",\"deg\":\"°\",\"plusmn\":\"±\",\"sup2\":\"²\",\"sup3\":\"³\",\"acute\":\"´\",\"micro\":\"µ\",\"para\":\"¶\",\"middot\":\"·\",\"cedil\":\"¸\",\"sup1\":\"¹\",\"ordm\":\"º\",\"raquo\":\"»\",\"frac14\":\"¼\",\"frac12\":\"½\",\"frac34\":\"¾\",\"iquest\":\"¿\",\"Agrave\":\"À\",\"Aacute\":\"Á\",\"Acirc\":\"Â\",\"Atilde\":\"Ã\",\"Auml\":\"Ä\",\"Aring\":\"Å\",\"AElig\":\"Æ\",\"Ccedil\":\"Ç\",\"Egrave\":\"È\",\"Eacute\":\"É\",\"Ecirc\":\"Ê\",\"Euml\":\"Ë\",\"Igrave\":\"Ì\",\"Iacute\":\"Í\",\"Icirc\":\"Î\",\"Iuml\":\"Ï\",\"ETH\":\"Ð\",\"Ntilde\":\"Ñ\",\"Ograve\":\"Ò\",\"Oacute\":\"Ó\",\"Ocirc\":\"Ô\",\"Otilde\":\"Õ\",\"Ouml\":\"Ö\",\"times\":\"×\",\"Oslash\":\"Ø\",\"Ugrave\":\"Ù\",\"Uacute\":\"Ú\",\"Ucirc\":\"Û\",\"Uuml\":\"Ü\",\"Yacute\":\"Ý\",\"THORN\":\"Þ\",\"szlig\":\"ß\",\"agrave\":\"à\",\"aacute\":\"á\",\"acirc\":\"â\",\"atilde\":\"ã\",\"auml\":\"ä\",\"aring\":\"å\",\"aelig\":\"æ\",\"ccedil\":\"ç\",\"egrave\":\"è\",\"eacute\":\"é\",\"ecirc\":\"ê\",\"euml\":\"ë\",\"igrave\":\"ì\",\"iacute\":\"í\",\"icirc\":\"î\",\"iuml\":\"ï\",\"eth\":\"ð\",\"ntilde\":\"ñ\",\"ograve\":\"ò\",\"oacute\":\"ó\",\"ocirc\":\"ô\",\"otilde\":\"õ\",\"ouml\":\"ö\",\"divide\":\"÷\",\"oslash\":\"ø\",\"ugrave\":\"ù\",\"uacute\":\"ú\",\"ucirc\":\"û\",\"uuml\":\"ü\",\"yacute\":\"ý\",\"thorn\":\"þ\",\"yuml\":\"ÿ\",\"fnof\":\"ƒ\",\"Alpha\":\"Α\",\"Beta\":\"Β\",\"Gamma\":\"Γ\",\"Delta\":\"Δ\",\"Epsilon\":\"Ε\",\"Zeta\":\"Ζ\",\"Eta\":\"Η\",\"Theta\":\"Θ\",\"Iota\":\"Ι\",\"Kappa\":\"Κ\",\"Lambda\":\"Λ\",\"Mu\":\"Μ\",\"Nu\":\"Ν\",\"Xi\":\"Ξ\",\"Omicron\":\"Ο\",\"Pi\":\"Π\",\"Rho\":\"Ρ\",\"Sigma\":\"Σ\",\"Tau\":\"Τ\",\"Upsilon\":\"Υ\",\"Phi\":\"Φ\",\"Chi\":\"Χ\",\"Psi\":\"Ψ\",\"Omega\":\"Ω\",\"alpha\":\"α\",\"beta\":\"β\",\"gamma\":\"γ\",\"delta\":\"δ\",\"epsilon\":\"ε\",\"zeta\":\"ζ\",\"eta\":\"η\",\"theta\":\"θ\",\"iota\":\"ι\",\"kappa\":\"κ\",\"lambda\":\"λ\",\"mu\":\"μ\",\"nu\":\"ν\",\"xi\":\"ξ\",\"omicron\":\"ο\",\"pi\":\"π\",\"rho\":\"ρ\",\"sigmaf\":\"ς\",\"sigma\":\"σ\",\"tau\":\"τ\",\"upsilon\":\"υ\",\"phi\":\"φ\",\"chi\":\"χ\",\"psi\":\"ψ\",\"omega\":\"ω\",\"thetasym\":\"ϑ\",\"upsih\":\"ϒ\",\"piv\":\"ϖ\",\"bull\":\"•\",\"hellip\":\"…\",\"prime\":\"′\",\"Prime\":\"″\",\"oline\":\"‾\",\"frasl\":\"⁄\",\"weierp\":\"℘\",\"image\":\"ℑ\",\"real\":\"ℜ\",\"trade\":\"™\",\"alefsym\":\"ℵ\",\"larr\":\"←\",\"uarr\":\"↑\",\"rarr\":\"→\",\"darr\":\"↓\",\"harr\":\"↔\",\"crarr\":\"↵\",\"lArr\":\"⇐\",\"uArr\":\"⇑\",\"rArr\":\"⇒\",\"dArr\":\"⇓\",\"hArr\":\"⇔\",\"forall\":\"∀\",\"part\":\"∂\",\"exist\":\"∃\",\"empty\":\"∅\",\"nabla\":\"∇\",\"isin\":\"∈\",\"notin\":\"∉\",\"ni\":\"∋\",\"prod\":\"∏\",\"sum\":\"∑\",\"minus\":\"−\",\"lowast\":\"∗\",\"radic\":\"√\",\"prop\":\"∝\",\"infin\":\"∞\",\"ang\":\"∠\",\"and\":\"∧\",\"or\":\"∨\",\"cap\":\"∩\",\"cup\":\"∪\",\"int\":\"∫\",\"there4\":\"∴\",\"sim\":\"∼\",\"cong\":\"≅\",\"asymp\":\"≈\",\"ne\":\"≠\",\"equiv\":\"≡\",\"le\":\"≤\",\"ge\":\"≥\",\"sub\":\"⊂\",\"sup\":\"⊃\",\"nsub\":\"⊄\",\"sube\":\"⊆\",\"supe\":\"⊇\",\"oplus\":\"⊕\",\"otimes\":\"⊗\",\"perp\":\"⊥\",\"sdot\":\"⋅\",\"lceil\":\"⌈\",\"rceil\":\"⌉\",\"lfloor\":\"⌊\",\"rfloor\":\"⌋\",\"lang\":\"〈\",\"rang\":\"〉\",\"loz\":\"◊\",\"spades\":\"♠\",\"clubs\":\"♣\",\"hearts\":\"♥\",\"diams\":\"♦\",\"quot\":\"\\\"\",\"amp\":\"&\",\"lt\":\"<\",\"gt\":\">\",\"OElig\":\"Œ\",\"oelig\":\"œ\",\"Scaron\":\"Š\",\"scaron\":\"š\",\"Yuml\":\"Ÿ\",\"circ\":\"ˆ\",\"tilde\":\"˜\",\"ensp\":\" \",\"emsp\":\" \",\"thinsp\":\" \",\"zwnj\":\"‌\",\"zwj\":\"‍\",\"lrm\":\"‎\",\"rlm\":\"‏\",\"ndash\":\"–\",\"mdash\":\"—\",\"lsquo\":\"‘\",\"rsquo\":\"’\",\"sbquo\":\"‚\",\"ldquo\":\"“\",\"rdquo\":\"”\",\"bdquo\":\"„\",\"dagger\":\"†\",\"Dagger\":\"‡\",\"permil\":\"‰\",\"lsaquo\":\"‹\",\"rsaquo\":\"›\",\"euro\":\"€\"}");
+module.exports = JSON.parse('{"nbsp":" ","iexcl":"¡","cent":"¢","pound":"£","curren":"¤","yen":"¥","brvbar":"¦","sect":"§","uml":"¨","copy":"©","ordf":"ª","laquo":"«","not":"¬","shy":"­","reg":"®","macr":"¯","deg":"°","plusmn":"±","sup2":"²","sup3":"³","acute":"´","micro":"µ","para":"¶","middot":"·","cedil":"¸","sup1":"¹","ordm":"º","raquo":"»","frac14":"¼","frac12":"½","frac34":"¾","iquest":"¿","Agrave":"À","Aacute":"Á","Acirc":"Â","Atilde":"Ã","Auml":"Ä","Aring":"Å","AElig":"Æ","Ccedil":"Ç","Egrave":"È","Eacute":"É","Ecirc":"Ê","Euml":"Ë","Igrave":"Ì","Iacute":"Í","Icirc":"Î","Iuml":"Ï","ETH":"Ð","Ntilde":"Ñ","Ograve":"Ò","Oacute":"Ó","Ocirc":"Ô","Otilde":"Õ","Ouml":"Ö","times":"×","Oslash":"Ø","Ugrave":"Ù","Uacute":"Ú","Ucirc":"Û","Uuml":"Ü","Yacute":"Ý","THORN":"Þ","szlig":"ß","agrave":"à","aacute":"á","acirc":"â","atilde":"ã","auml":"ä","aring":"å","aelig":"æ","ccedil":"ç","egrave":"è","eacute":"é","ecirc":"ê","euml":"ë","igrave":"ì","iacute":"í","icirc":"î","iuml":"ï","eth":"ð","ntilde":"ñ","ograve":"ò","oacute":"ó","ocirc":"ô","otilde":"õ","ouml":"ö","divide":"÷","oslash":"ø","ugrave":"ù","uacute":"ú","ucirc":"û","uuml":"ü","yacute":"ý","thorn":"þ","yuml":"ÿ","fnof":"ƒ","Alpha":"Α","Beta":"Β","Gamma":"Γ","Delta":"Δ","Epsilon":"Ε","Zeta":"Ζ","Eta":"Η","Theta":"Θ","Iota":"Ι","Kappa":"Κ","Lambda":"Λ","Mu":"Μ","Nu":"Ν","Xi":"Ξ","Omicron":"Ο","Pi":"Π","Rho":"Ρ","Sigma":"Σ","Tau":"Τ","Upsilon":"Υ","Phi":"Φ","Chi":"Χ","Psi":"Ψ","Omega":"Ω","alpha":"α","beta":"β","gamma":"γ","delta":"δ","epsilon":"ε","zeta":"ζ","eta":"η","theta":"θ","iota":"ι","kappa":"κ","lambda":"λ","mu":"μ","nu":"ν","xi":"ξ","omicron":"ο","pi":"π","rho":"ρ","sigmaf":"ς","sigma":"σ","tau":"τ","upsilon":"υ","phi":"φ","chi":"χ","psi":"ψ","omega":"ω","thetasym":"ϑ","upsih":"ϒ","piv":"ϖ","bull":"•","hellip":"…","prime":"′","Prime":"″","oline":"‾","frasl":"⁄","weierp":"℘","image":"ℑ","real":"ℜ","trade":"™","alefsym":"ℵ","larr":"←","uarr":"↑","rarr":"→","darr":"↓","harr":"↔","crarr":"↵","lArr":"⇐","uArr":"⇑","rArr":"⇒","dArr":"⇓","hArr":"⇔","forall":"∀","part":"∂","exist":"∃","empty":"∅","nabla":"∇","isin":"∈","notin":"∉","ni":"∋","prod":"∏","sum":"∑","minus":"−","lowast":"∗","radic":"√","prop":"∝","infin":"∞","ang":"∠","and":"∧","or":"∨","cap":"∩","cup":"∪","int":"∫","there4":"∴","sim":"∼","cong":"≅","asymp":"≈","ne":"≠","equiv":"≡","le":"≤","ge":"≥","sub":"⊂","sup":"⊃","nsub":"⊄","sube":"⊆","supe":"⊇","oplus":"⊕","otimes":"⊗","perp":"⊥","sdot":"⋅","lceil":"⌈","rceil":"⌉","lfloor":"⌊","rfloor":"⌋","lang":"〈","rang":"〉","loz":"◊","spades":"♠","clubs":"♣","hearts":"♥","diams":"♦","quot":"\\"","amp":"&","lt":"<","gt":">","OElig":"Œ","oelig":"œ","Scaron":"Š","scaron":"š","Yuml":"Ÿ","circ":"ˆ","tilde":"˜","ensp":" ","emsp":" ","thinsp":" ","zwnj":"‌","zwj":"‍","lrm":"‎","rlm":"‏","ndash":"–","mdash":"—","lsquo":"‘","rsquo":"’","sbquo":"‚","ldquo":"“","rdquo":"”","bdquo":"„","dagger":"†","Dagger":"‡","permil":"‰","lsaquo":"‹","rsaquo":"›","euro":"€"}');
 
 /***/ }),
 
@@ -79853,7 +82158,7 @@ module.exports = JSON.parse("{\"nbsp\":\" \",\"iexcl\":\"¡\",\"cent\":\"¢\",\
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse("{\"AElig\":\"Æ\",\"AMP\":\"&\",\"Aacute\":\"Á\",\"Acirc\":\"Â\",\"Agrave\":\"À\",\"Aring\":\"Å\",\"Atilde\":\"Ã\",\"Auml\":\"Ä\",\"COPY\":\"©\",\"Ccedil\":\"Ç\",\"ETH\":\"Ð\",\"Eacute\":\"É\",\"Ecirc\":\"Ê\",\"Egrave\":\"È\",\"Euml\":\"Ë\",\"GT\":\">\",\"Iacute\":\"Í\",\"Icirc\":\"Î\",\"Igrave\":\"Ì\",\"Iuml\":\"Ï\",\"LT\":\"<\",\"Ntilde\":\"Ñ\",\"Oacute\":\"Ó\",\"Ocirc\":\"Ô\",\"Ograve\":\"Ò\",\"Oslash\":\"Ø\",\"Otilde\":\"Õ\",\"Ouml\":\"Ö\",\"QUOT\":\"\\\"\",\"REG\":\"®\",\"THORN\":\"Þ\",\"Uacute\":\"Ú\",\"Ucirc\":\"Û\",\"Ugrave\":\"Ù\",\"Uuml\":\"Ü\",\"Yacute\":\"Ý\",\"aacute\":\"á\",\"acirc\":\"â\",\"acute\":\"´\",\"aelig\":\"æ\",\"agrave\":\"à\",\"amp\":\"&\",\"aring\":\"å\",\"atilde\":\"ã\",\"auml\":\"ä\",\"brvbar\":\"¦\",\"ccedil\":\"ç\",\"cedil\":\"¸\",\"cent\":\"¢\",\"copy\":\"©\",\"curren\":\"¤\",\"deg\":\"°\",\"divide\":\"÷\",\"eacute\":\"é\",\"ecirc\":\"ê\",\"egrave\":\"è\",\"eth\":\"ð\",\"euml\":\"ë\",\"frac12\":\"½\",\"frac14\":\"¼\",\"frac34\":\"¾\",\"gt\":\">\",\"iacute\":\"í\",\"icirc\":\"î\",\"iexcl\":\"¡\",\"igrave\":\"ì\",\"iquest\":\"¿\",\"iuml\":\"ï\",\"laquo\":\"«\",\"lt\":\"<\",\"macr\":\"¯\",\"micro\":\"µ\",\"middot\":\"·\",\"nbsp\":\" \",\"not\":\"¬\",\"ntilde\":\"ñ\",\"oacute\":\"ó\",\"ocirc\":\"ô\",\"ograve\":\"ò\",\"ordf\":\"ª\",\"ordm\":\"º\",\"oslash\":\"ø\",\"otilde\":\"õ\",\"ouml\":\"ö\",\"para\":\"¶\",\"plusmn\":\"±\",\"pound\":\"£\",\"quot\":\"\\\"\",\"raquo\":\"»\",\"reg\":\"®\",\"sect\":\"§\",\"shy\":\"­\",\"sup1\":\"¹\",\"sup2\":\"²\",\"sup3\":\"³\",\"szlig\":\"ß\",\"thorn\":\"þ\",\"times\":\"×\",\"uacute\":\"ú\",\"ucirc\":\"û\",\"ugrave\":\"ù\",\"uml\":\"¨\",\"uuml\":\"ü\",\"yacute\":\"ý\",\"yen\":\"¥\",\"yuml\":\"ÿ\"}");
+module.exports = JSON.parse('{"AElig":"Æ","AMP":"&","Aacute":"Á","Acirc":"Â","Agrave":"À","Aring":"Å","Atilde":"Ã","Auml":"Ä","COPY":"©","Ccedil":"Ç","ETH":"Ð","Eacute":"É","Ecirc":"Ê","Egrave":"È","Euml":"Ë","GT":">","Iacute":"Í","Icirc":"Î","Igrave":"Ì","Iuml":"Ï","LT":"<","Ntilde":"Ñ","Oacute":"Ó","Ocirc":"Ô","Ograve":"Ò","Oslash":"Ø","Otilde":"Õ","Ouml":"Ö","QUOT":"\\"","REG":"®","THORN":"Þ","Uacute":"Ú","Ucirc":"Û","Ugrave":"Ù","Uuml":"Ü","Yacute":"Ý","aacute":"á","acirc":"â","acute":"´","aelig":"æ","agrave":"à","amp":"&","aring":"å","atilde":"ã","auml":"ä","brvbar":"¦","ccedil":"ç","cedil":"¸","cent":"¢","copy":"©","curren":"¤","deg":"°","divide":"÷","eacute":"é","ecirc":"ê","egrave":"è","eth":"ð","euml":"ë","frac12":"½","frac14":"¼","frac34":"¾","gt":">","iacute":"í","icirc":"î","iexcl":"¡","igrave":"ì","iquest":"¿","iuml":"ï","laquo":"«","lt":"<","macr":"¯","micro":"µ","middot":"·","nbsp":" ","not":"¬","ntilde":"ñ","oacute":"ó","ocirc":"ô","ograve":"ò","ordf":"ª","ordm":"º","oslash":"ø","otilde":"õ","ouml":"ö","para":"¶","plusmn":"±","pound":"£","quot":"\\"","raquo":"»","reg":"®","sect":"§","shy":"­","sup1":"¹","sup2":"²","sup3":"³","szlig":"ß","thorn":"þ","times":"×","uacute":"ú","ucirc":"û","ugrave":"ù","uml":"¨","uuml":"ü","yacute":"ý","yen":"¥","yuml":"ÿ"}');
 
 /***/ }),
 
@@ -79861,7 +82166,7 @@ module.exports = JSON.parse("{\"AElig\":\"Æ\",\"AMP\":\"&\",\"Aacute\":\"Á\",\
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse("{\"AEli\":\"Æ\",\"AElig\":\"Æ\",\"AM\":\"&\",\"AMP\":\"&\",\"Aacut\":\"Á\",\"Aacute\":\"Á\",\"Abreve\":\"Ă\",\"Acir\":\"Â\",\"Acirc\":\"Â\",\"Acy\":\"А\",\"Afr\":\"𝔄\",\"Agrav\":\"À\",\"Agrave\":\"À\",\"Alpha\":\"Α\",\"Amacr\":\"Ā\",\"And\":\"⩓\",\"Aogon\":\"Ą\",\"Aopf\":\"𝔸\",\"ApplyFunction\":\"⁡\",\"Arin\":\"Å\",\"Aring\":\"Å\",\"Ascr\":\"𝒜\",\"Assign\":\"≔\",\"Atild\":\"Ã\",\"Atilde\":\"Ã\",\"Aum\":\"Ä\",\"Auml\":\"Ä\",\"Backslash\":\"∖\",\"Barv\":\"⫧\",\"Barwed\":\"⌆\",\"Bcy\":\"Б\",\"Because\":\"∵\",\"Bernoullis\":\"ℬ\",\"Beta\":\"Β\",\"Bfr\":\"𝔅\",\"Bopf\":\"𝔹\",\"Breve\":\"˘\",\"Bscr\":\"ℬ\",\"Bumpeq\":\"≎\",\"CHcy\":\"Ч\",\"COP\":\"©\",\"COPY\":\"©\",\"Cacute\":\"Ć\",\"Cap\":\"⋒\",\"CapitalDifferentialD\":\"ⅅ\",\"Cayleys\":\"ℭ\",\"Ccaron\":\"Č\",\"Ccedi\":\"Ç\",\"Ccedil\":\"Ç\",\"Ccirc\":\"Ĉ\",\"Cconint\":\"∰\",\"Cdot\":\"Ċ\",\"Cedilla\":\"¸\",\"CenterDot\":\"·\",\"Cfr\":\"ℭ\",\"Chi\":\"Χ\",\"CircleDot\":\"⊙\",\"CircleMinus\":\"⊖\",\"CirclePlus\":\"⊕\",\"CircleTimes\":\"⊗\",\"ClockwiseContourIntegral\":\"∲\",\"CloseCurlyDoubleQuote\":\"”\",\"CloseCurlyQuote\":\"’\",\"Colon\":\"∷\",\"Colone\":\"⩴\",\"Congruent\":\"≡\",\"Conint\":\"∯\",\"ContourIntegral\":\"∮\",\"Copf\":\"ℂ\",\"Coproduct\":\"∐\",\"CounterClockwiseContourIntegral\":\"∳\",\"Cross\":\"⨯\",\"Cscr\":\"𝒞\",\"Cup\":\"⋓\",\"CupCap\":\"≍\",\"DD\":\"ⅅ\",\"DDotrahd\":\"⤑\",\"DJcy\":\"Ђ\",\"DScy\":\"Ѕ\",\"DZcy\":\"Џ\",\"Dagger\":\"‡\",\"Darr\":\"↡\",\"Dashv\":\"⫤\",\"Dcaron\":\"Ď\",\"Dcy\":\"Д\",\"Del\":\"∇\",\"Delta\":\"Δ\",\"Dfr\":\"𝔇\",\"DiacriticalAcute\":\"´\",\"DiacriticalDot\":\"˙\",\"DiacriticalDoubleAcute\":\"˝\",\"DiacriticalGrave\":\"`\",\"DiacriticalTilde\":\"˜\",\"Diamond\":\"⋄\",\"DifferentialD\":\"ⅆ\",\"Dopf\":\"𝔻\",\"Dot\":\"¨\",\"DotDot\":\"⃜\",\"DotEqual\":\"≐\",\"DoubleContourIntegral\":\"∯\",\"DoubleDot\":\"¨\",\"DoubleDownArrow\":\"⇓\",\"DoubleLeftArrow\":\"⇐\",\"DoubleLeftRightArrow\":\"⇔\",\"DoubleLeftTee\":\"⫤\",\"DoubleLongLeftArrow\":\"⟸\",\"DoubleLongLeftRightArrow\":\"⟺\",\"DoubleLongRightArrow\":\"⟹\",\"DoubleRightArrow\":\"⇒\",\"DoubleRightTee\":\"⊨\",\"DoubleUpArrow\":\"⇑\",\"DoubleUpDownArrow\":\"⇕\",\"DoubleVerticalBar\":\"∥\",\"DownArrow\":\"↓\",\"DownArrowBar\":\"⤓\",\"DownArrowUpArrow\":\"⇵\",\"DownBreve\":\"̑\",\"DownLeftRightVector\":\"⥐\",\"DownLeftTeeVector\":\"⥞\",\"DownLeftVector\":\"↽\",\"DownLeftVectorBar\":\"⥖\",\"DownRightTeeVector\":\"⥟\",\"DownRightVector\":\"⇁\",\"DownRightVectorBar\":\"⥗\",\"DownTee\":\"⊤\",\"DownTeeArrow\":\"↧\",\"Downarrow\":\"⇓\",\"Dscr\":\"𝒟\",\"Dstrok\":\"Đ\",\"ENG\":\"Ŋ\",\"ET\":\"Ð\",\"ETH\":\"Ð\",\"Eacut\":\"É\",\"Eacute\":\"É\",\"Ecaron\":\"Ě\",\"Ecir\":\"Ê\",\"Ecirc\":\"Ê\",\"Ecy\":\"Э\",\"Edot\":\"Ė\",\"Efr\":\"𝔈\",\"Egrav\":\"È\",\"Egrave\":\"È\",\"Element\":\"∈\",\"Emacr\":\"Ē\",\"EmptySmallSquare\":\"◻\",\"EmptyVerySmallSquare\":\"▫\",\"Eogon\":\"Ę\",\"Eopf\":\"𝔼\",\"Epsilon\":\"Ε\",\"Equal\":\"⩵\",\"EqualTilde\":\"≂\",\"Equilibrium\":\"⇌\",\"Escr\":\"ℰ\",\"Esim\":\"⩳\",\"Eta\":\"Η\",\"Eum\":\"Ë\",\"Euml\":\"Ë\",\"Exists\":\"∃\",\"ExponentialE\":\"ⅇ\",\"Fcy\":\"Ф\",\"Ffr\":\"𝔉\",\"FilledSmallSquare\":\"◼\",\"FilledVerySmallSquare\":\"▪\",\"Fopf\":\"𝔽\",\"ForAll\":\"∀\",\"Fouriertrf\":\"ℱ\",\"Fscr\":\"ℱ\",\"GJcy\":\"Ѓ\",\"G\":\">\",\"GT\":\">\",\"Gamma\":\"Γ\",\"Gammad\":\"Ϝ\",\"Gbreve\":\"Ğ\",\"Gcedil\":\"Ģ\",\"Gcirc\":\"Ĝ\",\"Gcy\":\"Г\",\"Gdot\":\"Ġ\",\"Gfr\":\"𝔊\",\"Gg\":\"⋙\",\"Gopf\":\"𝔾\",\"GreaterEqual\":\"≥\",\"GreaterEqualLess\":\"⋛\",\"GreaterFullEqual\":\"≧\",\"GreaterGreater\":\"⪢\",\"GreaterLess\":\"≷\",\"GreaterSlantEqual\":\"⩾\",\"GreaterTilde\":\"≳\",\"Gscr\":\"𝒢\",\"Gt\":\"≫\",\"HARDcy\":\"Ъ\",\"Hacek\":\"ˇ\",\"Hat\":\"^\",\"Hcirc\":\"Ĥ\",\"Hfr\":\"ℌ\",\"HilbertSpace\":\"ℋ\",\"Hopf\":\"ℍ\",\"HorizontalLine\":\"─\",\"Hscr\":\"ℋ\",\"Hstrok\":\"Ħ\",\"HumpDownHump\":\"≎\",\"HumpEqual\":\"≏\",\"IEcy\":\"Е\",\"IJlig\":\"Ĳ\",\"IOcy\":\"Ё\",\"Iacut\":\"Í\",\"Iacute\":\"Í\",\"Icir\":\"Î\",\"Icirc\":\"Î\",\"Icy\":\"И\",\"Idot\":\"İ\",\"Ifr\":\"ℑ\",\"Igrav\":\"Ì\",\"Igrave\":\"Ì\",\"Im\":\"ℑ\",\"Imacr\":\"Ī\",\"ImaginaryI\":\"ⅈ\",\"Implies\":\"⇒\",\"Int\":\"∬\",\"Integral\":\"∫\",\"Intersection\":\"⋂\",\"InvisibleComma\":\"⁣\",\"InvisibleTimes\":\"⁢\",\"Iogon\":\"Į\",\"Iopf\":\"𝕀\",\"Iota\":\"Ι\",\"Iscr\":\"ℐ\",\"Itilde\":\"Ĩ\",\"Iukcy\":\"І\",\"Ium\":\"Ï\",\"Iuml\":\"Ï\",\"Jcirc\":\"Ĵ\",\"Jcy\":\"Й\",\"Jfr\":\"𝔍\",\"Jopf\":\"𝕁\",\"Jscr\":\"𝒥\",\"Jsercy\":\"Ј\",\"Jukcy\":\"Є\",\"KHcy\":\"Х\",\"KJcy\":\"Ќ\",\"Kappa\":\"Κ\",\"Kcedil\":\"Ķ\",\"Kcy\":\"К\",\"Kfr\":\"𝔎\",\"Kopf\":\"𝕂\",\"Kscr\":\"𝒦\",\"LJcy\":\"Љ\",\"L\":\"<\",\"LT\":\"<\",\"Lacute\":\"Ĺ\",\"Lambda\":\"Λ\",\"Lang\":\"⟪\",\"Laplacetrf\":\"ℒ\",\"Larr\":\"↞\",\"Lcaron\":\"Ľ\",\"Lcedil\":\"Ļ\",\"Lcy\":\"Л\",\"LeftAngleBracket\":\"⟨\",\"LeftArrow\":\"←\",\"LeftArrowBar\":\"⇤\",\"LeftArrowRightArrow\":\"⇆\",\"LeftCeiling\":\"⌈\",\"LeftDoubleBracket\":\"⟦\",\"LeftDownTeeVector\":\"⥡\",\"LeftDownVector\":\"⇃\",\"LeftDownVectorBar\":\"⥙\",\"LeftFloor\":\"⌊\",\"LeftRightArrow\":\"↔\",\"LeftRightVector\":\"⥎\",\"LeftTee\":\"⊣\",\"LeftTeeArrow\":\"↤\",\"LeftTeeVector\":\"⥚\",\"LeftTriangle\":\"⊲\",\"LeftTriangleBar\":\"⧏\",\"LeftTriangleEqual\":\"⊴\",\"LeftUpDownVector\":\"⥑\",\"LeftUpTeeVector\":\"⥠\",\"LeftUpVector\":\"↿\",\"LeftUpVectorBar\":\"⥘\",\"LeftVector\":\"↼\",\"LeftVectorBar\":\"⥒\",\"Leftarrow\":\"⇐\",\"Leftrightarrow\":\"⇔\",\"LessEqualGreater\":\"⋚\",\"LessFullEqual\":\"≦\",\"LessGreater\":\"≶\",\"LessLess\":\"⪡\",\"LessSlantEqual\":\"⩽\",\"LessTilde\":\"≲\",\"Lfr\":\"𝔏\",\"Ll\":\"⋘\",\"Lleftarrow\":\"⇚\",\"Lmidot\":\"Ŀ\",\"LongLeftArrow\":\"⟵\",\"LongLeftRightArrow\":\"⟷\",\"LongRightArrow\":\"⟶\",\"Longleftarrow\":\"⟸\",\"Longleftrightarrow\":\"⟺\",\"Longrightarrow\":\"⟹\",\"Lopf\":\"𝕃\",\"LowerLeftArrow\":\"↙\",\"LowerRightArrow\":\"↘\",\"Lscr\":\"ℒ\",\"Lsh\":\"↰\",\"Lstrok\":\"Ł\",\"Lt\":\"≪\",\"Map\":\"⤅\",\"Mcy\":\"М\",\"MediumSpace\":\" \",\"Mellintrf\":\"ℳ\",\"Mfr\":\"𝔐\",\"MinusPlus\":\"∓\",\"Mopf\":\"𝕄\",\"Mscr\":\"ℳ\",\"Mu\":\"Μ\",\"NJcy\":\"Њ\",\"Nacute\":\"Ń\",\"Ncaron\":\"Ň\",\"Ncedil\":\"Ņ\",\"Ncy\":\"Н\",\"NegativeMediumSpace\":\"​\",\"NegativeThickSpace\":\"​\",\"NegativeThinSpace\":\"​\",\"NegativeVeryThinSpace\":\"​\",\"NestedGreaterGreater\":\"≫\",\"NestedLessLess\":\"≪\",\"NewLine\":\"\\n\",\"Nfr\":\"𝔑\",\"NoBreak\":\"⁠\",\"NonBreakingSpace\":\" \",\"Nopf\":\"ℕ\",\"Not\":\"⫬\",\"NotCongruent\":\"≢\",\"NotCupCap\":\"≭\",\"NotDoubleVerticalBar\":\"∦\",\"NotElement\":\"∉\",\"NotEqual\":\"≠\",\"NotEqualTilde\":\"≂̸\",\"NotExists\":\"∄\",\"NotGreater\":\"≯\",\"NotGreaterEqual\":\"≱\",\"NotGreaterFullEqual\":\"≧̸\",\"NotGreaterGreater\":\"≫̸\",\"NotGreaterLess\":\"≹\",\"NotGreaterSlantEqual\":\"⩾̸\",\"NotGreaterTilde\":\"≵\",\"NotHumpDownHump\":\"≎̸\",\"NotHumpEqual\":\"≏̸\",\"NotLeftTriangle\":\"⋪\",\"NotLeftTriangleBar\":\"⧏̸\",\"NotLeftTriangleEqual\":\"⋬\",\"NotLess\":\"≮\",\"NotLessEqual\":\"≰\",\"NotLessGreater\":\"≸\",\"NotLessLess\":\"≪̸\",\"NotLessSlantEqual\":\"⩽̸\",\"NotLessTilde\":\"≴\",\"NotNestedGreaterGreater\":\"⪢̸\",\"NotNestedLessLess\":\"⪡̸\",\"NotPrecedes\":\"⊀\",\"NotPrecedesEqual\":\"⪯̸\",\"NotPrecedesSlantEqual\":\"⋠\",\"NotReverseElement\":\"∌\",\"NotRightTriangle\":\"⋫\",\"NotRightTriangleBar\":\"⧐̸\",\"NotRightTriangleEqual\":\"⋭\",\"NotSquareSubset\":\"⊏̸\",\"NotSquareSubsetEqual\":\"⋢\",\"NotSquareSuperset\":\"⊐̸\",\"NotSquareSupersetEqual\":\"⋣\",\"NotSubset\":\"⊂⃒\",\"NotSubsetEqual\":\"⊈\",\"NotSucceeds\":\"⊁\",\"NotSucceedsEqual\":\"⪰̸\",\"NotSucceedsSlantEqual\":\"⋡\",\"NotSucceedsTilde\":\"≿̸\",\"NotSuperset\":\"⊃⃒\",\"NotSupersetEqual\":\"⊉\",\"NotTilde\":\"≁\",\"NotTildeEqual\":\"≄\",\"NotTildeFullEqual\":\"≇\",\"NotTildeTilde\":\"≉\",\"NotVerticalBar\":\"∤\",\"Nscr\":\"𝒩\",\"Ntild\":\"Ñ\",\"Ntilde\":\"Ñ\",\"Nu\":\"Ν\",\"OElig\":\"Œ\",\"Oacut\":\"Ó\",\"Oacute\":\"Ó\",\"Ocir\":\"Ô\",\"Ocirc\":\"Ô\",\"Ocy\":\"О\",\"Odblac\":\"Ő\",\"Ofr\":\"𝔒\",\"Ograv\":\"Ò\",\"Ograve\":\"Ò\",\"Omacr\":\"Ō\",\"Omega\":\"Ω\",\"Omicron\":\"Ο\",\"Oopf\":\"𝕆\",\"OpenCurlyDoubleQuote\":\"“\",\"OpenCurlyQuote\":\"‘\",\"Or\":\"⩔\",\"Oscr\":\"𝒪\",\"Oslas\":\"Ø\",\"Oslash\":\"Ø\",\"Otild\":\"Õ\",\"Otilde\":\"Õ\",\"Otimes\":\"⨷\",\"Oum\":\"Ö\",\"Ouml\":\"Ö\",\"OverBar\":\"‾\",\"OverBrace\":\"⏞\",\"OverBracket\":\"⎴\",\"OverParenthesis\":\"⏜\",\"PartialD\":\"∂\",\"Pcy\":\"П\",\"Pfr\":\"𝔓\",\"Phi\":\"Φ\",\"Pi\":\"Π\",\"PlusMinus\":\"±\",\"Poincareplane\":\"ℌ\",\"Popf\":\"ℙ\",\"Pr\":\"⪻\",\"Precedes\":\"≺\",\"PrecedesEqual\":\"⪯\",\"PrecedesSlantEqual\":\"≼\",\"PrecedesTilde\":\"≾\",\"Prime\":\"″\",\"Product\":\"∏\",\"Proportion\":\"∷\",\"Proportional\":\"∝\",\"Pscr\":\"𝒫\",\"Psi\":\"Ψ\",\"QUO\":\"\\\"\",\"QUOT\":\"\\\"\",\"Qfr\":\"𝔔\",\"Qopf\":\"ℚ\",\"Qscr\":\"𝒬\",\"RBarr\":\"⤐\",\"RE\":\"®\",\"REG\":\"®\",\"Racute\":\"Ŕ\",\"Rang\":\"⟫\",\"Rarr\":\"↠\",\"Rarrtl\":\"⤖\",\"Rcaron\":\"Ř\",\"Rcedil\":\"Ŗ\",\"Rcy\":\"Р\",\"Re\":\"ℜ\",\"ReverseElement\":\"∋\",\"ReverseEquilibrium\":\"⇋\",\"ReverseUpEquilibrium\":\"⥯\",\"Rfr\":\"ℜ\",\"Rho\":\"Ρ\",\"RightAngleBracket\":\"⟩\",\"RightArrow\":\"→\",\"RightArrowBar\":\"⇥\",\"RightArrowLeftArrow\":\"⇄\",\"RightCeiling\":\"⌉\",\"RightDoubleBracket\":\"⟧\",\"RightDownTeeVector\":\"⥝\",\"RightDownVector\":\"⇂\",\"RightDownVectorBar\":\"⥕\",\"RightFloor\":\"⌋\",\"RightTee\":\"⊢\",\"RightTeeArrow\":\"↦\",\"RightTeeVector\":\"⥛\",\"RightTriangle\":\"⊳\",\"RightTriangleBar\":\"⧐\",\"RightTriangleEqual\":\"⊵\",\"RightUpDownVector\":\"⥏\",\"RightUpTeeVector\":\"⥜\",\"RightUpVector\":\"↾\",\"RightUpVectorBar\":\"⥔\",\"RightVector\":\"⇀\",\"RightVectorBar\":\"⥓\",\"Rightarrow\":\"⇒\",\"Ropf\":\"ℝ\",\"RoundImplies\":\"⥰\",\"Rrightarrow\":\"⇛\",\"Rscr\":\"ℛ\",\"Rsh\":\"↱\",\"RuleDelayed\":\"⧴\",\"SHCHcy\":\"Щ\",\"SHcy\":\"Ш\",\"SOFTcy\":\"Ь\",\"Sacute\":\"Ś\",\"Sc\":\"⪼\",\"Scaron\":\"Š\",\"Scedil\":\"Ş\",\"Scirc\":\"Ŝ\",\"Scy\":\"С\",\"Sfr\":\"𝔖\",\"ShortDownArrow\":\"↓\",\"ShortLeftArrow\":\"←\",\"ShortRightArrow\":\"→\",\"ShortUpArrow\":\"↑\",\"Sigma\":\"Σ\",\"SmallCircle\":\"∘\",\"Sopf\":\"𝕊\",\"Sqrt\":\"√\",\"Square\":\"□\",\"SquareIntersection\":\"⊓\",\"SquareSubset\":\"⊏\",\"SquareSubsetEqual\":\"⊑\",\"SquareSuperset\":\"⊐\",\"SquareSupersetEqual\":\"⊒\",\"SquareUnion\":\"⊔\",\"Sscr\":\"𝒮\",\"Star\":\"⋆\",\"Sub\":\"⋐\",\"Subset\":\"⋐\",\"SubsetEqual\":\"⊆\",\"Succeeds\":\"≻\",\"SucceedsEqual\":\"⪰\",\"SucceedsSlantEqual\":\"≽\",\"SucceedsTilde\":\"≿\",\"SuchThat\":\"∋\",\"Sum\":\"∑\",\"Sup\":\"⋑\",\"Superset\":\"⊃\",\"SupersetEqual\":\"⊇\",\"Supset\":\"⋑\",\"THOR\":\"Þ\",\"THORN\":\"Þ\",\"TRADE\":\"™\",\"TSHcy\":\"Ћ\",\"TScy\":\"Ц\",\"Tab\":\"\\t\",\"Tau\":\"Τ\",\"Tcaron\":\"Ť\",\"Tcedil\":\"Ţ\",\"Tcy\":\"Т\",\"Tfr\":\"𝔗\",\"Therefore\":\"∴\",\"Theta\":\"Θ\",\"ThickSpace\":\"  \",\"ThinSpace\":\" \",\"Tilde\":\"∼\",\"TildeEqual\":\"≃\",\"TildeFullEqual\":\"≅\",\"TildeTilde\":\"≈\",\"Topf\":\"𝕋\",\"TripleDot\":\"⃛\",\"Tscr\":\"𝒯\",\"Tstrok\":\"Ŧ\",\"Uacut\":\"Ú\",\"Uacute\":\"Ú\",\"Uarr\":\"↟\",\"Uarrocir\":\"⥉\",\"Ubrcy\":\"Ў\",\"Ubreve\":\"Ŭ\",\"Ucir\":\"Û\",\"Ucirc\":\"Û\",\"Ucy\":\"У\",\"Udblac\":\"Ű\",\"Ufr\":\"𝔘\",\"Ugrav\":\"Ù\",\"Ugrave\":\"Ù\",\"Umacr\":\"Ū\",\"UnderBar\":\"_\",\"UnderBrace\":\"⏟\",\"UnderBracket\":\"⎵\",\"UnderParenthesis\":\"⏝\",\"Union\":\"⋃\",\"UnionPlus\":\"⊎\",\"Uogon\":\"Ų\",\"Uopf\":\"𝕌\",\"UpArrow\":\"↑\",\"UpArrowBar\":\"⤒\",\"UpArrowDownArrow\":\"⇅\",\"UpDownArrow\":\"↕\",\"UpEquilibrium\":\"⥮\",\"UpTee\":\"⊥\",\"UpTeeArrow\":\"↥\",\"Uparrow\":\"⇑\",\"Updownarrow\":\"⇕\",\"UpperLeftArrow\":\"↖\",\"UpperRightArrow\":\"↗\",\"Upsi\":\"ϒ\",\"Upsilon\":\"Υ\",\"Uring\":\"Ů\",\"Uscr\":\"𝒰\",\"Utilde\":\"Ũ\",\"Uum\":\"Ü\",\"Uuml\":\"Ü\",\"VDash\":\"⊫\",\"Vbar\":\"⫫\",\"Vcy\":\"В\",\"Vdash\":\"⊩\",\"Vdashl\":\"⫦\",\"Vee\":\"⋁\",\"Verbar\":\"‖\",\"Vert\":\"‖\",\"VerticalBar\":\"∣\",\"VerticalLine\":\"|\",\"VerticalSeparator\":\"❘\",\"VerticalTilde\":\"≀\",\"VeryThinSpace\":\" \",\"Vfr\":\"𝔙\",\"Vopf\":\"𝕍\",\"Vscr\":\"𝒱\",\"Vvdash\":\"⊪\",\"Wcirc\":\"Ŵ\",\"Wedge\":\"⋀\",\"Wfr\":\"𝔚\",\"Wopf\":\"𝕎\",\"Wscr\":\"𝒲\",\"Xfr\":\"𝔛\",\"Xi\":\"Ξ\",\"Xopf\":\"𝕏\",\"Xscr\":\"𝒳\",\"YAcy\":\"Я\",\"YIcy\":\"Ї\",\"YUcy\":\"Ю\",\"Yacut\":\"Ý\",\"Yacute\":\"Ý\",\"Ycirc\":\"Ŷ\",\"Ycy\":\"Ы\",\"Yfr\":\"𝔜\",\"Yopf\":\"𝕐\",\"Yscr\":\"𝒴\",\"Yuml\":\"Ÿ\",\"ZHcy\":\"Ж\",\"Zacute\":\"Ź\",\"Zcaron\":\"Ž\",\"Zcy\":\"З\",\"Zdot\":\"Ż\",\"ZeroWidthSpace\":\"​\",\"Zeta\":\"Ζ\",\"Zfr\":\"ℨ\",\"Zopf\":\"ℤ\",\"Zscr\":\"𝒵\",\"aacut\":\"á\",\"aacute\":\"á\",\"abreve\":\"ă\",\"ac\":\"∾\",\"acE\":\"∾̳\",\"acd\":\"∿\",\"acir\":\"â\",\"acirc\":\"â\",\"acut\":\"´\",\"acute\":\"´\",\"acy\":\"а\",\"aeli\":\"æ\",\"aelig\":\"æ\",\"af\":\"⁡\",\"afr\":\"𝔞\",\"agrav\":\"à\",\"agrave\":\"à\",\"alefsym\":\"ℵ\",\"aleph\":\"ℵ\",\"alpha\":\"α\",\"amacr\":\"ā\",\"amalg\":\"⨿\",\"am\":\"&\",\"amp\":\"&\",\"and\":\"∧\",\"andand\":\"⩕\",\"andd\":\"⩜\",\"andslope\":\"⩘\",\"andv\":\"⩚\",\"ang\":\"∠\",\"ange\":\"⦤\",\"angle\":\"∠\",\"angmsd\":\"∡\",\"angmsdaa\":\"⦨\",\"angmsdab\":\"⦩\",\"angmsdac\":\"⦪\",\"angmsdad\":\"⦫\",\"angmsdae\":\"⦬\",\"angmsdaf\":\"⦭\",\"angmsdag\":\"⦮\",\"angmsdah\":\"⦯\",\"angrt\":\"∟\",\"angrtvb\":\"⊾\",\"angrtvbd\":\"⦝\",\"angsph\":\"∢\",\"angst\":\"Å\",\"angzarr\":\"⍼\",\"aogon\":\"ą\",\"aopf\":\"𝕒\",\"ap\":\"≈\",\"apE\":\"⩰\",\"apacir\":\"⩯\",\"ape\":\"≊\",\"apid\":\"≋\",\"apos\":\"'\",\"approx\":\"≈\",\"approxeq\":\"≊\",\"arin\":\"å\",\"aring\":\"å\",\"ascr\":\"𝒶\",\"ast\":\"*\",\"asymp\":\"≈\",\"asympeq\":\"≍\",\"atild\":\"ã\",\"atilde\":\"ã\",\"aum\":\"ä\",\"auml\":\"ä\",\"awconint\":\"∳\",\"awint\":\"⨑\",\"bNot\":\"⫭\",\"backcong\":\"≌\",\"backepsilon\":\"϶\",\"backprime\":\"‵\",\"backsim\":\"∽\",\"backsimeq\":\"⋍\",\"barvee\":\"⊽\",\"barwed\":\"⌅\",\"barwedge\":\"⌅\",\"bbrk\":\"⎵\",\"bbrktbrk\":\"⎶\",\"bcong\":\"≌\",\"bcy\":\"б\",\"bdquo\":\"„\",\"becaus\":\"∵\",\"because\":\"∵\",\"bemptyv\":\"⦰\",\"bepsi\":\"϶\",\"bernou\":\"ℬ\",\"beta\":\"β\",\"beth\":\"ℶ\",\"between\":\"≬\",\"bfr\":\"𝔟\",\"bigcap\":\"⋂\",\"bigcirc\":\"◯\",\"bigcup\":\"⋃\",\"bigodot\":\"⨀\",\"bigoplus\":\"⨁\",\"bigotimes\":\"⨂\",\"bigsqcup\":\"⨆\",\"bigstar\":\"★\",\"bigtriangledown\":\"▽\",\"bigtriangleup\":\"△\",\"biguplus\":\"⨄\",\"bigvee\":\"⋁\",\"bigwedge\":\"⋀\",\"bkarow\":\"⤍\",\"blacklozenge\":\"⧫\",\"blacksquare\":\"▪\",\"blacktriangle\":\"▴\",\"blacktriangledown\":\"▾\",\"blacktriangleleft\":\"◂\",\"blacktriangleright\":\"▸\",\"blank\":\"␣\",\"blk12\":\"▒\",\"blk14\":\"░\",\"blk34\":\"▓\",\"block\":\"█\",\"bne\":\"=⃥\",\"bnequiv\":\"≡⃥\",\"bnot\":\"⌐\",\"bopf\":\"𝕓\",\"bot\":\"⊥\",\"bottom\":\"⊥\",\"bowtie\":\"⋈\",\"boxDL\":\"╗\",\"boxDR\":\"╔\",\"boxDl\":\"╖\",\"boxDr\":\"╓\",\"boxH\":\"═\",\"boxHD\":\"╦\",\"boxHU\":\"╩\",\"boxHd\":\"╤\",\"boxHu\":\"╧\",\"boxUL\":\"╝\",\"boxUR\":\"╚\",\"boxUl\":\"╜\",\"boxUr\":\"╙\",\"boxV\":\"║\",\"boxVH\":\"╬\",\"boxVL\":\"╣\",\"boxVR\":\"╠\",\"boxVh\":\"╫\",\"boxVl\":\"╢\",\"boxVr\":\"╟\",\"boxbox\":\"⧉\",\"boxdL\":\"╕\",\"boxdR\":\"╒\",\"boxdl\":\"┐\",\"boxdr\":\"┌\",\"boxh\":\"─\",\"boxhD\":\"╥\",\"boxhU\":\"╨\",\"boxhd\":\"┬\",\"boxhu\":\"┴\",\"boxminus\":\"⊟\",\"boxplus\":\"⊞\",\"boxtimes\":\"⊠\",\"boxuL\":\"╛\",\"boxuR\":\"╘\",\"boxul\":\"┘\",\"boxur\":\"└\",\"boxv\":\"│\",\"boxvH\":\"╪\",\"boxvL\":\"╡\",\"boxvR\":\"╞\",\"boxvh\":\"┼\",\"boxvl\":\"┤\",\"boxvr\":\"├\",\"bprime\":\"‵\",\"breve\":\"˘\",\"brvba\":\"¦\",\"brvbar\":\"¦\",\"bscr\":\"𝒷\",\"bsemi\":\"⁏\",\"bsim\":\"∽\",\"bsime\":\"⋍\",\"bsol\":\"\\\\\",\"bsolb\":\"⧅\",\"bsolhsub\":\"⟈\",\"bull\":\"•\",\"bullet\":\"•\",\"bump\":\"≎\",\"bumpE\":\"⪮\",\"bumpe\":\"≏\",\"bumpeq\":\"≏\",\"cacute\":\"ć\",\"cap\":\"∩\",\"capand\":\"⩄\",\"capbrcup\":\"⩉\",\"capcap\":\"⩋\",\"capcup\":\"⩇\",\"capdot\":\"⩀\",\"caps\":\"∩︀\",\"caret\":\"⁁\",\"caron\":\"ˇ\",\"ccaps\":\"⩍\",\"ccaron\":\"č\",\"ccedi\":\"ç\",\"ccedil\":\"ç\",\"ccirc\":\"ĉ\",\"ccups\":\"⩌\",\"ccupssm\":\"⩐\",\"cdot\":\"ċ\",\"cedi\":\"¸\",\"cedil\":\"¸\",\"cemptyv\":\"⦲\",\"cen\":\"¢\",\"cent\":\"¢\",\"centerdot\":\"·\",\"cfr\":\"𝔠\",\"chcy\":\"ч\",\"check\":\"✓\",\"checkmark\":\"✓\",\"chi\":\"χ\",\"cir\":\"○\",\"cirE\":\"⧃\",\"circ\":\"ˆ\",\"circeq\":\"≗\",\"circlearrowleft\":\"↺\",\"circlearrowright\":\"↻\",\"circledR\":\"®\",\"circledS\":\"Ⓢ\",\"circledast\":\"⊛\",\"circledcirc\":\"⊚\",\"circleddash\":\"⊝\",\"cire\":\"≗\",\"cirfnint\":\"⨐\",\"cirmid\":\"⫯\",\"cirscir\":\"⧂\",\"clubs\":\"♣\",\"clubsuit\":\"♣\",\"colon\":\":\",\"colone\":\"≔\",\"coloneq\":\"≔\",\"comma\":\",\",\"commat\":\"@\",\"comp\":\"∁\",\"compfn\":\"∘\",\"complement\":\"∁\",\"complexes\":\"ℂ\",\"cong\":\"≅\",\"congdot\":\"⩭\",\"conint\":\"∮\",\"copf\":\"𝕔\",\"coprod\":\"∐\",\"cop\":\"©\",\"copy\":\"©\",\"copysr\":\"℗\",\"crarr\":\"↵\",\"cross\":\"✗\",\"cscr\":\"𝒸\",\"csub\":\"⫏\",\"csube\":\"⫑\",\"csup\":\"⫐\",\"csupe\":\"⫒\",\"ctdot\":\"⋯\",\"cudarrl\":\"⤸\",\"cudarrr\":\"⤵\",\"cuepr\":\"⋞\",\"cuesc\":\"⋟\",\"cularr\":\"↶\",\"cularrp\":\"⤽\",\"cup\":\"∪\",\"cupbrcap\":\"⩈\",\"cupcap\":\"⩆\",\"cupcup\":\"⩊\",\"cupdot\":\"⊍\",\"cupor\":\"⩅\",\"cups\":\"∪︀\",\"curarr\":\"↷\",\"curarrm\":\"⤼\",\"curlyeqprec\":\"⋞\",\"curlyeqsucc\":\"⋟\",\"curlyvee\":\"⋎\",\"curlywedge\":\"⋏\",\"curre\":\"¤\",\"curren\":\"¤\",\"curvearrowleft\":\"↶\",\"curvearrowright\":\"↷\",\"cuvee\":\"⋎\",\"cuwed\":\"⋏\",\"cwconint\":\"∲\",\"cwint\":\"∱\",\"cylcty\":\"⌭\",\"dArr\":\"⇓\",\"dHar\":\"⥥\",\"dagger\":\"†\",\"daleth\":\"ℸ\",\"darr\":\"↓\",\"dash\":\"‐\",\"dashv\":\"⊣\",\"dbkarow\":\"⤏\",\"dblac\":\"˝\",\"dcaron\":\"ď\",\"dcy\":\"д\",\"dd\":\"ⅆ\",\"ddagger\":\"‡\",\"ddarr\":\"⇊\",\"ddotseq\":\"⩷\",\"de\":\"°\",\"deg\":\"°\",\"delta\":\"δ\",\"demptyv\":\"⦱\",\"dfisht\":\"⥿\",\"dfr\":\"𝔡\",\"dharl\":\"⇃\",\"dharr\":\"⇂\",\"diam\":\"⋄\",\"diamond\":\"⋄\",\"diamondsuit\":\"♦\",\"diams\":\"♦\",\"die\":\"¨\",\"digamma\":\"ϝ\",\"disin\":\"⋲\",\"div\":\"÷\",\"divid\":\"÷\",\"divide\":\"÷\",\"divideontimes\":\"⋇\",\"divonx\":\"⋇\",\"djcy\":\"ђ\",\"dlcorn\":\"⌞\",\"dlcrop\":\"⌍\",\"dollar\":\"$\",\"dopf\":\"𝕕\",\"dot\":\"˙\",\"doteq\":\"≐\",\"doteqdot\":\"≑\",\"dotminus\":\"∸\",\"dotplus\":\"∔\",\"dotsquare\":\"⊡\",\"doublebarwedge\":\"⌆\",\"downarrow\":\"↓\",\"downdownarrows\":\"⇊\",\"downharpoonleft\":\"⇃\",\"downharpoonright\":\"⇂\",\"drbkarow\":\"⤐\",\"drcorn\":\"⌟\",\"drcrop\":\"⌌\",\"dscr\":\"𝒹\",\"dscy\":\"ѕ\",\"dsol\":\"⧶\",\"dstrok\":\"đ\",\"dtdot\":\"⋱\",\"dtri\":\"▿\",\"dtrif\":\"▾\",\"duarr\":\"⇵\",\"duhar\":\"⥯\",\"dwangle\":\"⦦\",\"dzcy\":\"џ\",\"dzigrarr\":\"⟿\",\"eDDot\":\"⩷\",\"eDot\":\"≑\",\"eacut\":\"é\",\"eacute\":\"é\",\"easter\":\"⩮\",\"ecaron\":\"ě\",\"ecir\":\"ê\",\"ecirc\":\"ê\",\"ecolon\":\"≕\",\"ecy\":\"э\",\"edot\":\"ė\",\"ee\":\"ⅇ\",\"efDot\":\"≒\",\"efr\":\"𝔢\",\"eg\":\"⪚\",\"egrav\":\"è\",\"egrave\":\"è\",\"egs\":\"⪖\",\"egsdot\":\"⪘\",\"el\":\"⪙\",\"elinters\":\"⏧\",\"ell\":\"ℓ\",\"els\":\"⪕\",\"elsdot\":\"⪗\",\"emacr\":\"ē\",\"empty\":\"∅\",\"emptyset\":\"∅\",\"emptyv\":\"∅\",\"emsp13\":\" \",\"emsp14\":\" \",\"emsp\":\" \",\"eng\":\"ŋ\",\"ensp\":\" \",\"eogon\":\"ę\",\"eopf\":\"𝕖\",\"epar\":\"⋕\",\"eparsl\":\"⧣\",\"eplus\":\"⩱\",\"epsi\":\"ε\",\"epsilon\":\"ε\",\"epsiv\":\"ϵ\",\"eqcirc\":\"≖\",\"eqcolon\":\"≕\",\"eqsim\":\"≂\",\"eqslantgtr\":\"⪖\",\"eqslantless\":\"⪕\",\"equals\":\"=\",\"equest\":\"≟\",\"equiv\":\"≡\",\"equivDD\":\"⩸\",\"eqvparsl\":\"⧥\",\"erDot\":\"≓\",\"erarr\":\"⥱\",\"escr\":\"ℯ\",\"esdot\":\"≐\",\"esim\":\"≂\",\"eta\":\"η\",\"et\":\"ð\",\"eth\":\"ð\",\"eum\":\"ë\",\"euml\":\"ë\",\"euro\":\"€\",\"excl\":\"!\",\"exist\":\"∃\",\"expectation\":\"ℰ\",\"exponentiale\":\"ⅇ\",\"fallingdotseq\":\"≒\",\"fcy\":\"ф\",\"female\":\"♀\",\"ffilig\":\"ﬃ\",\"fflig\":\"ﬀ\",\"ffllig\":\"ﬄ\",\"ffr\":\"𝔣\",\"filig\":\"ﬁ\",\"fjlig\":\"fj\",\"flat\":\"♭\",\"fllig\":\"ﬂ\",\"fltns\":\"▱\",\"fnof\":\"ƒ\",\"fopf\":\"𝕗\",\"forall\":\"∀\",\"fork\":\"⋔\",\"forkv\":\"⫙\",\"fpartint\":\"⨍\",\"frac1\":\"¼\",\"frac12\":\"½\",\"frac13\":\"⅓\",\"frac14\":\"¼\",\"frac15\":\"⅕\",\"frac16\":\"⅙\",\"frac18\":\"⅛\",\"frac23\":\"⅔\",\"frac25\":\"⅖\",\"frac3\":\"¾\",\"frac34\":\"¾\",\"frac35\":\"⅗\",\"frac38\":\"⅜\",\"frac45\":\"⅘\",\"frac56\":\"⅚\",\"frac58\":\"⅝\",\"frac78\":\"⅞\",\"frasl\":\"⁄\",\"frown\":\"⌢\",\"fscr\":\"𝒻\",\"gE\":\"≧\",\"gEl\":\"⪌\",\"gacute\":\"ǵ\",\"gamma\":\"γ\",\"gammad\":\"ϝ\",\"gap\":\"⪆\",\"gbreve\":\"ğ\",\"gcirc\":\"ĝ\",\"gcy\":\"г\",\"gdot\":\"ġ\",\"ge\":\"≥\",\"gel\":\"⋛\",\"geq\":\"≥\",\"geqq\":\"≧\",\"geqslant\":\"⩾\",\"ges\":\"⩾\",\"gescc\":\"⪩\",\"gesdot\":\"⪀\",\"gesdoto\":\"⪂\",\"gesdotol\":\"⪄\",\"gesl\":\"⋛︀\",\"gesles\":\"⪔\",\"gfr\":\"𝔤\",\"gg\":\"≫\",\"ggg\":\"⋙\",\"gimel\":\"ℷ\",\"gjcy\":\"ѓ\",\"gl\":\"≷\",\"glE\":\"⪒\",\"gla\":\"⪥\",\"glj\":\"⪤\",\"gnE\":\"≩\",\"gnap\":\"⪊\",\"gnapprox\":\"⪊\",\"gne\":\"⪈\",\"gneq\":\"⪈\",\"gneqq\":\"≩\",\"gnsim\":\"⋧\",\"gopf\":\"𝕘\",\"grave\":\"`\",\"gscr\":\"ℊ\",\"gsim\":\"≳\",\"gsime\":\"⪎\",\"gsiml\":\"⪐\",\"g\":\">\",\"gt\":\">\",\"gtcc\":\"⪧\",\"gtcir\":\"⩺\",\"gtdot\":\"⋗\",\"gtlPar\":\"⦕\",\"gtquest\":\"⩼\",\"gtrapprox\":\"⪆\",\"gtrarr\":\"⥸\",\"gtrdot\":\"⋗\",\"gtreqless\":\"⋛\",\"gtreqqless\":\"⪌\",\"gtrless\":\"≷\",\"gtrsim\":\"≳\",\"gvertneqq\":\"≩︀\",\"gvnE\":\"≩︀\",\"hArr\":\"⇔\",\"hairsp\":\" \",\"half\":\"½\",\"hamilt\":\"ℋ\",\"hardcy\":\"ъ\",\"harr\":\"↔\",\"harrcir\":\"⥈\",\"harrw\":\"↭\",\"hbar\":\"ℏ\",\"hcirc\":\"ĥ\",\"hearts\":\"♥\",\"heartsuit\":\"♥\",\"hellip\":\"…\",\"hercon\":\"⊹\",\"hfr\":\"𝔥\",\"hksearow\":\"⤥\",\"hkswarow\":\"⤦\",\"hoarr\":\"⇿\",\"homtht\":\"∻\",\"hookleftarrow\":\"↩\",\"hookrightarrow\":\"↪\",\"hopf\":\"𝕙\",\"horbar\":\"―\",\"hscr\":\"𝒽\",\"hslash\":\"ℏ\",\"hstrok\":\"ħ\",\"hybull\":\"⁃\",\"hyphen\":\"‐\",\"iacut\":\"í\",\"iacute\":\"í\",\"ic\":\"⁣\",\"icir\":\"î\",\"icirc\":\"î\",\"icy\":\"и\",\"iecy\":\"е\",\"iexc\":\"¡\",\"iexcl\":\"¡\",\"iff\":\"⇔\",\"ifr\":\"𝔦\",\"igrav\":\"ì\",\"igrave\":\"ì\",\"ii\":\"ⅈ\",\"iiiint\":\"⨌\",\"iiint\":\"∭\",\"iinfin\":\"⧜\",\"iiota\":\"℩\",\"ijlig\":\"ĳ\",\"imacr\":\"ī\",\"image\":\"ℑ\",\"imagline\":\"ℐ\",\"imagpart\":\"ℑ\",\"imath\":\"ı\",\"imof\":\"⊷\",\"imped\":\"Ƶ\",\"in\":\"∈\",\"incare\":\"℅\",\"infin\":\"∞\",\"infintie\":\"⧝\",\"inodot\":\"ı\",\"int\":\"∫\",\"intcal\":\"⊺\",\"integers\":\"ℤ\",\"intercal\":\"⊺\",\"intlarhk\":\"⨗\",\"intprod\":\"⨼\",\"iocy\":\"ё\",\"iogon\":\"į\",\"iopf\":\"𝕚\",\"iota\":\"ι\",\"iprod\":\"⨼\",\"iques\":\"¿\",\"iquest\":\"¿\",\"iscr\":\"𝒾\",\"isin\":\"∈\",\"isinE\":\"⋹\",\"isindot\":\"⋵\",\"isins\":\"⋴\",\"isinsv\":\"⋳\",\"isinv\":\"∈\",\"it\":\"⁢\",\"itilde\":\"ĩ\",\"iukcy\":\"і\",\"ium\":\"ï\",\"iuml\":\"ï\",\"jcirc\":\"ĵ\",\"jcy\":\"й\",\"jfr\":\"𝔧\",\"jmath\":\"ȷ\",\"jopf\":\"𝕛\",\"jscr\":\"𝒿\",\"jsercy\":\"ј\",\"jukcy\":\"є\",\"kappa\":\"κ\",\"kappav\":\"ϰ\",\"kcedil\":\"ķ\",\"kcy\":\"к\",\"kfr\":\"𝔨\",\"kgreen\":\"ĸ\",\"khcy\":\"х\",\"kjcy\":\"ќ\",\"kopf\":\"𝕜\",\"kscr\":\"𝓀\",\"lAarr\":\"⇚\",\"lArr\":\"⇐\",\"lAtail\":\"⤛\",\"lBarr\":\"⤎\",\"lE\":\"≦\",\"lEg\":\"⪋\",\"lHar\":\"⥢\",\"lacute\":\"ĺ\",\"laemptyv\":\"⦴\",\"lagran\":\"ℒ\",\"lambda\":\"λ\",\"lang\":\"⟨\",\"langd\":\"⦑\",\"langle\":\"⟨\",\"lap\":\"⪅\",\"laqu\":\"«\",\"laquo\":\"«\",\"larr\":\"←\",\"larrb\":\"⇤\",\"larrbfs\":\"⤟\",\"larrfs\":\"⤝\",\"larrhk\":\"↩\",\"larrlp\":\"↫\",\"larrpl\":\"⤹\",\"larrsim\":\"⥳\",\"larrtl\":\"↢\",\"lat\":\"⪫\",\"latail\":\"⤙\",\"late\":\"⪭\",\"lates\":\"⪭︀\",\"lbarr\":\"⤌\",\"lbbrk\":\"❲\",\"lbrace\":\"{\",\"lbrack\":\"[\",\"lbrke\":\"⦋\",\"lbrksld\":\"⦏\",\"lbrkslu\":\"⦍\",\"lcaron\":\"ľ\",\"lcedil\":\"ļ\",\"lceil\":\"⌈\",\"lcub\":\"{\",\"lcy\":\"л\",\"ldca\":\"⤶\",\"ldquo\":\"“\",\"ldquor\":\"„\",\"ldrdhar\":\"⥧\",\"ldrushar\":\"⥋\",\"ldsh\":\"↲\",\"le\":\"≤\",\"leftarrow\":\"←\",\"leftarrowtail\":\"↢\",\"leftharpoondown\":\"↽\",\"leftharpoonup\":\"↼\",\"leftleftarrows\":\"⇇\",\"leftrightarrow\":\"↔\",\"leftrightarrows\":\"⇆\",\"leftrightharpoons\":\"⇋\",\"leftrightsquigarrow\":\"↭\",\"leftthreetimes\":\"⋋\",\"leg\":\"⋚\",\"leq\":\"≤\",\"leqq\":\"≦\",\"leqslant\":\"⩽\",\"les\":\"⩽\",\"lescc\":\"⪨\",\"lesdot\":\"⩿\",\"lesdoto\":\"⪁\",\"lesdotor\":\"⪃\",\"lesg\":\"⋚︀\",\"lesges\":\"⪓\",\"lessapprox\":\"⪅\",\"lessdot\":\"⋖\",\"lesseqgtr\":\"⋚\",\"lesseqqgtr\":\"⪋\",\"lessgtr\":\"≶\",\"lesssim\":\"≲\",\"lfisht\":\"⥼\",\"lfloor\":\"⌊\",\"lfr\":\"𝔩\",\"lg\":\"≶\",\"lgE\":\"⪑\",\"lhard\":\"↽\",\"lharu\":\"↼\",\"lharul\":\"⥪\",\"lhblk\":\"▄\",\"ljcy\":\"љ\",\"ll\":\"≪\",\"llarr\":\"⇇\",\"llcorner\":\"⌞\",\"llhard\":\"⥫\",\"lltri\":\"◺\",\"lmidot\":\"ŀ\",\"lmoust\":\"⎰\",\"lmoustache\":\"⎰\",\"lnE\":\"≨\",\"lnap\":\"⪉\",\"lnapprox\":\"⪉\",\"lne\":\"⪇\",\"lneq\":\"⪇\",\"lneqq\":\"≨\",\"lnsim\":\"⋦\",\"loang\":\"⟬\",\"loarr\":\"⇽\",\"lobrk\":\"⟦\",\"longleftarrow\":\"⟵\",\"longleftrightarrow\":\"⟷\",\"longmapsto\":\"⟼\",\"longrightarrow\":\"⟶\",\"looparrowleft\":\"↫\",\"looparrowright\":\"↬\",\"lopar\":\"⦅\",\"lopf\":\"𝕝\",\"loplus\":\"⨭\",\"lotimes\":\"⨴\",\"lowast\":\"∗\",\"lowbar\":\"_\",\"loz\":\"◊\",\"lozenge\":\"◊\",\"lozf\":\"⧫\",\"lpar\":\"(\",\"lparlt\":\"⦓\",\"lrarr\":\"⇆\",\"lrcorner\":\"⌟\",\"lrhar\":\"⇋\",\"lrhard\":\"⥭\",\"lrm\":\"‎\",\"lrtri\":\"⊿\",\"lsaquo\":\"‹\",\"lscr\":\"𝓁\",\"lsh\":\"↰\",\"lsim\":\"≲\",\"lsime\":\"⪍\",\"lsimg\":\"⪏\",\"lsqb\":\"[\",\"lsquo\":\"‘\",\"lsquor\":\"‚\",\"lstrok\":\"ł\",\"l\":\"<\",\"lt\":\"<\",\"ltcc\":\"⪦\",\"ltcir\":\"⩹\",\"ltdot\":\"⋖\",\"lthree\":\"⋋\",\"ltimes\":\"⋉\",\"ltlarr\":\"⥶\",\"ltquest\":\"⩻\",\"ltrPar\":\"⦖\",\"ltri\":\"◃\",\"ltrie\":\"⊴\",\"ltrif\":\"◂\",\"lurdshar\":\"⥊\",\"luruhar\":\"⥦\",\"lvertneqq\":\"≨︀\",\"lvnE\":\"≨︀\",\"mDDot\":\"∺\",\"mac\":\"¯\",\"macr\":\"¯\",\"male\":\"♂\",\"malt\":\"✠\",\"maltese\":\"✠\",\"map\":\"↦\",\"mapsto\":\"↦\",\"mapstodown\":\"↧\",\"mapstoleft\":\"↤\",\"mapstoup\":\"↥\",\"marker\":\"▮\",\"mcomma\":\"⨩\",\"mcy\":\"м\",\"mdash\":\"—\",\"measuredangle\":\"∡\",\"mfr\":\"𝔪\",\"mho\":\"℧\",\"micr\":\"µ\",\"micro\":\"µ\",\"mid\":\"∣\",\"midast\":\"*\",\"midcir\":\"⫰\",\"middo\":\"·\",\"middot\":\"·\",\"minus\":\"−\",\"minusb\":\"⊟\",\"minusd\":\"∸\",\"minusdu\":\"⨪\",\"mlcp\":\"⫛\",\"mldr\":\"…\",\"mnplus\":\"∓\",\"models\":\"⊧\",\"mopf\":\"𝕞\",\"mp\":\"∓\",\"mscr\":\"𝓂\",\"mstpos\":\"∾\",\"mu\":\"μ\",\"multimap\":\"⊸\",\"mumap\":\"⊸\",\"nGg\":\"⋙̸\",\"nGt\":\"≫⃒\",\"nGtv\":\"≫̸\",\"nLeftarrow\":\"⇍\",\"nLeftrightarrow\":\"⇎\",\"nLl\":\"⋘̸\",\"nLt\":\"≪⃒\",\"nLtv\":\"≪̸\",\"nRightarrow\":\"⇏\",\"nVDash\":\"⊯\",\"nVdash\":\"⊮\",\"nabla\":\"∇\",\"nacute\":\"ń\",\"nang\":\"∠⃒\",\"nap\":\"≉\",\"napE\":\"⩰̸\",\"napid\":\"≋̸\",\"napos\":\"ŉ\",\"napprox\":\"≉\",\"natur\":\"♮\",\"natural\":\"♮\",\"naturals\":\"ℕ\",\"nbs\":\" \",\"nbsp\":\" \",\"nbump\":\"≎̸\",\"nbumpe\":\"≏̸\",\"ncap\":\"⩃\",\"ncaron\":\"ň\",\"ncedil\":\"ņ\",\"ncong\":\"≇\",\"ncongdot\":\"⩭̸\",\"ncup\":\"⩂\",\"ncy\":\"н\",\"ndash\":\"–\",\"ne\":\"≠\",\"neArr\":\"⇗\",\"nearhk\":\"⤤\",\"nearr\":\"↗\",\"nearrow\":\"↗\",\"nedot\":\"≐̸\",\"nequiv\":\"≢\",\"nesear\":\"⤨\",\"nesim\":\"≂̸\",\"nexist\":\"∄\",\"nexists\":\"∄\",\"nfr\":\"𝔫\",\"ngE\":\"≧̸\",\"nge\":\"≱\",\"ngeq\":\"≱\",\"ngeqq\":\"≧̸\",\"ngeqslant\":\"⩾̸\",\"nges\":\"⩾̸\",\"ngsim\":\"≵\",\"ngt\":\"≯\",\"ngtr\":\"≯\",\"nhArr\":\"⇎\",\"nharr\":\"↮\",\"nhpar\":\"⫲\",\"ni\":\"∋\",\"nis\":\"⋼\",\"nisd\":\"⋺\",\"niv\":\"∋\",\"njcy\":\"њ\",\"nlArr\":\"⇍\",\"nlE\":\"≦̸\",\"nlarr\":\"↚\",\"nldr\":\"‥\",\"nle\":\"≰\",\"nleftarrow\":\"↚\",\"nleftrightarrow\":\"↮\",\"nleq\":\"≰\",\"nleqq\":\"≦̸\",\"nleqslant\":\"⩽̸\",\"nles\":\"⩽̸\",\"nless\":\"≮\",\"nlsim\":\"≴\",\"nlt\":\"≮\",\"nltri\":\"⋪\",\"nltrie\":\"⋬\",\"nmid\":\"∤\",\"nopf\":\"𝕟\",\"no\":\"¬\",\"not\":\"¬\",\"notin\":\"∉\",\"notinE\":\"⋹̸\",\"notindot\":\"⋵̸\",\"notinva\":\"∉\",\"notinvb\":\"⋷\",\"notinvc\":\"⋶\",\"notni\":\"∌\",\"notniva\":\"∌\",\"notnivb\":\"⋾\",\"notnivc\":\"⋽\",\"npar\":\"∦\",\"nparallel\":\"∦\",\"nparsl\":\"⫽⃥\",\"npart\":\"∂̸\",\"npolint\":\"⨔\",\"npr\":\"⊀\",\"nprcue\":\"⋠\",\"npre\":\"⪯̸\",\"nprec\":\"⊀\",\"npreceq\":\"⪯̸\",\"nrArr\":\"⇏\",\"nrarr\":\"↛\",\"nrarrc\":\"⤳̸\",\"nrarrw\":\"↝̸\",\"nrightarrow\":\"↛\",\"nrtri\":\"⋫\",\"nrtrie\":\"⋭\",\"nsc\":\"⊁\",\"nsccue\":\"⋡\",\"nsce\":\"⪰̸\",\"nscr\":\"𝓃\",\"nshortmid\":\"∤\",\"nshortparallel\":\"∦\",\"nsim\":\"≁\",\"nsime\":\"≄\",\"nsimeq\":\"≄\",\"nsmid\":\"∤\",\"nspar\":\"∦\",\"nsqsube\":\"⋢\",\"nsqsupe\":\"⋣\",\"nsub\":\"⊄\",\"nsubE\":\"⫅̸\",\"nsube\":\"⊈\",\"nsubset\":\"⊂⃒\",\"nsubseteq\":\"⊈\",\"nsubseteqq\":\"⫅̸\",\"nsucc\":\"⊁\",\"nsucceq\":\"⪰̸\",\"nsup\":\"⊅\",\"nsupE\":\"⫆̸\",\"nsupe\":\"⊉\",\"nsupset\":\"⊃⃒\",\"nsupseteq\":\"⊉\",\"nsupseteqq\":\"⫆̸\",\"ntgl\":\"≹\",\"ntild\":\"ñ\",\"ntilde\":\"ñ\",\"ntlg\":\"≸\",\"ntriangleleft\":\"⋪\",\"ntrianglelefteq\":\"⋬\",\"ntriangleright\":\"⋫\",\"ntrianglerighteq\":\"⋭\",\"nu\":\"ν\",\"num\":\"#\",\"numero\":\"№\",\"numsp\":\" \",\"nvDash\":\"⊭\",\"nvHarr\":\"⤄\",\"nvap\":\"≍⃒\",\"nvdash\":\"⊬\",\"nvge\":\"≥⃒\",\"nvgt\":\">⃒\",\"nvinfin\":\"⧞\",\"nvlArr\":\"⤂\",\"nvle\":\"≤⃒\",\"nvlt\":\"<⃒\",\"nvltrie\":\"⊴⃒\",\"nvrArr\":\"⤃\",\"nvrtrie\":\"⊵⃒\",\"nvsim\":\"∼⃒\",\"nwArr\":\"⇖\",\"nwarhk\":\"⤣\",\"nwarr\":\"↖\",\"nwarrow\":\"↖\",\"nwnear\":\"⤧\",\"oS\":\"Ⓢ\",\"oacut\":\"ó\",\"oacute\":\"ó\",\"oast\":\"⊛\",\"ocir\":\"ô\",\"ocirc\":\"ô\",\"ocy\":\"о\",\"odash\":\"⊝\",\"odblac\":\"ő\",\"odiv\":\"⨸\",\"odot\":\"⊙\",\"odsold\":\"⦼\",\"oelig\":\"œ\",\"ofcir\":\"⦿\",\"ofr\":\"𝔬\",\"ogon\":\"˛\",\"ograv\":\"ò\",\"ograve\":\"ò\",\"ogt\":\"⧁\",\"ohbar\":\"⦵\",\"ohm\":\"Ω\",\"oint\":\"∮\",\"olarr\":\"↺\",\"olcir\":\"⦾\",\"olcross\":\"⦻\",\"oline\":\"‾\",\"olt\":\"⧀\",\"omacr\":\"ō\",\"omega\":\"ω\",\"omicron\":\"ο\",\"omid\":\"⦶\",\"ominus\":\"⊖\",\"oopf\":\"𝕠\",\"opar\":\"⦷\",\"operp\":\"⦹\",\"oplus\":\"⊕\",\"or\":\"∨\",\"orarr\":\"↻\",\"ord\":\"º\",\"order\":\"ℴ\",\"orderof\":\"ℴ\",\"ordf\":\"ª\",\"ordm\":\"º\",\"origof\":\"⊶\",\"oror\":\"⩖\",\"orslope\":\"⩗\",\"orv\":\"⩛\",\"oscr\":\"ℴ\",\"oslas\":\"ø\",\"oslash\":\"ø\",\"osol\":\"⊘\",\"otild\":\"õ\",\"otilde\":\"õ\",\"otimes\":\"⊗\",\"otimesas\":\"⨶\",\"oum\":\"ö\",\"ouml\":\"ö\",\"ovbar\":\"⌽\",\"par\":\"¶\",\"para\":\"¶\",\"parallel\":\"∥\",\"parsim\":\"⫳\",\"parsl\":\"⫽\",\"part\":\"∂\",\"pcy\":\"п\",\"percnt\":\"%\",\"period\":\".\",\"permil\":\"‰\",\"perp\":\"⊥\",\"pertenk\":\"‱\",\"pfr\":\"𝔭\",\"phi\":\"φ\",\"phiv\":\"ϕ\",\"phmmat\":\"ℳ\",\"phone\":\"☎\",\"pi\":\"π\",\"pitchfork\":\"⋔\",\"piv\":\"ϖ\",\"planck\":\"ℏ\",\"planckh\":\"ℎ\",\"plankv\":\"ℏ\",\"plus\":\"+\",\"plusacir\":\"⨣\",\"plusb\":\"⊞\",\"pluscir\":\"⨢\",\"plusdo\":\"∔\",\"plusdu\":\"⨥\",\"pluse\":\"⩲\",\"plusm\":\"±\",\"plusmn\":\"±\",\"plussim\":\"⨦\",\"plustwo\":\"⨧\",\"pm\":\"±\",\"pointint\":\"⨕\",\"popf\":\"𝕡\",\"poun\":\"£\",\"pound\":\"£\",\"pr\":\"≺\",\"prE\":\"⪳\",\"prap\":\"⪷\",\"prcue\":\"≼\",\"pre\":\"⪯\",\"prec\":\"≺\",\"precapprox\":\"⪷\",\"preccurlyeq\":\"≼\",\"preceq\":\"⪯\",\"precnapprox\":\"⪹\",\"precneqq\":\"⪵\",\"precnsim\":\"⋨\",\"precsim\":\"≾\",\"prime\":\"′\",\"primes\":\"ℙ\",\"prnE\":\"⪵\",\"prnap\":\"⪹\",\"prnsim\":\"⋨\",\"prod\":\"∏\",\"profalar\":\"⌮\",\"profline\":\"⌒\",\"profsurf\":\"⌓\",\"prop\":\"∝\",\"propto\":\"∝\",\"prsim\":\"≾\",\"prurel\":\"⊰\",\"pscr\":\"𝓅\",\"psi\":\"ψ\",\"puncsp\":\" \",\"qfr\":\"𝔮\",\"qint\":\"⨌\",\"qopf\":\"𝕢\",\"qprime\":\"⁗\",\"qscr\":\"𝓆\",\"quaternions\":\"ℍ\",\"quatint\":\"⨖\",\"quest\":\"?\",\"questeq\":\"≟\",\"quo\":\"\\\"\",\"quot\":\"\\\"\",\"rAarr\":\"⇛\",\"rArr\":\"⇒\",\"rAtail\":\"⤜\",\"rBarr\":\"⤏\",\"rHar\":\"⥤\",\"race\":\"∽̱\",\"racute\":\"ŕ\",\"radic\":\"√\",\"raemptyv\":\"⦳\",\"rang\":\"⟩\",\"rangd\":\"⦒\",\"range\":\"⦥\",\"rangle\":\"⟩\",\"raqu\":\"»\",\"raquo\":\"»\",\"rarr\":\"→\",\"rarrap\":\"⥵\",\"rarrb\":\"⇥\",\"rarrbfs\":\"⤠\",\"rarrc\":\"⤳\",\"rarrfs\":\"⤞\",\"rarrhk\":\"↪\",\"rarrlp\":\"↬\",\"rarrpl\":\"⥅\",\"rarrsim\":\"⥴\",\"rarrtl\":\"↣\",\"rarrw\":\"↝\",\"ratail\":\"⤚\",\"ratio\":\"∶\",\"rationals\":\"ℚ\",\"rbarr\":\"⤍\",\"rbbrk\":\"❳\",\"rbrace\":\"}\",\"rbrack\":\"]\",\"rbrke\":\"⦌\",\"rbrksld\":\"⦎\",\"rbrkslu\":\"⦐\",\"rcaron\":\"ř\",\"rcedil\":\"ŗ\",\"rceil\":\"⌉\",\"rcub\":\"}\",\"rcy\":\"р\",\"rdca\":\"⤷\",\"rdldhar\":\"⥩\",\"rdquo\":\"”\",\"rdquor\":\"”\",\"rdsh\":\"↳\",\"real\":\"ℜ\",\"realine\":\"ℛ\",\"realpart\":\"ℜ\",\"reals\":\"ℝ\",\"rect\":\"▭\",\"re\":\"®\",\"reg\":\"®\",\"rfisht\":\"⥽\",\"rfloor\":\"⌋\",\"rfr\":\"𝔯\",\"rhard\":\"⇁\",\"rharu\":\"⇀\",\"rharul\":\"⥬\",\"rho\":\"ρ\",\"rhov\":\"ϱ\",\"rightarrow\":\"→\",\"rightarrowtail\":\"↣\",\"rightharpoondown\":\"⇁\",\"rightharpoonup\":\"⇀\",\"rightleftarrows\":\"⇄\",\"rightleftharpoons\":\"⇌\",\"rightrightarrows\":\"⇉\",\"rightsquigarrow\":\"↝\",\"rightthreetimes\":\"⋌\",\"ring\":\"˚\",\"risingdotseq\":\"≓\",\"rlarr\":\"⇄\",\"rlhar\":\"⇌\",\"rlm\":\"‏\",\"rmoust\":\"⎱\",\"rmoustache\":\"⎱\",\"rnmid\":\"⫮\",\"roang\":\"⟭\",\"roarr\":\"⇾\",\"robrk\":\"⟧\",\"ropar\":\"⦆\",\"ropf\":\"𝕣\",\"roplus\":\"⨮\",\"rotimes\":\"⨵\",\"rpar\":\")\",\"rpargt\":\"⦔\",\"rppolint\":\"⨒\",\"rrarr\":\"⇉\",\"rsaquo\":\"›\",\"rscr\":\"𝓇\",\"rsh\":\"↱\",\"rsqb\":\"]\",\"rsquo\":\"’\",\"rsquor\":\"’\",\"rthree\":\"⋌\",\"rtimes\":\"⋊\",\"rtri\":\"▹\",\"rtrie\":\"⊵\",\"rtrif\":\"▸\",\"rtriltri\":\"⧎\",\"ruluhar\":\"⥨\",\"rx\":\"℞\",\"sacute\":\"ś\",\"sbquo\":\"‚\",\"sc\":\"≻\",\"scE\":\"⪴\",\"scap\":\"⪸\",\"scaron\":\"š\",\"sccue\":\"≽\",\"sce\":\"⪰\",\"scedil\":\"ş\",\"scirc\":\"ŝ\",\"scnE\":\"⪶\",\"scnap\":\"⪺\",\"scnsim\":\"⋩\",\"scpolint\":\"⨓\",\"scsim\":\"≿\",\"scy\":\"с\",\"sdot\":\"⋅\",\"sdotb\":\"⊡\",\"sdote\":\"⩦\",\"seArr\":\"⇘\",\"searhk\":\"⤥\",\"searr\":\"↘\",\"searrow\":\"↘\",\"sec\":\"§\",\"sect\":\"§\",\"semi\":\";\",\"seswar\":\"⤩\",\"setminus\":\"∖\",\"setmn\":\"∖\",\"sext\":\"✶\",\"sfr\":\"𝔰\",\"sfrown\":\"⌢\",\"sharp\":\"♯\",\"shchcy\":\"щ\",\"shcy\":\"ш\",\"shortmid\":\"∣\",\"shortparallel\":\"∥\",\"sh\":\"­\",\"shy\":\"­\",\"sigma\":\"σ\",\"sigmaf\":\"ς\",\"sigmav\":\"ς\",\"sim\":\"∼\",\"simdot\":\"⩪\",\"sime\":\"≃\",\"simeq\":\"≃\",\"simg\":\"⪞\",\"simgE\":\"⪠\",\"siml\":\"⪝\",\"simlE\":\"⪟\",\"simne\":\"≆\",\"simplus\":\"⨤\",\"simrarr\":\"⥲\",\"slarr\":\"←\",\"smallsetminus\":\"∖\",\"smashp\":\"⨳\",\"smeparsl\":\"⧤\",\"smid\":\"∣\",\"smile\":\"⌣\",\"smt\":\"⪪\",\"smte\":\"⪬\",\"smtes\":\"⪬︀\",\"softcy\":\"ь\",\"sol\":\"/\",\"solb\":\"⧄\",\"solbar\":\"⌿\",\"sopf\":\"𝕤\",\"spades\":\"♠\",\"spadesuit\":\"♠\",\"spar\":\"∥\",\"sqcap\":\"⊓\",\"sqcaps\":\"⊓︀\",\"sqcup\":\"⊔\",\"sqcups\":\"⊔︀\",\"sqsub\":\"⊏\",\"sqsube\":\"⊑\",\"sqsubset\":\"⊏\",\"sqsubseteq\":\"⊑\",\"sqsup\":\"⊐\",\"sqsupe\":\"⊒\",\"sqsupset\":\"⊐\",\"sqsupseteq\":\"⊒\",\"squ\":\"□\",\"square\":\"□\",\"squarf\":\"▪\",\"squf\":\"▪\",\"srarr\":\"→\",\"sscr\":\"𝓈\",\"ssetmn\":\"∖\",\"ssmile\":\"⌣\",\"sstarf\":\"⋆\",\"star\":\"☆\",\"starf\":\"★\",\"straightepsilon\":\"ϵ\",\"straightphi\":\"ϕ\",\"strns\":\"¯\",\"sub\":\"⊂\",\"subE\":\"⫅\",\"subdot\":\"⪽\",\"sube\":\"⊆\",\"subedot\":\"⫃\",\"submult\":\"⫁\",\"subnE\":\"⫋\",\"subne\":\"⊊\",\"subplus\":\"⪿\",\"subrarr\":\"⥹\",\"subset\":\"⊂\",\"subseteq\":\"⊆\",\"subseteqq\":\"⫅\",\"subsetneq\":\"⊊\",\"subsetneqq\":\"⫋\",\"subsim\":\"⫇\",\"subsub\":\"⫕\",\"subsup\":\"⫓\",\"succ\":\"≻\",\"succapprox\":\"⪸\",\"succcurlyeq\":\"≽\",\"succeq\":\"⪰\",\"succnapprox\":\"⪺\",\"succneqq\":\"⪶\",\"succnsim\":\"⋩\",\"succsim\":\"≿\",\"sum\":\"∑\",\"sung\":\"♪\",\"sup\":\"⊃\",\"sup1\":\"¹\",\"sup2\":\"²\",\"sup3\":\"³\",\"supE\":\"⫆\",\"supdot\":\"⪾\",\"supdsub\":\"⫘\",\"supe\":\"⊇\",\"supedot\":\"⫄\",\"suphsol\":\"⟉\",\"suphsub\":\"⫗\",\"suplarr\":\"⥻\",\"supmult\":\"⫂\",\"supnE\":\"⫌\",\"supne\":\"⊋\",\"supplus\":\"⫀\",\"supset\":\"⊃\",\"supseteq\":\"⊇\",\"supseteqq\":\"⫆\",\"supsetneq\":\"⊋\",\"supsetneqq\":\"⫌\",\"supsim\":\"⫈\",\"supsub\":\"⫔\",\"supsup\":\"⫖\",\"swArr\":\"⇙\",\"swarhk\":\"⤦\",\"swarr\":\"↙\",\"swarrow\":\"↙\",\"swnwar\":\"⤪\",\"szli\":\"ß\",\"szlig\":\"ß\",\"target\":\"⌖\",\"tau\":\"τ\",\"tbrk\":\"⎴\",\"tcaron\":\"ť\",\"tcedil\":\"ţ\",\"tcy\":\"т\",\"tdot\":\"⃛\",\"telrec\":\"⌕\",\"tfr\":\"𝔱\",\"there4\":\"∴\",\"therefore\":\"∴\",\"theta\":\"θ\",\"thetasym\":\"ϑ\",\"thetav\":\"ϑ\",\"thickapprox\":\"≈\",\"thicksim\":\"∼\",\"thinsp\":\" \",\"thkap\":\"≈\",\"thksim\":\"∼\",\"thor\":\"þ\",\"thorn\":\"þ\",\"tilde\":\"˜\",\"time\":\"×\",\"times\":\"×\",\"timesb\":\"⊠\",\"timesbar\":\"⨱\",\"timesd\":\"⨰\",\"tint\":\"∭\",\"toea\":\"⤨\",\"top\":\"⊤\",\"topbot\":\"⌶\",\"topcir\":\"⫱\",\"topf\":\"𝕥\",\"topfork\":\"⫚\",\"tosa\":\"⤩\",\"tprime\":\"‴\",\"trade\":\"™\",\"triangle\":\"▵\",\"triangledown\":\"▿\",\"triangleleft\":\"◃\",\"trianglelefteq\":\"⊴\",\"triangleq\":\"≜\",\"triangleright\":\"▹\",\"trianglerighteq\":\"⊵\",\"tridot\":\"◬\",\"trie\":\"≜\",\"triminus\":\"⨺\",\"triplus\":\"⨹\",\"trisb\":\"⧍\",\"tritime\":\"⨻\",\"trpezium\":\"⏢\",\"tscr\":\"𝓉\",\"tscy\":\"ц\",\"tshcy\":\"ћ\",\"tstrok\":\"ŧ\",\"twixt\":\"≬\",\"twoheadleftarrow\":\"↞\",\"twoheadrightarrow\":\"↠\",\"uArr\":\"⇑\",\"uHar\":\"⥣\",\"uacut\":\"ú\",\"uacute\":\"ú\",\"uarr\":\"↑\",\"ubrcy\":\"ў\",\"ubreve\":\"ŭ\",\"ucir\":\"û\",\"ucirc\":\"û\",\"ucy\":\"у\",\"udarr\":\"⇅\",\"udblac\":\"ű\",\"udhar\":\"⥮\",\"ufisht\":\"⥾\",\"ufr\":\"𝔲\",\"ugrav\":\"ù\",\"ugrave\":\"ù\",\"uharl\":\"↿\",\"uharr\":\"↾\",\"uhblk\":\"▀\",\"ulcorn\":\"⌜\",\"ulcorner\":\"⌜\",\"ulcrop\":\"⌏\",\"ultri\":\"◸\",\"umacr\":\"ū\",\"um\":\"¨\",\"uml\":\"¨\",\"uogon\":\"ų\",\"uopf\":\"𝕦\",\"uparrow\":\"↑\",\"updownarrow\":\"↕\",\"upharpoonleft\":\"↿\",\"upharpoonright\":\"↾\",\"uplus\":\"⊎\",\"upsi\":\"υ\",\"upsih\":\"ϒ\",\"upsilon\":\"υ\",\"upuparrows\":\"⇈\",\"urcorn\":\"⌝\",\"urcorner\":\"⌝\",\"urcrop\":\"⌎\",\"uring\":\"ů\",\"urtri\":\"◹\",\"uscr\":\"𝓊\",\"utdot\":\"⋰\",\"utilde\":\"ũ\",\"utri\":\"▵\",\"utrif\":\"▴\",\"uuarr\":\"⇈\",\"uum\":\"ü\",\"uuml\":\"ü\",\"uwangle\":\"⦧\",\"vArr\":\"⇕\",\"vBar\":\"⫨\",\"vBarv\":\"⫩\",\"vDash\":\"⊨\",\"vangrt\":\"⦜\",\"varepsilon\":\"ϵ\",\"varkappa\":\"ϰ\",\"varnothing\":\"∅\",\"varphi\":\"ϕ\",\"varpi\":\"ϖ\",\"varpropto\":\"∝\",\"varr\":\"↕\",\"varrho\":\"ϱ\",\"varsigma\":\"ς\",\"varsubsetneq\":\"⊊︀\",\"varsubsetneqq\":\"⫋︀\",\"varsupsetneq\":\"⊋︀\",\"varsupsetneqq\":\"⫌︀\",\"vartheta\":\"ϑ\",\"vartriangleleft\":\"⊲\",\"vartriangleright\":\"⊳\",\"vcy\":\"в\",\"vdash\":\"⊢\",\"vee\":\"∨\",\"veebar\":\"⊻\",\"veeeq\":\"≚\",\"vellip\":\"⋮\",\"verbar\":\"|\",\"vert\":\"|\",\"vfr\":\"𝔳\",\"vltri\":\"⊲\",\"vnsub\":\"⊂⃒\",\"vnsup\":\"⊃⃒\",\"vopf\":\"𝕧\",\"vprop\":\"∝\",\"vrtri\":\"⊳\",\"vscr\":\"𝓋\",\"vsubnE\":\"⫋︀\",\"vsubne\":\"⊊︀\",\"vsupnE\":\"⫌︀\",\"vsupne\":\"⊋︀\",\"vzigzag\":\"⦚\",\"wcirc\":\"ŵ\",\"wedbar\":\"⩟\",\"wedge\":\"∧\",\"wedgeq\":\"≙\",\"weierp\":\"℘\",\"wfr\":\"𝔴\",\"wopf\":\"𝕨\",\"wp\":\"℘\",\"wr\":\"≀\",\"wreath\":\"≀\",\"wscr\":\"𝓌\",\"xcap\":\"⋂\",\"xcirc\":\"◯\",\"xcup\":\"⋃\",\"xdtri\":\"▽\",\"xfr\":\"𝔵\",\"xhArr\":\"⟺\",\"xharr\":\"⟷\",\"xi\":\"ξ\",\"xlArr\":\"⟸\",\"xlarr\":\"⟵\",\"xmap\":\"⟼\",\"xnis\":\"⋻\",\"xodot\":\"⨀\",\"xopf\":\"𝕩\",\"xoplus\":\"⨁\",\"xotime\":\"⨂\",\"xrArr\":\"⟹\",\"xrarr\":\"⟶\",\"xscr\":\"𝓍\",\"xsqcup\":\"⨆\",\"xuplus\":\"⨄\",\"xutri\":\"△\",\"xvee\":\"⋁\",\"xwedge\":\"⋀\",\"yacut\":\"ý\",\"yacute\":\"ý\",\"yacy\":\"я\",\"ycirc\":\"ŷ\",\"ycy\":\"ы\",\"ye\":\"¥\",\"yen\":\"¥\",\"yfr\":\"𝔶\",\"yicy\":\"ї\",\"yopf\":\"𝕪\",\"yscr\":\"𝓎\",\"yucy\":\"ю\",\"yum\":\"ÿ\",\"yuml\":\"ÿ\",\"zacute\":\"ź\",\"zcaron\":\"ž\",\"zcy\":\"з\",\"zdot\":\"ż\",\"zeetrf\":\"ℨ\",\"zeta\":\"ζ\",\"zfr\":\"𝔷\",\"zhcy\":\"ж\",\"zigrarr\":\"⇝\",\"zopf\":\"𝕫\",\"zscr\":\"𝓏\",\"zwj\":\"‍\",\"zwnj\":\"‌\"}");
+module.exports = JSON.parse('{"AEli":"Æ","AElig":"Æ","AM":"&","AMP":"&","Aacut":"Á","Aacute":"Á","Abreve":"Ă","Acir":"Â","Acirc":"Â","Acy":"А","Afr":"𝔄","Agrav":"À","Agrave":"À","Alpha":"Α","Amacr":"Ā","And":"⩓","Aogon":"Ą","Aopf":"𝔸","ApplyFunction":"⁡","Arin":"Å","Aring":"Å","Ascr":"𝒜","Assign":"≔","Atild":"Ã","Atilde":"Ã","Aum":"Ä","Auml":"Ä","Backslash":"∖","Barv":"⫧","Barwed":"⌆","Bcy":"Б","Because":"∵","Bernoullis":"ℬ","Beta":"Β","Bfr":"𝔅","Bopf":"𝔹","Breve":"˘","Bscr":"ℬ","Bumpeq":"≎","CHcy":"Ч","COP":"©","COPY":"©","Cacute":"Ć","Cap":"⋒","CapitalDifferentialD":"ⅅ","Cayleys":"ℭ","Ccaron":"Č","Ccedi":"Ç","Ccedil":"Ç","Ccirc":"Ĉ","Cconint":"∰","Cdot":"Ċ","Cedilla":"¸","CenterDot":"·","Cfr":"ℭ","Chi":"Χ","CircleDot":"⊙","CircleMinus":"⊖","CirclePlus":"⊕","CircleTimes":"⊗","ClockwiseContourIntegral":"∲","CloseCurlyDoubleQuote":"”","CloseCurlyQuote":"’","Colon":"∷","Colone":"⩴","Congruent":"≡","Conint":"∯","ContourIntegral":"∮","Copf":"ℂ","Coproduct":"∐","CounterClockwiseContourIntegral":"∳","Cross":"⨯","Cscr":"𝒞","Cup":"⋓","CupCap":"≍","DD":"ⅅ","DDotrahd":"⤑","DJcy":"Ђ","DScy":"Ѕ","DZcy":"Џ","Dagger":"‡","Darr":"↡","Dashv":"⫤","Dcaron":"Ď","Dcy":"Д","Del":"∇","Delta":"Δ","Dfr":"𝔇","DiacriticalAcute":"´","DiacriticalDot":"˙","DiacriticalDoubleAcute":"˝","DiacriticalGrave":"`","DiacriticalTilde":"˜","Diamond":"⋄","DifferentialD":"ⅆ","Dopf":"𝔻","Dot":"¨","DotDot":"⃜","DotEqual":"≐","DoubleContourIntegral":"∯","DoubleDot":"¨","DoubleDownArrow":"⇓","DoubleLeftArrow":"⇐","DoubleLeftRightArrow":"⇔","DoubleLeftTee":"⫤","DoubleLongLeftArrow":"⟸","DoubleLongLeftRightArrow":"⟺","DoubleLongRightArrow":"⟹","DoubleRightArrow":"⇒","DoubleRightTee":"⊨","DoubleUpArrow":"⇑","DoubleUpDownArrow":"⇕","DoubleVerticalBar":"∥","DownArrow":"↓","DownArrowBar":"⤓","DownArrowUpArrow":"⇵","DownBreve":"̑","DownLeftRightVector":"⥐","DownLeftTeeVector":"⥞","DownLeftVector":"↽","DownLeftVectorBar":"⥖","DownRightTeeVector":"⥟","DownRightVector":"⇁","DownRightVectorBar":"⥗","DownTee":"⊤","DownTeeArrow":"↧","Downarrow":"⇓","Dscr":"𝒟","Dstrok":"Đ","ENG":"Ŋ","ET":"Ð","ETH":"Ð","Eacut":"É","Eacute":"É","Ecaron":"Ě","Ecir":"Ê","Ecirc":"Ê","Ecy":"Э","Edot":"Ė","Efr":"𝔈","Egrav":"È","Egrave":"È","Element":"∈","Emacr":"Ē","EmptySmallSquare":"◻","EmptyVerySmallSquare":"▫","Eogon":"Ę","Eopf":"𝔼","Epsilon":"Ε","Equal":"⩵","EqualTilde":"≂","Equilibrium":"⇌","Escr":"ℰ","Esim":"⩳","Eta":"Η","Eum":"Ë","Euml":"Ë","Exists":"∃","ExponentialE":"ⅇ","Fcy":"Ф","Ffr":"𝔉","FilledSmallSquare":"◼","FilledVerySmallSquare":"▪","Fopf":"𝔽","ForAll":"∀","Fouriertrf":"ℱ","Fscr":"ℱ","GJcy":"Ѓ","G":">","GT":">","Gamma":"Γ","Gammad":"Ϝ","Gbreve":"Ğ","Gcedil":"Ģ","Gcirc":"Ĝ","Gcy":"Г","Gdot":"Ġ","Gfr":"𝔊","Gg":"⋙","Gopf":"𝔾","GreaterEqual":"≥","GreaterEqualLess":"⋛","GreaterFullEqual":"≧","GreaterGreater":"⪢","GreaterLess":"≷","GreaterSlantEqual":"⩾","GreaterTilde":"≳","Gscr":"𝒢","Gt":"≫","HARDcy":"Ъ","Hacek":"ˇ","Hat":"^","Hcirc":"Ĥ","Hfr":"ℌ","HilbertSpace":"ℋ","Hopf":"ℍ","HorizontalLine":"─","Hscr":"ℋ","Hstrok":"Ħ","HumpDownHump":"≎","HumpEqual":"≏","IEcy":"Е","IJlig":"Ĳ","IOcy":"Ё","Iacut":"Í","Iacute":"Í","Icir":"Î","Icirc":"Î","Icy":"И","Idot":"İ","Ifr":"ℑ","Igrav":"Ì","Igrave":"Ì","Im":"ℑ","Imacr":"Ī","ImaginaryI":"ⅈ","Implies":"⇒","Int":"∬","Integral":"∫","Intersection":"⋂","InvisibleComma":"⁣","InvisibleTimes":"⁢","Iogon":"Į","Iopf":"𝕀","Iota":"Ι","Iscr":"ℐ","Itilde":"Ĩ","Iukcy":"І","Ium":"Ï","Iuml":"Ï","Jcirc":"Ĵ","Jcy":"Й","Jfr":"𝔍","Jopf":"𝕁","Jscr":"𝒥","Jsercy":"Ј","Jukcy":"Є","KHcy":"Х","KJcy":"Ќ","Kappa":"Κ","Kcedil":"Ķ","Kcy":"К","Kfr":"𝔎","Kopf":"𝕂","Kscr":"𝒦","LJcy":"Љ","L":"<","LT":"<","Lacute":"Ĺ","Lambda":"Λ","Lang":"⟪","Laplacetrf":"ℒ","Larr":"↞","Lcaron":"Ľ","Lcedil":"Ļ","Lcy":"Л","LeftAngleBracket":"⟨","LeftArrow":"←","LeftArrowBar":"⇤","LeftArrowRightArrow":"⇆","LeftCeiling":"⌈","LeftDoubleBracket":"⟦","LeftDownTeeVector":"⥡","LeftDownVector":"⇃","LeftDownVectorBar":"⥙","LeftFloor":"⌊","LeftRightArrow":"↔","LeftRightVector":"⥎","LeftTee":"⊣","LeftTeeArrow":"↤","LeftTeeVector":"⥚","LeftTriangle":"⊲","LeftTriangleBar":"⧏","LeftTriangleEqual":"⊴","LeftUpDownVector":"⥑","LeftUpTeeVector":"⥠","LeftUpVector":"↿","LeftUpVectorBar":"⥘","LeftVector":"↼","LeftVectorBar":"⥒","Leftarrow":"⇐","Leftrightarrow":"⇔","LessEqualGreater":"⋚","LessFullEqual":"≦","LessGreater":"≶","LessLess":"⪡","LessSlantEqual":"⩽","LessTilde":"≲","Lfr":"𝔏","Ll":"⋘","Lleftarrow":"⇚","Lmidot":"Ŀ","LongLeftArrow":"⟵","LongLeftRightArrow":"⟷","LongRightArrow":"⟶","Longleftarrow":"⟸","Longleftrightarrow":"⟺","Longrightarrow":"⟹","Lopf":"𝕃","LowerLeftArrow":"↙","LowerRightArrow":"↘","Lscr":"ℒ","Lsh":"↰","Lstrok":"Ł","Lt":"≪","Map":"⤅","Mcy":"М","MediumSpace":" ","Mellintrf":"ℳ","Mfr":"𝔐","MinusPlus":"∓","Mopf":"𝕄","Mscr":"ℳ","Mu":"Μ","NJcy":"Њ","Nacute":"Ń","Ncaron":"Ň","Ncedil":"Ņ","Ncy":"Н","NegativeMediumSpace":"​","NegativeThickSpace":"​","NegativeThinSpace":"​","NegativeVeryThinSpace":"​","NestedGreaterGreater":"≫","NestedLessLess":"≪","NewLine":"\\n","Nfr":"𝔑","NoBreak":"⁠","NonBreakingSpace":" ","Nopf":"ℕ","Not":"⫬","NotCongruent":"≢","NotCupCap":"≭","NotDoubleVerticalBar":"∦","NotElement":"∉","NotEqual":"≠","NotEqualTilde":"≂̸","NotExists":"∄","NotGreater":"≯","NotGreaterEqual":"≱","NotGreaterFullEqual":"≧̸","NotGreaterGreater":"≫̸","NotGreaterLess":"≹","NotGreaterSlantEqual":"⩾̸","NotGreaterTilde":"≵","NotHumpDownHump":"≎̸","NotHumpEqual":"≏̸","NotLeftTriangle":"⋪","NotLeftTriangleBar":"⧏̸","NotLeftTriangleEqual":"⋬","NotLess":"≮","NotLessEqual":"≰","NotLessGreater":"≸","NotLessLess":"≪̸","NotLessSlantEqual":"⩽̸","NotLessTilde":"≴","NotNestedGreaterGreater":"⪢̸","NotNestedLessLess":"⪡̸","NotPrecedes":"⊀","NotPrecedesEqual":"⪯̸","NotPrecedesSlantEqual":"⋠","NotReverseElement":"∌","NotRightTriangle":"⋫","NotRightTriangleBar":"⧐̸","NotRightTriangleEqual":"⋭","NotSquareSubset":"⊏̸","NotSquareSubsetEqual":"⋢","NotSquareSuperset":"⊐̸","NotSquareSupersetEqual":"⋣","NotSubset":"⊂⃒","NotSubsetEqual":"⊈","NotSucceeds":"⊁","NotSucceedsEqual":"⪰̸","NotSucceedsSlantEqual":"⋡","NotSucceedsTilde":"≿̸","NotSuperset":"⊃⃒","NotSupersetEqual":"⊉","NotTilde":"≁","NotTildeEqual":"≄","NotTildeFullEqual":"≇","NotTildeTilde":"≉","NotVerticalBar":"∤","Nscr":"𝒩","Ntild":"Ñ","Ntilde":"Ñ","Nu":"Ν","OElig":"Œ","Oacut":"Ó","Oacute":"Ó","Ocir":"Ô","Ocirc":"Ô","Ocy":"О","Odblac":"Ő","Ofr":"𝔒","Ograv":"Ò","Ograve":"Ò","Omacr":"Ō","Omega":"Ω","Omicron":"Ο","Oopf":"𝕆","OpenCurlyDoubleQuote":"“","OpenCurlyQuote":"‘","Or":"⩔","Oscr":"𝒪","Oslas":"Ø","Oslash":"Ø","Otild":"Õ","Otilde":"Õ","Otimes":"⨷","Oum":"Ö","Ouml":"Ö","OverBar":"‾","OverBrace":"⏞","OverBracket":"⎴","OverParenthesis":"⏜","PartialD":"∂","Pcy":"П","Pfr":"𝔓","Phi":"Φ","Pi":"Π","PlusMinus":"±","Poincareplane":"ℌ","Popf":"ℙ","Pr":"⪻","Precedes":"≺","PrecedesEqual":"⪯","PrecedesSlantEqual":"≼","PrecedesTilde":"≾","Prime":"″","Product":"∏","Proportion":"∷","Proportional":"∝","Pscr":"𝒫","Psi":"Ψ","QUO":"\\"","QUOT":"\\"","Qfr":"𝔔","Qopf":"ℚ","Qscr":"𝒬","RBarr":"⤐","RE":"®","REG":"®","Racute":"Ŕ","Rang":"⟫","Rarr":"↠","Rarrtl":"⤖","Rcaron":"Ř","Rcedil":"Ŗ","Rcy":"Р","Re":"ℜ","ReverseElement":"∋","ReverseEquilibrium":"⇋","ReverseUpEquilibrium":"⥯","Rfr":"ℜ","Rho":"Ρ","RightAngleBracket":"⟩","RightArrow":"→","RightArrowBar":"⇥","RightArrowLeftArrow":"⇄","RightCeiling":"⌉","RightDoubleBracket":"⟧","RightDownTeeVector":"⥝","RightDownVector":"⇂","RightDownVectorBar":"⥕","RightFloor":"⌋","RightTee":"⊢","RightTeeArrow":"↦","RightTeeVector":"⥛","RightTriangle":"⊳","RightTriangleBar":"⧐","RightTriangleEqual":"⊵","RightUpDownVector":"⥏","RightUpTeeVector":"⥜","RightUpVector":"↾","RightUpVectorBar":"⥔","RightVector":"⇀","RightVectorBar":"⥓","Rightarrow":"⇒","Ropf":"ℝ","RoundImplies":"⥰","Rrightarrow":"⇛","Rscr":"ℛ","Rsh":"↱","RuleDelayed":"⧴","SHCHcy":"Щ","SHcy":"Ш","SOFTcy":"Ь","Sacute":"Ś","Sc":"⪼","Scaron":"Š","Scedil":"Ş","Scirc":"Ŝ","Scy":"С","Sfr":"𝔖","ShortDownArrow":"↓","ShortLeftArrow":"←","ShortRightArrow":"→","ShortUpArrow":"↑","Sigma":"Σ","SmallCircle":"∘","Sopf":"𝕊","Sqrt":"√","Square":"□","SquareIntersection":"⊓","SquareSubset":"⊏","SquareSubsetEqual":"⊑","SquareSuperset":"⊐","SquareSupersetEqual":"⊒","SquareUnion":"⊔","Sscr":"𝒮","Star":"⋆","Sub":"⋐","Subset":"⋐","SubsetEqual":"⊆","Succeeds":"≻","SucceedsEqual":"⪰","SucceedsSlantEqual":"≽","SucceedsTilde":"≿","SuchThat":"∋","Sum":"∑","Sup":"⋑","Superset":"⊃","SupersetEqual":"⊇","Supset":"⋑","THOR":"Þ","THORN":"Þ","TRADE":"™","TSHcy":"Ћ","TScy":"Ц","Tab":"\\t","Tau":"Τ","Tcaron":"Ť","Tcedil":"Ţ","Tcy":"Т","Tfr":"𝔗","Therefore":"∴","Theta":"Θ","ThickSpace":"  ","ThinSpace":" ","Tilde":"∼","TildeEqual":"≃","TildeFullEqual":"≅","TildeTilde":"≈","Topf":"𝕋","TripleDot":"⃛","Tscr":"𝒯","Tstrok":"Ŧ","Uacut":"Ú","Uacute":"Ú","Uarr":"↟","Uarrocir":"⥉","Ubrcy":"Ў","Ubreve":"Ŭ","Ucir":"Û","Ucirc":"Û","Ucy":"У","Udblac":"Ű","Ufr":"𝔘","Ugrav":"Ù","Ugrave":"Ù","Umacr":"Ū","UnderBar":"_","UnderBrace":"⏟","UnderBracket":"⎵","UnderParenthesis":"⏝","Union":"⋃","UnionPlus":"⊎","Uogon":"Ų","Uopf":"𝕌","UpArrow":"↑","UpArrowBar":"⤒","UpArrowDownArrow":"⇅","UpDownArrow":"↕","UpEquilibrium":"⥮","UpTee":"⊥","UpTeeArrow":"↥","Uparrow":"⇑","Updownarrow":"⇕","UpperLeftArrow":"↖","UpperRightArrow":"↗","Upsi":"ϒ","Upsilon":"Υ","Uring":"Ů","Uscr":"𝒰","Utilde":"Ũ","Uum":"Ü","Uuml":"Ü","VDash":"⊫","Vbar":"⫫","Vcy":"В","Vdash":"⊩","Vdashl":"⫦","Vee":"⋁","Verbar":"‖","Vert":"‖","VerticalBar":"∣","VerticalLine":"|","VerticalSeparator":"❘","VerticalTilde":"≀","VeryThinSpace":" ","Vfr":"𝔙","Vopf":"𝕍","Vscr":"𝒱","Vvdash":"⊪","Wcirc":"Ŵ","Wedge":"⋀","Wfr":"𝔚","Wopf":"𝕎","Wscr":"𝒲","Xfr":"𝔛","Xi":"Ξ","Xopf":"𝕏","Xscr":"𝒳","YAcy":"Я","YIcy":"Ї","YUcy":"Ю","Yacut":"Ý","Yacute":"Ý","Ycirc":"Ŷ","Ycy":"Ы","Yfr":"𝔜","Yopf":"𝕐","Yscr":"𝒴","Yuml":"Ÿ","ZHcy":"Ж","Zacute":"Ź","Zcaron":"Ž","Zcy":"З","Zdot":"Ż","ZeroWidthSpace":"​","Zeta":"Ζ","Zfr":"ℨ","Zopf":"ℤ","Zscr":"𝒵","aacut":"á","aacute":"á","abreve":"ă","ac":"∾","acE":"∾̳","acd":"∿","acir":"â","acirc":"â","acut":"´","acute":"´","acy":"а","aeli":"æ","aelig":"æ","af":"⁡","afr":"𝔞","agrav":"à","agrave":"à","alefsym":"ℵ","aleph":"ℵ","alpha":"α","amacr":"ā","amalg":"⨿","am":"&","amp":"&","and":"∧","andand":"⩕","andd":"⩜","andslope":"⩘","andv":"⩚","ang":"∠","ange":"⦤","angle":"∠","angmsd":"∡","angmsdaa":"⦨","angmsdab":"⦩","angmsdac":"⦪","angmsdad":"⦫","angmsdae":"⦬","angmsdaf":"⦭","angmsdag":"⦮","angmsdah":"⦯","angrt":"∟","angrtvb":"⊾","angrtvbd":"⦝","angsph":"∢","angst":"Å","angzarr":"⍼","aogon":"ą","aopf":"𝕒","ap":"≈","apE":"⩰","apacir":"⩯","ape":"≊","apid":"≋","apos":"\'","approx":"≈","approxeq":"≊","arin":"å","aring":"å","ascr":"𝒶","ast":"*","asymp":"≈","asympeq":"≍","atild":"ã","atilde":"ã","aum":"ä","auml":"ä","awconint":"∳","awint":"⨑","bNot":"⫭","backcong":"≌","backepsilon":"϶","backprime":"‵","backsim":"∽","backsimeq":"⋍","barvee":"⊽","barwed":"⌅","barwedge":"⌅","bbrk":"⎵","bbrktbrk":"⎶","bcong":"≌","bcy":"б","bdquo":"„","becaus":"∵","because":"∵","bemptyv":"⦰","bepsi":"϶","bernou":"ℬ","beta":"β","beth":"ℶ","between":"≬","bfr":"𝔟","bigcap":"⋂","bigcirc":"◯","bigcup":"⋃","bigodot":"⨀","bigoplus":"⨁","bigotimes":"⨂","bigsqcup":"⨆","bigstar":"★","bigtriangledown":"▽","bigtriangleup":"△","biguplus":"⨄","bigvee":"⋁","bigwedge":"⋀","bkarow":"⤍","blacklozenge":"⧫","blacksquare":"▪","blacktriangle":"▴","blacktriangledown":"▾","blacktriangleleft":"◂","blacktriangleright":"▸","blank":"␣","blk12":"▒","blk14":"░","blk34":"▓","block":"█","bne":"=⃥","bnequiv":"≡⃥","bnot":"⌐","bopf":"𝕓","bot":"⊥","bottom":"⊥","bowtie":"⋈","boxDL":"╗","boxDR":"╔","boxDl":"╖","boxDr":"╓","boxH":"═","boxHD":"╦","boxHU":"╩","boxHd":"╤","boxHu":"╧","boxUL":"╝","boxUR":"╚","boxUl":"╜","boxUr":"╙","boxV":"║","boxVH":"╬","boxVL":"╣","boxVR":"╠","boxVh":"╫","boxVl":"╢","boxVr":"╟","boxbox":"⧉","boxdL":"╕","boxdR":"╒","boxdl":"┐","boxdr":"┌","boxh":"─","boxhD":"╥","boxhU":"╨","boxhd":"┬","boxhu":"┴","boxminus":"⊟","boxplus":"⊞","boxtimes":"⊠","boxuL":"╛","boxuR":"╘","boxul":"┘","boxur":"└","boxv":"│","boxvH":"╪","boxvL":"╡","boxvR":"╞","boxvh":"┼","boxvl":"┤","boxvr":"├","bprime":"‵","breve":"˘","brvba":"¦","brvbar":"¦","bscr":"𝒷","bsemi":"⁏","bsim":"∽","bsime":"⋍","bsol":"\\\\","bsolb":"⧅","bsolhsub":"⟈","bull":"•","bullet":"•","bump":"≎","bumpE":"⪮","bumpe":"≏","bumpeq":"≏","cacute":"ć","cap":"∩","capand":"⩄","capbrcup":"⩉","capcap":"⩋","capcup":"⩇","capdot":"⩀","caps":"∩︀","caret":"⁁","caron":"ˇ","ccaps":"⩍","ccaron":"č","ccedi":"ç","ccedil":"ç","ccirc":"ĉ","ccups":"⩌","ccupssm":"⩐","cdot":"ċ","cedi":"¸","cedil":"¸","cemptyv":"⦲","cen":"¢","cent":"¢","centerdot":"·","cfr":"𝔠","chcy":"ч","check":"✓","checkmark":"✓","chi":"χ","cir":"○","cirE":"⧃","circ":"ˆ","circeq":"≗","circlearrowleft":"↺","circlearrowright":"↻","circledR":"®","circledS":"Ⓢ","circledast":"⊛","circledcirc":"⊚","circleddash":"⊝","cire":"≗","cirfnint":"⨐","cirmid":"⫯","cirscir":"⧂","clubs":"♣","clubsuit":"♣","colon":":","colone":"≔","coloneq":"≔","comma":",","commat":"@","comp":"∁","compfn":"∘","complement":"∁","complexes":"ℂ","cong":"≅","congdot":"⩭","conint":"∮","copf":"𝕔","coprod":"∐","cop":"©","copy":"©","copysr":"℗","crarr":"↵","cross":"✗","cscr":"𝒸","csub":"⫏","csube":"⫑","csup":"⫐","csupe":"⫒","ctdot":"⋯","cudarrl":"⤸","cudarrr":"⤵","cuepr":"⋞","cuesc":"⋟","cularr":"↶","cularrp":"⤽","cup":"∪","cupbrcap":"⩈","cupcap":"⩆","cupcup":"⩊","cupdot":"⊍","cupor":"⩅","cups":"∪︀","curarr":"↷","curarrm":"⤼","curlyeqprec":"⋞","curlyeqsucc":"⋟","curlyvee":"⋎","curlywedge":"⋏","curre":"¤","curren":"¤","curvearrowleft":"↶","curvearrowright":"↷","cuvee":"⋎","cuwed":"⋏","cwconint":"∲","cwint":"∱","cylcty":"⌭","dArr":"⇓","dHar":"⥥","dagger":"†","daleth":"ℸ","darr":"↓","dash":"‐","dashv":"⊣","dbkarow":"⤏","dblac":"˝","dcaron":"ď","dcy":"д","dd":"ⅆ","ddagger":"‡","ddarr":"⇊","ddotseq":"⩷","de":"°","deg":"°","delta":"δ","demptyv":"⦱","dfisht":"⥿","dfr":"𝔡","dharl":"⇃","dharr":"⇂","diam":"⋄","diamond":"⋄","diamondsuit":"♦","diams":"♦","die":"¨","digamma":"ϝ","disin":"⋲","div":"÷","divid":"÷","divide":"÷","divideontimes":"⋇","divonx":"⋇","djcy":"ђ","dlcorn":"⌞","dlcrop":"⌍","dollar":"$","dopf":"𝕕","dot":"˙","doteq":"≐","doteqdot":"≑","dotminus":"∸","dotplus":"∔","dotsquare":"⊡","doublebarwedge":"⌆","downarrow":"↓","downdownarrows":"⇊","downharpoonleft":"⇃","downharpoonright":"⇂","drbkarow":"⤐","drcorn":"⌟","drcrop":"⌌","dscr":"𝒹","dscy":"ѕ","dsol":"⧶","dstrok":"đ","dtdot":"⋱","dtri":"▿","dtrif":"▾","duarr":"⇵","duhar":"⥯","dwangle":"⦦","dzcy":"џ","dzigrarr":"⟿","eDDot":"⩷","eDot":"≑","eacut":"é","eacute":"é","easter":"⩮","ecaron":"ě","ecir":"ê","ecirc":"ê","ecolon":"≕","ecy":"э","edot":"ė","ee":"ⅇ","efDot":"≒","efr":"𝔢","eg":"⪚","egrav":"è","egrave":"è","egs":"⪖","egsdot":"⪘","el":"⪙","elinters":"⏧","ell":"ℓ","els":"⪕","elsdot":"⪗","emacr":"ē","empty":"∅","emptyset":"∅","emptyv":"∅","emsp13":" ","emsp14":" ","emsp":" ","eng":"ŋ","ensp":" ","eogon":"ę","eopf":"𝕖","epar":"⋕","eparsl":"⧣","eplus":"⩱","epsi":"ε","epsilon":"ε","epsiv":"ϵ","eqcirc":"≖","eqcolon":"≕","eqsim":"≂","eqslantgtr":"⪖","eqslantless":"⪕","equals":"=","equest":"≟","equiv":"≡","equivDD":"⩸","eqvparsl":"⧥","erDot":"≓","erarr":"⥱","escr":"ℯ","esdot":"≐","esim":"≂","eta":"η","et":"ð","eth":"ð","eum":"ë","euml":"ë","euro":"€","excl":"!","exist":"∃","expectation":"ℰ","exponentiale":"ⅇ","fallingdotseq":"≒","fcy":"ф","female":"♀","ffilig":"ﬃ","fflig":"ﬀ","ffllig":"ﬄ","ffr":"𝔣","filig":"ﬁ","fjlig":"fj","flat":"♭","fllig":"ﬂ","fltns":"▱","fnof":"ƒ","fopf":"𝕗","forall":"∀","fork":"⋔","forkv":"⫙","fpartint":"⨍","frac1":"¼","frac12":"½","frac13":"⅓","frac14":"¼","frac15":"⅕","frac16":"⅙","frac18":"⅛","frac23":"⅔","frac25":"⅖","frac3":"¾","frac34":"¾","frac35":"⅗","frac38":"⅜","frac45":"⅘","frac56":"⅚","frac58":"⅝","frac78":"⅞","frasl":"⁄","frown":"⌢","fscr":"𝒻","gE":"≧","gEl":"⪌","gacute":"ǵ","gamma":"γ","gammad":"ϝ","gap":"⪆","gbreve":"ğ","gcirc":"ĝ","gcy":"г","gdot":"ġ","ge":"≥","gel":"⋛","geq":"≥","geqq":"≧","geqslant":"⩾","ges":"⩾","gescc":"⪩","gesdot":"⪀","gesdoto":"⪂","gesdotol":"⪄","gesl":"⋛︀","gesles":"⪔","gfr":"𝔤","gg":"≫","ggg":"⋙","gimel":"ℷ","gjcy":"ѓ","gl":"≷","glE":"⪒","gla":"⪥","glj":"⪤","gnE":"≩","gnap":"⪊","gnapprox":"⪊","gne":"⪈","gneq":"⪈","gneqq":"≩","gnsim":"⋧","gopf":"𝕘","grave":"`","gscr":"ℊ","gsim":"≳","gsime":"⪎","gsiml":"⪐","g":">","gt":">","gtcc":"⪧","gtcir":"⩺","gtdot":"⋗","gtlPar":"⦕","gtquest":"⩼","gtrapprox":"⪆","gtrarr":"⥸","gtrdot":"⋗","gtreqless":"⋛","gtreqqless":"⪌","gtrless":"≷","gtrsim":"≳","gvertneqq":"≩︀","gvnE":"≩︀","hArr":"⇔","hairsp":" ","half":"½","hamilt":"ℋ","hardcy":"ъ","harr":"↔","harrcir":"⥈","harrw":"↭","hbar":"ℏ","hcirc":"ĥ","hearts":"♥","heartsuit":"♥","hellip":"…","hercon":"⊹","hfr":"𝔥","hksearow":"⤥","hkswarow":"⤦","hoarr":"⇿","homtht":"∻","hookleftarrow":"↩","hookrightarrow":"↪","hopf":"𝕙","horbar":"―","hscr":"𝒽","hslash":"ℏ","hstrok":"ħ","hybull":"⁃","hyphen":"‐","iacut":"í","iacute":"í","ic":"⁣","icir":"î","icirc":"î","icy":"и","iecy":"е","iexc":"¡","iexcl":"¡","iff":"⇔","ifr":"𝔦","igrav":"ì","igrave":"ì","ii":"ⅈ","iiiint":"⨌","iiint":"∭","iinfin":"⧜","iiota":"℩","ijlig":"ĳ","imacr":"ī","image":"ℑ","imagline":"ℐ","imagpart":"ℑ","imath":"ı","imof":"⊷","imped":"Ƶ","in":"∈","incare":"℅","infin":"∞","infintie":"⧝","inodot":"ı","int":"∫","intcal":"⊺","integers":"ℤ","intercal":"⊺","intlarhk":"⨗","intprod":"⨼","iocy":"ё","iogon":"į","iopf":"𝕚","iota":"ι","iprod":"⨼","iques":"¿","iquest":"¿","iscr":"𝒾","isin":"∈","isinE":"⋹","isindot":"⋵","isins":"⋴","isinsv":"⋳","isinv":"∈","it":"⁢","itilde":"ĩ","iukcy":"і","ium":"ï","iuml":"ï","jcirc":"ĵ","jcy":"й","jfr":"𝔧","jmath":"ȷ","jopf":"𝕛","jscr":"𝒿","jsercy":"ј","jukcy":"є","kappa":"κ","kappav":"ϰ","kcedil":"ķ","kcy":"к","kfr":"𝔨","kgreen":"ĸ","khcy":"х","kjcy":"ќ","kopf":"𝕜","kscr":"𝓀","lAarr":"⇚","lArr":"⇐","lAtail":"⤛","lBarr":"⤎","lE":"≦","lEg":"⪋","lHar":"⥢","lacute":"ĺ","laemptyv":"⦴","lagran":"ℒ","lambda":"λ","lang":"⟨","langd":"⦑","langle":"⟨","lap":"⪅","laqu":"«","laquo":"«","larr":"←","larrb":"⇤","larrbfs":"⤟","larrfs":"⤝","larrhk":"↩","larrlp":"↫","larrpl":"⤹","larrsim":"⥳","larrtl":"↢","lat":"⪫","latail":"⤙","late":"⪭","lates":"⪭︀","lbarr":"⤌","lbbrk":"❲","lbrace":"{","lbrack":"[","lbrke":"⦋","lbrksld":"⦏","lbrkslu":"⦍","lcaron":"ľ","lcedil":"ļ","lceil":"⌈","lcub":"{","lcy":"л","ldca":"⤶","ldquo":"“","ldquor":"„","ldrdhar":"⥧","ldrushar":"⥋","ldsh":"↲","le":"≤","leftarrow":"←","leftarrowtail":"↢","leftharpoondown":"↽","leftharpoonup":"↼","leftleftarrows":"⇇","leftrightarrow":"↔","leftrightarrows":"⇆","leftrightharpoons":"⇋","leftrightsquigarrow":"↭","leftthreetimes":"⋋","leg":"⋚","leq":"≤","leqq":"≦","leqslant":"⩽","les":"⩽","lescc":"⪨","lesdot":"⩿","lesdoto":"⪁","lesdotor":"⪃","lesg":"⋚︀","lesges":"⪓","lessapprox":"⪅","lessdot":"⋖","lesseqgtr":"⋚","lesseqqgtr":"⪋","lessgtr":"≶","lesssim":"≲","lfisht":"⥼","lfloor":"⌊","lfr":"𝔩","lg":"≶","lgE":"⪑","lhard":"↽","lharu":"↼","lharul":"⥪","lhblk":"▄","ljcy":"љ","ll":"≪","llarr":"⇇","llcorner":"⌞","llhard":"⥫","lltri":"◺","lmidot":"ŀ","lmoust":"⎰","lmoustache":"⎰","lnE":"≨","lnap":"⪉","lnapprox":"⪉","lne":"⪇","lneq":"⪇","lneqq":"≨","lnsim":"⋦","loang":"⟬","loarr":"⇽","lobrk":"⟦","longleftarrow":"⟵","longleftrightarrow":"⟷","longmapsto":"⟼","longrightarrow":"⟶","looparrowleft":"↫","looparrowright":"↬","lopar":"⦅","lopf":"𝕝","loplus":"⨭","lotimes":"⨴","lowast":"∗","lowbar":"_","loz":"◊","lozenge":"◊","lozf":"⧫","lpar":"(","lparlt":"⦓","lrarr":"⇆","lrcorner":"⌟","lrhar":"⇋","lrhard":"⥭","lrm":"‎","lrtri":"⊿","lsaquo":"‹","lscr":"𝓁","lsh":"↰","lsim":"≲","lsime":"⪍","lsimg":"⪏","lsqb":"[","lsquo":"‘","lsquor":"‚","lstrok":"ł","l":"<","lt":"<","ltcc":"⪦","ltcir":"⩹","ltdot":"⋖","lthree":"⋋","ltimes":"⋉","ltlarr":"⥶","ltquest":"⩻","ltrPar":"⦖","ltri":"◃","ltrie":"⊴","ltrif":"◂","lurdshar":"⥊","luruhar":"⥦","lvertneqq":"≨︀","lvnE":"≨︀","mDDot":"∺","mac":"¯","macr":"¯","male":"♂","malt":"✠","maltese":"✠","map":"↦","mapsto":"↦","mapstodown":"↧","mapstoleft":"↤","mapstoup":"↥","marker":"▮","mcomma":"⨩","mcy":"м","mdash":"—","measuredangle":"∡","mfr":"𝔪","mho":"℧","micr":"µ","micro":"µ","mid":"∣","midast":"*","midcir":"⫰","middo":"·","middot":"·","minus":"−","minusb":"⊟","minusd":"∸","minusdu":"⨪","mlcp":"⫛","mldr":"…","mnplus":"∓","models":"⊧","mopf":"𝕞","mp":"∓","mscr":"𝓂","mstpos":"∾","mu":"μ","multimap":"⊸","mumap":"⊸","nGg":"⋙̸","nGt":"≫⃒","nGtv":"≫̸","nLeftarrow":"⇍","nLeftrightarrow":"⇎","nLl":"⋘̸","nLt":"≪⃒","nLtv":"≪̸","nRightarrow":"⇏","nVDash":"⊯","nVdash":"⊮","nabla":"∇","nacute":"ń","nang":"∠⃒","nap":"≉","napE":"⩰̸","napid":"≋̸","napos":"ŉ","napprox":"≉","natur":"♮","natural":"♮","naturals":"ℕ","nbs":" ","nbsp":" ","nbump":"≎̸","nbumpe":"≏̸","ncap":"⩃","ncaron":"ň","ncedil":"ņ","ncong":"≇","ncongdot":"⩭̸","ncup":"⩂","ncy":"н","ndash":"–","ne":"≠","neArr":"⇗","nearhk":"⤤","nearr":"↗","nearrow":"↗","nedot":"≐̸","nequiv":"≢","nesear":"⤨","nesim":"≂̸","nexist":"∄","nexists":"∄","nfr":"𝔫","ngE":"≧̸","nge":"≱","ngeq":"≱","ngeqq":"≧̸","ngeqslant":"⩾̸","nges":"⩾̸","ngsim":"≵","ngt":"≯","ngtr":"≯","nhArr":"⇎","nharr":"↮","nhpar":"⫲","ni":"∋","nis":"⋼","nisd":"⋺","niv":"∋","njcy":"њ","nlArr":"⇍","nlE":"≦̸","nlarr":"↚","nldr":"‥","nle":"≰","nleftarrow":"↚","nleftrightarrow":"↮","nleq":"≰","nleqq":"≦̸","nleqslant":"⩽̸","nles":"⩽̸","nless":"≮","nlsim":"≴","nlt":"≮","nltri":"⋪","nltrie":"⋬","nmid":"∤","nopf":"𝕟","no":"¬","not":"¬","notin":"∉","notinE":"⋹̸","notindot":"⋵̸","notinva":"∉","notinvb":"⋷","notinvc":"⋶","notni":"∌","notniva":"∌","notnivb":"⋾","notnivc":"⋽","npar":"∦","nparallel":"∦","nparsl":"⫽⃥","npart":"∂̸","npolint":"⨔","npr":"⊀","nprcue":"⋠","npre":"⪯̸","nprec":"⊀","npreceq":"⪯̸","nrArr":"⇏","nrarr":"↛","nrarrc":"⤳̸","nrarrw":"↝̸","nrightarrow":"↛","nrtri":"⋫","nrtrie":"⋭","nsc":"⊁","nsccue":"⋡","nsce":"⪰̸","nscr":"𝓃","nshortmid":"∤","nshortparallel":"∦","nsim":"≁","nsime":"≄","nsimeq":"≄","nsmid":"∤","nspar":"∦","nsqsube":"⋢","nsqsupe":"⋣","nsub":"⊄","nsubE":"⫅̸","nsube":"⊈","nsubset":"⊂⃒","nsubseteq":"⊈","nsubseteqq":"⫅̸","nsucc":"⊁","nsucceq":"⪰̸","nsup":"⊅","nsupE":"⫆̸","nsupe":"⊉","nsupset":"⊃⃒","nsupseteq":"⊉","nsupseteqq":"⫆̸","ntgl":"≹","ntild":"ñ","ntilde":"ñ","ntlg":"≸","ntriangleleft":"⋪","ntrianglelefteq":"⋬","ntriangleright":"⋫","ntrianglerighteq":"⋭","nu":"ν","num":"#","numero":"№","numsp":" ","nvDash":"⊭","nvHarr":"⤄","nvap":"≍⃒","nvdash":"⊬","nvge":"≥⃒","nvgt":">⃒","nvinfin":"⧞","nvlArr":"⤂","nvle":"≤⃒","nvlt":"<⃒","nvltrie":"⊴⃒","nvrArr":"⤃","nvrtrie":"⊵⃒","nvsim":"∼⃒","nwArr":"⇖","nwarhk":"⤣","nwarr":"↖","nwarrow":"↖","nwnear":"⤧","oS":"Ⓢ","oacut":"ó","oacute":"ó","oast":"⊛","ocir":"ô","ocirc":"ô","ocy":"о","odash":"⊝","odblac":"ő","odiv":"⨸","odot":"⊙","odsold":"⦼","oelig":"œ","ofcir":"⦿","ofr":"𝔬","ogon":"˛","ograv":"ò","ograve":"ò","ogt":"⧁","ohbar":"⦵","ohm":"Ω","oint":"∮","olarr":"↺","olcir":"⦾","olcross":"⦻","oline":"‾","olt":"⧀","omacr":"ō","omega":"ω","omicron":"ο","omid":"⦶","ominus":"⊖","oopf":"𝕠","opar":"⦷","operp":"⦹","oplus":"⊕","or":"∨","orarr":"↻","ord":"º","order":"ℴ","orderof":"ℴ","ordf":"ª","ordm":"º","origof":"⊶","oror":"⩖","orslope":"⩗","orv":"⩛","oscr":"ℴ","oslas":"ø","oslash":"ø","osol":"⊘","otild":"õ","otilde":"õ","otimes":"⊗","otimesas":"⨶","oum":"ö","ouml":"ö","ovbar":"⌽","par":"¶","para":"¶","parallel":"∥","parsim":"⫳","parsl":"⫽","part":"∂","pcy":"п","percnt":"%","period":".","permil":"‰","perp":"⊥","pertenk":"‱","pfr":"𝔭","phi":"φ","phiv":"ϕ","phmmat":"ℳ","phone":"☎","pi":"π","pitchfork":"⋔","piv":"ϖ","planck":"ℏ","planckh":"ℎ","plankv":"ℏ","plus":"+","plusacir":"⨣","plusb":"⊞","pluscir":"⨢","plusdo":"∔","plusdu":"⨥","pluse":"⩲","plusm":"±","plusmn":"±","plussim":"⨦","plustwo":"⨧","pm":"±","pointint":"⨕","popf":"𝕡","poun":"£","pound":"£","pr":"≺","prE":"⪳","prap":"⪷","prcue":"≼","pre":"⪯","prec":"≺","precapprox":"⪷","preccurlyeq":"≼","preceq":"⪯","precnapprox":"⪹","precneqq":"⪵","precnsim":"⋨","precsim":"≾","prime":"′","primes":"ℙ","prnE":"⪵","prnap":"⪹","prnsim":"⋨","prod":"∏","profalar":"⌮","profline":"⌒","profsurf":"⌓","prop":"∝","propto":"∝","prsim":"≾","prurel":"⊰","pscr":"𝓅","psi":"ψ","puncsp":" ","qfr":"𝔮","qint":"⨌","qopf":"𝕢","qprime":"⁗","qscr":"𝓆","quaternions":"ℍ","quatint":"⨖","quest":"?","questeq":"≟","quo":"\\"","quot":"\\"","rAarr":"⇛","rArr":"⇒","rAtail":"⤜","rBarr":"⤏","rHar":"⥤","race":"∽̱","racute":"ŕ","radic":"√","raemptyv":"⦳","rang":"⟩","rangd":"⦒","range":"⦥","rangle":"⟩","raqu":"»","raquo":"»","rarr":"→","rarrap":"⥵","rarrb":"⇥","rarrbfs":"⤠","rarrc":"⤳","rarrfs":"⤞","rarrhk":"↪","rarrlp":"↬","rarrpl":"⥅","rarrsim":"⥴","rarrtl":"↣","rarrw":"↝","ratail":"⤚","ratio":"∶","rationals":"ℚ","rbarr":"⤍","rbbrk":"❳","rbrace":"}","rbrack":"]","rbrke":"⦌","rbrksld":"⦎","rbrkslu":"⦐","rcaron":"ř","rcedil":"ŗ","rceil":"⌉","rcub":"}","rcy":"р","rdca":"⤷","rdldhar":"⥩","rdquo":"”","rdquor":"”","rdsh":"↳","real":"ℜ","realine":"ℛ","realpart":"ℜ","reals":"ℝ","rect":"▭","re":"®","reg":"®","rfisht":"⥽","rfloor":"⌋","rfr":"𝔯","rhard":"⇁","rharu":"⇀","rharul":"⥬","rho":"ρ","rhov":"ϱ","rightarrow":"→","rightarrowtail":"↣","rightharpoondown":"⇁","rightharpoonup":"⇀","rightleftarrows":"⇄","rightleftharpoons":"⇌","rightrightarrows":"⇉","rightsquigarrow":"↝","rightthreetimes":"⋌","ring":"˚","risingdotseq":"≓","rlarr":"⇄","rlhar":"⇌","rlm":"‏","rmoust":"⎱","rmoustache":"⎱","rnmid":"⫮","roang":"⟭","roarr":"⇾","robrk":"⟧","ropar":"⦆","ropf":"𝕣","roplus":"⨮","rotimes":"⨵","rpar":")","rpargt":"⦔","rppolint":"⨒","rrarr":"⇉","rsaquo":"›","rscr":"𝓇","rsh":"↱","rsqb":"]","rsquo":"’","rsquor":"’","rthree":"⋌","rtimes":"⋊","rtri":"▹","rtrie":"⊵","rtrif":"▸","rtriltri":"⧎","ruluhar":"⥨","rx":"℞","sacute":"ś","sbquo":"‚","sc":"≻","scE":"⪴","scap":"⪸","scaron":"š","sccue":"≽","sce":"⪰","scedil":"ş","scirc":"ŝ","scnE":"⪶","scnap":"⪺","scnsim":"⋩","scpolint":"⨓","scsim":"≿","scy":"с","sdot":"⋅","sdotb":"⊡","sdote":"⩦","seArr":"⇘","searhk":"⤥","searr":"↘","searrow":"↘","sec":"§","sect":"§","semi":";","seswar":"⤩","setminus":"∖","setmn":"∖","sext":"✶","sfr":"𝔰","sfrown":"⌢","sharp":"♯","shchcy":"щ","shcy":"ш","shortmid":"∣","shortparallel":"∥","sh":"­","shy":"­","sigma":"σ","sigmaf":"ς","sigmav":"ς","sim":"∼","simdot":"⩪","sime":"≃","simeq":"≃","simg":"⪞","simgE":"⪠","siml":"⪝","simlE":"⪟","simne":"≆","simplus":"⨤","simrarr":"⥲","slarr":"←","smallsetminus":"∖","smashp":"⨳","smeparsl":"⧤","smid":"∣","smile":"⌣","smt":"⪪","smte":"⪬","smtes":"⪬︀","softcy":"ь","sol":"/","solb":"⧄","solbar":"⌿","sopf":"𝕤","spades":"♠","spadesuit":"♠","spar":"∥","sqcap":"⊓","sqcaps":"⊓︀","sqcup":"⊔","sqcups":"⊔︀","sqsub":"⊏","sqsube":"⊑","sqsubset":"⊏","sqsubseteq":"⊑","sqsup":"⊐","sqsupe":"⊒","sqsupset":"⊐","sqsupseteq":"⊒","squ":"□","square":"□","squarf":"▪","squf":"▪","srarr":"→","sscr":"𝓈","ssetmn":"∖","ssmile":"⌣","sstarf":"⋆","star":"☆","starf":"★","straightepsilon":"ϵ","straightphi":"ϕ","strns":"¯","sub":"⊂","subE":"⫅","subdot":"⪽","sube":"⊆","subedot":"⫃","submult":"⫁","subnE":"⫋","subne":"⊊","subplus":"⪿","subrarr":"⥹","subset":"⊂","subseteq":"⊆","subseteqq":"⫅","subsetneq":"⊊","subsetneqq":"⫋","subsim":"⫇","subsub":"⫕","subsup":"⫓","succ":"≻","succapprox":"⪸","succcurlyeq":"≽","succeq":"⪰","succnapprox":"⪺","succneqq":"⪶","succnsim":"⋩","succsim":"≿","sum":"∑","sung":"♪","sup":"⊃","sup1":"¹","sup2":"²","sup3":"³","supE":"⫆","supdot":"⪾","supdsub":"⫘","supe":"⊇","supedot":"⫄","suphsol":"⟉","suphsub":"⫗","suplarr":"⥻","supmult":"⫂","supnE":"⫌","supne":"⊋","supplus":"⫀","supset":"⊃","supseteq":"⊇","supseteqq":"⫆","supsetneq":"⊋","supsetneqq":"⫌","supsim":"⫈","supsub":"⫔","supsup":"⫖","swArr":"⇙","swarhk":"⤦","swarr":"↙","swarrow":"↙","swnwar":"⤪","szli":"ß","szlig":"ß","target":"⌖","tau":"τ","tbrk":"⎴","tcaron":"ť","tcedil":"ţ","tcy":"т","tdot":"⃛","telrec":"⌕","tfr":"𝔱","there4":"∴","therefore":"∴","theta":"θ","thetasym":"ϑ","thetav":"ϑ","thickapprox":"≈","thicksim":"∼","thinsp":" ","thkap":"≈","thksim":"∼","thor":"þ","thorn":"þ","tilde":"˜","time":"×","times":"×","timesb":"⊠","timesbar":"⨱","timesd":"⨰","tint":"∭","toea":"⤨","top":"⊤","topbot":"⌶","topcir":"⫱","topf":"𝕥","topfork":"⫚","tosa":"⤩","tprime":"‴","trade":"™","triangle":"▵","triangledown":"▿","triangleleft":"◃","trianglelefteq":"⊴","triangleq":"≜","triangleright":"▹","trianglerighteq":"⊵","tridot":"◬","trie":"≜","triminus":"⨺","triplus":"⨹","trisb":"⧍","tritime":"⨻","trpezium":"⏢","tscr":"𝓉","tscy":"ц","tshcy":"ћ","tstrok":"ŧ","twixt":"≬","twoheadleftarrow":"↞","twoheadrightarrow":"↠","uArr":"⇑","uHar":"⥣","uacut":"ú","uacute":"ú","uarr":"↑","ubrcy":"ў","ubreve":"ŭ","ucir":"û","ucirc":"û","ucy":"у","udarr":"⇅","udblac":"ű","udhar":"⥮","ufisht":"⥾","ufr":"𝔲","ugrav":"ù","ugrave":"ù","uharl":"↿","uharr":"↾","uhblk":"▀","ulcorn":"⌜","ulcorner":"⌜","ulcrop":"⌏","ultri":"◸","umacr":"ū","um":"¨","uml":"¨","uogon":"ų","uopf":"𝕦","uparrow":"↑","updownarrow":"↕","upharpoonleft":"↿","upharpoonright":"↾","uplus":"⊎","upsi":"υ","upsih":"ϒ","upsilon":"υ","upuparrows":"⇈","urcorn":"⌝","urcorner":"⌝","urcrop":"⌎","uring":"ů","urtri":"◹","uscr":"𝓊","utdot":"⋰","utilde":"ũ","utri":"▵","utrif":"▴","uuarr":"⇈","uum":"ü","uuml":"ü","uwangle":"⦧","vArr":"⇕","vBar":"⫨","vBarv":"⫩","vDash":"⊨","vangrt":"⦜","varepsilon":"ϵ","varkappa":"ϰ","varnothing":"∅","varphi":"ϕ","varpi":"ϖ","varpropto":"∝","varr":"↕","varrho":"ϱ","varsigma":"ς","varsubsetneq":"⊊︀","varsubsetneqq":"⫋︀","varsupsetneq":"⊋︀","varsupsetneqq":"⫌︀","vartheta":"ϑ","vartriangleleft":"⊲","vartriangleright":"⊳","vcy":"в","vdash":"⊢","vee":"∨","veebar":"⊻","veeeq":"≚","vellip":"⋮","verbar":"|","vert":"|","vfr":"𝔳","vltri":"⊲","vnsub":"⊂⃒","vnsup":"⊃⃒","vopf":"𝕧","vprop":"∝","vrtri":"⊳","vscr":"𝓋","vsubnE":"⫋︀","vsubne":"⊊︀","vsupnE":"⫌︀","vsupne":"⊋︀","vzigzag":"⦚","wcirc":"ŵ","wedbar":"⩟","wedge":"∧","wedgeq":"≙","weierp":"℘","wfr":"𝔴","wopf":"𝕨","wp":"℘","wr":"≀","wreath":"≀","wscr":"𝓌","xcap":"⋂","xcirc":"◯","xcup":"⋃","xdtri":"▽","xfr":"𝔵","xhArr":"⟺","xharr":"⟷","xi":"ξ","xlArr":"⟸","xlarr":"⟵","xmap":"⟼","xnis":"⋻","xodot":"⨀","xopf":"𝕩","xoplus":"⨁","xotime":"⨂","xrArr":"⟹","xrarr":"⟶","xscr":"𝓍","xsqcup":"⨆","xuplus":"⨄","xutri":"△","xvee":"⋁","xwedge":"⋀","yacut":"ý","yacute":"ý","yacy":"я","ycirc":"ŷ","ycy":"ы","ye":"¥","yen":"¥","yfr":"𝔶","yicy":"ї","yopf":"𝕪","yscr":"𝓎","yucy":"ю","yum":"ÿ","yuml":"ÿ","zacute":"ź","zcaron":"ž","zcy":"з","zdot":"ż","zeetrf":"ℨ","zeta":"ζ","zfr":"𝔷","zhcy":"ж","zigrarr":"⇝","zopf":"𝕫","zscr":"𝓏","zwj":"‍","zwnj":"‌"}');
 
 /***/ }),
 
@@ -79869,7 +82174,7 @@ module.exports = JSON.parse("{\"AEli\":\"Æ\",\"AElig\":\"Æ\",\"AM\":\"&\",\"AM
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse("{\"100\":\"💯\",\"1234\":\"🔢\",\"grinning\":\"😀\",\"smiley\":\"😃\",\"smile\":\"😄\",\"grin\":\"😁\",\"laughing\":\"😆\",\"satisfied\":\"😆\",\"sweat_smile\":\"😅\",\"rofl\":\"🤣\",\"joy\":\"😂\",\"slightly_smiling_face\":\"🙂\",\"upside_down_face\":\"🙃\",\"wink\":\"😉\",\"blush\":\"😊\",\"innocent\":\"😇\",\"smiling_face_with_three_hearts\":\"🥰\",\"heart_eyes\":\"😍\",\"star_struck\":\"🤩\",\"kissing_heart\":\"😘\",\"kissing\":\"😗\",\"relaxed\":\"☺️\",\"kissing_closed_eyes\":\"😚\",\"kissing_smiling_eyes\":\"😙\",\"smiling_face_with_tear\":\"🥲\",\"yum\":\"😋\",\"stuck_out_tongue\":\"😛\",\"stuck_out_tongue_winking_eye\":\"😜\",\"zany_face\":\"🤪\",\"stuck_out_tongue_closed_eyes\":\"😝\",\"money_mouth_face\":\"🤑\",\"hugs\":\"🤗\",\"hand_over_mouth\":\"🤭\",\"shushing_face\":\"🤫\",\"thinking\":\"🤔\",\"zipper_mouth_face\":\"🤐\",\"raised_eyebrow\":\"🤨\",\"neutral_face\":\"😐\",\"expressionless\":\"😑\",\"no_mouth\":\"😶\",\"smirk\":\"😏\",\"unamused\":\"😒\",\"roll_eyes\":\"🙄\",\"grimacing\":\"😬\",\"lying_face\":\"🤥\",\"relieved\":\"😌\",\"pensive\":\"😔\",\"sleepy\":\"😪\",\"drooling_face\":\"🤤\",\"sleeping\":\"😴\",\"mask\":\"😷\",\"face_with_thermometer\":\"🤒\",\"face_with_head_bandage\":\"🤕\",\"nauseated_face\":\"🤢\",\"vomiting_face\":\"🤮\",\"sneezing_face\":\"🤧\",\"hot_face\":\"🥵\",\"cold_face\":\"🥶\",\"woozy_face\":\"🥴\",\"dizzy_face\":\"😵\",\"exploding_head\":\"🤯\",\"cowboy_hat_face\":\"🤠\",\"partying_face\":\"🥳\",\"disguised_face\":\"🥸\",\"sunglasses\":\"😎\",\"nerd_face\":\"🤓\",\"monocle_face\":\"🧐\",\"confused\":\"😕\",\"worried\":\"😟\",\"slightly_frowning_face\":\"🙁\",\"frowning_face\":\"☹️\",\"open_mouth\":\"😮\",\"hushed\":\"😯\",\"astonished\":\"😲\",\"flushed\":\"😳\",\"pleading_face\":\"🥺\",\"frowning\":\"😦\",\"anguished\":\"😧\",\"fearful\":\"😨\",\"cold_sweat\":\"😰\",\"disappointed_relieved\":\"😥\",\"cry\":\"😢\",\"sob\":\"😭\",\"scream\":\"😱\",\"confounded\":\"😖\",\"persevere\":\"😣\",\"disappointed\":\"😞\",\"sweat\":\"😓\",\"weary\":\"😩\",\"tired_face\":\"😫\",\"yawning_face\":\"🥱\",\"triumph\":\"😤\",\"rage\":\"😡\",\"pout\":\"😡\",\"angry\":\"😠\",\"cursing_face\":\"🤬\",\"smiling_imp\":\"😈\",\"imp\":\"👿\",\"skull\":\"💀\",\"skull_and_crossbones\":\"☠️\",\"hankey\":\"💩\",\"poop\":\"💩\",\"shit\":\"💩\",\"clown_face\":\"🤡\",\"japanese_ogre\":\"👹\",\"japanese_goblin\":\"👺\",\"ghost\":\"👻\",\"alien\":\"👽\",\"space_invader\":\"👾\",\"robot\":\"🤖\",\"smiley_cat\":\"😺\",\"smile_cat\":\"😸\",\"joy_cat\":\"😹\",\"heart_eyes_cat\":\"😻\",\"smirk_cat\":\"😼\",\"kissing_cat\":\"😽\",\"scream_cat\":\"🙀\",\"crying_cat_face\":\"😿\",\"pouting_cat\":\"😾\",\"see_no_evil\":\"🙈\",\"hear_no_evil\":\"🙉\",\"speak_no_evil\":\"🙊\",\"kiss\":\"💋\",\"love_letter\":\"💌\",\"cupid\":\"💘\",\"gift_heart\":\"💝\",\"sparkling_heart\":\"💖\",\"heartpulse\":\"💗\",\"heartbeat\":\"💓\",\"revolving_hearts\":\"💞\",\"two_hearts\":\"💕\",\"heart_decoration\":\"💟\",\"heavy_heart_exclamation\":\"❣️\",\"broken_heart\":\"💔\",\"heart\":\"❤️\",\"orange_heart\":\"🧡\",\"yellow_heart\":\"💛\",\"green_heart\":\"💚\",\"blue_heart\":\"💙\",\"purple_heart\":\"💜\",\"brown_heart\":\"🤎\",\"black_heart\":\"🖤\",\"white_heart\":\"🤍\",\"anger\":\"💢\",\"boom\":\"💥\",\"collision\":\"💥\",\"dizzy\":\"💫\",\"sweat_drops\":\"💦\",\"dash\":\"💨\",\"hole\":\"🕳️\",\"bomb\":\"💣\",\"speech_balloon\":\"💬\",\"eye_speech_bubble\":\"👁️‍🗨️\",\"left_speech_bubble\":\"🗨️\",\"right_anger_bubble\":\"🗯️\",\"thought_balloon\":\"💭\",\"zzz\":\"💤\",\"wave\":\"👋\",\"raised_back_of_hand\":\"🤚\",\"raised_hand_with_fingers_splayed\":\"🖐️\",\"hand\":\"✋\",\"raised_hand\":\"✋\",\"vulcan_salute\":\"🖖\",\"ok_hand\":\"👌\",\"pinched_fingers\":\"🤌\",\"pinching_hand\":\"🤏\",\"v\":\"✌️\",\"crossed_fingers\":\"🤞\",\"love_you_gesture\":\"🤟\",\"metal\":\"🤘\",\"call_me_hand\":\"🤙\",\"point_left\":\"👈\",\"point_right\":\"👉\",\"point_up_2\":\"👆\",\"middle_finger\":\"🖕\",\"fu\":\"🖕\",\"point_down\":\"👇\",\"point_up\":\"☝️\",\"+1\":\"👍\",\"thumbsup\":\"👍\",\"-1\":\"👎\",\"thumbsdown\":\"👎\",\"fist_raised\":\"✊\",\"fist\":\"✊\",\"fist_oncoming\":\"👊\",\"facepunch\":\"👊\",\"punch\":\"👊\",\"fist_left\":\"🤛\",\"fist_right\":\"🤜\",\"clap\":\"👏\",\"raised_hands\":\"🙌\",\"open_hands\":\"👐\",\"palms_up_together\":\"🤲\",\"handshake\":\"🤝\",\"pray\":\"🙏\",\"writing_hand\":\"✍️\",\"nail_care\":\"💅\",\"selfie\":\"🤳\",\"muscle\":\"💪\",\"mechanical_arm\":\"🦾\",\"mechanical_leg\":\"🦿\",\"leg\":\"🦵\",\"foot\":\"🦶\",\"ear\":\"👂\",\"ear_with_hearing_aid\":\"🦻\",\"nose\":\"👃\",\"brain\":\"🧠\",\"anatomical_heart\":\"🫀\",\"lungs\":\"🫁\",\"tooth\":\"🦷\",\"bone\":\"🦴\",\"eyes\":\"👀\",\"eye\":\"👁️\",\"tongue\":\"👅\",\"lips\":\"👄\",\"baby\":\"👶\",\"child\":\"🧒\",\"boy\":\"👦\",\"girl\":\"👧\",\"adult\":\"🧑\",\"blond_haired_person\":\"👱\",\"man\":\"👨\",\"bearded_person\":\"🧔\",\"red_haired_man\":\"👨‍🦰\",\"curly_haired_man\":\"👨‍🦱\",\"white_haired_man\":\"👨‍🦳\",\"bald_man\":\"👨‍🦲\",\"woman\":\"👩\",\"red_haired_woman\":\"👩‍🦰\",\"person_red_hair\":\"🧑‍🦰\",\"curly_haired_woman\":\"👩‍🦱\",\"person_curly_hair\":\"🧑‍🦱\",\"white_haired_woman\":\"👩‍🦳\",\"person_white_hair\":\"🧑‍🦳\",\"bald_woman\":\"👩‍🦲\",\"person_bald\":\"🧑‍🦲\",\"blond_haired_woman\":\"👱‍♀️\",\"blonde_woman\":\"👱‍♀️\",\"blond_haired_man\":\"👱‍♂️\",\"older_adult\":\"🧓\",\"older_man\":\"👴\",\"older_woman\":\"👵\",\"frowning_person\":\"🙍\",\"frowning_man\":\"🙍‍♂️\",\"frowning_woman\":\"🙍‍♀️\",\"pouting_face\":\"🙎\",\"pouting_man\":\"🙎‍♂️\",\"pouting_woman\":\"🙎‍♀️\",\"no_good\":\"🙅\",\"no_good_man\":\"🙅‍♂️\",\"ng_man\":\"🙅‍♂️\",\"no_good_woman\":\"🙅‍♀️\",\"ng_woman\":\"🙅‍♀️\",\"ok_person\":\"🙆\",\"ok_man\":\"🙆‍♂️\",\"ok_woman\":\"🙆‍♀️\",\"tipping_hand_person\":\"💁\",\"information_desk_person\":\"💁\",\"tipping_hand_man\":\"💁‍♂️\",\"sassy_man\":\"💁‍♂️\",\"tipping_hand_woman\":\"💁‍♀️\",\"sassy_woman\":\"💁‍♀️\",\"raising_hand\":\"🙋\",\"raising_hand_man\":\"🙋‍♂️\",\"raising_hand_woman\":\"🙋‍♀️\",\"deaf_person\":\"🧏\",\"deaf_man\":\"🧏‍♂️\",\"deaf_woman\":\"🧏‍♀️\",\"bow\":\"🙇\",\"bowing_man\":\"🙇‍♂️\",\"bowing_woman\":\"🙇‍♀️\",\"facepalm\":\"🤦\",\"man_facepalming\":\"🤦‍♂️\",\"woman_facepalming\":\"🤦‍♀️\",\"shrug\":\"🤷\",\"man_shrugging\":\"🤷‍♂️\",\"woman_shrugging\":\"🤷‍♀️\",\"health_worker\":\"🧑‍⚕️\",\"man_health_worker\":\"👨‍⚕️\",\"woman_health_worker\":\"👩‍⚕️\",\"student\":\"🧑‍🎓\",\"man_student\":\"👨‍🎓\",\"woman_student\":\"👩‍🎓\",\"teacher\":\"🧑‍🏫\",\"man_teacher\":\"👨‍🏫\",\"woman_teacher\":\"👩‍🏫\",\"judge\":\"🧑‍⚖️\",\"man_judge\":\"👨‍⚖️\",\"woman_judge\":\"👩‍⚖️\",\"farmer\":\"🧑‍🌾\",\"man_farmer\":\"👨‍🌾\",\"woman_farmer\":\"👩‍🌾\",\"cook\":\"🧑‍🍳\",\"man_cook\":\"👨‍🍳\",\"woman_cook\":\"👩‍🍳\",\"mechanic\":\"🧑‍🔧\",\"man_mechanic\":\"👨‍🔧\",\"woman_mechanic\":\"👩‍🔧\",\"factory_worker\":\"🧑‍🏭\",\"man_factory_worker\":\"👨‍🏭\",\"woman_factory_worker\":\"👩‍🏭\",\"office_worker\":\"🧑‍💼\",\"man_office_worker\":\"👨‍💼\",\"woman_office_worker\":\"👩‍💼\",\"scientist\":\"🧑‍🔬\",\"man_scientist\":\"👨‍🔬\",\"woman_scientist\":\"👩‍🔬\",\"technologist\":\"🧑‍💻\",\"man_technologist\":\"👨‍💻\",\"woman_technologist\":\"👩‍💻\",\"singer\":\"🧑‍🎤\",\"man_singer\":\"👨‍🎤\",\"woman_singer\":\"👩‍🎤\",\"artist\":\"🧑‍🎨\",\"man_artist\":\"👨‍🎨\",\"woman_artist\":\"👩‍🎨\",\"pilot\":\"🧑‍✈️\",\"man_pilot\":\"👨‍✈️\",\"woman_pilot\":\"👩‍✈️\",\"astronaut\":\"🧑‍🚀\",\"man_astronaut\":\"👨‍🚀\",\"woman_astronaut\":\"👩‍🚀\",\"firefighter\":\"🧑‍🚒\",\"man_firefighter\":\"👨‍🚒\",\"woman_firefighter\":\"👩‍🚒\",\"police_officer\":\"👮\",\"cop\":\"👮\",\"policeman\":\"👮‍♂️\",\"policewoman\":\"👮‍♀️\",\"detective\":\"🕵️\",\"male_detective\":\"🕵️‍♂️\",\"female_detective\":\"🕵️‍♀️\",\"guard\":\"💂\",\"guardsman\":\"💂‍♂️\",\"guardswoman\":\"💂‍♀️\",\"ninja\":\"🥷\",\"construction_worker\":\"👷\",\"construction_worker_man\":\"👷‍♂️\",\"construction_worker_woman\":\"👷‍♀️\",\"prince\":\"🤴\",\"princess\":\"👸\",\"person_with_turban\":\"👳\",\"man_with_turban\":\"👳‍♂️\",\"woman_with_turban\":\"👳‍♀️\",\"man_with_gua_pi_mao\":\"👲\",\"woman_with_headscarf\":\"🧕\",\"person_in_tuxedo\":\"🤵\",\"man_in_tuxedo\":\"🤵‍♂️\",\"woman_in_tuxedo\":\"🤵‍♀️\",\"person_with_veil\":\"👰\",\"man_with_veil\":\"👰‍♂️\",\"woman_with_veil\":\"👰‍♀️\",\"bride_with_veil\":\"👰‍♀️\",\"pregnant_woman\":\"🤰\",\"breast_feeding\":\"🤱\",\"woman_feeding_baby\":\"👩‍🍼\",\"man_feeding_baby\":\"👨‍🍼\",\"person_feeding_baby\":\"🧑‍🍼\",\"angel\":\"👼\",\"santa\":\"🎅\",\"mrs_claus\":\"🤶\",\"mx_claus\":\"🧑‍🎄\",\"superhero\":\"🦸\",\"superhero_man\":\"🦸‍♂️\",\"superhero_woman\":\"🦸‍♀️\",\"supervillain\":\"🦹\",\"supervillain_man\":\"🦹‍♂️\",\"supervillain_woman\":\"🦹‍♀️\",\"mage\":\"🧙\",\"mage_man\":\"🧙‍♂️\",\"mage_woman\":\"🧙‍♀️\",\"fairy\":\"🧚\",\"fairy_man\":\"🧚‍♂️\",\"fairy_woman\":\"🧚‍♀️\",\"vampire\":\"🧛\",\"vampire_man\":\"🧛‍♂️\",\"vampire_woman\":\"🧛‍♀️\",\"merperson\":\"🧜\",\"merman\":\"🧜‍♂️\",\"mermaid\":\"🧜‍♀️\",\"elf\":\"🧝\",\"elf_man\":\"🧝‍♂️\",\"elf_woman\":\"🧝‍♀️\",\"genie\":\"🧞\",\"genie_man\":\"🧞‍♂️\",\"genie_woman\":\"🧞‍♀️\",\"zombie\":\"🧟\",\"zombie_man\":\"🧟‍♂️\",\"zombie_woman\":\"🧟‍♀️\",\"massage\":\"💆\",\"massage_man\":\"💆‍♂️\",\"massage_woman\":\"💆‍♀️\",\"haircut\":\"💇\",\"haircut_man\":\"💇‍♂️\",\"haircut_woman\":\"💇‍♀️\",\"walking\":\"🚶\",\"walking_man\":\"🚶‍♂️\",\"walking_woman\":\"🚶‍♀️\",\"standing_person\":\"🧍\",\"standing_man\":\"🧍‍♂️\",\"standing_woman\":\"🧍‍♀️\",\"kneeling_person\":\"🧎\",\"kneeling_man\":\"🧎‍♂️\",\"kneeling_woman\":\"🧎‍♀️\",\"person_with_probing_cane\":\"🧑‍🦯\",\"man_with_probing_cane\":\"👨‍🦯\",\"woman_with_probing_cane\":\"👩‍🦯\",\"person_in_motorized_wheelchair\":\"🧑‍🦼\",\"man_in_motorized_wheelchair\":\"👨‍🦼\",\"woman_in_motorized_wheelchair\":\"👩‍🦼\",\"person_in_manual_wheelchair\":\"🧑‍🦽\",\"man_in_manual_wheelchair\":\"👨‍🦽\",\"woman_in_manual_wheelchair\":\"👩‍🦽\",\"runner\":\"🏃\",\"running\":\"🏃\",\"running_man\":\"🏃‍♂️\",\"running_woman\":\"🏃‍♀️\",\"woman_dancing\":\"💃\",\"dancer\":\"💃\",\"man_dancing\":\"🕺\",\"business_suit_levitating\":\"🕴️\",\"dancers\":\"👯\",\"dancing_men\":\"👯‍♂️\",\"dancing_women\":\"👯‍♀️\",\"sauna_person\":\"🧖\",\"sauna_man\":\"🧖‍♂️\",\"sauna_woman\":\"🧖‍♀️\",\"climbing\":\"🧗\",\"climbing_man\":\"🧗‍♂️\",\"climbing_woman\":\"🧗‍♀️\",\"person_fencing\":\"🤺\",\"horse_racing\":\"🏇\",\"skier\":\"⛷️\",\"snowboarder\":\"🏂\",\"golfing\":\"🏌️\",\"golfing_man\":\"🏌️‍♂️\",\"golfing_woman\":\"🏌️‍♀️\",\"surfer\":\"🏄\",\"surfing_man\":\"🏄‍♂️\",\"surfing_woman\":\"🏄‍♀️\",\"rowboat\":\"🚣\",\"rowing_man\":\"🚣‍♂️\",\"rowing_woman\":\"🚣‍♀️\",\"swimmer\":\"🏊\",\"swimming_man\":\"🏊‍♂️\",\"swimming_woman\":\"🏊‍♀️\",\"bouncing_ball_person\":\"⛹️\",\"bouncing_ball_man\":\"⛹️‍♂️\",\"basketball_man\":\"⛹️‍♂️\",\"bouncing_ball_woman\":\"⛹️‍♀️\",\"basketball_woman\":\"⛹️‍♀️\",\"weight_lifting\":\"🏋️\",\"weight_lifting_man\":\"🏋️‍♂️\",\"weight_lifting_woman\":\"🏋️‍♀️\",\"bicyclist\":\"🚴\",\"biking_man\":\"🚴‍♂️\",\"biking_woman\":\"🚴‍♀️\",\"mountain_bicyclist\":\"🚵\",\"mountain_biking_man\":\"🚵‍♂️\",\"mountain_biking_woman\":\"🚵‍♀️\",\"cartwheeling\":\"🤸\",\"man_cartwheeling\":\"🤸‍♂️\",\"woman_cartwheeling\":\"🤸‍♀️\",\"wrestling\":\"🤼\",\"men_wrestling\":\"🤼‍♂️\",\"women_wrestling\":\"🤼‍♀️\",\"water_polo\":\"🤽\",\"man_playing_water_polo\":\"🤽‍♂️\",\"woman_playing_water_polo\":\"🤽‍♀️\",\"handball_person\":\"🤾\",\"man_playing_handball\":\"🤾‍♂️\",\"woman_playing_handball\":\"🤾‍♀️\",\"juggling_person\":\"🤹\",\"man_juggling\":\"🤹‍♂️\",\"woman_juggling\":\"🤹‍♀️\",\"lotus_position\":\"🧘\",\"lotus_position_man\":\"🧘‍♂️\",\"lotus_position_woman\":\"🧘‍♀️\",\"bath\":\"🛀\",\"sleeping_bed\":\"🛌\",\"people_holding_hands\":\"🧑‍🤝‍🧑\",\"two_women_holding_hands\":\"👭\",\"couple\":\"👫\",\"two_men_holding_hands\":\"👬\",\"couplekiss\":\"💏\",\"couplekiss_man_woman\":\"👩‍❤️‍💋‍👨\",\"couplekiss_man_man\":\"👨‍❤️‍💋‍👨\",\"couplekiss_woman_woman\":\"👩‍❤️‍💋‍👩\",\"couple_with_heart\":\"💑\",\"couple_with_heart_woman_man\":\"👩‍❤️‍👨\",\"couple_with_heart_man_man\":\"👨‍❤️‍👨\",\"couple_with_heart_woman_woman\":\"👩‍❤️‍👩\",\"family\":\"👪\",\"family_man_woman_boy\":\"👨‍👩‍👦\",\"family_man_woman_girl\":\"👨‍👩‍👧\",\"family_man_woman_girl_boy\":\"👨‍👩‍👧‍👦\",\"family_man_woman_boy_boy\":\"👨‍👩‍👦‍👦\",\"family_man_woman_girl_girl\":\"👨‍👩‍👧‍👧\",\"family_man_man_boy\":\"👨‍👨‍👦\",\"family_man_man_girl\":\"👨‍👨‍👧\",\"family_man_man_girl_boy\":\"👨‍👨‍👧‍👦\",\"family_man_man_boy_boy\":\"👨‍👨‍👦‍👦\",\"family_man_man_girl_girl\":\"👨‍👨‍👧‍👧\",\"family_woman_woman_boy\":\"👩‍👩‍👦\",\"family_woman_woman_girl\":\"👩‍👩‍👧\",\"family_woman_woman_girl_boy\":\"👩‍👩‍👧‍👦\",\"family_woman_woman_boy_boy\":\"👩‍👩‍👦‍👦\",\"family_woman_woman_girl_girl\":\"👩‍👩‍👧‍👧\",\"family_man_boy\":\"👨‍👦\",\"family_man_boy_boy\":\"👨‍👦‍👦\",\"family_man_girl\":\"👨‍👧\",\"family_man_girl_boy\":\"👨‍👧‍👦\",\"family_man_girl_girl\":\"👨‍👧‍👧\",\"family_woman_boy\":\"👩‍👦\",\"family_woman_boy_boy\":\"👩‍👦‍👦\",\"family_woman_girl\":\"👩‍👧\",\"family_woman_girl_boy\":\"👩‍👧‍👦\",\"family_woman_girl_girl\":\"👩‍👧‍👧\",\"speaking_head\":\"🗣️\",\"bust_in_silhouette\":\"👤\",\"busts_in_silhouette\":\"👥\",\"people_hugging\":\"🫂\",\"footprints\":\"👣\",\"monkey_face\":\"🐵\",\"monkey\":\"🐒\",\"gorilla\":\"🦍\",\"orangutan\":\"🦧\",\"dog\":\"🐶\",\"dog2\":\"🐕\",\"guide_dog\":\"🦮\",\"service_dog\":\"🐕‍🦺\",\"poodle\":\"🐩\",\"wolf\":\"🐺\",\"fox_face\":\"🦊\",\"raccoon\":\"🦝\",\"cat\":\"🐱\",\"cat2\":\"🐈\",\"black_cat\":\"🐈‍⬛\",\"lion\":\"🦁\",\"tiger\":\"🐯\",\"tiger2\":\"🐅\",\"leopard\":\"🐆\",\"horse\":\"🐴\",\"racehorse\":\"🐎\",\"unicorn\":\"🦄\",\"zebra\":\"🦓\",\"deer\":\"🦌\",\"bison\":\"🦬\",\"cow\":\"🐮\",\"ox\":\"🐂\",\"water_buffalo\":\"🐃\",\"cow2\":\"🐄\",\"pig\":\"🐷\",\"pig2\":\"🐖\",\"boar\":\"🐗\",\"pig_nose\":\"🐽\",\"ram\":\"🐏\",\"sheep\":\"🐑\",\"goat\":\"🐐\",\"dromedary_camel\":\"🐪\",\"camel\":\"🐫\",\"llama\":\"🦙\",\"giraffe\":\"🦒\",\"elephant\":\"🐘\",\"mammoth\":\"🦣\",\"rhinoceros\":\"🦏\",\"hippopotamus\":\"🦛\",\"mouse\":\"🐭\",\"mouse2\":\"🐁\",\"rat\":\"🐀\",\"hamster\":\"🐹\",\"rabbit\":\"🐰\",\"rabbit2\":\"🐇\",\"chipmunk\":\"🐿️\",\"beaver\":\"🦫\",\"hedgehog\":\"🦔\",\"bat\":\"🦇\",\"bear\":\"🐻\",\"polar_bear\":\"🐻‍❄️\",\"koala\":\"🐨\",\"panda_face\":\"🐼\",\"sloth\":\"🦥\",\"otter\":\"🦦\",\"skunk\":\"🦨\",\"kangaroo\":\"🦘\",\"badger\":\"🦡\",\"feet\":\"🐾\",\"paw_prints\":\"🐾\",\"turkey\":\"🦃\",\"chicken\":\"🐔\",\"rooster\":\"🐓\",\"hatching_chick\":\"🐣\",\"baby_chick\":\"🐤\",\"hatched_chick\":\"🐥\",\"bird\":\"🐦\",\"penguin\":\"🐧\",\"dove\":\"🕊️\",\"eagle\":\"🦅\",\"duck\":\"🦆\",\"swan\":\"🦢\",\"owl\":\"🦉\",\"dodo\":\"🦤\",\"feather\":\"🪶\",\"flamingo\":\"🦩\",\"peacock\":\"🦚\",\"parrot\":\"🦜\",\"frog\":\"🐸\",\"crocodile\":\"🐊\",\"turtle\":\"🐢\",\"lizard\":\"🦎\",\"snake\":\"🐍\",\"dragon_face\":\"🐲\",\"dragon\":\"🐉\",\"sauropod\":\"🦕\",\"t-rex\":\"🦖\",\"whale\":\"🐳\",\"whale2\":\"🐋\",\"dolphin\":\"🐬\",\"flipper\":\"🐬\",\"seal\":\"🦭\",\"fish\":\"🐟\",\"tropical_fish\":\"🐠\",\"blowfish\":\"🐡\",\"shark\":\"🦈\",\"octopus\":\"🐙\",\"shell\":\"🐚\",\"snail\":\"🐌\",\"butterfly\":\"🦋\",\"bug\":\"🐛\",\"ant\":\"🐜\",\"bee\":\"🐝\",\"honeybee\":\"🐝\",\"beetle\":\"🪲\",\"lady_beetle\":\"🐞\",\"cricket\":\"🦗\",\"cockroach\":\"🪳\",\"spider\":\"🕷️\",\"spider_web\":\"🕸️\",\"scorpion\":\"🦂\",\"mosquito\":\"🦟\",\"fly\":\"🪰\",\"worm\":\"🪱\",\"microbe\":\"🦠\",\"bouquet\":\"💐\",\"cherry_blossom\":\"🌸\",\"white_flower\":\"💮\",\"rosette\":\"🏵️\",\"rose\":\"🌹\",\"wilted_flower\":\"🥀\",\"hibiscus\":\"🌺\",\"sunflower\":\"🌻\",\"blossom\":\"🌼\",\"tulip\":\"🌷\",\"seedling\":\"🌱\",\"potted_plant\":\"🪴\",\"evergreen_tree\":\"🌲\",\"deciduous_tree\":\"🌳\",\"palm_tree\":\"🌴\",\"cactus\":\"🌵\",\"ear_of_rice\":\"🌾\",\"herb\":\"🌿\",\"shamrock\":\"☘️\",\"four_leaf_clover\":\"🍀\",\"maple_leaf\":\"🍁\",\"fallen_leaf\":\"🍂\",\"leaves\":\"🍃\",\"grapes\":\"🍇\",\"melon\":\"🍈\",\"watermelon\":\"🍉\",\"tangerine\":\"🍊\",\"orange\":\"🍊\",\"mandarin\":\"🍊\",\"lemon\":\"🍋\",\"banana\":\"🍌\",\"pineapple\":\"🍍\",\"mango\":\"🥭\",\"apple\":\"🍎\",\"green_apple\":\"🍏\",\"pear\":\"🍐\",\"peach\":\"🍑\",\"cherries\":\"🍒\",\"strawberry\":\"🍓\",\"blueberries\":\"🫐\",\"kiwi_fruit\":\"🥝\",\"tomato\":\"🍅\",\"olive\":\"🫒\",\"coconut\":\"🥥\",\"avocado\":\"🥑\",\"eggplant\":\"🍆\",\"potato\":\"🥔\",\"carrot\":\"🥕\",\"corn\":\"🌽\",\"hot_pepper\":\"🌶️\",\"bell_pepper\":\"🫑\",\"cucumber\":\"🥒\",\"leafy_green\":\"🥬\",\"broccoli\":\"🥦\",\"garlic\":\"🧄\",\"onion\":\"🧅\",\"mushroom\":\"🍄\",\"peanuts\":\"🥜\",\"chestnut\":\"🌰\",\"bread\":\"🍞\",\"croissant\":\"🥐\",\"baguette_bread\":\"🥖\",\"flatbread\":\"🫓\",\"pretzel\":\"🥨\",\"bagel\":\"🥯\",\"pancakes\":\"🥞\",\"waffle\":\"🧇\",\"cheese\":\"🧀\",\"meat_on_bone\":\"🍖\",\"poultry_leg\":\"🍗\",\"cut_of_meat\":\"🥩\",\"bacon\":\"🥓\",\"hamburger\":\"🍔\",\"fries\":\"🍟\",\"pizza\":\"🍕\",\"hotdog\":\"🌭\",\"sandwich\":\"🥪\",\"taco\":\"🌮\",\"burrito\":\"🌯\",\"tamale\":\"🫔\",\"stuffed_flatbread\":\"🥙\",\"falafel\":\"🧆\",\"egg\":\"🥚\",\"fried_egg\":\"🍳\",\"shallow_pan_of_food\":\"🥘\",\"stew\":\"🍲\",\"fondue\":\"🫕\",\"bowl_with_spoon\":\"🥣\",\"green_salad\":\"🥗\",\"popcorn\":\"🍿\",\"butter\":\"🧈\",\"salt\":\"🧂\",\"canned_food\":\"🥫\",\"bento\":\"🍱\",\"rice_cracker\":\"🍘\",\"rice_ball\":\"🍙\",\"rice\":\"🍚\",\"curry\":\"🍛\",\"ramen\":\"🍜\",\"spaghetti\":\"🍝\",\"sweet_potato\":\"🍠\",\"oden\":\"🍢\",\"sushi\":\"🍣\",\"fried_shrimp\":\"🍤\",\"fish_cake\":\"🍥\",\"moon_cake\":\"🥮\",\"dango\":\"🍡\",\"dumpling\":\"🥟\",\"fortune_cookie\":\"🥠\",\"takeout_box\":\"🥡\",\"crab\":\"🦀\",\"lobster\":\"🦞\",\"shrimp\":\"🦐\",\"squid\":\"🦑\",\"oyster\":\"🦪\",\"icecream\":\"🍦\",\"shaved_ice\":\"🍧\",\"ice_cream\":\"🍨\",\"doughnut\":\"🍩\",\"cookie\":\"🍪\",\"birthday\":\"🎂\",\"cake\":\"🍰\",\"cupcake\":\"🧁\",\"pie\":\"🥧\",\"chocolate_bar\":\"🍫\",\"candy\":\"🍬\",\"lollipop\":\"🍭\",\"custard\":\"🍮\",\"honey_pot\":\"🍯\",\"baby_bottle\":\"🍼\",\"milk_glass\":\"🥛\",\"coffee\":\"☕\",\"teapot\":\"🫖\",\"tea\":\"🍵\",\"sake\":\"🍶\",\"champagne\":\"🍾\",\"wine_glass\":\"🍷\",\"cocktail\":\"🍸\",\"tropical_drink\":\"🍹\",\"beer\":\"🍺\",\"beers\":\"🍻\",\"clinking_glasses\":\"🥂\",\"tumbler_glass\":\"🥃\",\"cup_with_straw\":\"🥤\",\"bubble_tea\":\"🧋\",\"beverage_box\":\"🧃\",\"mate\":\"🧉\",\"ice_cube\":\"🧊\",\"chopsticks\":\"🥢\",\"plate_with_cutlery\":\"🍽️\",\"fork_and_knife\":\"🍴\",\"spoon\":\"🥄\",\"hocho\":\"🔪\",\"knife\":\"🔪\",\"amphora\":\"🏺\",\"earth_africa\":\"🌍\",\"earth_americas\":\"🌎\",\"earth_asia\":\"🌏\",\"globe_with_meridians\":\"🌐\",\"world_map\":\"🗺️\",\"japan\":\"🗾\",\"compass\":\"🧭\",\"mountain_snow\":\"🏔️\",\"mountain\":\"⛰️\",\"volcano\":\"🌋\",\"mount_fuji\":\"🗻\",\"camping\":\"🏕️\",\"beach_umbrella\":\"🏖️\",\"desert\":\"🏜️\",\"desert_island\":\"🏝️\",\"national_park\":\"🏞️\",\"stadium\":\"🏟️\",\"classical_building\":\"🏛️\",\"building_construction\":\"🏗️\",\"bricks\":\"🧱\",\"rock\":\"🪨\",\"wood\":\"🪵\",\"hut\":\"🛖\",\"houses\":\"🏘️\",\"derelict_house\":\"🏚️\",\"house\":\"🏠\",\"house_with_garden\":\"🏡\",\"office\":\"🏢\",\"post_office\":\"🏣\",\"european_post_office\":\"🏤\",\"hospital\":\"🏥\",\"bank\":\"🏦\",\"hotel\":\"🏨\",\"love_hotel\":\"🏩\",\"convenience_store\":\"🏪\",\"school\":\"🏫\",\"department_store\":\"🏬\",\"factory\":\"🏭\",\"japanese_castle\":\"🏯\",\"european_castle\":\"🏰\",\"wedding\":\"💒\",\"tokyo_tower\":\"🗼\",\"statue_of_liberty\":\"🗽\",\"church\":\"⛪\",\"mosque\":\"🕌\",\"hindu_temple\":\"🛕\",\"synagogue\":\"🕍\",\"shinto_shrine\":\"⛩️\",\"kaaba\":\"🕋\",\"fountain\":\"⛲\",\"tent\":\"⛺\",\"foggy\":\"🌁\",\"night_with_stars\":\"🌃\",\"cityscape\":\"🏙️\",\"sunrise_over_mountains\":\"🌄\",\"sunrise\":\"🌅\",\"city_sunset\":\"🌆\",\"city_sunrise\":\"🌇\",\"bridge_at_night\":\"🌉\",\"hotsprings\":\"♨️\",\"carousel_horse\":\"🎠\",\"ferris_wheel\":\"🎡\",\"roller_coaster\":\"🎢\",\"barber\":\"💈\",\"circus_tent\":\"🎪\",\"steam_locomotive\":\"🚂\",\"railway_car\":\"🚃\",\"bullettrain_side\":\"🚄\",\"bullettrain_front\":\"🚅\",\"train2\":\"🚆\",\"metro\":\"🚇\",\"light_rail\":\"🚈\",\"station\":\"🚉\",\"tram\":\"🚊\",\"monorail\":\"🚝\",\"mountain_railway\":\"🚞\",\"train\":\"🚋\",\"bus\":\"🚌\",\"oncoming_bus\":\"🚍\",\"trolleybus\":\"🚎\",\"minibus\":\"🚐\",\"ambulance\":\"🚑\",\"fire_engine\":\"🚒\",\"police_car\":\"🚓\",\"oncoming_police_car\":\"🚔\",\"taxi\":\"🚕\",\"oncoming_taxi\":\"🚖\",\"car\":\"🚗\",\"red_car\":\"🚗\",\"oncoming_automobile\":\"🚘\",\"blue_car\":\"🚙\",\"pickup_truck\":\"🛻\",\"truck\":\"🚚\",\"articulated_lorry\":\"🚛\",\"tractor\":\"🚜\",\"racing_car\":\"🏎️\",\"motorcycle\":\"🏍️\",\"motor_scooter\":\"🛵\",\"manual_wheelchair\":\"🦽\",\"motorized_wheelchair\":\"🦼\",\"auto_rickshaw\":\"🛺\",\"bike\":\"🚲\",\"kick_scooter\":\"🛴\",\"skateboard\":\"🛹\",\"roller_skate\":\"🛼\",\"busstop\":\"🚏\",\"motorway\":\"🛣️\",\"railway_track\":\"🛤️\",\"oil_drum\":\"🛢️\",\"fuelpump\":\"⛽\",\"rotating_light\":\"🚨\",\"traffic_light\":\"🚥\",\"vertical_traffic_light\":\"🚦\",\"stop_sign\":\"🛑\",\"construction\":\"🚧\",\"anchor\":\"⚓\",\"boat\":\"⛵\",\"sailboat\":\"⛵\",\"canoe\":\"🛶\",\"speedboat\":\"🚤\",\"passenger_ship\":\"🛳️\",\"ferry\":\"⛴️\",\"motor_boat\":\"🛥️\",\"ship\":\"🚢\",\"airplane\":\"✈️\",\"small_airplane\":\"🛩️\",\"flight_departure\":\"🛫\",\"flight_arrival\":\"🛬\",\"parachute\":\"🪂\",\"seat\":\"💺\",\"helicopter\":\"🚁\",\"suspension_railway\":\"🚟\",\"mountain_cableway\":\"🚠\",\"aerial_tramway\":\"🚡\",\"artificial_satellite\":\"🛰️\",\"rocket\":\"🚀\",\"flying_saucer\":\"🛸\",\"bellhop_bell\":\"🛎️\",\"luggage\":\"🧳\",\"hourglass\":\"⌛\",\"hourglass_flowing_sand\":\"⏳\",\"watch\":\"⌚\",\"alarm_clock\":\"⏰\",\"stopwatch\":\"⏱️\",\"timer_clock\":\"⏲️\",\"mantelpiece_clock\":\"🕰️\",\"clock12\":\"🕛\",\"clock1230\":\"🕧\",\"clock1\":\"🕐\",\"clock130\":\"🕜\",\"clock2\":\"🕑\",\"clock230\":\"🕝\",\"clock3\":\"🕒\",\"clock330\":\"🕞\",\"clock4\":\"🕓\",\"clock430\":\"🕟\",\"clock5\":\"🕔\",\"clock530\":\"🕠\",\"clock6\":\"🕕\",\"clock630\":\"🕡\",\"clock7\":\"🕖\",\"clock730\":\"🕢\",\"clock8\":\"🕗\",\"clock830\":\"🕣\",\"clock9\":\"🕘\",\"clock930\":\"🕤\",\"clock10\":\"🕙\",\"clock1030\":\"🕥\",\"clock11\":\"🕚\",\"clock1130\":\"🕦\",\"new_moon\":\"🌑\",\"waxing_crescent_moon\":\"🌒\",\"first_quarter_moon\":\"🌓\",\"moon\":\"🌔\",\"waxing_gibbous_moon\":\"🌔\",\"full_moon\":\"🌕\",\"waning_gibbous_moon\":\"🌖\",\"last_quarter_moon\":\"🌗\",\"waning_crescent_moon\":\"🌘\",\"crescent_moon\":\"🌙\",\"new_moon_with_face\":\"🌚\",\"first_quarter_moon_with_face\":\"🌛\",\"last_quarter_moon_with_face\":\"🌜\",\"thermometer\":\"🌡️\",\"sunny\":\"☀️\",\"full_moon_with_face\":\"🌝\",\"sun_with_face\":\"🌞\",\"ringed_planet\":\"🪐\",\"star\":\"⭐\",\"star2\":\"🌟\",\"stars\":\"🌠\",\"milky_way\":\"🌌\",\"cloud\":\"☁️\",\"partly_sunny\":\"⛅\",\"cloud_with_lightning_and_rain\":\"⛈️\",\"sun_behind_small_cloud\":\"🌤️\",\"sun_behind_large_cloud\":\"🌥️\",\"sun_behind_rain_cloud\":\"🌦️\",\"cloud_with_rain\":\"🌧️\",\"cloud_with_snow\":\"🌨️\",\"cloud_with_lightning\":\"🌩️\",\"tornado\":\"🌪️\",\"fog\":\"🌫️\",\"wind_face\":\"🌬️\",\"cyclone\":\"🌀\",\"rainbow\":\"🌈\",\"closed_umbrella\":\"🌂\",\"open_umbrella\":\"☂️\",\"umbrella\":\"☔\",\"parasol_on_ground\":\"⛱️\",\"zap\":\"⚡\",\"snowflake\":\"❄️\",\"snowman_with_snow\":\"☃️\",\"snowman\":\"⛄\",\"comet\":\"☄️\",\"fire\":\"🔥\",\"droplet\":\"💧\",\"ocean\":\"🌊\",\"jack_o_lantern\":\"🎃\",\"christmas_tree\":\"🎄\",\"fireworks\":\"🎆\",\"sparkler\":\"🎇\",\"firecracker\":\"🧨\",\"sparkles\":\"✨\",\"balloon\":\"🎈\",\"tada\":\"🎉\",\"confetti_ball\":\"🎊\",\"tanabata_tree\":\"🎋\",\"bamboo\":\"🎍\",\"dolls\":\"🎎\",\"flags\":\"🎏\",\"wind_chime\":\"🎐\",\"rice_scene\":\"🎑\",\"red_envelope\":\"🧧\",\"ribbon\":\"🎀\",\"gift\":\"🎁\",\"reminder_ribbon\":\"🎗️\",\"tickets\":\"🎟️\",\"ticket\":\"🎫\",\"medal_military\":\"🎖️\",\"trophy\":\"🏆\",\"medal_sports\":\"🏅\",\"1st_place_medal\":\"🥇\",\"2nd_place_medal\":\"🥈\",\"3rd_place_medal\":\"🥉\",\"soccer\":\"⚽\",\"baseball\":\"⚾\",\"softball\":\"🥎\",\"basketball\":\"🏀\",\"volleyball\":\"🏐\",\"football\":\"🏈\",\"rugby_football\":\"🏉\",\"tennis\":\"🎾\",\"flying_disc\":\"🥏\",\"bowling\":\"🎳\",\"cricket_game\":\"🏏\",\"field_hockey\":\"🏑\",\"ice_hockey\":\"🏒\",\"lacrosse\":\"🥍\",\"ping_pong\":\"🏓\",\"badminton\":\"🏸\",\"boxing_glove\":\"🥊\",\"martial_arts_uniform\":\"🥋\",\"goal_net\":\"🥅\",\"golf\":\"⛳\",\"ice_skate\":\"⛸️\",\"fishing_pole_and_fish\":\"🎣\",\"diving_mask\":\"🤿\",\"running_shirt_with_sash\":\"🎽\",\"ski\":\"🎿\",\"sled\":\"🛷\",\"curling_stone\":\"🥌\",\"dart\":\"🎯\",\"yo_yo\":\"🪀\",\"kite\":\"🪁\",\"8ball\":\"🎱\",\"crystal_ball\":\"🔮\",\"magic_wand\":\"🪄\",\"nazar_amulet\":\"🧿\",\"video_game\":\"🎮\",\"joystick\":\"🕹️\",\"slot_machine\":\"🎰\",\"game_die\":\"🎲\",\"jigsaw\":\"🧩\",\"teddy_bear\":\"🧸\",\"pinata\":\"🪅\",\"nesting_dolls\":\"🪆\",\"spades\":\"♠️\",\"hearts\":\"♥️\",\"diamonds\":\"♦️\",\"clubs\":\"♣️\",\"chess_pawn\":\"♟️\",\"black_joker\":\"🃏\",\"mahjong\":\"🀄\",\"flower_playing_cards\":\"🎴\",\"performing_arts\":\"🎭\",\"framed_picture\":\"🖼️\",\"art\":\"🎨\",\"thread\":\"🧵\",\"sewing_needle\":\"🪡\",\"yarn\":\"🧶\",\"knot\":\"🪢\",\"eyeglasses\":\"👓\",\"dark_sunglasses\":\"🕶️\",\"goggles\":\"🥽\",\"lab_coat\":\"🥼\",\"safety_vest\":\"🦺\",\"necktie\":\"👔\",\"shirt\":\"👕\",\"tshirt\":\"👕\",\"jeans\":\"👖\",\"scarf\":\"🧣\",\"gloves\":\"🧤\",\"coat\":\"🧥\",\"socks\":\"🧦\",\"dress\":\"👗\",\"kimono\":\"👘\",\"sari\":\"🥻\",\"one_piece_swimsuit\":\"🩱\",\"swim_brief\":\"🩲\",\"shorts\":\"🩳\",\"bikini\":\"👙\",\"womans_clothes\":\"👚\",\"purse\":\"👛\",\"handbag\":\"👜\",\"pouch\":\"👝\",\"shopping\":\"🛍️\",\"school_satchel\":\"🎒\",\"thong_sandal\":\"🩴\",\"mans_shoe\":\"👞\",\"shoe\":\"👞\",\"athletic_shoe\":\"👟\",\"hiking_boot\":\"🥾\",\"flat_shoe\":\"🥿\",\"high_heel\":\"👠\",\"sandal\":\"👡\",\"ballet_shoes\":\"🩰\",\"boot\":\"👢\",\"crown\":\"👑\",\"womans_hat\":\"👒\",\"tophat\":\"🎩\",\"mortar_board\":\"🎓\",\"billed_cap\":\"🧢\",\"military_helmet\":\"🪖\",\"rescue_worker_helmet\":\"⛑️\",\"prayer_beads\":\"📿\",\"lipstick\":\"💄\",\"ring\":\"💍\",\"gem\":\"💎\",\"mute\":\"🔇\",\"speaker\":\"🔈\",\"sound\":\"🔉\",\"loud_sound\":\"🔊\",\"loudspeaker\":\"📢\",\"mega\":\"📣\",\"postal_horn\":\"📯\",\"bell\":\"🔔\",\"no_bell\":\"🔕\",\"musical_score\":\"🎼\",\"musical_note\":\"🎵\",\"notes\":\"🎶\",\"studio_microphone\":\"🎙️\",\"level_slider\":\"🎚️\",\"control_knobs\":\"🎛️\",\"microphone\":\"🎤\",\"headphones\":\"🎧\",\"radio\":\"📻\",\"saxophone\":\"🎷\",\"accordion\":\"🪗\",\"guitar\":\"🎸\",\"musical_keyboard\":\"🎹\",\"trumpet\":\"🎺\",\"violin\":\"🎻\",\"banjo\":\"🪕\",\"drum\":\"🥁\",\"long_drum\":\"🪘\",\"iphone\":\"📱\",\"calling\":\"📲\",\"phone\":\"☎️\",\"telephone\":\"☎️\",\"telephone_receiver\":\"📞\",\"pager\":\"📟\",\"fax\":\"📠\",\"battery\":\"🔋\",\"electric_plug\":\"🔌\",\"computer\":\"💻\",\"desktop_computer\":\"🖥️\",\"printer\":\"🖨️\",\"keyboard\":\"⌨️\",\"computer_mouse\":\"🖱️\",\"trackball\":\"🖲️\",\"minidisc\":\"💽\",\"floppy_disk\":\"💾\",\"cd\":\"💿\",\"dvd\":\"📀\",\"abacus\":\"🧮\",\"movie_camera\":\"🎥\",\"film_strip\":\"🎞️\",\"film_projector\":\"📽️\",\"clapper\":\"🎬\",\"tv\":\"📺\",\"camera\":\"📷\",\"camera_flash\":\"📸\",\"video_camera\":\"📹\",\"vhs\":\"📼\",\"mag\":\"🔍\",\"mag_right\":\"🔎\",\"candle\":\"🕯️\",\"bulb\":\"💡\",\"flashlight\":\"🔦\",\"izakaya_lantern\":\"🏮\",\"lantern\":\"🏮\",\"diya_lamp\":\"🪔\",\"notebook_with_decorative_cover\":\"📔\",\"closed_book\":\"📕\",\"book\":\"📖\",\"open_book\":\"📖\",\"green_book\":\"📗\",\"blue_book\":\"📘\",\"orange_book\":\"📙\",\"books\":\"📚\",\"notebook\":\"📓\",\"ledger\":\"📒\",\"page_with_curl\":\"📃\",\"scroll\":\"📜\",\"page_facing_up\":\"📄\",\"newspaper\":\"📰\",\"newspaper_roll\":\"🗞️\",\"bookmark_tabs\":\"📑\",\"bookmark\":\"🔖\",\"label\":\"🏷️\",\"moneybag\":\"💰\",\"coin\":\"🪙\",\"yen\":\"💴\",\"dollar\":\"💵\",\"euro\":\"💶\",\"pound\":\"💷\",\"money_with_wings\":\"💸\",\"credit_card\":\"💳\",\"receipt\":\"🧾\",\"chart\":\"💹\",\"envelope\":\"✉️\",\"email\":\"📧\",\"e-mail\":\"📧\",\"incoming_envelope\":\"📨\",\"envelope_with_arrow\":\"📩\",\"outbox_tray\":\"📤\",\"inbox_tray\":\"📥\",\"package\":\"📦\",\"mailbox\":\"📫\",\"mailbox_closed\":\"📪\",\"mailbox_with_mail\":\"📬\",\"mailbox_with_no_mail\":\"📭\",\"postbox\":\"📮\",\"ballot_box\":\"🗳️\",\"pencil2\":\"✏️\",\"black_nib\":\"✒️\",\"fountain_pen\":\"🖋️\",\"pen\":\"🖊️\",\"paintbrush\":\"🖌️\",\"crayon\":\"🖍️\",\"memo\":\"📝\",\"pencil\":\"📝\",\"briefcase\":\"💼\",\"file_folder\":\"📁\",\"open_file_folder\":\"📂\",\"card_index_dividers\":\"🗂️\",\"date\":\"📅\",\"calendar\":\"📆\",\"spiral_notepad\":\"🗒️\",\"spiral_calendar\":\"🗓️\",\"card_index\":\"📇\",\"chart_with_upwards_trend\":\"📈\",\"chart_with_downwards_trend\":\"📉\",\"bar_chart\":\"📊\",\"clipboard\":\"📋\",\"pushpin\":\"📌\",\"round_pushpin\":\"📍\",\"paperclip\":\"📎\",\"paperclips\":\"🖇️\",\"straight_ruler\":\"📏\",\"triangular_ruler\":\"📐\",\"scissors\":\"✂️\",\"card_file_box\":\"🗃️\",\"file_cabinet\":\"🗄️\",\"wastebasket\":\"🗑️\",\"lock\":\"🔒\",\"unlock\":\"🔓\",\"lock_with_ink_pen\":\"🔏\",\"closed_lock_with_key\":\"🔐\",\"key\":\"🔑\",\"old_key\":\"🗝️\",\"hammer\":\"🔨\",\"axe\":\"🪓\",\"pick\":\"⛏️\",\"hammer_and_pick\":\"⚒️\",\"hammer_and_wrench\":\"🛠️\",\"dagger\":\"🗡️\",\"crossed_swords\":\"⚔️\",\"gun\":\"🔫\",\"boomerang\":\"🪃\",\"bow_and_arrow\":\"🏹\",\"shield\":\"🛡️\",\"carpentry_saw\":\"🪚\",\"wrench\":\"🔧\",\"screwdriver\":\"🪛\",\"nut_and_bolt\":\"🔩\",\"gear\":\"⚙️\",\"clamp\":\"🗜️\",\"balance_scale\":\"⚖️\",\"probing_cane\":\"🦯\",\"link\":\"🔗\",\"chains\":\"⛓️\",\"hook\":\"🪝\",\"toolbox\":\"🧰\",\"magnet\":\"🧲\",\"ladder\":\"🪜\",\"alembic\":\"⚗️\",\"test_tube\":\"🧪\",\"petri_dish\":\"🧫\",\"dna\":\"🧬\",\"microscope\":\"🔬\",\"telescope\":\"🔭\",\"satellite\":\"📡\",\"syringe\":\"💉\",\"drop_of_blood\":\"🩸\",\"pill\":\"💊\",\"adhesive_bandage\":\"🩹\",\"stethoscope\":\"🩺\",\"door\":\"🚪\",\"elevator\":\"🛗\",\"mirror\":\"🪞\",\"window\":\"🪟\",\"bed\":\"🛏️\",\"couch_and_lamp\":\"🛋️\",\"chair\":\"🪑\",\"toilet\":\"🚽\",\"plunger\":\"🪠\",\"shower\":\"🚿\",\"bathtub\":\"🛁\",\"mouse_trap\":\"🪤\",\"razor\":\"🪒\",\"lotion_bottle\":\"🧴\",\"safety_pin\":\"🧷\",\"broom\":\"🧹\",\"basket\":\"🧺\",\"roll_of_paper\":\"🧻\",\"bucket\":\"🪣\",\"soap\":\"🧼\",\"toothbrush\":\"🪥\",\"sponge\":\"🧽\",\"fire_extinguisher\":\"🧯\",\"shopping_cart\":\"🛒\",\"smoking\":\"🚬\",\"coffin\":\"⚰️\",\"headstone\":\"🪦\",\"funeral_urn\":\"⚱️\",\"moyai\":\"🗿\",\"placard\":\"🪧\",\"atm\":\"🏧\",\"put_litter_in_its_place\":\"🚮\",\"potable_water\":\"🚰\",\"wheelchair\":\"♿\",\"mens\":\"🚹\",\"womens\":\"🚺\",\"restroom\":\"🚻\",\"baby_symbol\":\"🚼\",\"wc\":\"🚾\",\"passport_control\":\"🛂\",\"customs\":\"🛃\",\"baggage_claim\":\"🛄\",\"left_luggage\":\"🛅\",\"warning\":\"⚠️\",\"children_crossing\":\"🚸\",\"no_entry\":\"⛔\",\"no_entry_sign\":\"🚫\",\"no_bicycles\":\"🚳\",\"no_smoking\":\"🚭\",\"do_not_litter\":\"🚯\",\"non-potable_water\":\"🚱\",\"no_pedestrians\":\"🚷\",\"no_mobile_phones\":\"📵\",\"underage\":\"🔞\",\"radioactive\":\"☢️\",\"biohazard\":\"☣️\",\"arrow_up\":\"⬆️\",\"arrow_upper_right\":\"↗️\",\"arrow_right\":\"➡️\",\"arrow_lower_right\":\"↘️\",\"arrow_down\":\"⬇️\",\"arrow_lower_left\":\"↙️\",\"arrow_left\":\"⬅️\",\"arrow_upper_left\":\"↖️\",\"arrow_up_down\":\"↕️\",\"left_right_arrow\":\"↔️\",\"leftwards_arrow_with_hook\":\"↩️\",\"arrow_right_hook\":\"↪️\",\"arrow_heading_up\":\"⤴️\",\"arrow_heading_down\":\"⤵️\",\"arrows_clockwise\":\"🔃\",\"arrows_counterclockwise\":\"🔄\",\"back\":\"🔙\",\"end\":\"🔚\",\"on\":\"🔛\",\"soon\":\"🔜\",\"top\":\"🔝\",\"place_of_worship\":\"🛐\",\"atom_symbol\":\"⚛️\",\"om\":\"🕉️\",\"star_of_david\":\"✡️\",\"wheel_of_dharma\":\"☸️\",\"yin_yang\":\"☯️\",\"latin_cross\":\"✝️\",\"orthodox_cross\":\"☦️\",\"star_and_crescent\":\"☪️\",\"peace_symbol\":\"☮️\",\"menorah\":\"🕎\",\"six_pointed_star\":\"🔯\",\"aries\":\"♈\",\"taurus\":\"♉\",\"gemini\":\"♊\",\"cancer\":\"♋\",\"leo\":\"♌\",\"virgo\":\"♍\",\"libra\":\"♎\",\"scorpius\":\"♏\",\"sagittarius\":\"♐\",\"capricorn\":\"♑\",\"aquarius\":\"♒\",\"pisces\":\"♓\",\"ophiuchus\":\"⛎\",\"twisted_rightwards_arrows\":\"🔀\",\"repeat\":\"🔁\",\"repeat_one\":\"🔂\",\"arrow_forward\":\"▶️\",\"fast_forward\":\"⏩\",\"next_track_button\":\"⏭️\",\"play_or_pause_button\":\"⏯️\",\"arrow_backward\":\"◀️\",\"rewind\":\"⏪\",\"previous_track_button\":\"⏮️\",\"arrow_up_small\":\"🔼\",\"arrow_double_up\":\"⏫\",\"arrow_down_small\":\"🔽\",\"arrow_double_down\":\"⏬\",\"pause_button\":\"⏸️\",\"stop_button\":\"⏹️\",\"record_button\":\"⏺️\",\"eject_button\":\"⏏️\",\"cinema\":\"🎦\",\"low_brightness\":\"🔅\",\"high_brightness\":\"🔆\",\"signal_strength\":\"📶\",\"vibration_mode\":\"📳\",\"mobile_phone_off\":\"📴\",\"female_sign\":\"♀️\",\"male_sign\":\"♂️\",\"transgender_symbol\":\"⚧️\",\"heavy_multiplication_x\":\"✖️\",\"heavy_plus_sign\":\"➕\",\"heavy_minus_sign\":\"➖\",\"heavy_division_sign\":\"➗\",\"infinity\":\"♾️\",\"bangbang\":\"‼️\",\"interrobang\":\"⁉️\",\"question\":\"❓\",\"grey_question\":\"❔\",\"grey_exclamation\":\"❕\",\"exclamation\":\"❗\",\"heavy_exclamation_mark\":\"❗\",\"wavy_dash\":\"〰️\",\"currency_exchange\":\"💱\",\"heavy_dollar_sign\":\"💲\",\"medical_symbol\":\"⚕️\",\"recycle\":\"♻️\",\"fleur_de_lis\":\"⚜️\",\"trident\":\"🔱\",\"name_badge\":\"📛\",\"beginner\":\"🔰\",\"o\":\"⭕\",\"white_check_mark\":\"✅\",\"ballot_box_with_check\":\"☑️\",\"heavy_check_mark\":\"✔️\",\"x\":\"❌\",\"negative_squared_cross_mark\":\"❎\",\"curly_loop\":\"➰\",\"loop\":\"➿\",\"part_alternation_mark\":\"〽️\",\"eight_spoked_asterisk\":\"✳️\",\"eight_pointed_black_star\":\"✴️\",\"sparkle\":\"❇️\",\"copyright\":\"©️\",\"registered\":\"®️\",\"tm\":\"™️\",\"hash\":\"#️⃣\",\"asterisk\":\"*️⃣\",\"zero\":\"0️⃣\",\"one\":\"1️⃣\",\"two\":\"2️⃣\",\"three\":\"3️⃣\",\"four\":\"4️⃣\",\"five\":\"5️⃣\",\"six\":\"6️⃣\",\"seven\":\"7️⃣\",\"eight\":\"8️⃣\",\"nine\":\"9️⃣\",\"keycap_ten\":\"🔟\",\"capital_abcd\":\"🔠\",\"abcd\":\"🔡\",\"symbols\":\"🔣\",\"abc\":\"🔤\",\"a\":\"🅰️\",\"ab\":\"🆎\",\"b\":\"🅱️\",\"cl\":\"🆑\",\"cool\":\"🆒\",\"free\":\"🆓\",\"information_source\":\"ℹ️\",\"id\":\"🆔\",\"m\":\"Ⓜ️\",\"new\":\"🆕\",\"ng\":\"🆖\",\"o2\":\"🅾️\",\"ok\":\"🆗\",\"parking\":\"🅿️\",\"sos\":\"🆘\",\"up\":\"🆙\",\"vs\":\"🆚\",\"koko\":\"🈁\",\"sa\":\"🈂️\",\"u6708\":\"🈷️\",\"u6709\":\"🈶\",\"u6307\":\"🈯\",\"ideograph_advantage\":\"🉐\",\"u5272\":\"🈹\",\"u7121\":\"🈚\",\"u7981\":\"🈲\",\"accept\":\"🉑\",\"u7533\":\"🈸\",\"u5408\":\"🈴\",\"u7a7a\":\"🈳\",\"congratulations\":\"㊗️\",\"secret\":\"㊙️\",\"u55b6\":\"🈺\",\"u6e80\":\"🈵\",\"red_circle\":\"🔴\",\"orange_circle\":\"🟠\",\"yellow_circle\":\"🟡\",\"green_circle\":\"🟢\",\"large_blue_circle\":\"🔵\",\"purple_circle\":\"🟣\",\"brown_circle\":\"🟤\",\"black_circle\":\"⚫\",\"white_circle\":\"⚪\",\"red_square\":\"🟥\",\"orange_square\":\"🟧\",\"yellow_square\":\"🟨\",\"green_square\":\"🟩\",\"blue_square\":\"🟦\",\"purple_square\":\"🟪\",\"brown_square\":\"🟫\",\"black_large_square\":\"⬛\",\"white_large_square\":\"⬜\",\"black_medium_square\":\"◼️\",\"white_medium_square\":\"◻️\",\"black_medium_small_square\":\"◾\",\"white_medium_small_square\":\"◽\",\"black_small_square\":\"▪️\",\"white_small_square\":\"▫️\",\"large_orange_diamond\":\"🔶\",\"large_blue_diamond\":\"🔷\",\"small_orange_diamond\":\"🔸\",\"small_blue_diamond\":\"🔹\",\"small_red_triangle\":\"🔺\",\"small_red_triangle_down\":\"🔻\",\"diamond_shape_with_a_dot_inside\":\"💠\",\"radio_button\":\"🔘\",\"white_square_button\":\"🔳\",\"black_square_button\":\"🔲\",\"checkered_flag\":\"🏁\",\"triangular_flag_on_post\":\"🚩\",\"crossed_flags\":\"🎌\",\"black_flag\":\"🏴\",\"white_flag\":\"🏳️\",\"rainbow_flag\":\"🏳️‍🌈\",\"transgender_flag\":\"🏳️‍⚧️\",\"pirate_flag\":\"🏴‍☠️\",\"ascension_island\":\"🇦🇨\",\"andorra\":\"🇦🇩\",\"united_arab_emirates\":\"🇦🇪\",\"afghanistan\":\"🇦🇫\",\"antigua_barbuda\":\"🇦🇬\",\"anguilla\":\"🇦🇮\",\"albania\":\"🇦🇱\",\"armenia\":\"🇦🇲\",\"angola\":\"🇦🇴\",\"antarctica\":\"🇦🇶\",\"argentina\":\"🇦🇷\",\"american_samoa\":\"🇦🇸\",\"austria\":\"🇦🇹\",\"australia\":\"🇦🇺\",\"aruba\":\"🇦🇼\",\"aland_islands\":\"🇦🇽\",\"azerbaijan\":\"🇦🇿\",\"bosnia_herzegovina\":\"🇧🇦\",\"barbados\":\"🇧🇧\",\"bangladesh\":\"🇧🇩\",\"belgium\":\"🇧🇪\",\"burkina_faso\":\"🇧🇫\",\"bulgaria\":\"🇧🇬\",\"bahrain\":\"🇧🇭\",\"burundi\":\"🇧🇮\",\"benin\":\"🇧🇯\",\"st_barthelemy\":\"🇧🇱\",\"bermuda\":\"🇧🇲\",\"brunei\":\"🇧🇳\",\"bolivia\":\"🇧🇴\",\"caribbean_netherlands\":\"🇧🇶\",\"brazil\":\"🇧🇷\",\"bahamas\":\"🇧🇸\",\"bhutan\":\"🇧🇹\",\"bouvet_island\":\"🇧🇻\",\"botswana\":\"🇧🇼\",\"belarus\":\"🇧🇾\",\"belize\":\"🇧🇿\",\"canada\":\"🇨🇦\",\"cocos_islands\":\"🇨🇨\",\"congo_kinshasa\":\"🇨🇩\",\"central_african_republic\":\"🇨🇫\",\"congo_brazzaville\":\"🇨🇬\",\"switzerland\":\"🇨🇭\",\"cote_divoire\":\"🇨🇮\",\"cook_islands\":\"🇨🇰\",\"chile\":\"🇨🇱\",\"cameroon\":\"🇨🇲\",\"cn\":\"🇨🇳\",\"colombia\":\"🇨🇴\",\"clipperton_island\":\"🇨🇵\",\"costa_rica\":\"🇨🇷\",\"cuba\":\"🇨🇺\",\"cape_verde\":\"🇨🇻\",\"curacao\":\"🇨🇼\",\"christmas_island\":\"🇨🇽\",\"cyprus\":\"🇨🇾\",\"czech_republic\":\"🇨🇿\",\"de\":\"🇩🇪\",\"diego_garcia\":\"🇩🇬\",\"djibouti\":\"🇩🇯\",\"denmark\":\"🇩🇰\",\"dominica\":\"🇩🇲\",\"dominican_republic\":\"🇩🇴\",\"algeria\":\"🇩🇿\",\"ceuta_melilla\":\"🇪🇦\",\"ecuador\":\"🇪🇨\",\"estonia\":\"🇪🇪\",\"egypt\":\"🇪🇬\",\"western_sahara\":\"🇪🇭\",\"eritrea\":\"🇪🇷\",\"es\":\"🇪🇸\",\"ethiopia\":\"🇪🇹\",\"eu\":\"🇪🇺\",\"european_union\":\"🇪🇺\",\"finland\":\"🇫🇮\",\"fiji\":\"🇫🇯\",\"falkland_islands\":\"🇫🇰\",\"micronesia\":\"🇫🇲\",\"faroe_islands\":\"🇫🇴\",\"fr\":\"🇫🇷\",\"gabon\":\"🇬🇦\",\"gb\":\"🇬🇧\",\"uk\":\"🇬🇧\",\"grenada\":\"🇬🇩\",\"georgia\":\"🇬🇪\",\"french_guiana\":\"🇬🇫\",\"guernsey\":\"🇬🇬\",\"ghana\":\"🇬🇭\",\"gibraltar\":\"🇬🇮\",\"greenland\":\"🇬🇱\",\"gambia\":\"🇬🇲\",\"guinea\":\"🇬🇳\",\"guadeloupe\":\"🇬🇵\",\"equatorial_guinea\":\"🇬🇶\",\"greece\":\"🇬🇷\",\"south_georgia_south_sandwich_islands\":\"🇬🇸\",\"guatemala\":\"🇬🇹\",\"guam\":\"🇬🇺\",\"guinea_bissau\":\"🇬🇼\",\"guyana\":\"🇬🇾\",\"hong_kong\":\"🇭🇰\",\"heard_mcdonald_islands\":\"🇭🇲\",\"honduras\":\"🇭🇳\",\"croatia\":\"🇭🇷\",\"haiti\":\"🇭🇹\",\"hungary\":\"🇭🇺\",\"canary_islands\":\"🇮🇨\",\"indonesia\":\"🇮🇩\",\"ireland\":\"🇮🇪\",\"israel\":\"🇮🇱\",\"isle_of_man\":\"🇮🇲\",\"india\":\"🇮🇳\",\"british_indian_ocean_territory\":\"🇮🇴\",\"iraq\":\"🇮🇶\",\"iran\":\"🇮🇷\",\"iceland\":\"🇮🇸\",\"it\":\"🇮🇹\",\"jersey\":\"🇯🇪\",\"jamaica\":\"🇯🇲\",\"jordan\":\"🇯🇴\",\"jp\":\"🇯🇵\",\"kenya\":\"🇰🇪\",\"kyrgyzstan\":\"🇰🇬\",\"cambodia\":\"🇰🇭\",\"kiribati\":\"🇰🇮\",\"comoros\":\"🇰🇲\",\"st_kitts_nevis\":\"🇰🇳\",\"north_korea\":\"🇰🇵\",\"kr\":\"🇰🇷\",\"kuwait\":\"🇰🇼\",\"cayman_islands\":\"🇰🇾\",\"kazakhstan\":\"🇰🇿\",\"laos\":\"🇱🇦\",\"lebanon\":\"🇱🇧\",\"st_lucia\":\"🇱🇨\",\"liechtenstein\":\"🇱🇮\",\"sri_lanka\":\"🇱🇰\",\"liberia\":\"🇱🇷\",\"lesotho\":\"🇱🇸\",\"lithuania\":\"🇱🇹\",\"luxembourg\":\"🇱🇺\",\"latvia\":\"🇱🇻\",\"libya\":\"🇱🇾\",\"morocco\":\"🇲🇦\",\"monaco\":\"🇲🇨\",\"moldova\":\"🇲🇩\",\"montenegro\":\"🇲🇪\",\"st_martin\":\"🇲🇫\",\"madagascar\":\"🇲🇬\",\"marshall_islands\":\"🇲🇭\",\"macedonia\":\"🇲🇰\",\"mali\":\"🇲🇱\",\"myanmar\":\"🇲🇲\",\"mongolia\":\"🇲🇳\",\"macau\":\"🇲🇴\",\"northern_mariana_islands\":\"🇲🇵\",\"martinique\":\"🇲🇶\",\"mauritania\":\"🇲🇷\",\"montserrat\":\"🇲🇸\",\"malta\":\"🇲🇹\",\"mauritius\":\"🇲🇺\",\"maldives\":\"🇲🇻\",\"malawi\":\"🇲🇼\",\"mexico\":\"🇲🇽\",\"malaysia\":\"🇲🇾\",\"mozambique\":\"🇲🇿\",\"namibia\":\"🇳🇦\",\"new_caledonia\":\"🇳🇨\",\"niger\":\"🇳🇪\",\"norfolk_island\":\"🇳🇫\",\"nigeria\":\"🇳🇬\",\"nicaragua\":\"🇳🇮\",\"netherlands\":\"🇳🇱\",\"norway\":\"🇳🇴\",\"nepal\":\"🇳🇵\",\"nauru\":\"🇳🇷\",\"niue\":\"🇳🇺\",\"new_zealand\":\"🇳🇿\",\"oman\":\"🇴🇲\",\"panama\":\"🇵🇦\",\"peru\":\"🇵🇪\",\"french_polynesia\":\"🇵🇫\",\"papua_new_guinea\":\"🇵🇬\",\"philippines\":\"🇵🇭\",\"pakistan\":\"🇵🇰\",\"poland\":\"🇵🇱\",\"st_pierre_miquelon\":\"🇵🇲\",\"pitcairn_islands\":\"🇵🇳\",\"puerto_rico\":\"🇵🇷\",\"palestinian_territories\":\"🇵🇸\",\"portugal\":\"🇵🇹\",\"palau\":\"🇵🇼\",\"paraguay\":\"🇵🇾\",\"qatar\":\"🇶🇦\",\"reunion\":\"🇷🇪\",\"romania\":\"🇷🇴\",\"serbia\":\"🇷🇸\",\"ru\":\"🇷🇺\",\"rwanda\":\"🇷🇼\",\"saudi_arabia\":\"🇸🇦\",\"solomon_islands\":\"🇸🇧\",\"seychelles\":\"🇸🇨\",\"sudan\":\"🇸🇩\",\"sweden\":\"🇸🇪\",\"singapore\":\"🇸🇬\",\"st_helena\":\"🇸🇭\",\"slovenia\":\"🇸🇮\",\"svalbard_jan_mayen\":\"🇸🇯\",\"slovakia\":\"🇸🇰\",\"sierra_leone\":\"🇸🇱\",\"san_marino\":\"🇸🇲\",\"senegal\":\"🇸🇳\",\"somalia\":\"🇸🇴\",\"suriname\":\"🇸🇷\",\"south_sudan\":\"🇸🇸\",\"sao_tome_principe\":\"🇸🇹\",\"el_salvador\":\"🇸🇻\",\"sint_maarten\":\"🇸🇽\",\"syria\":\"🇸🇾\",\"swaziland\":\"🇸🇿\",\"tristan_da_cunha\":\"🇹🇦\",\"turks_caicos_islands\":\"🇹🇨\",\"chad\":\"🇹🇩\",\"french_southern_territories\":\"🇹🇫\",\"togo\":\"🇹🇬\",\"thailand\":\"🇹🇭\",\"tajikistan\":\"🇹🇯\",\"tokelau\":\"🇹🇰\",\"timor_leste\":\"🇹🇱\",\"turkmenistan\":\"🇹🇲\",\"tunisia\":\"🇹🇳\",\"tonga\":\"🇹🇴\",\"tr\":\"🇹🇷\",\"trinidad_tobago\":\"🇹🇹\",\"tuvalu\":\"🇹🇻\",\"taiwan\":\"🇹🇼\",\"tanzania\":\"🇹🇿\",\"ukraine\":\"🇺🇦\",\"uganda\":\"🇺🇬\",\"us_outlying_islands\":\"🇺🇲\",\"united_nations\":\"🇺🇳\",\"us\":\"🇺🇸\",\"uruguay\":\"🇺🇾\",\"uzbekistan\":\"🇺🇿\",\"vatican_city\":\"🇻🇦\",\"st_vincent_grenadines\":\"🇻🇨\",\"venezuela\":\"🇻🇪\",\"british_virgin_islands\":\"🇻🇬\",\"us_virgin_islands\":\"🇻🇮\",\"vietnam\":\"🇻🇳\",\"vanuatu\":\"🇻🇺\",\"wallis_futuna\":\"🇼🇫\",\"samoa\":\"🇼🇸\",\"kosovo\":\"🇽🇰\",\"yemen\":\"🇾🇪\",\"mayotte\":\"🇾🇹\",\"south_africa\":\"🇿🇦\",\"zambia\":\"🇿🇲\",\"zimbabwe\":\"🇿🇼\",\"england\":\"🏴󠁧󠁢󠁥󠁮󠁧󠁿\",\"scotland\":\"🏴󠁧󠁢󠁳󠁣󠁴󠁿\",\"wales\":\"🏴󠁧󠁢󠁷󠁬󠁳󠁿\"}");
+module.exports = JSON.parse('{"100":"💯","1234":"🔢","grinning":"😀","smiley":"😃","smile":"😄","grin":"😁","laughing":"😆","satisfied":"😆","sweat_smile":"😅","rofl":"🤣","joy":"😂","slightly_smiling_face":"🙂","upside_down_face":"🙃","wink":"😉","blush":"😊","innocent":"😇","smiling_face_with_three_hearts":"🥰","heart_eyes":"😍","star_struck":"🤩","kissing_heart":"😘","kissing":"😗","relaxed":"☺️","kissing_closed_eyes":"😚","kissing_smiling_eyes":"😙","smiling_face_with_tear":"🥲","yum":"😋","stuck_out_tongue":"😛","stuck_out_tongue_winking_eye":"😜","zany_face":"🤪","stuck_out_tongue_closed_eyes":"😝","money_mouth_face":"🤑","hugs":"🤗","hand_over_mouth":"🤭","shushing_face":"🤫","thinking":"🤔","zipper_mouth_face":"🤐","raised_eyebrow":"🤨","neutral_face":"😐","expressionless":"😑","no_mouth":"😶","smirk":"😏","unamused":"😒","roll_eyes":"🙄","grimacing":"😬","lying_face":"🤥","relieved":"😌","pensive":"😔","sleepy":"😪","drooling_face":"🤤","sleeping":"😴","mask":"😷","face_with_thermometer":"🤒","face_with_head_bandage":"🤕","nauseated_face":"🤢","vomiting_face":"🤮","sneezing_face":"🤧","hot_face":"🥵","cold_face":"🥶","woozy_face":"🥴","dizzy_face":"😵","exploding_head":"🤯","cowboy_hat_face":"🤠","partying_face":"🥳","disguised_face":"🥸","sunglasses":"😎","nerd_face":"🤓","monocle_face":"🧐","confused":"😕","worried":"😟","slightly_frowning_face":"🙁","frowning_face":"☹️","open_mouth":"😮","hushed":"😯","astonished":"😲","flushed":"😳","pleading_face":"🥺","frowning":"😦","anguished":"😧","fearful":"😨","cold_sweat":"😰","disappointed_relieved":"😥","cry":"😢","sob":"😭","scream":"😱","confounded":"😖","persevere":"😣","disappointed":"😞","sweat":"😓","weary":"😩","tired_face":"😫","yawning_face":"🥱","triumph":"😤","rage":"😡","pout":"😡","angry":"😠","cursing_face":"🤬","smiling_imp":"😈","imp":"👿","skull":"💀","skull_and_crossbones":"☠️","hankey":"💩","poop":"💩","shit":"💩","clown_face":"🤡","japanese_ogre":"👹","japanese_goblin":"👺","ghost":"👻","alien":"👽","space_invader":"👾","robot":"🤖","smiley_cat":"😺","smile_cat":"😸","joy_cat":"😹","heart_eyes_cat":"😻","smirk_cat":"😼","kissing_cat":"😽","scream_cat":"🙀","crying_cat_face":"😿","pouting_cat":"😾","see_no_evil":"🙈","hear_no_evil":"🙉","speak_no_evil":"🙊","kiss":"💋","love_letter":"💌","cupid":"💘","gift_heart":"💝","sparkling_heart":"💖","heartpulse":"💗","heartbeat":"💓","revolving_hearts":"💞","two_hearts":"💕","heart_decoration":"💟","heavy_heart_exclamation":"❣️","broken_heart":"💔","heart":"❤️","orange_heart":"🧡","yellow_heart":"💛","green_heart":"💚","blue_heart":"💙","purple_heart":"💜","brown_heart":"🤎","black_heart":"🖤","white_heart":"🤍","anger":"💢","boom":"💥","collision":"💥","dizzy":"💫","sweat_drops":"💦","dash":"💨","hole":"🕳️","bomb":"💣","speech_balloon":"💬","eye_speech_bubble":"👁️‍🗨️","left_speech_bubble":"🗨️","right_anger_bubble":"🗯️","thought_balloon":"💭","zzz":"💤","wave":"👋","raised_back_of_hand":"🤚","raised_hand_with_fingers_splayed":"🖐️","hand":"✋","raised_hand":"✋","vulcan_salute":"🖖","ok_hand":"👌","pinched_fingers":"🤌","pinching_hand":"🤏","v":"✌️","crossed_fingers":"🤞","love_you_gesture":"🤟","metal":"🤘","call_me_hand":"🤙","point_left":"👈","point_right":"👉","point_up_2":"👆","middle_finger":"🖕","fu":"🖕","point_down":"👇","point_up":"☝️","+1":"👍","thumbsup":"👍","-1":"👎","thumbsdown":"👎","fist_raised":"✊","fist":"✊","fist_oncoming":"👊","facepunch":"👊","punch":"👊","fist_left":"🤛","fist_right":"🤜","clap":"👏","raised_hands":"🙌","open_hands":"👐","palms_up_together":"🤲","handshake":"🤝","pray":"🙏","writing_hand":"✍️","nail_care":"💅","selfie":"🤳","muscle":"💪","mechanical_arm":"🦾","mechanical_leg":"🦿","leg":"🦵","foot":"🦶","ear":"👂","ear_with_hearing_aid":"🦻","nose":"👃","brain":"🧠","anatomical_heart":"🫀","lungs":"🫁","tooth":"🦷","bone":"🦴","eyes":"👀","eye":"👁️","tongue":"👅","lips":"👄","baby":"👶","child":"🧒","boy":"👦","girl":"👧","adult":"🧑","blond_haired_person":"👱","man":"👨","bearded_person":"🧔","red_haired_man":"👨‍🦰","curly_haired_man":"👨‍🦱","white_haired_man":"👨‍🦳","bald_man":"👨‍🦲","woman":"👩","red_haired_woman":"👩‍🦰","person_red_hair":"🧑‍🦰","curly_haired_woman":"👩‍🦱","person_curly_hair":"🧑‍🦱","white_haired_woman":"👩‍🦳","person_white_hair":"🧑‍🦳","bald_woman":"👩‍🦲","person_bald":"🧑‍🦲","blond_haired_woman":"👱‍♀️","blonde_woman":"👱‍♀️","blond_haired_man":"👱‍♂️","older_adult":"🧓","older_man":"👴","older_woman":"👵","frowning_person":"🙍","frowning_man":"🙍‍♂️","frowning_woman":"🙍‍♀️","pouting_face":"🙎","pouting_man":"🙎‍♂️","pouting_woman":"🙎‍♀️","no_good":"🙅","no_good_man":"🙅‍♂️","ng_man":"🙅‍♂️","no_good_woman":"🙅‍♀️","ng_woman":"🙅‍♀️","ok_person":"🙆","ok_man":"🙆‍♂️","ok_woman":"🙆‍♀️","tipping_hand_person":"💁","information_desk_person":"💁","tipping_hand_man":"💁‍♂️","sassy_man":"💁‍♂️","tipping_hand_woman":"💁‍♀️","sassy_woman":"💁‍♀️","raising_hand":"🙋","raising_hand_man":"🙋‍♂️","raising_hand_woman":"🙋‍♀️","deaf_person":"🧏","deaf_man":"🧏‍♂️","deaf_woman":"🧏‍♀️","bow":"🙇","bowing_man":"🙇‍♂️","bowing_woman":"🙇‍♀️","facepalm":"🤦","man_facepalming":"🤦‍♂️","woman_facepalming":"🤦‍♀️","shrug":"🤷","man_shrugging":"🤷‍♂️","woman_shrugging":"🤷‍♀️","health_worker":"🧑‍⚕️","man_health_worker":"👨‍⚕️","woman_health_worker":"👩‍⚕️","student":"🧑‍🎓","man_student":"👨‍🎓","woman_student":"👩‍🎓","teacher":"🧑‍🏫","man_teacher":"👨‍🏫","woman_teacher":"👩‍🏫","judge":"🧑‍⚖️","man_judge":"👨‍⚖️","woman_judge":"👩‍⚖️","farmer":"🧑‍🌾","man_farmer":"👨‍🌾","woman_farmer":"👩‍🌾","cook":"🧑‍🍳","man_cook":"👨‍🍳","woman_cook":"👩‍🍳","mechanic":"🧑‍🔧","man_mechanic":"👨‍🔧","woman_mechanic":"👩‍🔧","factory_worker":"🧑‍🏭","man_factory_worker":"👨‍🏭","woman_factory_worker":"👩‍🏭","office_worker":"🧑‍💼","man_office_worker":"👨‍💼","woman_office_worker":"👩‍💼","scientist":"🧑‍🔬","man_scientist":"👨‍🔬","woman_scientist":"👩‍🔬","technologist":"🧑‍💻","man_technologist":"👨‍💻","woman_technologist":"👩‍💻","singer":"🧑‍🎤","man_singer":"👨‍🎤","woman_singer":"👩‍🎤","artist":"🧑‍🎨","man_artist":"👨‍🎨","woman_artist":"👩‍🎨","pilot":"🧑‍✈️","man_pilot":"👨‍✈️","woman_pilot":"👩‍✈️","astronaut":"🧑‍🚀","man_astronaut":"👨‍🚀","woman_astronaut":"👩‍🚀","firefighter":"🧑‍🚒","man_firefighter":"👨‍🚒","woman_firefighter":"👩‍🚒","police_officer":"👮","cop":"👮","policeman":"👮‍♂️","policewoman":"👮‍♀️","detective":"🕵️","male_detective":"🕵️‍♂️","female_detective":"🕵️‍♀️","guard":"💂","guardsman":"💂‍♂️","guardswoman":"💂‍♀️","ninja":"🥷","construction_worker":"👷","construction_worker_man":"👷‍♂️","construction_worker_woman":"👷‍♀️","prince":"🤴","princess":"👸","person_with_turban":"👳","man_with_turban":"👳‍♂️","woman_with_turban":"👳‍♀️","man_with_gua_pi_mao":"👲","woman_with_headscarf":"🧕","person_in_tuxedo":"🤵","man_in_tuxedo":"🤵‍♂️","woman_in_tuxedo":"🤵‍♀️","person_with_veil":"👰","man_with_veil":"👰‍♂️","woman_with_veil":"👰‍♀️","bride_with_veil":"👰‍♀️","pregnant_woman":"🤰","breast_feeding":"🤱","woman_feeding_baby":"👩‍🍼","man_feeding_baby":"👨‍🍼","person_feeding_baby":"🧑‍🍼","angel":"👼","santa":"🎅","mrs_claus":"🤶","mx_claus":"🧑‍🎄","superhero":"🦸","superhero_man":"🦸‍♂️","superhero_woman":"🦸‍♀️","supervillain":"🦹","supervillain_man":"🦹‍♂️","supervillain_woman":"🦹‍♀️","mage":"🧙","mage_man":"🧙‍♂️","mage_woman":"🧙‍♀️","fairy":"🧚","fairy_man":"🧚‍♂️","fairy_woman":"🧚‍♀️","vampire":"🧛","vampire_man":"🧛‍♂️","vampire_woman":"🧛‍♀️","merperson":"🧜","merman":"🧜‍♂️","mermaid":"🧜‍♀️","elf":"🧝","elf_man":"🧝‍♂️","elf_woman":"🧝‍♀️","genie":"🧞","genie_man":"🧞‍♂️","genie_woman":"🧞‍♀️","zombie":"🧟","zombie_man":"🧟‍♂️","zombie_woman":"🧟‍♀️","massage":"💆","massage_man":"💆‍♂️","massage_woman":"💆‍♀️","haircut":"💇","haircut_man":"💇‍♂️","haircut_woman":"💇‍♀️","walking":"🚶","walking_man":"🚶‍♂️","walking_woman":"🚶‍♀️","standing_person":"🧍","standing_man":"🧍‍♂️","standing_woman":"🧍‍♀️","kneeling_person":"🧎","kneeling_man":"🧎‍♂️","kneeling_woman":"🧎‍♀️","person_with_probing_cane":"🧑‍🦯","man_with_probing_cane":"👨‍🦯","woman_with_probing_cane":"👩‍🦯","person_in_motorized_wheelchair":"🧑‍🦼","man_in_motorized_wheelchair":"👨‍🦼","woman_in_motorized_wheelchair":"👩‍🦼","person_in_manual_wheelchair":"🧑‍🦽","man_in_manual_wheelchair":"👨‍🦽","woman_in_manual_wheelchair":"👩‍🦽","runner":"🏃","running":"🏃","running_man":"🏃‍♂️","running_woman":"🏃‍♀️","woman_dancing":"💃","dancer":"💃","man_dancing":"🕺","business_suit_levitating":"🕴️","dancers":"👯","dancing_men":"👯‍♂️","dancing_women":"👯‍♀️","sauna_person":"🧖","sauna_man":"🧖‍♂️","sauna_woman":"🧖‍♀️","climbing":"🧗","climbing_man":"🧗‍♂️","climbing_woman":"🧗‍♀️","person_fencing":"🤺","horse_racing":"🏇","skier":"⛷️","snowboarder":"🏂","golfing":"🏌️","golfing_man":"🏌️‍♂️","golfing_woman":"🏌️‍♀️","surfer":"🏄","surfing_man":"🏄‍♂️","surfing_woman":"🏄‍♀️","rowboat":"🚣","rowing_man":"🚣‍♂️","rowing_woman":"🚣‍♀️","swimmer":"🏊","swimming_man":"🏊‍♂️","swimming_woman":"🏊‍♀️","bouncing_ball_person":"⛹️","bouncing_ball_man":"⛹️‍♂️","basketball_man":"⛹️‍♂️","bouncing_ball_woman":"⛹️‍♀️","basketball_woman":"⛹️‍♀️","weight_lifting":"🏋️","weight_lifting_man":"🏋️‍♂️","weight_lifting_woman":"🏋️‍♀️","bicyclist":"🚴","biking_man":"🚴‍♂️","biking_woman":"🚴‍♀️","mountain_bicyclist":"🚵","mountain_biking_man":"🚵‍♂️","mountain_biking_woman":"🚵‍♀️","cartwheeling":"🤸","man_cartwheeling":"🤸‍♂️","woman_cartwheeling":"🤸‍♀️","wrestling":"🤼","men_wrestling":"🤼‍♂️","women_wrestling":"🤼‍♀️","water_polo":"🤽","man_playing_water_polo":"🤽‍♂️","woman_playing_water_polo":"🤽‍♀️","handball_person":"🤾","man_playing_handball":"🤾‍♂️","woman_playing_handball":"🤾‍♀️","juggling_person":"🤹","man_juggling":"🤹‍♂️","woman_juggling":"🤹‍♀️","lotus_position":"🧘","lotus_position_man":"🧘‍♂️","lotus_position_woman":"🧘‍♀️","bath":"🛀","sleeping_bed":"🛌","people_holding_hands":"🧑‍🤝‍🧑","two_women_holding_hands":"👭","couple":"👫","two_men_holding_hands":"👬","couplekiss":"💏","couplekiss_man_woman":"👩‍❤️‍💋‍👨","couplekiss_man_man":"👨‍❤️‍💋‍👨","couplekiss_woman_woman":"👩‍❤️‍💋‍👩","couple_with_heart":"💑","couple_with_heart_woman_man":"👩‍❤️‍👨","couple_with_heart_man_man":"👨‍❤️‍👨","couple_with_heart_woman_woman":"👩‍❤️‍👩","family":"👪","family_man_woman_boy":"👨‍👩‍👦","family_man_woman_girl":"👨‍👩‍👧","family_man_woman_girl_boy":"👨‍👩‍👧‍👦","family_man_woman_boy_boy":"👨‍👩‍👦‍👦","family_man_woman_girl_girl":"👨‍👩‍👧‍👧","family_man_man_boy":"👨‍👨‍👦","family_man_man_girl":"👨‍👨‍👧","family_man_man_girl_boy":"👨‍👨‍👧‍👦","family_man_man_boy_boy":"👨‍👨‍👦‍👦","family_man_man_girl_girl":"👨‍👨‍👧‍👧","family_woman_woman_boy":"👩‍👩‍👦","family_woman_woman_girl":"👩‍👩‍👧","family_woman_woman_girl_boy":"👩‍👩‍👧‍👦","family_woman_woman_boy_boy":"👩‍👩‍👦‍👦","family_woman_woman_girl_girl":"👩‍👩‍👧‍👧","family_man_boy":"👨‍👦","family_man_boy_boy":"👨‍👦‍👦","family_man_girl":"👨‍👧","family_man_girl_boy":"👨‍👧‍👦","family_man_girl_girl":"👨‍👧‍👧","family_woman_boy":"👩‍👦","family_woman_boy_boy":"👩‍👦‍👦","family_woman_girl":"👩‍👧","family_woman_girl_boy":"👩‍👧‍👦","family_woman_girl_girl":"👩‍👧‍👧","speaking_head":"🗣️","bust_in_silhouette":"👤","busts_in_silhouette":"👥","people_hugging":"🫂","footprints":"👣","monkey_face":"🐵","monkey":"🐒","gorilla":"🦍","orangutan":"🦧","dog":"🐶","dog2":"🐕","guide_dog":"🦮","service_dog":"🐕‍🦺","poodle":"🐩","wolf":"🐺","fox_face":"🦊","raccoon":"🦝","cat":"🐱","cat2":"🐈","black_cat":"🐈‍⬛","lion":"🦁","tiger":"🐯","tiger2":"🐅","leopard":"🐆","horse":"🐴","racehorse":"🐎","unicorn":"🦄","zebra":"🦓","deer":"🦌","bison":"🦬","cow":"🐮","ox":"🐂","water_buffalo":"🐃","cow2":"🐄","pig":"🐷","pig2":"🐖","boar":"🐗","pig_nose":"🐽","ram":"🐏","sheep":"🐑","goat":"🐐","dromedary_camel":"🐪","camel":"🐫","llama":"🦙","giraffe":"🦒","elephant":"🐘","mammoth":"🦣","rhinoceros":"🦏","hippopotamus":"🦛","mouse":"🐭","mouse2":"🐁","rat":"🐀","hamster":"🐹","rabbit":"🐰","rabbit2":"🐇","chipmunk":"🐿️","beaver":"🦫","hedgehog":"🦔","bat":"🦇","bear":"🐻","polar_bear":"🐻‍❄️","koala":"🐨","panda_face":"🐼","sloth":"🦥","otter":"🦦","skunk":"🦨","kangaroo":"🦘","badger":"🦡","feet":"🐾","paw_prints":"🐾","turkey":"🦃","chicken":"🐔","rooster":"🐓","hatching_chick":"🐣","baby_chick":"🐤","hatched_chick":"🐥","bird":"🐦","penguin":"🐧","dove":"🕊️","eagle":"🦅","duck":"🦆","swan":"🦢","owl":"🦉","dodo":"🦤","feather":"🪶","flamingo":"🦩","peacock":"🦚","parrot":"🦜","frog":"🐸","crocodile":"🐊","turtle":"🐢","lizard":"🦎","snake":"🐍","dragon_face":"🐲","dragon":"🐉","sauropod":"🦕","t-rex":"🦖","whale":"🐳","whale2":"🐋","dolphin":"🐬","flipper":"🐬","seal":"🦭","fish":"🐟","tropical_fish":"🐠","blowfish":"🐡","shark":"🦈","octopus":"🐙","shell":"🐚","snail":"🐌","butterfly":"🦋","bug":"🐛","ant":"🐜","bee":"🐝","honeybee":"🐝","beetle":"🪲","lady_beetle":"🐞","cricket":"🦗","cockroach":"🪳","spider":"🕷️","spider_web":"🕸️","scorpion":"🦂","mosquito":"🦟","fly":"🪰","worm":"🪱","microbe":"🦠","bouquet":"💐","cherry_blossom":"🌸","white_flower":"💮","rosette":"🏵️","rose":"🌹","wilted_flower":"🥀","hibiscus":"🌺","sunflower":"🌻","blossom":"🌼","tulip":"🌷","seedling":"🌱","potted_plant":"🪴","evergreen_tree":"🌲","deciduous_tree":"🌳","palm_tree":"🌴","cactus":"🌵","ear_of_rice":"🌾","herb":"🌿","shamrock":"☘️","four_leaf_clover":"🍀","maple_leaf":"🍁","fallen_leaf":"🍂","leaves":"🍃","grapes":"🍇","melon":"🍈","watermelon":"🍉","tangerine":"🍊","orange":"🍊","mandarin":"🍊","lemon":"🍋","banana":"🍌","pineapple":"🍍","mango":"🥭","apple":"🍎","green_apple":"🍏","pear":"🍐","peach":"🍑","cherries":"🍒","strawberry":"🍓","blueberries":"🫐","kiwi_fruit":"🥝","tomato":"🍅","olive":"🫒","coconut":"🥥","avocado":"🥑","eggplant":"🍆","potato":"🥔","carrot":"🥕","corn":"🌽","hot_pepper":"🌶️","bell_pepper":"🫑","cucumber":"🥒","leafy_green":"🥬","broccoli":"🥦","garlic":"🧄","onion":"🧅","mushroom":"🍄","peanuts":"🥜","chestnut":"🌰","bread":"🍞","croissant":"🥐","baguette_bread":"🥖","flatbread":"🫓","pretzel":"🥨","bagel":"🥯","pancakes":"🥞","waffle":"🧇","cheese":"🧀","meat_on_bone":"🍖","poultry_leg":"🍗","cut_of_meat":"🥩","bacon":"🥓","hamburger":"🍔","fries":"🍟","pizza":"🍕","hotdog":"🌭","sandwich":"🥪","taco":"🌮","burrito":"🌯","tamale":"🫔","stuffed_flatbread":"🥙","falafel":"🧆","egg":"🥚","fried_egg":"🍳","shallow_pan_of_food":"🥘","stew":"🍲","fondue":"🫕","bowl_with_spoon":"🥣","green_salad":"🥗","popcorn":"🍿","butter":"🧈","salt":"🧂","canned_food":"🥫","bento":"🍱","rice_cracker":"🍘","rice_ball":"🍙","rice":"🍚","curry":"🍛","ramen":"🍜","spaghetti":"🍝","sweet_potato":"🍠","oden":"🍢","sushi":"🍣","fried_shrimp":"🍤","fish_cake":"🍥","moon_cake":"🥮","dango":"🍡","dumpling":"🥟","fortune_cookie":"🥠","takeout_box":"🥡","crab":"🦀","lobster":"🦞","shrimp":"🦐","squid":"🦑","oyster":"🦪","icecream":"🍦","shaved_ice":"🍧","ice_cream":"🍨","doughnut":"🍩","cookie":"🍪","birthday":"🎂","cake":"🍰","cupcake":"🧁","pie":"🥧","chocolate_bar":"🍫","candy":"🍬","lollipop":"🍭","custard":"🍮","honey_pot":"🍯","baby_bottle":"🍼","milk_glass":"🥛","coffee":"☕","teapot":"🫖","tea":"🍵","sake":"🍶","champagne":"🍾","wine_glass":"🍷","cocktail":"🍸","tropical_drink":"🍹","beer":"🍺","beers":"🍻","clinking_glasses":"🥂","tumbler_glass":"🥃","cup_with_straw":"🥤","bubble_tea":"🧋","beverage_box":"🧃","mate":"🧉","ice_cube":"🧊","chopsticks":"🥢","plate_with_cutlery":"🍽️","fork_and_knife":"🍴","spoon":"🥄","hocho":"🔪","knife":"🔪","amphora":"🏺","earth_africa":"🌍","earth_americas":"🌎","earth_asia":"🌏","globe_with_meridians":"🌐","world_map":"🗺️","japan":"🗾","compass":"🧭","mountain_snow":"🏔️","mountain":"⛰️","volcano":"🌋","mount_fuji":"🗻","camping":"🏕️","beach_umbrella":"🏖️","desert":"🏜️","desert_island":"🏝️","national_park":"🏞️","stadium":"🏟️","classical_building":"🏛️","building_construction":"🏗️","bricks":"🧱","rock":"🪨","wood":"🪵","hut":"🛖","houses":"🏘️","derelict_house":"🏚️","house":"🏠","house_with_garden":"🏡","office":"🏢","post_office":"🏣","european_post_office":"🏤","hospital":"🏥","bank":"🏦","hotel":"🏨","love_hotel":"🏩","convenience_store":"🏪","school":"🏫","department_store":"🏬","factory":"🏭","japanese_castle":"🏯","european_castle":"🏰","wedding":"💒","tokyo_tower":"🗼","statue_of_liberty":"🗽","church":"⛪","mosque":"🕌","hindu_temple":"🛕","synagogue":"🕍","shinto_shrine":"⛩️","kaaba":"🕋","fountain":"⛲","tent":"⛺","foggy":"🌁","night_with_stars":"🌃","cityscape":"🏙️","sunrise_over_mountains":"🌄","sunrise":"🌅","city_sunset":"🌆","city_sunrise":"🌇","bridge_at_night":"🌉","hotsprings":"♨️","carousel_horse":"🎠","ferris_wheel":"🎡","roller_coaster":"🎢","barber":"💈","circus_tent":"🎪","steam_locomotive":"🚂","railway_car":"🚃","bullettrain_side":"🚄","bullettrain_front":"🚅","train2":"🚆","metro":"🚇","light_rail":"🚈","station":"🚉","tram":"🚊","monorail":"🚝","mountain_railway":"🚞","train":"🚋","bus":"🚌","oncoming_bus":"🚍","trolleybus":"🚎","minibus":"🚐","ambulance":"🚑","fire_engine":"🚒","police_car":"🚓","oncoming_police_car":"🚔","taxi":"🚕","oncoming_taxi":"🚖","car":"🚗","red_car":"🚗","oncoming_automobile":"🚘","blue_car":"🚙","pickup_truck":"🛻","truck":"🚚","articulated_lorry":"🚛","tractor":"🚜","racing_car":"🏎️","motorcycle":"🏍️","motor_scooter":"🛵","manual_wheelchair":"🦽","motorized_wheelchair":"🦼","auto_rickshaw":"🛺","bike":"🚲","kick_scooter":"🛴","skateboard":"🛹","roller_skate":"🛼","busstop":"🚏","motorway":"🛣️","railway_track":"🛤️","oil_drum":"🛢️","fuelpump":"⛽","rotating_light":"🚨","traffic_light":"🚥","vertical_traffic_light":"🚦","stop_sign":"🛑","construction":"🚧","anchor":"⚓","boat":"⛵","sailboat":"⛵","canoe":"🛶","speedboat":"🚤","passenger_ship":"🛳️","ferry":"⛴️","motor_boat":"🛥️","ship":"🚢","airplane":"✈️","small_airplane":"🛩️","flight_departure":"🛫","flight_arrival":"🛬","parachute":"🪂","seat":"💺","helicopter":"🚁","suspension_railway":"🚟","mountain_cableway":"🚠","aerial_tramway":"🚡","artificial_satellite":"🛰️","rocket":"🚀","flying_saucer":"🛸","bellhop_bell":"🛎️","luggage":"🧳","hourglass":"⌛","hourglass_flowing_sand":"⏳","watch":"⌚","alarm_clock":"⏰","stopwatch":"⏱️","timer_clock":"⏲️","mantelpiece_clock":"🕰️","clock12":"🕛","clock1230":"🕧","clock1":"🕐","clock130":"🕜","clock2":"🕑","clock230":"🕝","clock3":"🕒","clock330":"🕞","clock4":"🕓","clock430":"🕟","clock5":"🕔","clock530":"🕠","clock6":"🕕","clock630":"🕡","clock7":"🕖","clock730":"🕢","clock8":"🕗","clock830":"🕣","clock9":"🕘","clock930":"🕤","clock10":"🕙","clock1030":"🕥","clock11":"🕚","clock1130":"🕦","new_moon":"🌑","waxing_crescent_moon":"🌒","first_quarter_moon":"🌓","moon":"🌔","waxing_gibbous_moon":"🌔","full_moon":"🌕","waning_gibbous_moon":"🌖","last_quarter_moon":"🌗","waning_crescent_moon":"🌘","crescent_moon":"🌙","new_moon_with_face":"🌚","first_quarter_moon_with_face":"🌛","last_quarter_moon_with_face":"🌜","thermometer":"🌡️","sunny":"☀️","full_moon_with_face":"🌝","sun_with_face":"🌞","ringed_planet":"🪐","star":"⭐","star2":"🌟","stars":"🌠","milky_way":"🌌","cloud":"☁️","partly_sunny":"⛅","cloud_with_lightning_and_rain":"⛈️","sun_behind_small_cloud":"🌤️","sun_behind_large_cloud":"🌥️","sun_behind_rain_cloud":"🌦️","cloud_with_rain":"🌧️","cloud_with_snow":"🌨️","cloud_with_lightning":"🌩️","tornado":"🌪️","fog":"🌫️","wind_face":"🌬️","cyclone":"🌀","rainbow":"🌈","closed_umbrella":"🌂","open_umbrella":"☂️","umbrella":"☔","parasol_on_ground":"⛱️","zap":"⚡","snowflake":"❄️","snowman_with_snow":"☃️","snowman":"⛄","comet":"☄️","fire":"🔥","droplet":"💧","ocean":"🌊","jack_o_lantern":"🎃","christmas_tree":"🎄","fireworks":"🎆","sparkler":"🎇","firecracker":"🧨","sparkles":"✨","balloon":"🎈","tada":"🎉","confetti_ball":"🎊","tanabata_tree":"🎋","bamboo":"🎍","dolls":"🎎","flags":"🎏","wind_chime":"🎐","rice_scene":"🎑","red_envelope":"🧧","ribbon":"🎀","gift":"🎁","reminder_ribbon":"🎗️","tickets":"🎟️","ticket":"🎫","medal_military":"🎖️","trophy":"🏆","medal_sports":"🏅","1st_place_medal":"🥇","2nd_place_medal":"🥈","3rd_place_medal":"🥉","soccer":"⚽","baseball":"⚾","softball":"🥎","basketball":"🏀","volleyball":"🏐","football":"🏈","rugby_football":"🏉","tennis":"🎾","flying_disc":"🥏","bowling":"🎳","cricket_game":"🏏","field_hockey":"🏑","ice_hockey":"🏒","lacrosse":"🥍","ping_pong":"🏓","badminton":"🏸","boxing_glove":"🥊","martial_arts_uniform":"🥋","goal_net":"🥅","golf":"⛳","ice_skate":"⛸️","fishing_pole_and_fish":"🎣","diving_mask":"🤿","running_shirt_with_sash":"🎽","ski":"🎿","sled":"🛷","curling_stone":"🥌","dart":"🎯","yo_yo":"🪀","kite":"🪁","8ball":"🎱","crystal_ball":"🔮","magic_wand":"🪄","nazar_amulet":"🧿","video_game":"🎮","joystick":"🕹️","slot_machine":"🎰","game_die":"🎲","jigsaw":"🧩","teddy_bear":"🧸","pinata":"🪅","nesting_dolls":"🪆","spades":"♠️","hearts":"♥️","diamonds":"♦️","clubs":"♣️","chess_pawn":"♟️","black_joker":"🃏","mahjong":"🀄","flower_playing_cards":"🎴","performing_arts":"🎭","framed_picture":"🖼️","art":"🎨","thread":"🧵","sewing_needle":"🪡","yarn":"🧶","knot":"🪢","eyeglasses":"👓","dark_sunglasses":"🕶️","goggles":"🥽","lab_coat":"🥼","safety_vest":"🦺","necktie":"👔","shirt":"👕","tshirt":"👕","jeans":"👖","scarf":"🧣","gloves":"🧤","coat":"🧥","socks":"🧦","dress":"👗","kimono":"👘","sari":"🥻","one_piece_swimsuit":"🩱","swim_brief":"🩲","shorts":"🩳","bikini":"👙","womans_clothes":"👚","purse":"👛","handbag":"👜","pouch":"👝","shopping":"🛍️","school_satchel":"🎒","thong_sandal":"🩴","mans_shoe":"👞","shoe":"👞","athletic_shoe":"👟","hiking_boot":"🥾","flat_shoe":"🥿","high_heel":"👠","sandal":"👡","ballet_shoes":"🩰","boot":"👢","crown":"👑","womans_hat":"👒","tophat":"🎩","mortar_board":"🎓","billed_cap":"🧢","military_helmet":"🪖","rescue_worker_helmet":"⛑️","prayer_beads":"📿","lipstick":"💄","ring":"💍","gem":"💎","mute":"🔇","speaker":"🔈","sound":"🔉","loud_sound":"🔊","loudspeaker":"📢","mega":"📣","postal_horn":"📯","bell":"🔔","no_bell":"🔕","musical_score":"🎼","musical_note":"🎵","notes":"🎶","studio_microphone":"🎙️","level_slider":"🎚️","control_knobs":"🎛️","microphone":"🎤","headphones":"🎧","radio":"📻","saxophone":"🎷","accordion":"🪗","guitar":"🎸","musical_keyboard":"🎹","trumpet":"🎺","violin":"🎻","banjo":"🪕","drum":"🥁","long_drum":"🪘","iphone":"📱","calling":"📲","phone":"☎️","telephone":"☎️","telephone_receiver":"📞","pager":"📟","fax":"📠","battery":"🔋","electric_plug":"🔌","computer":"💻","desktop_computer":"🖥️","printer":"🖨️","keyboard":"⌨️","computer_mouse":"🖱️","trackball":"🖲️","minidisc":"💽","floppy_disk":"💾","cd":"💿","dvd":"📀","abacus":"🧮","movie_camera":"🎥","film_strip":"🎞️","film_projector":"📽️","clapper":"🎬","tv":"📺","camera":"📷","camera_flash":"📸","video_camera":"📹","vhs":"📼","mag":"🔍","mag_right":"🔎","candle":"🕯️","bulb":"💡","flashlight":"🔦","izakaya_lantern":"🏮","lantern":"🏮","diya_lamp":"🪔","notebook_with_decorative_cover":"📔","closed_book":"📕","book":"📖","open_book":"📖","green_book":"📗","blue_book":"📘","orange_book":"📙","books":"📚","notebook":"📓","ledger":"📒","page_with_curl":"📃","scroll":"📜","page_facing_up":"📄","newspaper":"📰","newspaper_roll":"🗞️","bookmark_tabs":"📑","bookmark":"🔖","label":"🏷️","moneybag":"💰","coin":"🪙","yen":"💴","dollar":"💵","euro":"💶","pound":"💷","money_with_wings":"💸","credit_card":"💳","receipt":"🧾","chart":"💹","envelope":"✉️","email":"📧","e-mail":"📧","incoming_envelope":"📨","envelope_with_arrow":"📩","outbox_tray":"📤","inbox_tray":"📥","package":"📦","mailbox":"📫","mailbox_closed":"📪","mailbox_with_mail":"📬","mailbox_with_no_mail":"📭","postbox":"📮","ballot_box":"🗳️","pencil2":"✏️","black_nib":"✒️","fountain_pen":"🖋️","pen":"🖊️","paintbrush":"🖌️","crayon":"🖍️","memo":"📝","pencil":"📝","briefcase":"💼","file_folder":"📁","open_file_folder":"📂","card_index_dividers":"🗂️","date":"📅","calendar":"📆","spiral_notepad":"🗒️","spiral_calendar":"🗓️","card_index":"📇","chart_with_upwards_trend":"📈","chart_with_downwards_trend":"📉","bar_chart":"📊","clipboard":"📋","pushpin":"📌","round_pushpin":"📍","paperclip":"📎","paperclips":"🖇️","straight_ruler":"📏","triangular_ruler":"📐","scissors":"✂️","card_file_box":"🗃️","file_cabinet":"🗄️","wastebasket":"🗑️","lock":"🔒","unlock":"🔓","lock_with_ink_pen":"🔏","closed_lock_with_key":"🔐","key":"🔑","old_key":"🗝️","hammer":"🔨","axe":"🪓","pick":"⛏️","hammer_and_pick":"⚒️","hammer_and_wrench":"🛠️","dagger":"🗡️","crossed_swords":"⚔️","gun":"🔫","boomerang":"🪃","bow_and_arrow":"🏹","shield":"🛡️","carpentry_saw":"🪚","wrench":"🔧","screwdriver":"🪛","nut_and_bolt":"🔩","gear":"⚙️","clamp":"🗜️","balance_scale":"⚖️","probing_cane":"🦯","link":"🔗","chains":"⛓️","hook":"🪝","toolbox":"🧰","magnet":"🧲","ladder":"🪜","alembic":"⚗️","test_tube":"🧪","petri_dish":"🧫","dna":"🧬","microscope":"🔬","telescope":"🔭","satellite":"📡","syringe":"💉","drop_of_blood":"🩸","pill":"💊","adhesive_bandage":"🩹","stethoscope":"🩺","door":"🚪","elevator":"🛗","mirror":"🪞","window":"🪟","bed":"🛏️","couch_and_lamp":"🛋️","chair":"🪑","toilet":"🚽","plunger":"🪠","shower":"🚿","bathtub":"🛁","mouse_trap":"🪤","razor":"🪒","lotion_bottle":"🧴","safety_pin":"🧷","broom":"🧹","basket":"🧺","roll_of_paper":"🧻","bucket":"🪣","soap":"🧼","toothbrush":"🪥","sponge":"🧽","fire_extinguisher":"🧯","shopping_cart":"🛒","smoking":"🚬","coffin":"⚰️","headstone":"🪦","funeral_urn":"⚱️","moyai":"🗿","placard":"🪧","atm":"🏧","put_litter_in_its_place":"🚮","potable_water":"🚰","wheelchair":"♿","mens":"🚹","womens":"🚺","restroom":"🚻","baby_symbol":"🚼","wc":"🚾","passport_control":"🛂","customs":"🛃","baggage_claim":"🛄","left_luggage":"🛅","warning":"⚠️","children_crossing":"🚸","no_entry":"⛔","no_entry_sign":"🚫","no_bicycles":"🚳","no_smoking":"🚭","do_not_litter":"🚯","non-potable_water":"🚱","no_pedestrians":"🚷","no_mobile_phones":"📵","underage":"🔞","radioactive":"☢️","biohazard":"☣️","arrow_up":"⬆️","arrow_upper_right":"↗️","arrow_right":"➡️","arrow_lower_right":"↘️","arrow_down":"⬇️","arrow_lower_left":"↙️","arrow_left":"⬅️","arrow_upper_left":"↖️","arrow_up_down":"↕️","left_right_arrow":"↔️","leftwards_arrow_with_hook":"↩️","arrow_right_hook":"↪️","arrow_heading_up":"⤴️","arrow_heading_down":"⤵️","arrows_clockwise":"🔃","arrows_counterclockwise":"🔄","back":"🔙","end":"🔚","on":"🔛","soon":"🔜","top":"🔝","place_of_worship":"🛐","atom_symbol":"⚛️","om":"🕉️","star_of_david":"✡️","wheel_of_dharma":"☸️","yin_yang":"☯️","latin_cross":"✝️","orthodox_cross":"☦️","star_and_crescent":"☪️","peace_symbol":"☮️","menorah":"🕎","six_pointed_star":"🔯","aries":"♈","taurus":"♉","gemini":"♊","cancer":"♋","leo":"♌","virgo":"♍","libra":"♎","scorpius":"♏","sagittarius":"♐","capricorn":"♑","aquarius":"♒","pisces":"♓","ophiuchus":"⛎","twisted_rightwards_arrows":"🔀","repeat":"🔁","repeat_one":"🔂","arrow_forward":"▶️","fast_forward":"⏩","next_track_button":"⏭️","play_or_pause_button":"⏯️","arrow_backward":"◀️","rewind":"⏪","previous_track_button":"⏮️","arrow_up_small":"🔼","arrow_double_up":"⏫","arrow_down_small":"🔽","arrow_double_down":"⏬","pause_button":"⏸️","stop_button":"⏹️","record_button":"⏺️","eject_button":"⏏️","cinema":"🎦","low_brightness":"🔅","high_brightness":"🔆","signal_strength":"📶","vibration_mode":"📳","mobile_phone_off":"📴","female_sign":"♀️","male_sign":"♂️","transgender_symbol":"⚧️","heavy_multiplication_x":"✖️","heavy_plus_sign":"➕","heavy_minus_sign":"➖","heavy_division_sign":"➗","infinity":"♾️","bangbang":"‼️","interrobang":"⁉️","question":"❓","grey_question":"❔","grey_exclamation":"❕","exclamation":"❗","heavy_exclamation_mark":"❗","wavy_dash":"〰️","currency_exchange":"💱","heavy_dollar_sign":"💲","medical_symbol":"⚕️","recycle":"♻️","fleur_de_lis":"⚜️","trident":"🔱","name_badge":"📛","beginner":"🔰","o":"⭕","white_check_mark":"✅","ballot_box_with_check":"☑️","heavy_check_mark":"✔️","x":"❌","negative_squared_cross_mark":"❎","curly_loop":"➰","loop":"➿","part_alternation_mark":"〽️","eight_spoked_asterisk":"✳️","eight_pointed_black_star":"✴️","sparkle":"❇️","copyright":"©️","registered":"®️","tm":"™️","hash":"#️⃣","asterisk":"*️⃣","zero":"0️⃣","one":"1️⃣","two":"2️⃣","three":"3️⃣","four":"4️⃣","five":"5️⃣","six":"6️⃣","seven":"7️⃣","eight":"8️⃣","nine":"9️⃣","keycap_ten":"🔟","capital_abcd":"🔠","abcd":"🔡","symbols":"🔣","abc":"🔤","a":"🅰️","ab":"🆎","b":"🅱️","cl":"🆑","cool":"🆒","free":"🆓","information_source":"ℹ️","id":"🆔","m":"Ⓜ️","new":"🆕","ng":"🆖","o2":"🅾️","ok":"🆗","parking":"🅿️","sos":"🆘","up":"🆙","vs":"🆚","koko":"🈁","sa":"🈂️","u6708":"🈷️","u6709":"🈶","u6307":"🈯","ideograph_advantage":"🉐","u5272":"🈹","u7121":"🈚","u7981":"🈲","accept":"🉑","u7533":"🈸","u5408":"🈴","u7a7a":"🈳","congratulations":"㊗️","secret":"㊙️","u55b6":"🈺","u6e80":"🈵","red_circle":"🔴","orange_circle":"🟠","yellow_circle":"🟡","green_circle":"🟢","large_blue_circle":"🔵","purple_circle":"🟣","brown_circle":"🟤","black_circle":"⚫","white_circle":"⚪","red_square":"🟥","orange_square":"🟧","yellow_square":"🟨","green_square":"🟩","blue_square":"🟦","purple_square":"🟪","brown_square":"🟫","black_large_square":"⬛","white_large_square":"⬜","black_medium_square":"◼️","white_medium_square":"◻️","black_medium_small_square":"◾","white_medium_small_square":"◽","black_small_square":"▪️","white_small_square":"▫️","large_orange_diamond":"🔶","large_blue_diamond":"🔷","small_orange_diamond":"🔸","small_blue_diamond":"🔹","small_red_triangle":"🔺","small_red_triangle_down":"🔻","diamond_shape_with_a_dot_inside":"💠","radio_button":"🔘","white_square_button":"🔳","black_square_button":"🔲","checkered_flag":"🏁","triangular_flag_on_post":"🚩","crossed_flags":"🎌","black_flag":"🏴","white_flag":"🏳️","rainbow_flag":"🏳️‍🌈","transgender_flag":"🏳️‍⚧️","pirate_flag":"🏴‍☠️","ascension_island":"🇦🇨","andorra":"🇦🇩","united_arab_emirates":"🇦🇪","afghanistan":"🇦🇫","antigua_barbuda":"🇦🇬","anguilla":"🇦🇮","albania":"🇦🇱","armenia":"🇦🇲","angola":"🇦🇴","antarctica":"🇦🇶","argentina":"🇦🇷","american_samoa":"🇦🇸","austria":"🇦🇹","australia":"🇦🇺","aruba":"🇦🇼","aland_islands":"🇦🇽","azerbaijan":"🇦🇿","bosnia_herzegovina":"🇧🇦","barbados":"🇧🇧","bangladesh":"🇧🇩","belgium":"🇧🇪","burkina_faso":"🇧🇫","bulgaria":"🇧🇬","bahrain":"🇧🇭","burundi":"🇧🇮","benin":"🇧🇯","st_barthelemy":"🇧🇱","bermuda":"🇧🇲","brunei":"🇧🇳","bolivia":"🇧🇴","caribbean_netherlands":"🇧🇶","brazil":"🇧🇷","bahamas":"🇧🇸","bhutan":"🇧🇹","bouvet_island":"🇧🇻","botswana":"🇧🇼","belarus":"🇧🇾","belize":"🇧🇿","canada":"🇨🇦","cocos_islands":"🇨🇨","congo_kinshasa":"🇨🇩","central_african_republic":"🇨🇫","congo_brazzaville":"🇨🇬","switzerland":"🇨🇭","cote_divoire":"🇨🇮","cook_islands":"🇨🇰","chile":"🇨🇱","cameroon":"🇨🇲","cn":"🇨🇳","colombia":"🇨🇴","clipperton_island":"🇨🇵","costa_rica":"🇨🇷","cuba":"🇨🇺","cape_verde":"🇨🇻","curacao":"🇨🇼","christmas_island":"🇨🇽","cyprus":"🇨🇾","czech_republic":"🇨🇿","de":"🇩🇪","diego_garcia":"🇩🇬","djibouti":"🇩🇯","denmark":"🇩🇰","dominica":"🇩🇲","dominican_republic":"🇩🇴","algeria":"🇩🇿","ceuta_melilla":"🇪🇦","ecuador":"🇪🇨","estonia":"🇪🇪","egypt":"🇪🇬","western_sahara":"🇪🇭","eritrea":"🇪🇷","es":"🇪🇸","ethiopia":"🇪🇹","eu":"🇪🇺","european_union":"🇪🇺","finland":"🇫🇮","fiji":"🇫🇯","falkland_islands":"🇫🇰","micronesia":"🇫🇲","faroe_islands":"🇫🇴","fr":"🇫🇷","gabon":"🇬🇦","gb":"🇬🇧","uk":"🇬🇧","grenada":"🇬🇩","georgia":"🇬🇪","french_guiana":"🇬🇫","guernsey":"🇬🇬","ghana":"🇬🇭","gibraltar":"🇬🇮","greenland":"🇬🇱","gambia":"🇬🇲","guinea":"🇬🇳","guadeloupe":"🇬🇵","equatorial_guinea":"🇬🇶","greece":"🇬🇷","south_georgia_south_sandwich_islands":"🇬🇸","guatemala":"🇬🇹","guam":"🇬🇺","guinea_bissau":"🇬🇼","guyana":"🇬🇾","hong_kong":"🇭🇰","heard_mcdonald_islands":"🇭🇲","honduras":"🇭🇳","croatia":"🇭🇷","haiti":"🇭🇹","hungary":"🇭🇺","canary_islands":"🇮🇨","indonesia":"🇮🇩","ireland":"🇮🇪","israel":"🇮🇱","isle_of_man":"🇮🇲","india":"🇮🇳","british_indian_ocean_territory":"🇮🇴","iraq":"🇮🇶","iran":"🇮🇷","iceland":"🇮🇸","it":"🇮🇹","jersey":"🇯🇪","jamaica":"🇯🇲","jordan":"🇯🇴","jp":"🇯🇵","kenya":"🇰🇪","kyrgyzstan":"🇰🇬","cambodia":"🇰🇭","kiribati":"🇰🇮","comoros":"🇰🇲","st_kitts_nevis":"🇰🇳","north_korea":"🇰🇵","kr":"🇰🇷","kuwait":"🇰🇼","cayman_islands":"🇰🇾","kazakhstan":"🇰🇿","laos":"🇱🇦","lebanon":"🇱🇧","st_lucia":"🇱🇨","liechtenstein":"🇱🇮","sri_lanka":"🇱🇰","liberia":"🇱🇷","lesotho":"🇱🇸","lithuania":"🇱🇹","luxembourg":"🇱🇺","latvia":"🇱🇻","libya":"🇱🇾","morocco":"🇲🇦","monaco":"🇲🇨","moldova":"🇲🇩","montenegro":"🇲🇪","st_martin":"🇲🇫","madagascar":"🇲🇬","marshall_islands":"🇲🇭","macedonia":"🇲🇰","mali":"🇲🇱","myanmar":"🇲🇲","mongolia":"🇲🇳","macau":"🇲🇴","northern_mariana_islands":"🇲🇵","martinique":"🇲🇶","mauritania":"🇲🇷","montserrat":"🇲🇸","malta":"🇲🇹","mauritius":"🇲🇺","maldives":"🇲🇻","malawi":"🇲🇼","mexico":"🇲🇽","malaysia":"🇲🇾","mozambique":"🇲🇿","namibia":"🇳🇦","new_caledonia":"🇳🇨","niger":"🇳🇪","norfolk_island":"🇳🇫","nigeria":"🇳🇬","nicaragua":"🇳🇮","netherlands":"🇳🇱","norway":"🇳🇴","nepal":"🇳🇵","nauru":"🇳🇷","niue":"🇳🇺","new_zealand":"🇳🇿","oman":"🇴🇲","panama":"🇵🇦","peru":"🇵🇪","french_polynesia":"🇵🇫","papua_new_guinea":"🇵🇬","philippines":"🇵🇭","pakistan":"🇵🇰","poland":"🇵🇱","st_pierre_miquelon":"🇵🇲","pitcairn_islands":"🇵🇳","puerto_rico":"🇵🇷","palestinian_territories":"🇵🇸","portugal":"🇵🇹","palau":"🇵🇼","paraguay":"🇵🇾","qatar":"🇶🇦","reunion":"🇷🇪","romania":"🇷🇴","serbia":"🇷🇸","ru":"🇷🇺","rwanda":"🇷🇼","saudi_arabia":"🇸🇦","solomon_islands":"🇸🇧","seychelles":"🇸🇨","sudan":"🇸🇩","sweden":"🇸🇪","singapore":"🇸🇬","st_helena":"🇸🇭","slovenia":"🇸🇮","svalbard_jan_mayen":"🇸🇯","slovakia":"🇸🇰","sierra_leone":"🇸🇱","san_marino":"🇸🇲","senegal":"🇸🇳","somalia":"🇸🇴","suriname":"🇸🇷","south_sudan":"🇸🇸","sao_tome_principe":"🇸🇹","el_salvador":"🇸🇻","sint_maarten":"🇸🇽","syria":"🇸🇾","swaziland":"🇸🇿","tristan_da_cunha":"🇹🇦","turks_caicos_islands":"🇹🇨","chad":"🇹🇩","french_southern_territories":"🇹🇫","togo":"🇹🇬","thailand":"🇹🇭","tajikistan":"🇹🇯","tokelau":"🇹🇰","timor_leste":"🇹🇱","turkmenistan":"🇹🇲","tunisia":"🇹🇳","tonga":"🇹🇴","tr":"🇹🇷","trinidad_tobago":"🇹🇹","tuvalu":"🇹🇻","taiwan":"🇹🇼","tanzania":"🇹🇿","ukraine":"🇺🇦","uganda":"🇺🇬","us_outlying_islands":"🇺🇲","united_nations":"🇺🇳","us":"🇺🇸","uruguay":"🇺🇾","uzbekistan":"🇺🇿","vatican_city":"🇻🇦","st_vincent_grenadines":"🇻🇨","venezuela":"🇻🇪","british_virgin_islands":"🇻🇬","us_virgin_islands":"🇻🇮","vietnam":"🇻🇳","vanuatu":"🇻🇺","wallis_futuna":"🇼🇫","samoa":"🇼🇸","kosovo":"🇽🇰","yemen":"🇾🇪","mayotte":"🇾🇹","south_africa":"🇿🇦","zambia":"🇿🇲","zimbabwe":"🇿🇼","england":"🏴󠁧󠁢󠁥󠁮󠁧󠁿","scotland":"🏴󠁧󠁢󠁳󠁣󠁴󠁿","wales":"🏴󠁧󠁢󠁷󠁬󠁳󠁿"}');
 
 /***/ }),
 
@@ -79877,7 +82182,7 @@ module.exports = JSON.parse("{\"100\":\"💯\",\"1234\":\"🔢\",\"grinning\":\"
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse("{\"strip\":[\"script\"],\"clobberPrefix\":\"user-content-\",\"clobber\":[\"name\",\"id\"],\"ancestors\":{\"tbody\":[\"table\"],\"tfoot\":[\"table\"],\"thead\":[\"table\"],\"td\":[\"table\"],\"th\":[\"table\"],\"tr\":[\"table\"]},\"protocols\":{\"href\":[\"http\",\"https\",\"mailto\",\"xmpp\",\"irc\",\"ircs\"],\"cite\":[\"http\",\"https\"],\"src\":[\"http\",\"https\"],\"longDesc\":[\"http\",\"https\"]},\"tagNames\":[\"h1\",\"h2\",\"h3\",\"h4\",\"h5\",\"h6\",\"br\",\"b\",\"i\",\"strong\",\"em\",\"a\",\"pre\",\"code\",\"img\",\"tt\",\"div\",\"ins\",\"del\",\"sup\",\"sub\",\"p\",\"ol\",\"ul\",\"table\",\"thead\",\"tbody\",\"tfoot\",\"blockquote\",\"dl\",\"dt\",\"dd\",\"kbd\",\"q\",\"samp\",\"var\",\"hr\",\"ruby\",\"rt\",\"rp\",\"li\",\"tr\",\"td\",\"th\",\"s\",\"strike\",\"summary\",\"details\",\"caption\",\"figure\",\"figcaption\",\"abbr\",\"bdo\",\"cite\",\"dfn\",\"mark\",\"small\",\"span\",\"time\",\"wbr\",\"input\"],\"attributes\":{\"a\":[\"href\"],\"img\":[\"src\",\"longDesc\"],\"input\":[[\"type\",\"checkbox\"],[\"disabled\",true]],\"li\":[[\"className\",\"task-list-item\"]],\"div\":[\"itemScope\",\"itemType\"],\"blockquote\":[\"cite\"],\"del\":[\"cite\"],\"ins\":[\"cite\"],\"q\":[\"cite\"],\"*\":[\"abbr\",\"accept\",\"acceptCharset\",\"accessKey\",\"action\",\"align\",\"alt\",\"ariaDescribedBy\",\"ariaHidden\",\"ariaLabel\",\"ariaLabelledBy\",\"axis\",\"border\",\"cellPadding\",\"cellSpacing\",\"char\",\"charOff\",\"charSet\",\"checked\",\"clear\",\"cols\",\"colSpan\",\"color\",\"compact\",\"coords\",\"dateTime\",\"dir\",\"disabled\",\"encType\",\"htmlFor\",\"frame\",\"headers\",\"height\",\"hrefLang\",\"hSpace\",\"isMap\",\"id\",\"label\",\"lang\",\"maxLength\",\"media\",\"method\",\"multiple\",\"name\",\"noHref\",\"noShade\",\"noWrap\",\"open\",\"prompt\",\"readOnly\",\"rel\",\"rev\",\"rows\",\"rowSpan\",\"rules\",\"scope\",\"selected\",\"shape\",\"size\",\"span\",\"start\",\"summary\",\"tabIndex\",\"target\",\"title\",\"type\",\"useMap\",\"vAlign\",\"value\",\"vSpace\",\"width\",\"itemProp\"]},\"required\":{\"input\":{\"type\":\"checkbox\",\"disabled\":true}}}");
+module.exports = JSON.parse('{"strip":["script"],"clobberPrefix":"user-content-","clobber":["name","id"],"ancestors":{"tbody":["table"],"tfoot":["table"],"thead":["table"],"td":["table"],"th":["table"],"tr":["table"]},"protocols":{"href":["http","https","mailto","xmpp","irc","ircs"],"cite":["http","https"],"src":["http","https"],"longDesc":["http","https"]},"tagNames":["h1","h2","h3","h4","h5","h6","br","b","i","strong","em","a","pre","code","img","tt","div","ins","del","sup","sub","p","ol","ul","table","thead","tbody","tfoot","blockquote","dl","dt","dd","kbd","q","samp","var","hr","ruby","rt","rp","li","tr","td","th","s","strike","summary","details","caption","figure","figcaption","abbr","bdo","cite","dfn","mark","small","span","time","wbr","input"],"attributes":{"a":["href"],"img":["src","longDesc"],"input":[["type","checkbox"],["disabled",true]],"li":[["className","task-list-item"]],"div":["itemScope","itemType"],"blockquote":["cite"],"del":["cite"],"ins":["cite"],"q":["cite"],"*":["abbr","accept","acceptCharset","accessKey","action","align","alt","ariaDescribedBy","ariaHidden","ariaLabel","ariaLabelledBy","axis","border","cellPadding","cellSpacing","char","charOff","charSet","checked","clear","cols","colSpan","color","compact","coords","dateTime","dir","disabled","encType","htmlFor","frame","headers","height","hrefLang","hSpace","isMap","id","label","lang","maxLength","media","method","multiple","name","noHref","noShade","noWrap","open","prompt","readOnly","rel","rev","rows","rowSpan","rules","scope","selected","shape","size","span","start","summary","tabIndex","target","title","type","useMap","vAlign","value","vSpace","width","itemProp"]},"required":{"input":{"type":"checkbox","disabled":true}}}');
 
 /***/ }),
 
@@ -79885,7 +82190,7 @@ module.exports = JSON.parse("{\"strip\":[\"script\"],\"clobberPrefix\":\"user-co
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse("[\"area\",\"base\",\"basefont\",\"bgsound\",\"br\",\"col\",\"command\",\"embed\",\"frame\",\"hr\",\"image\",\"img\",\"input\",\"isindex\",\"keygen\",\"link\",\"menuitem\",\"meta\",\"nextid\",\"param\",\"source\",\"track\",\"wbr\"]");
+module.exports = JSON.parse('["area","base","basefont","bgsound","br","col","command","embed","frame","hr","image","img","input","isindex","keygen","link","menuitem","meta","nextid","param","source","track","wbr"]');
 
 /***/ }),
 
@@ -79893,7 +82198,7 @@ module.exports = JSON.parse("[\"area\",\"base\",\"basefont\",\"bgsound\",\"br\",
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse("[\"cent\",\"copy\",\"divide\",\"gt\",\"lt\",\"not\",\"para\",\"times\"]");
+module.exports = JSON.parse('["cent","copy","divide","gt","lt","not","para","times"]');
 
 /***/ }),
 
@@ -80041,8 +82346,9 @@ module.exports = require("zlib");;
 /******/ 	// The require function
 /******/ 	function __nccwpck_require__(moduleId) {
 /******/ 		// Check if module is in cache
-/******/ 		if(__webpack_module_cache__[moduleId]) {
-/******/ 			return __webpack_module_cache__[moduleId].exports;
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
 /******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = __webpack_module_cache__[moduleId] = {
@@ -80067,10 +82373,81 @@ module.exports = require("zlib");;
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat */
 /******/ 	
-/******/ 	__nccwpck_require__.ab = __dirname + "/";/************************************************************************/
-/******/ 	// module exports must be returned from runtime so entry inlining is disabled
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	return __nccwpck_require__(32932);
+/******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
+const path = __nccwpck_require__(85622);
+const core = __nccwpck_require__(42186);
+const github = __nccwpck_require__(95438);
+const { execSync } = __nccwpck_require__(63129);
+
+const { run } = __nccwpck_require__(94822);
+
+const CWD = execSync('pwd').toString('utf8').trim();
+const TEMPLATES = __nccwpck_require__.ab + "templates";
+// No shorthand for TEMPLATES, because otherwise `ncc build` fails...
+const paths = { CWD, TEMPLATES: __nccwpck_require__.ab + "templates" };
+
+const token = core.getInput('repo-token', { required: true });
+const url = core.getInput('url', { required: true });
+const title = core.getInput('title');
+const description = core.getInput('description');
+const theme = core.getInput('theme');
+const dateFormat = core.getInput('date-format');
+const postsPerPage = core.getInput('posts-per-page');
+const customStyles = core.getInput('custom-styles');
+const customJavascript = core.getInput('custom-javascript');
+const pages = core.getInput('pages');
+const staticFrontpage = core.getInput('static-frontpage');
+const label = core.getInput('label');
+const closed = core.getInput('closed');
+const outDir = core.getInput('out-dir');
+const staticDir = core.getInput('static-dir');
+const lang = core.getInput('lang');
+const i18nNext = core.getInput('i18n.next');
+const i18nPrev = core.getInput('i18n.prev');
+const i18nPosts = core.getInput('i18n.posts');
+const i18n = {
+  next: i18nNext,
+  prev: i18nPrev,
+  posts: i18nPosts,
+};
+const { repo } = github.context;
+const octokit = github.getOctokit(token);
+const userOptions = {
+  url,
+  lang,
+  i18n,
+  theme,
+  dateFormat,
+  postsPerPage,
+  pages,
+  outDir,
+  staticDir,
+  ...(title ? { title } : undefined),
+  ...(description ? { description } : undefined),
+  ...(customStyles
+    ? { customStyles: path.resolve(CWD, customStyles) }
+    : undefined),
+  ...(customJavascript
+    ? { customJavascript: path.resolve(CWD, customJavascript) }
+    : undefined),
+  ...(staticFrontpage ? { staticFrontpage } : undefined),
+  ...(label ? { label } : undefined),
+  ...(closed ? { closed } : undefined),
+};
+
+run({ paths, octokit, repo, userOptions }).then(
+  () => console.log('Successfully built Microblog'),
+  (err) => {
+    console.log(err.message);
+    console.log(err.stack);
+  }
+);
+
+})();
+
+module.exports = __webpack_exports__;
 /******/ })()
 ;
