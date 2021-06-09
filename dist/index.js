@@ -48,7 +48,7 @@ exports.getPages = async (cwd, glob) => {
 };
 
 exports.getPosts = async ({ octokit, repo, label, closed }) => {
-  const result = await octokit.paginate(octokit.issues.listForRepo, {
+  const result = await octokit.paginate(octokit.rest.issues.listForRepo, {
     ...repo,
     ...(label ? { labels: label } : undefined),
     ...(closed ? { state: 'closed' } : undefined),
