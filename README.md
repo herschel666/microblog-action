@@ -146,14 +146,22 @@ conflict. Only the first one will be rendered.
 ### Frontmatter
 
 **Microblog-Action** supports frontmatter for static pages. Although currently only the
-`title`-property is processed. It is recommended to set the title, otherwise the file's basename is
-used as label in the main navigation.
+`title`- & the `hidden`-properties are processed.
 
-Set the title at the beginning of a file like this.
+It is recommended to set the title, otherwise the file's basename is used as label in the main
+navigation. Set the title at the beginning of a file like this.
 
 ```yaml
 ---
 title: Title of the page
+---
+```
+
+To hide a page from the main navigation add the optional `hidden`-property to the frontmatter and set it to `true`.
+
+```yaml
+---
+hidden: true
 ---
 ```
 
