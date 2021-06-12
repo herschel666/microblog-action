@@ -15,6 +15,7 @@
 - limit publishing to issues with a certain label
 - only publish closed labels (when open issues as a quality indicator is relevant)
 - each blogpost's Canonical URL points to the original issue
+- custom 404 page
 
 ## Usage
 
@@ -172,6 +173,19 @@ the list of blogposts, that's displayed by default. Given you have a file at `<r
 you want to display on the frontpage, set the `static-frontpage`-option to `welcome.md`. The lists
 of blogposts will then be available at `/<posts>.html` — the actual slug of the posts's page depends
 on the value of the `i18n.posts`-option.
+
+### Custom 404 page
+
+Creating a custom 404 page is pretty straight forward: create a `404.md` in the static pages folder and set it to `hidden` in the frontmatter.
+
+```
+---
+hidden: true
+---
+```
+
+This generates a file `404.html` that your static hosting service should display in case a resouce
+could not be found.
 
 ## Themes
 
