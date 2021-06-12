@@ -15,6 +15,7 @@
 - limit publishing to issues with a certain label
 - only publish closed labels (when open issues as a quality indicator is relevant)
 - each blogpost's Canonical URL points to the original issue
+- custom 404 page
 
 ## Usage
 
@@ -146,14 +147,22 @@ conflict. Only the first one will be rendered.
 ### Frontmatter
 
 **Microblog-Action** supports frontmatter for static pages. Although currently only the
-`title`-property is processed. It is recommended to set the title, otherwise the file's basename is
-used as label in the main navigation.
+`title`- & the `hidden`-properties are processed.
 
-Set the title at the beginning of a file like this.
+It is recommended to set the title, otherwise the file's basename is used as label in the main
+navigation. Set the title at the beginning of a file like this.
 
 ```yaml
 ---
 title: Title of the page
+---
+```
+
+To hide a page from the main navigation add the optional `hidden`-property to the frontmatter and set it to `true`.
+
+```yaml
+---
+hidden: true
 ---
 ```
 
@@ -164,6 +173,19 @@ the list of blogposts, that's displayed by default. Given you have a file at `<r
 you want to display on the frontpage, set the `static-frontpage`-option to `welcome.md`. The lists
 of blogposts will then be available at `/<posts>.html` — the actual slug of the posts's page depends
 on the value of the `i18n.posts`-option.
+
+### Custom 404 page
+
+Creating a custom 404 page is pretty straight forward: create a `404.md` in the static pages folder and set it to `hidden` in the frontmatter.
+
+```
+---
+hidden: true
+---
+```
+
+This generates a file `404.html` that your static hosting service should display in case a resouce
+could not be found.
 
 ## Themes
 
