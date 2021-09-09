@@ -74,7 +74,7 @@
     "eslint-plugin-prettier": "4.0.0",
     "jest": "27.1.1",
     "jest-runner-eslint": "0.10.1",
-    "prettier": "2.3.2",
+    "prettier": "2.4.0",
     "serve": "12.0.0",
     "standard-version": "9.3.1"
   },
