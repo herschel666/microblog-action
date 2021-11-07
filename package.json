@@ -93,6 +93,6 @@
     "remark-gfm": "1.0.0",
     "remark-html": "13.0.1",
     "remark-parse": "9.0.0",
-    "slugify": "1.6.0"
+    "slugify": "1.6.2"
   }
 }
