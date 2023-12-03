@@ -67,7 +67,7 @@
     "@octokit/rest": "18.12.0",
     "@testing-library/dom": "8.20.1",
     "@vercel/ncc": "0.38.1",
-    "eslint": "8.14.0",
+    "eslint": "8.55.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-node": "11.1.0",
